@@ -1,6 +1,5 @@
-package com.alenniboris.fastbanking.ui.theme
+package com.alenniboris.fastbanking.presentation.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

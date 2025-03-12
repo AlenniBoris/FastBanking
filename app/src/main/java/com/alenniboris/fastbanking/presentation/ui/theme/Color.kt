@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.ui.theme
+package com.alenniboris.fastbanking.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "291554862931",
+    "firebase_url": "https://fastbanking-d98db-default-rtdb.firebaseio.com",
+    "project_id": "fastbanking-d98db",
+    "storage_bucket": "fastbanking-d98db.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291554862931:android:d145873a1eb3cb25c4a3a6",
+        "android_client_info": {
+          "package_name": "com.alenniboris.fastbanking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqmPJrBmWLiCPseuRDedQSaO2jXkTuDOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

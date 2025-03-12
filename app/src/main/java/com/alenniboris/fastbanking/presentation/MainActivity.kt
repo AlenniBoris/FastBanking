@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking
+package com.alenniboris.fastbanking.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alenniboris.fastbanking.ui.theme.FastBankingTheme
+import com.alenniboris.fastbanking.presentation.ui.theme.FastBankingTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
