@@ -1,6 +1,13 @@
 package com.alenniboris.fastbanking.domain.model
 
 enum class UserGender {
-    MALE,
-    FEMALE
+    Male,
+    Female,
+    Undefined
+}
+
+fun String.toUserGender(): UserGender = when (this) {
+    "Male" -> UserGender.Male
+    "Female" -> UserGender.Female
+    else -> UserGender.Undefined
 }

@@ -7,9 +7,10 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.core.module.Module
 
-val myModules = listOf<Module>(
+val myModules = listOf(
     DispatchersModule,
-    UserModule
+    UserModule,
+    DatabaseModule
 )
 
 class BankingApplication : Application() {

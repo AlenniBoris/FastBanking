@@ -13,16 +13,25 @@ class RegisterUserIntoBankingUseCaseImpl(
 ) : IRegisterUserIntoBankingUseCase {
 
     override suspend fun invoke(
-        email: String,
+        login: String,
         password: String,
         passwordCheck: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext userRepository.registerUserIntoBanking(
-                email = email,
-                password = password,
-                passwordCheck = passwordCheck
-            )
+            when (
+                val res = userRepository.registerUserIntoBanking(
+                    login = login,
+                    password = password,
+                    passwordCheck = passwordCheck
+                )
+            ) {
+                is CustomResultModelDomain.Success -> userRepository.loginUserIntoBanking(
+                    login = login,
+                    password = password
+                )
+
+                is CustomResultModelDomain.Error -> CustomResultModelDomain.Error(res.exception)
+            }
         }
 
 }

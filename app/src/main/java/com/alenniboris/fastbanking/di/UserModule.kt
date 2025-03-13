@@ -9,12 +9,16 @@ import com.alenniboris.fastbanking.domain.usecase.logic.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.IRegisterUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
+import com.google.firebase.database.FirebaseDatabase
 import org.koin.dsl.module
 
 val UserModule = module {
 
     single<IUserRepository> {
-        UserRepositoryImpl()
+        UserRepositoryImpl(
+            database = get<FirebaseDatabase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
     }
 
     single<IGetCurrentUserUseCase> {

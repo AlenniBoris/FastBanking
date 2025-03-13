@@ -13,12 +13,12 @@ class LoginUserIntoBankingUseCaseImpl(
 ) : ILoginUserIntoBankingUseCase {
 
     override suspend fun invoke(
-        email: String,
+        login: String,
         password: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain> =
         withContext(dispatchers.IO) {
             return@withContext userRepository.loginUserIntoBanking(
-                email = email,
+                login = login,
                 password = password
             )
         }

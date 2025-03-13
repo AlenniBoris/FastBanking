@@ -3,6 +3,10 @@ package com.alenniboris.fastbanking.domain.model
 sealed class AuthenticationExceptionModelDomain : Throwable() {
     data object NoSuchUserException : AuthenticationExceptionModelDomain()
 
+    data object OnlineBankingNotAllowed: AuthenticationExceptionModelDomain()
+
+    data object UserAlreadyExistsException: AuthenticationExceptionModelDomain()
+
     data object WrongEnteringFieldException : AuthenticationExceptionModelDomain()
 
     data object NotEmailTypeException : AuthenticationExceptionModelDomain()
@@ -12,6 +16,8 @@ sealed class AuthenticationExceptionModelDomain : Throwable() {
     data object WeakPasswordException : AuthenticationExceptionModelDomain()
 
     data object WebException : AuthenticationExceptionModelDomain()
+
+    data object ErrorGettingData: AuthenticationExceptionModelDomain()
 
     data object Other : AuthenticationExceptionModelDomain()
 }

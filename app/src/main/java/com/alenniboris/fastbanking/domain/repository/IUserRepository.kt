@@ -9,13 +9,15 @@ interface IUserRepository {
     val user: StateFlow<UserModelDomain?>
 
     suspend fun loginUserIntoBanking(
-        email: String,
+        login: String,
         password: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
 
     suspend fun registerUserIntoBanking(
-        email: String,
+        login: String,
         password: String,
         passwordCheck: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
+
+    fun signOut()
 }

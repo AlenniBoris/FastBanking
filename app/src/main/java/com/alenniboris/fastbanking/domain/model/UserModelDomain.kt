@@ -2,7 +2,6 @@ package com.alenniboris.fastbanking.domain.model
 
 data class UserModelDomain(
     val id: String,
-    val login: String,
     val password: String,
     val name: String,
     val surname: String,

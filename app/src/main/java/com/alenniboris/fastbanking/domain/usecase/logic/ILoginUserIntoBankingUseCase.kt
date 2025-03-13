@@ -6,7 +6,7 @@ import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 interface ILoginUserIntoBankingUseCase {
 
     suspend fun invoke(
-        email: String,
+        login: String,
         password: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
 
