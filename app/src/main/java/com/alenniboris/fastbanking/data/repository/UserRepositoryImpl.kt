@@ -1,10 +1,15 @@
 package com.alenniboris.fastbanking.data.repository
 
+import android.app.Application
+import android.content.Intent
 import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toAuthenticationException
 import com.alenniboris.fastbanking.data.model.UserModelData
 import com.alenniboris.fastbanking.data.model.toModelData
 import com.alenniboris.fastbanking.data.model.toModelDomain
+import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.SEND_MESSAGE_WITH_VERIFICATION_CODE_ACTION
+import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.VERIFICATION_CODE
+import com.alenniboris.fastbanking.data.utils.CodeGenerator
 import com.alenniboris.fastbanking.domain.model.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.UserModelDomain
@@ -19,12 +24,44 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl(
+    private val apl: Application,
     private val database: FirebaseDatabase,
     private val dispatchers: IAppDispatchers
 ) : IUserRepository {
-
     private val userFlow = MutableStateFlow<UserModelDomain?>(null)
     override val user: StateFlow<UserModelDomain?> = userFlow.asStateFlow()
+
+    private var verificationCode: String = ""
+
+    /**
+     * Normal verification code verification is needed to be implemented
+     *  **/
+    override fun checkVerificationCodeForRegistration(
+        code: String
+    ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain> {
+        if (code == verificationCode) {
+            return CustomResultModelDomain.Success(Unit)
+        }
+        return CustomResultModelDomain.Error(
+            AuthenticationExceptionModelDomain.VerificationWithCodeFailed
+        )
+    }
+
+    /**
+     * Normal verification code sending is needed to be implemented
+     *  **/
+    override fun sendVerificationCode() {
+        val generatedVerificationCode = CodeGenerator.generate()
+        verificationCode = generatedVerificationCode
+
+        val intent = Intent()
+        intent.action = SEND_MESSAGE_WITH_VERIFICATION_CODE_ACTION
+        intent.putExtra(VERIFICATION_CODE, generatedVerificationCode)
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+        intent.setPackage(apl.packageName)
+
+        apl.sendBroadcast(intent)
+    }
 
     override fun signOut() {
         userFlow.update { null }
@@ -76,17 +113,10 @@ class UserRepositoryImpl(
 
     override suspend fun registerUserIntoBanking(
         login: String,
-        password: String,
-        passwordCheck: String
+        password: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain> =
         withContext(dispatchers.IO) {
             runCatching {
-
-                if (password != passwordCheck) {
-                    return@withContext CustomResultModelDomain.Error(
-                        AuthenticationExceptionModelDomain.PasswordsCheckException
-                    )
-                }
 
                 val databaseReference = database.reference
                 val snapshot = databaseReference

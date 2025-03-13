@@ -15,9 +15,14 @@ interface IUserRepository {
 
     suspend fun registerUserIntoBanking(
         login: String,
-        password: String,
-        passwordCheck: String
+        password: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
 
     fun signOut()
+
+    fun sendVerificationCode()
+
+    fun checkVerificationCodeForRegistration(
+        code: String
+    ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
 }

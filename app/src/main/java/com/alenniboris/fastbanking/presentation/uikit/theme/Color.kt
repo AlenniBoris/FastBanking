@@ -1,0 +1,79 @@
+package com.alenniboris.fastbanking.presentation.uikit.theme
+
+import androidx.compose.ui.graphics.Color
+
+
+private val AppColorLight = Color(0xffdbdbdb)
+private val AppColorDark = Color(0xff404040)
+
+val appColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AppColorLight
+        true -> AppColorDark
+    }
+
+// Text field (LoginScreen, RegisterScreen)
+
+private val EnterTextFieldColorLight = Color(0xffbcb8b8)
+private val EnterTextFieldColorDark = Color(0xff1c1c1c)
+
+val enterTextFieldColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> EnterTextFieldColorLight
+        true -> EnterTextFieldColorDark
+    }
+
+private val EnterTextFieldTextColorLight = Color(0xff000000)
+private val EnterTextFieldTextColorDark = Color(0xffffffff)
+
+val enterTextFieldTextColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> EnterTextFieldTextColorLight
+        true -> EnterTextFieldTextColorDark
+    }
+
+
+val selectedTextBackgroundColor = Color(0xfff9e753)
+
+val selectedTextHandlesColor = Color(0xfff9e753)
+
+// TopBar
+
+private val AppTopBarElementsColorLight = Color(0xff000000)
+private val AppTopBarElementsColorDark = Color(0xffffffff)
+val appTopBarElementsColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AppTopBarElementsColorLight
+        true -> AppTopBarElementsColorDark
+    }
+
+// Process progress bar
+
+val progressBarDoneProcess = Color(0xfff9e753)
+private val ProgressBarNotDoneProcessLight = Color(0xff000000)
+private val ProgressBarNotDoneProcessDark = Color(0xffffffff)
+val progressBarNotDoneProcess
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> ProgressBarNotDoneProcessLight
+        true -> ProgressBarNotDoneProcessDark
+    }
+
+// App filter
+
+private val AppFilterColorLight = Color(0xffbcb8b8)
+private val AppFilterColorDark = Color(0xff1c1c1c)
+
+val appFilterColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AppFilterColorLight
+        true -> AppFilterColorDark
+    }
+
+private val AppFilterTextColorLight = Color(0xff000000)
+private val AppFilterTextColorDark = Color(0xffffffff)
+
+val appFilterTextColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AppFilterTextColorLight
+        true -> AppFilterTextColorDark
+    }

@@ -14,7 +14,8 @@ data class UserModelData(
     val gender: String? = null,
     val country: String? = null,
     val accountId: String? = null,
-    val hasOnlineBanking: String? = null
+    val hasOnlineBanking: String? = null,
+    val phoneNumber: String? = null
 ) {
     val hasSomeValueMissing: Boolean
         get() = id == null
@@ -27,6 +28,7 @@ data class UserModelData(
                 || country == null
                 || accountId == null
                 || hasOnlineBanking == null
+                || phoneNumber == null
 
     fun toUpdatesMap(): Map<String, String?> {
         return mapOf(
@@ -39,7 +41,8 @@ data class UserModelData(
             "gender" to gender,
             "country" to country,
             "accountId" to accountId,
-            "hasOnlineBanking" to hasOnlineBanking
+            "hasOnlineBanking" to hasOnlineBanking,
+            "phoneNumber" to phoneNumber
         )
     }
 }
@@ -55,7 +58,8 @@ fun UserModelData.toModelDomain(): UserModelDomain? = runCatching {
         gender = this.gender?.toUserGender()!!,
         country = this.country!!,
         accountId = this.accountId!!,
-        hasOnlineBanking = this.hasOnlineBanking?.toBoolean()!!
+        hasOnlineBanking = this.hasOnlineBanking?.toBoolean()!!,
+        phoneNumber = this.phoneNumber!!
     )
 }.getOrElse {
     Log.e("!!!", "UserModelData.toModelDomain")
@@ -73,6 +77,7 @@ fun UserModelDomain.toModelData(): UserModelData =
         gender = this.gender.name,
         country = this.country,
         accountId = this.accountId,
-        hasOnlineBanking = this.hasOnlineBanking.toString()
+        hasOnlineBanking = this.hasOnlineBanking.toString(),
+        phoneNumber = this.phoneNumber
     )
 

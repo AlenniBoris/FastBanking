@@ -10,5 +10,6 @@ data class UserModelDomain(
     val gender: UserGender,
     val country: String,
     val accountId: String,
-    val hasOnlineBanking: Boolean
+    val hasOnlineBanking: Boolean,
+    val phoneNumber: String
 )

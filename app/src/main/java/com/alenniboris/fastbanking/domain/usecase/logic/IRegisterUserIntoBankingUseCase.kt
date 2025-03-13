@@ -7,8 +7,7 @@ interface IRegisterUserIntoBankingUseCase {
 
     suspend fun invoke(
         login: String,
-        password: String,
-        passwordCheck: String
+        password: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
 
 }
