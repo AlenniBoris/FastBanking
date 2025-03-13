@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FastBanking</string>
+
+    <string name="exception_getting_data">Error getting data from server</string>
+    <string name="exception_no_such_user">There is no such user, register</string>
+    <string name="exception_unknown">Unknown exception</string>
+    <string name="exception_password_check">Error to check passwords</string>
+    <string name="exception_user_existed">User already  exists, login</string>
+    <string name="exception_weak_password">Password is too weak</string>
+    <string name="exception_internet_error">Error with internet connection</string>
+    <string name="exception_entering_fields_wrong">User exists, but check your entered fields</string>
+    <string name="exception_user_underage_for_banking">Online banking is allowed only from 18</string>
+    <string name="show_password_btn_description">show btn</string>
+    <string name="top_bar_left_btn_description">top bar left button</string>
+    <string name="top_bar_right_btn_description">top bar right button</string>
+
 </resources>

@@ -9,8 +9,6 @@ sealed class AuthenticationExceptionModelDomain : Throwable() {
 
     data object WrongEnteringFieldException : AuthenticationExceptionModelDomain()
 
-    data object NotEmailTypeException : AuthenticationExceptionModelDomain()
-
     data object PasswordsCheckException : AuthenticationExceptionModelDomain()
 
     data object WeakPasswordException : AuthenticationExceptionModelDomain()

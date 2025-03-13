@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.ui.theme
+package com.alenniboris.fastbanking.presentation.uikit.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -82,6 +82,12 @@ class UserRepositoryImpl(
         withContext(dispatchers.IO) {
             runCatching {
 
+                if (password.length < 6) {
+                    return@withContext CustomResultModelDomain.Error(
+                        AuthenticationExceptionModelDomain.WeakPasswordException
+                    )
+                }
+
                 if (password != passwordCheck) {
                     return@withContext CustomResultModelDomain.Error(
                         AuthenticationExceptionModelDomain.PasswordsCheckException
