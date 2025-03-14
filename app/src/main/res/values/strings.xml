@@ -13,5 +13,10 @@
     <string name="show_password_btn_description">show btn</string>
     <string name="top_bar_left_btn_description">top bar left button</string>
     <string name="top_bar_right_btn_description">top bar right button</string>
+    <string name="login_icon_description">login bank icon</string>
+    <string name="bank_name">BBank</string>
+    <string name="login_placeholder_text">Personal id</string>
+    <string name="password_placeholder_text">Password</string>
+    <string name="login_text">Login</string>
 
 </resources>

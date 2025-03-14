@@ -117,6 +117,7 @@ private fun EnterValueTextField(
                             painter = if (isPasswordVisible) painterResource(PasswordShowPicture)
                             else painterResource(PasswordHidePicture),
                             contentDescription = stringResource(R.string.show_password_btn_description),
+                            tint = enterTextFieldTextColor
                         )
                     }
                 }

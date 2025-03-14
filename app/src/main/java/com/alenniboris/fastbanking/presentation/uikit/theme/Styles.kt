@@ -6,7 +6,7 @@ import androidx.compose.ui.unit.sp
 
 val bodyStyle = TextStyle(
     fontFamily = applicationFontFamily,
-    fontWeight = FontWeight.Medium,
+    fontWeight = FontWeight.Normal,
     lineHeight = 28.sp,
     letterSpacing = 0.sp,
 )

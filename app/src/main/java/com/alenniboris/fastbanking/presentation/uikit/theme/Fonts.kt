@@ -7,8 +7,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.alenniboris.fastbanking.R
 
 val applicationFontFamily = FontFamily(
-    Font(R.font.mulish_variablefont_wght, FontWeight.Normal),
-    Font(R.font.mulish_variablefont_wght, FontWeight.Bold),
-    Font(R.font.mulish_variablefont_wght, FontWeight.Medium),
-    Font(R.font.mulish_variablefont_wght, FontWeight.Light),
+    Font(R.font.mulish_regular, FontWeight.Normal),
+    Font(R.font.mulish_bold, FontWeight.Bold),
+    Font(R.font.mulish_medium, FontWeight.Medium),
+    Font(R.font.mulish_light, FontWeight.Light),
 )
