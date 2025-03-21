@@ -8,4 +8,5 @@ object FirebaseDatabaseValues {
 
     const val TABLE_ACCOUNTS = "accounts"
 
+    const val TABLE_MAPS_DATA = "maps_data"
 }

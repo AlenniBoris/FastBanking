@@ -8,5 +8,4 @@ val DatabaseModule = module {
     single<FirebaseDatabase> {
         FirebaseDatabase.getInstance()
     }
-
 }

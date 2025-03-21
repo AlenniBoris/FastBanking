@@ -88,4 +88,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.auth)
 
+    //Gson
+    implementation("com.google.code.gson:gson:2.9.0")
+
 }
