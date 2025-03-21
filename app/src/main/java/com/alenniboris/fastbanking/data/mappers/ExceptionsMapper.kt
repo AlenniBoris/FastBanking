@@ -1,8 +1,6 @@
 package com.alenniboris.fastbanking.data.mappers
 
-import com.alenniboris.fastbanking.domain.model.AuthenticationExceptionModelDomain
-import com.google.firebase.FirebaseException
-import com.google.firebase.database.DatabaseException
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import java.net.ConnectException
 import java.net.UnknownHostException
 

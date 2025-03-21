@@ -1,8 +1,8 @@
 package com.alenniboris.fastbanking.data.model
 
 import android.util.Log
-import com.alenniboris.fastbanking.domain.model.UserModelDomain
-import com.alenniboris.fastbanking.domain.model.toUserGender
+import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
+import com.alenniboris.fastbanking.domain.model.user.toUserGender
 
 data class UserModelData(
     val id: String? = null,

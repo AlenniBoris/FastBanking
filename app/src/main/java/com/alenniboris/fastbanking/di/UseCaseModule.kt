@@ -1,13 +1,16 @@
 package com.alenniboris.fastbanking.di
 
+import com.alenniboris.fastbanking.domain.repository.IMapsRepository
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.usecase.implementation.CheckVerificationCodeForRegistrationUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.GetBankLocationsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.GetCurrentUserUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.LoginUserIntoBankingUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.RegisterUserIntoBankingUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.SendVerificationCodeForRegistrationUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.SignOutUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.logic.ICheckVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.IGetBankLocationsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.IRegisterUserIntoBankingUseCase
@@ -54,6 +57,13 @@ val UseCaseModule = module {
     factory<ICheckVerificationCodeForRegistrationUseCase> {
         CheckVerificationCodeForRegistrationUseCaseImpl(
             userRepository = get<IUserRepository>()
+        )
+    }
+
+    factory<IGetBankLocationsUseCase> {
+        GetBankLocationsUseCaseImpl(
+            mapsRepository = get<IMapsRepository>(),
+            dispatchers = get<IAppDispatchers>()
         )
     }
 }

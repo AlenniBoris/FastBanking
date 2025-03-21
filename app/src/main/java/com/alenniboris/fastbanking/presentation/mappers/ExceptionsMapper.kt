@@ -1,7 +1,7 @@
 package com.alenniboris.fastbanking.presentation.mappers
 
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.domain.model.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 
 fun AuthenticationExceptionModelDomain.toUiMessageString(): Int =
     when (this) {

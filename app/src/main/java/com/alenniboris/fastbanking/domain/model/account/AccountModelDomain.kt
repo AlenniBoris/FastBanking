@@ -1,4 +1,6 @@
-package com.alenniboris.fastbanking.domain.model
+package com.alenniboris.fastbanking.domain.model.account
+
+import com.alenniboris.fastbanking.domain.model.OwnerModelDomain
 
 data class AccountModelDomain(
     val id: String,

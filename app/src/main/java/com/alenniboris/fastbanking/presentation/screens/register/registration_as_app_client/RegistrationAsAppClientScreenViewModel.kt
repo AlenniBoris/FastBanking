@@ -3,7 +3,7 @@ package com.alenniboris.fastbanking.presentation.screens.register.registration_a
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.domain.model.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.usecase.logic.ICheckVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.IRegisterUserIntoBankingUseCase

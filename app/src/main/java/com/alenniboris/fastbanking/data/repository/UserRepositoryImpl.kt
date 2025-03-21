@@ -10,9 +10,9 @@ import com.alenniboris.fastbanking.data.model.toModelDomain
 import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.SEND_MESSAGE_WITH_VERIFICATION_CODE_ACTION
 import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.VERIFICATION_CODE
 import com.alenniboris.fastbanking.data.utils.CodeGenerator
-import com.alenniboris.fastbanking.domain.model.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.model.UserModelDomain
+import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import com.google.firebase.database.FirebaseDatabase

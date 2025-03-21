@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.domain.model
+package com.alenniboris.fastbanking.domain.model.user
 
 data class UserModelDomain(
     val id: String,

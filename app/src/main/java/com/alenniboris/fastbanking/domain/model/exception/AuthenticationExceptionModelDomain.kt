@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.domain.model
+package com.alenniboris.fastbanking.domain.model.exception
 
 sealed class AuthenticationExceptionModelDomain : Throwable() {
     data object NoSuchUserException : AuthenticationExceptionModelDomain()

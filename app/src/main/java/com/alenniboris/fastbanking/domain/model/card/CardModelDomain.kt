@@ -1,5 +1,6 @@
-package com.alenniboris.fastbanking.domain.model
+package com.alenniboris.fastbanking.domain.model.card
 
+import com.alenniboris.fastbanking.domain.model.OwnerModelDomain
 import java.util.Date
 
 data class CardModelDomain(

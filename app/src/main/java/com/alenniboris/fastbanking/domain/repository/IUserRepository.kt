@@ -1,8 +1,8 @@
 package com.alenniboris.fastbanking.domain.repository
 
-import com.alenniboris.fastbanking.domain.model.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.model.UserModelDomain
+import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import kotlinx.coroutines.flow.StateFlow
 
 interface IUserRepository {
