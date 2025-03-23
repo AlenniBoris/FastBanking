@@ -15,3 +15,7 @@
 local.properties
 .idea
 /.idea
+secret.apikey.properties
+/secret.apikey.properties
+secret.apikey.default.properties
+/secret.apikey.default.properties

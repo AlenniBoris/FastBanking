@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
     alias(libs.plugins.google.gms.google.services)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -63,6 +64,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -91,4 +93,14 @@ dependencies {
     //Gson
     implementation("com.google.code.gson:gson:2.9.0")
 
+    //Google maps
+    implementation("com.google.maps.android:maps-compose:6.5.2")
+    implementation("com.google.maps.android:maps-compose-utils:6.5.2")
+    implementation("com.google.maps.android:android-maps-utils:3.10.0")
+    implementation("com.google.android.gms:play-services-maps:19.1.0")
+}
+
+secrets {
+    propertiesFileName = "secret.apikey.properties"
+    defaultPropertiesFileName = "secret.apikey.default.properties"
 }

@@ -1,8 +1,9 @@
 package com.alenniboris.fastbanking.domain.model.map
 
 data class MapsElementModelDomain(
-    val latitude: Float,
-    val longitude: Float,
+    val latitude: Double,
+    val longitude: Double,
     val type: MapElementType,
-    val address: String
+    val address: String,
+    val workingTime: String
 )

@@ -1,6 +1,7 @@
 package com.alenniboris.fastbanking.presentation.uikit.theme
 
 import androidx.compose.ui.graphics.Color
+import com.alenniboris.fastbanking.presentation.uikit.utils.currentThemeMode
 
 
 private val AppColorLight = Color(0xffdbdbdb)
@@ -76,4 +77,64 @@ val appFilterTextColor
     get() = when (currentThemeMode.value.isThemeDark) {
         false -> AppFilterTextColorLight
         true -> AppFilterTextColorDark
+    }
+
+// Map location item
+
+private val MapLocationItemColorLight = Color(0xffbcb8b8)
+private val MapLocationItemColorDark = Color(0xff1c1c1c)
+
+val mapLocationItemColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MapLocationItemColorLight
+        true -> MapLocationItemColorDark
+    }
+
+
+private val MapLocationItemTextColorLight = Color(0xff000000)
+private val MapLocationItemTextColorDark = Color(0xffffffff)
+
+val mapLocationItemTextColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MapLocationItemTextColorLight
+        true -> MapLocationItemTextColorDark
+    }
+
+val locationPinColor = Color(0xfff9e753)
+
+// Atm map not registered user
+
+private val AtmMapScreenButtonNotSelectedColorLight = Color(0xffbcb8b8)
+private val AtmMapScreenButtonNotSelectedColorDark = Color(0xff1c1c1c)
+
+val atmMapScreenButtonNotSelectedColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AtmMapScreenButtonNotSelectedColorLight
+        true -> AtmMapScreenButtonNotSelectedColorDark
+    }
+
+private val AtmMapScreenButtonSelectedColorLight = Color(0xFF555559)
+private val AtmMapScreenButtonSelectedColorDark = Color(0xFFB2ADAD)
+
+val atmMapScreenButtonSelectedColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AtmMapScreenButtonSelectedColorLight
+        true -> AtmMapScreenButtonSelectedColorDark
+    }
+
+private val AtmMapScreenButtonTextNotSelectedColorLight = Color(0xff000000)
+private val AtmMapScreenButtonTextNotSelectedColorDark = Color(0xffffffff)
+
+val atmMapScreenButtonTextNotSelectedColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AtmMapScreenButtonTextNotSelectedColorLight
+        true -> AtmMapScreenButtonTextNotSelectedColorDark
+    }
+
+private val AtmMapScreenButtonTextSelectedColorLight = Color(0xffffffff)
+private val AtmMapScreenButtonTextSelectedColorDark = Color(0xff000000)
+val atmMapScreenButtonTextSelectedColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AtmMapScreenButtonTextSelectedColorLight
+        true -> AtmMapScreenButtonTextSelectedColorDark
     }

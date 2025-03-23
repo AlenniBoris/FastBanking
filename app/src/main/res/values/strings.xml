@@ -54,5 +54,19 @@
     <string name="registration_confirmation_process_text">Tap button below to finish registration. It it fails try pressing again or try to register again. If it goes well, you will be transferred to login page</string>
     <string name="phone_verification_code_text">Verification code</string>
     <string name="welcome_to_app_text">Welcome to banking</string>
+    <string name="coarse_location_permission_explanation">Allows an app to access the device\'s location at a coarse level of accuracy, typically based on cell tower or WiFi network information</string>
+    <string name="fine_location_permission_explanation">Permission to access fine location</string>
+    <string name="coarse_location_permission_name">Coarse location</string>
+    <string name="fine_location_permission_name">Fine location</string>
+    <string name="office_text">Office</string>
+    <string name="atm_text">Atm</string>
+    <string name="office_with_atm_text">Office with atm</string>
+    <string name="undefined_text">Undefined</string>
+    <string name="progress_bar_animation_description">Progress bar animation</string>
+    <string name="progress_bar_description">Progress bar icon\n</string>
+    <string name="location_pin_description">location pin</string>
+    <string name="map_mode_text">Map</string>
+    <string name="list_mode_text">List</string>
+    <string name="map_top_bar_header_text">BBank map</string>
 
 </resources>

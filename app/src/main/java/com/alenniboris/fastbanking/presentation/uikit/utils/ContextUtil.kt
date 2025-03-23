@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.domain.utils
+package com.alenniboris.fastbanking.presentation.uikit.utils
 
 import android.app.Activity
 import android.content.Context

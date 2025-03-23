@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.uikit.theme
+package com.alenniboris.fastbanking.presentation.uikit.utils
 
 import android.content.Context
 import kotlinx.coroutines.flow.MutableStateFlow

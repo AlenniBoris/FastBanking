@@ -16,6 +16,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.alenniboris.fastbanking.presentation.uikit.utils.ThemeMode
+import com.alenniboris.fastbanking.presentation.uikit.utils.currentThemeMode
+import com.alenniboris.fastbanking.presentation.uikit.utils.getLastThemeAndApply
 
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFF673AB7),

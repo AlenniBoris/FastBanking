@@ -80,3 +80,22 @@ val SettingPasswordProcessUiContainerPadding = PaddingValues(horizontal = 20.dp)
 // Confirm page process ui
 val ConfirmPageProcessUiContainerPadding = PaddingValues(horizontal = 20.dp)
 
+// Map location item
+val MapLocationItemTitleTextSize = 20.sp
+val MapLocationItemContentTextSize = 15.sp
+val MapLocationItemTextPadding = PaddingValues(top = 10.dp)
+
+// Map user not registered screen
+val AtmMapNotRegisteredUserScreenTopBarPadding = PaddingValues(bottom = 10.dp)
+val AtmMapNotRegisteredUserScreenTopBarButtonInnerPadding = PaddingValues(vertical = 5.dp)
+val AtmMapNotRegisteredUserScreenTopBarButtonOuterPadding = PaddingValues(horizontal = 5.dp)
+val AtmMapNotRegisteredUserScreenTopBarButtonShape = RoundedCornerShape(20)
+val AtmMapNotRegisteredUserScreenContentPadding = PaddingValues(horizontal = 20.dp)
+
+// Map screen
+val AtmMapListScreenItemPadding = PaddingValues(vertical = 5.dp)
+val AtmMapListScreenItemInnerPadding = PaddingValues(vertical = 5.dp)
+val AtmMapListScreenItemIconPadding = PaddingValues(horizontal = 15.dp)
+val AtmMapListScreenItemBorderSize = 1.dp
+val AtmMapListScreenItemBorderShape = RoundedCornerShape(20)
+

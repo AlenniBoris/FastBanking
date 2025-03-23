@@ -39,7 +39,7 @@ fun NotAuthorizedActions.toBottomBarModel(onClick: () -> Unit) = when (this) {
             onClick = onClick,
             iconId = AtmLocalePicture,
             textId = R.string.atm_locale_icon_text,
-            route = AtmMapScreenRoute
+            route = AtmMapNotRegisteredUserScreenRoute
         )
 
     NotAuthorizedActions.Exchange ->

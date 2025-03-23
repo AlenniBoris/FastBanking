@@ -2,6 +2,7 @@ package com.alenniboris.fastbanking.presentation.mappers
 
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.MapsExceptionModelDomain
 
 fun AuthenticationExceptionModelDomain.toUiMessageString(): Int =
     when (this) {
@@ -20,3 +21,9 @@ fun AuthenticationExceptionModelDomain.toUiMessageString(): Int =
         AuthenticationExceptionModelDomain.WeakPasswordException -> R.string.exception_weak_password
         AuthenticationExceptionModelDomain.VerificationWithCodeFailed -> R.string.exception_verification_code
     }
+
+fun MapsExceptionModelDomain.toUiMessageString(): Int = when (this) {
+    MapsExceptionModelDomain.ErrorGettingData -> R.string.exception_getting_data
+    MapsExceptionModelDomain.Other -> R.string.exception_unknown
+    MapsExceptionModelDomain.WebException -> R.string.exception_internet_error
+}

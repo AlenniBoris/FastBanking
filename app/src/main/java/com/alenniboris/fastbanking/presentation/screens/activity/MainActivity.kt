@@ -23,11 +23,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.alenniboris.fastbanking.presentation.screens.NavGraphs
+import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapNotRegisteredUserScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.LoginScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.MainScreenDestination
 import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.enterTextFieldColor
+import com.alenniboris.fastbanking.presentation.uikit.values.AtmMapNotRegisteredUserScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.AuthorizedActions
 import com.alenniboris.fastbanking.presentation.uikit.values.LoginScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.NotAuthorizedActions
@@ -115,6 +117,11 @@ fun FastBankingUi() {
                                         }
 
                                         NotAuthorizedActions.Atms -> {
+                                            if (currentRoute != AtmMapNotRegisteredUserScreenRoute) {
+                                                navController.navigate(
+                                                    AtmMapNotRegisteredUserScreenDestination
+                                                )
+                                            }
                                             Log.e("!!!", "Atms")
                                         }
 
