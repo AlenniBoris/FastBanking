@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.domain.usecase.logic
+package com.alenniboris.fastbanking.domain.usecase.logic.map
 
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.MapsExceptionModelDomain

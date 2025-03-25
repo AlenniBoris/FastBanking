@@ -1,8 +1,8 @@
-package com.alenniboris.fastbanking.domain.usecase.implementation
+package com.alenniboris.fastbanking.domain.usecase.implementation.user
 
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
-import com.alenniboris.fastbanking.domain.usecase.logic.IGetCurrentUserUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import kotlinx.coroutines.flow.StateFlow
 

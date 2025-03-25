@@ -1,11 +1,13 @@
-package com.alenniboris.fastbanking.domain.usecase.logic
+package com.alenniboris.fastbanking.domain.usecase.logic.user
 
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 
-interface ICheckVerificationCodeForRegistrationUseCase {
+interface IRegisterUserIntoBankingUseCase {
 
-    fun invoke(
-        code: String
+    suspend fun invoke(
+        login: String,
+        password: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
+
 }

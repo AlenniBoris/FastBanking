@@ -7,7 +7,7 @@ import android.provider.Settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.usecase.logic.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi

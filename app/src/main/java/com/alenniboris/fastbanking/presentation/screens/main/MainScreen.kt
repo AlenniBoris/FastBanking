@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alenniboris.fastbanking.domain.usecase.logic.ISignOutUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ISignOutUseCase
 import com.alenniboris.fastbanking.presentation.uikit.values.MainScreenRoute
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph

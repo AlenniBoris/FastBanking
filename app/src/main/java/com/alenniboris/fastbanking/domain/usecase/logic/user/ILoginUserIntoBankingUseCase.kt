@@ -1,9 +1,9 @@
-package com.alenniboris.fastbanking.domain.usecase.logic
+package com.alenniboris.fastbanking.domain.usecase.logic.user
 
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 
-interface IRegisterUserIntoBankingUseCase {
+interface ILoginUserIntoBankingUseCase {
 
     suspend fun invoke(
         login: String,

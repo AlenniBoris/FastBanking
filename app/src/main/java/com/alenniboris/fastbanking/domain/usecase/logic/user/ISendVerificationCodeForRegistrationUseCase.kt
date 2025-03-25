@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.domain.usecase.logic
+package com.alenniboris.fastbanking.domain.usecase.logic.user
 
 interface ISendVerificationCodeForRegistrationUseCase {
 

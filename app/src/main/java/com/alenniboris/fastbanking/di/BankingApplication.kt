@@ -12,7 +12,9 @@ val myModules = listOf(
     DatabaseModule,
     ViewModelsModule,
     UseCaseModule,
-    MapsModule
+    MapsModule,
+    CurrencyModule,
+    CountriesModule
 )
 
 class BankingApplication : Application() {
