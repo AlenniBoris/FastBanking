@@ -7,7 +7,7 @@ import com.alenniboris.fastbanking.domain.model.exception.CurrencyExceptionModel
 interface IGetCurrenciesExchangeRateUseCase {
 
     suspend fun invoke(
-        first: CurrencyInfoModelDomain,
-        second: CurrencyInfoModelDomain
+        fromCurrency: CurrencyInfoModelDomain,
+        toCurrency: CurrencyInfoModelDomain
     ): CustomResultModelDomain<Double, CurrencyExceptionModelDomain>
 }

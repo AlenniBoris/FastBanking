@@ -19,3 +19,5 @@ secret.apikey.properties
 /secret.apikey.properties
 secret.apikey.default.properties
 /secret.apikey.default.properties
+apikeys.properties
+/apikeys.properties

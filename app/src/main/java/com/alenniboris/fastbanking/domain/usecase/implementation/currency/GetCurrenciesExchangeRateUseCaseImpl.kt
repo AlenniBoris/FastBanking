@@ -14,12 +14,12 @@ class GetCurrenciesExchangeRateUseCaseImpl(
 ) : IGetCurrenciesExchangeRateUseCase {
 
     override suspend fun invoke(
-        first: CurrencyInfoModelDomain,
-        second: CurrencyInfoModelDomain
+        fromCurrency: CurrencyInfoModelDomain,
+        toCurrency: CurrencyInfoModelDomain
     ): CustomResultModelDomain<Double, CurrencyExceptionModelDomain> = withContext(dispatchers.IO) {
         return@withContext currencyRepository.getExchangeRateForCurrencies(
-            first = first,
-            second = second
+            fromCurrency = fromCurrency,
+            toCurrency = toCurrency
         )
     }
 }

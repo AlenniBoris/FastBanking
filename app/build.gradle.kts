@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -21,6 +23,16 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val keyStoreFile = project.rootProject.file("apikeys.properties")
+        val properties = Properties()
+        properties.load(keyStoreFile.inputStream())
+        val exchangeRateApiKey = properties.getProperty("EXCHANGE_RATE_API_KEY") ?: ""
+        buildConfigField(
+            type = "String",
+            name = "EXCHANGE_RATE_API_KEY",
+            value = exchangeRateApiKey
+        )
     }
 
     buildTypes {
@@ -98,6 +110,13 @@ dependencies {
     implementation("com.google.maps.android:maps-compose-utils:6.5.2")
     implementation("com.google.maps.android:android-maps-utils:3.10.0")
     implementation("com.google.android.gms:play-services-maps:19.1.0")
+
+    // Retrofit + cache
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.andretietz.retrofit:cache-extension:1.0.0")
 }
 
 secrets {

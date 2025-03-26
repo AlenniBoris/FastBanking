@@ -9,7 +9,7 @@ interface ICurrencyRepository {
     suspend fun getAllCurrencies(): CustomResultModelDomain<List<CurrencyInfoModelDomain>, CurrencyExceptionModelDomain>
 
     suspend fun getExchangeRateForCurrencies(
-        first: CurrencyInfoModelDomain,
-        second: CurrencyInfoModelDomain
+        fromCurrency: CurrencyInfoModelDomain,
+        toCurrency: CurrencyInfoModelDomain
     ): CustomResultModelDomain<Double, CurrencyExceptionModelDomain>
 }
