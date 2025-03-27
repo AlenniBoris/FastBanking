@@ -4,11 +4,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -21,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarIndicatorHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarIndicatorWidth
+import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarItemHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.enterTextFieldColor
 import com.alenniboris.fastbanking.presentation.uikit.values.AuthorizedActions
@@ -35,6 +38,7 @@ fun AppBottomBar(
     items: List<BottomBarModelUi>,
     currentRoute: String
 ) {
+
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
@@ -56,17 +60,22 @@ private fun BottomBarItem(
     currentRoute: String
 ) {
 
-    Column(
-        modifier = Modifier
-            .clickable { item.onClick() },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Box(
+        modifier = Modifier.size(BottomBarHeight),
+        contentAlignment = Alignment.TopCenter
     ) {
-        Icon(
-            painter = painterResource(item.iconId),
-            contentDescription = stringResource(item.textId),
-            tint = appTopBarElementsColor
-        )
+        Box(
+            modifier = Modifier
+                .height(BottomBarItemHeight)
+                .clickable { item.onClick() },
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(item.iconId),
+                contentDescription = stringResource(item.textId),
+                tint = appTopBarElementsColor
+            )
+        }
         AnimatedVisibility(
             visible = item.route == currentRoute
         ) {

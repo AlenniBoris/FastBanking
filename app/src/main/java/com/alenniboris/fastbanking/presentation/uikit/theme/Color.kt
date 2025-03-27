@@ -107,7 +107,7 @@ val locationPinColor = Color(0xfff9e753)
 private val AtmMapScreenButtonNotSelectedColorLight = Color(0xffbcb8b8)
 private val AtmMapScreenButtonNotSelectedColorDark = Color(0xff1c1c1c)
 
-val atmMapScreenButtonNotSelectedColor
+val appButtonRowButtonNotSelectedColor
     get() = when (currentThemeMode.value.isThemeDark) {
         false -> AtmMapScreenButtonNotSelectedColorLight
         true -> AtmMapScreenButtonNotSelectedColorDark
@@ -116,7 +116,7 @@ val atmMapScreenButtonNotSelectedColor
 private val AtmMapScreenButtonSelectedColorLight = Color(0xFF555559)
 private val AtmMapScreenButtonSelectedColorDark = Color(0xFFB2ADAD)
 
-val atmMapScreenButtonSelectedColor
+val appButtonRowButtonSelectedColor
     get() = when (currentThemeMode.value.isThemeDark) {
         false -> AtmMapScreenButtonSelectedColorLight
         true -> AtmMapScreenButtonSelectedColorDark
@@ -125,7 +125,7 @@ val atmMapScreenButtonSelectedColor
 private val AtmMapScreenButtonTextNotSelectedColorLight = Color(0xff000000)
 private val AtmMapScreenButtonTextNotSelectedColorDark = Color(0xffffffff)
 
-val atmMapScreenButtonTextNotSelectedColor
+val appButtonRowButtonTextNotSelectedColor
     get() = when (currentThemeMode.value.isThemeDark) {
         false -> AtmMapScreenButtonTextNotSelectedColorLight
         true -> AtmMapScreenButtonTextNotSelectedColorDark
@@ -133,8 +133,40 @@ val atmMapScreenButtonTextNotSelectedColor
 
 private val AtmMapScreenButtonTextSelectedColorLight = Color(0xffffffff)
 private val AtmMapScreenButtonTextSelectedColorDark = Color(0xff000000)
-val atmMapScreenButtonTextSelectedColor
+val appButtonRowButtonTextSelectedColor
     get() = when (currentThemeMode.value.isThemeDark) {
         false -> AtmMapScreenButtonTextSelectedColorLight
         true -> AtmMapScreenButtonTextSelectedColorDark
+    }
+
+// App dropdown menu
+
+private val AppDropdownColorLight = Color(0xffbcb8b8)
+private val AppDropdownColorDark = Color(0xff1c1c1c)
+
+val appDropdownColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> AppDropdownColorLight
+        true -> AppDropdownColorDark
+    }
+
+//Bottom bar
+
+private val BottomBarColorLight = Color(0xffbcb8b8)
+private val BottomBarColorDark = Color(0xff1c1c1c)
+
+val bottomBarColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> BottomBarColorLight
+        true -> BottomBarColorDark
+    }
+
+// currency rate item
+private val CurrencyRateItemTextColorLight = Color(0xff000000)
+private val CurrencyRateItemTextColorDark = Color(0xffffffff)
+
+val CurrencyRateItemTextColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> CurrencyRateItemTextColorLight
+        true -> CurrencyRateItemTextColorDark
     }

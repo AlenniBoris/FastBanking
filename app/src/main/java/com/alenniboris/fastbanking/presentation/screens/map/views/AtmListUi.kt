@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.map
+package com.alenniboris.fastbanking.presentation.screens.map.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,7 +38,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 import com.alenniboris.fastbanking.presentation.uikit.theme.mapLocationItemTextColor
 
 @Composable
-fun AtmListScreen(
+fun AtmListUi(
     modifier: Modifier = Modifier,
     items: List<MapsElementModelUi>,
     onItemClicked: (MapsElementModelUi) -> Unit = {}

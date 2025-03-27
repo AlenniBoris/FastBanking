@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.data.source.remote.api.exchange_rate_api
+package com.alenniboris.fastbanking.data.source.remote.api.exchange_rate_api.response
 
 
 import com.google.gson.annotations.SerializedName

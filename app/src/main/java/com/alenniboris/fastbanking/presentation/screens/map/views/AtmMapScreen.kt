@@ -1,17 +1,12 @@
-package com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered.views
+package com.alenniboris.fastbanking.presentation.screens.map.views
 
 import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,33 +29,23 @@ import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.map.MapElementType
 import com.alenniboris.fastbanking.domain.model.map.MapsElementModelDomain
 import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
-import com.alenniboris.fastbanking.presentation.screens.map.AtmListScreen
-import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreen
-import com.alenniboris.fastbanking.presentation.screens.map.MapScreenMode
-import com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered.AtmMapNotRegisteredUserScreenState
-import com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered.AtmMapNotRegisteredUserScreenViewModel
-import com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered.IAtmMapNotRegisteredUserEvent
-import com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered.IAtmMapNotRegisteredUserIntent
-import com.alenniboris.fastbanking.presentation.screens.map.toUiString
+import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenState
+import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.map.IAtmMapScreenEvent
+import com.alenniboris.fastbanking.presentation.screens.map.IAtmMapScreenIntent
 import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapNotRegisteredUserScreenContentPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapNotRegisteredUserScreenTopBarButtonInnerPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapNotRegisteredUserScreenTopBarButtonOuterPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapNotRegisteredUserScreenTopBarButtonShape
 import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapNotRegisteredUserScreenTopBarPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.MapLocationItemContentTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarHeaderTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.atmMapScreenButtonNotSelectedColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.atmMapScreenButtonSelectedColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.atmMapScreenButtonTextNotSelectedColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.atmMapScreenButtonTextSelectedColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 import com.alenniboris.fastbanking.presentation.uikit.utils.PermissionType
 import com.alenniboris.fastbanking.presentation.uikit.utils.launchForPermission
 import com.alenniboris.fastbanking.presentation.uikit.utils.toPermission
-import com.alenniboris.fastbanking.presentation.uikit.values.AtmMapNotRegisteredUserScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.values.AtmMapScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.values.ClickableElement
+import com.alenniboris.fastbanking.presentation.uikit.views.AppButtonRow
 import com.alenniboris.fastbanking.presentation.uikit.views.AppRationaleDialog
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.google.android.gms.location.LocationServices
@@ -67,8 +53,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.google.maps.android.compose.rememberUpdatedMarkerState
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -78,10 +64,13 @@ import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
-@Destination(route = AtmMapNotRegisteredUserScreenRoute)
-fun AtmMapNotRegisteredUserScreen() {
+@Destination(route = AtmMapScreenRoute)
+fun AtmMapScreen(
+    isUserAuthenticated: Boolean = false,
+    navigator: DestinationsNavigator
+) {
 
-    val viewModel = koinViewModel<AtmMapNotRegisteredUserScreenViewModel>()
+    val viewModel = koinViewModel<AtmMapScreenViewModel>()
     val proceedIntent by remember { mutableStateOf(viewModel::proceedIntent) }
     val state by viewModel.state.collectAsStateWithLifecycle()
     val event by remember { mutableStateOf(viewModel.event) }
@@ -94,7 +83,7 @@ fun AtmMapNotRegisteredUserScreen() {
 
     LaunchedEffect(event) {
         launch {
-            event.filterIsInstance<IAtmMapNotRegisteredUserEvent.ShowToastMessage>()
+            event.filterIsInstance<IAtmMapScreenEvent.ShowToastMessage>()
                 .collect { coming ->
                     toastMessage.cancel()
                     toastMessage =
@@ -106,9 +95,16 @@ fun AtmMapNotRegisteredUserScreen() {
                     toastMessage.show()
                 }
         }
+
+        launch {
+            event.filterIsInstance<IAtmMapScreenEvent.NavigateBack>().collect {
+                navigator.popBackStack()
+            }
+        }
     }
 
     AtmMapNotRegisteredUserScreenUi(
+        isUserRegistered = isUserAuthenticated,
         state = state,
         proceedIntent = proceedIntent
     )
@@ -117,107 +113,140 @@ fun AtmMapNotRegisteredUserScreen() {
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 private fun AtmMapNotRegisteredUserScreenUi(
-    state: AtmMapNotRegisteredUserScreenState,
-    proceedIntent: (IAtmMapNotRegisteredUserIntent) -> Unit
+    isUserRegistered: Boolean,
+    state: AtmMapScreenState,
+    proceedIntent: (IAtmMapScreenIntent) -> Unit
 ) {
 
-    val context = LocalContext.current
-    val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
-        context
-    )
-    val permissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (isGranted) {
-            proceedIntent(
-                IAtmMapNotRegisteredUserIntent.GetUserCurrentLocation(
-                    fusedLocationProviderClient = fusedLocationProviderClient
-                )
-            )
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        launchForPermission(
-            permission = PermissionType.PERMISSION_FINE_LOCATION,
-            context = context,
-            onPermissionGrantedAction = {
-                proceedIntent(
-                    IAtmMapNotRegisteredUserIntent.GetUserCurrentLocation(
-                        fusedLocationProviderClient = fusedLocationProviderClient
-                    )
-                )
-            },
-            onPermissionNotGrantedAction = {},
-            onShowRationale = { permission ->
-                proceedIntent(
-                    IAtmMapNotRegisteredUserIntent.UpdateRequestedPermissionAndShowDialog(
-                        newRequestedPermission = permission
-                    )
-                )
-            },
-            onLaunchAgain = { permission ->
-                permissionLauncher.launch(permission.toPermission())
-            }
-        )
-    }
-    if (state.isPermissionDialogVisible) {
-        state.requestedPermission?.let {
-            AppRationaleDialog(
-                permissionType = it,
-                onDismiss = {
-                    proceedIntent(
-                        IAtmMapNotRegisteredUserIntent.HidePermissionDialog
-                    )
-                },
-                onOpenSettings = {
-                    proceedIntent(
-                        IAtmMapNotRegisteredUserIntent.OpenSettingsAndHidePermissionDialog
-                    )
-                }
-            )
-        }
-    }
-
-    val mapProperties = MapProperties(isBuildingEnabled = state.userLocation != null)
-    val cameraPositionState = rememberCameraPositionState()
-    val markerState = rememberUpdatedMarkerState()
-
-    LaunchedEffect(state.userLocation) {
-        state.userLocation?.let { location ->
-            CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
-                cameraPositionState.animate(
-                    update = CameraUpdateFactory.newLatLngZoom(
-                        LatLng(location.latitude, location.longitude),
-                        15f
-                    )
-                )
-            }
-        }
-    }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(appColor)
     ) {
 
-        AppTopBar(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(appColor)
-                .padding(TopBarPadding),
-            content = {
-                TopBarContent(
-                    currentMode = state.screenMode,
-                    listOfScreenModes = state.listOfScreenModes,
-                    proceedIntent = proceedIntent
+        if (isUserRegistered) {
+            AppTopBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(appColor)
+                    .padding(TopBarPadding),
+                headerTextString = stringResource(R.string.map_top_bar_header_text),
+                leftBtnPainter = painterResource(R.drawable.back_icon),
+                onLeftBtnClicked = {
+                    proceedIntent(
+                        IAtmMapScreenIntent.NavigateBack
+                    )
+                }
+            )
+        } else {
+            AppTopBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(appColor)
+                    .padding(TopBarPadding),
+                headerTextString = stringResource(R.string.map_top_bar_header_text)
+            )
+        }
+
+
+        val context = LocalContext.current
+        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
+            context
+        )
+        val permissionLauncher = rememberLauncherForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (isGranted) {
+                proceedIntent(
+                    IAtmMapScreenIntent.GetUserCurrentLocation(
+                        fusedLocationProviderClient = fusedLocationProviderClient
+                    )
                 )
             }
+        }
+
+        LaunchedEffect(Unit) {
+            launchForPermission(
+                permission = PermissionType.PERMISSION_FINE_LOCATION,
+                context = context,
+                onPermissionGrantedAction = {
+                    proceedIntent(
+                        IAtmMapScreenIntent.GetUserCurrentLocation(
+                            fusedLocationProviderClient = fusedLocationProviderClient
+                        )
+                    )
+                },
+                onPermissionNotGrantedAction = {},
+                onShowRationale = { permission ->
+                    proceedIntent(
+                        IAtmMapScreenIntent.UpdateRequestedPermissionAndShowDialog(
+                            newRequestedPermission = permission
+                        )
+                    )
+                },
+                onLaunchAgain = { permission ->
+                    permissionLauncher.launch(permission.toPermission())
+                }
+            )
+        }
+        if (state.isPermissionDialogVisible) {
+            state.requestedPermission?.let {
+                AppRationaleDialog(
+                    permissionType = it,
+                    onDismiss = {
+                        proceedIntent(
+                            IAtmMapScreenIntent.HidePermissionDialog
+                        )
+                    },
+                    onOpenSettings = {
+                        proceedIntent(
+                            IAtmMapScreenIntent.OpenSettingsAndHidePermissionDialog
+                        )
+                    }
+                )
+            }
+        }
+
+        val mapProperties = MapProperties(isBuildingEnabled = state.userLocation != null)
+        val cameraPositionState = rememberCameraPositionState()
+
+        LaunchedEffect(state.userLocation) {
+            state.userLocation?.let { location ->
+                CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+                    cameraPositionState.animate(
+                        update = CameraUpdateFactory.newLatLngZoom(
+                            LatLng(location.latitude, location.longitude),
+                            15f
+                        )
+                    )
+                }
+            }
+        }
+
+        AppButtonRow(
+            modifier = Modifier
+                .padding(AtmMapNotRegisteredUserScreenContentPadding)
+                .fillMaxWidth()
+                .padding(AtmMapNotRegisteredUserScreenTopBarPadding),
+            listOfElements = state.listOfScreenModes.map { element ->
+                ClickableElement(
+                    text = stringResource(element.toUiString()),
+                    onClick = {
+                        proceedIntent(
+                            IAtmMapScreenIntent.UpdateCurrentScreenMode(element)
+                        )
+                    }
+                )
+            },
+            currentElement = ClickableElement(
+                text = stringResource(state.screenMode.toUiString()),
+                onClick = {}
+            )
         )
 
         when (state.screenMode) {
             MapScreenMode.Map -> {
-                AtmMapScreen(
+                AtmMapUi(
                     modifier = Modifier
                         .padding(AtmMapNotRegisteredUserScreenContentPadding)
                         .fillMaxSize(),
@@ -231,20 +260,20 @@ private fun AtmMapNotRegisteredUserScreenUi(
                     },
                     onClusterItemClick = { item ->
                         proceedIntent(
-                            IAtmMapNotRegisteredUserIntent.UpdateClickedMapElement(item)
+                            IAtmMapScreenIntent.UpdateClickedMapElement(item)
                         )
                     },
                     selectedItem = state.clickedMapItem,
                     onItemInfoDismiss = {
                         proceedIntent(
-                            IAtmMapNotRegisteredUserIntent.UpdateClickedMapElement(null)
+                            IAtmMapScreenIntent.UpdateClickedMapElement(null)
                         )
                     }
                 )
             }
 
             MapScreenMode.List -> {
-                AtmListScreen(
+                AtmListUi(
                     modifier = Modifier
                         .padding(AtmMapNotRegisteredUserScreenContentPadding)
                         .fillMaxSize(),
@@ -259,7 +288,7 @@ private fun AtmMapNotRegisteredUserScreenUi(
 private fun TopBarContent(
     currentMode: MapScreenMode,
     listOfScreenModes: List<MapScreenMode>,
-    proceedIntent: (IAtmMapNotRegisteredUserIntent) -> Unit
+    proceedIntent: (IAtmMapScreenIntent) -> Unit
 ) {
 
     Column(
@@ -276,53 +305,23 @@ private fun TopBarContent(
             )
         )
 
-        Row(
+        AppButtonRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            listOfScreenModes.forEach { mode ->
-
-                val backgroundColor by animateColorAsState(
-                    if (mode == currentMode)
-                        atmMapScreenButtonSelectedColor
-                    else
-                        atmMapScreenButtonNotSelectedColor
-                )
-
-                val textColor by animateColorAsState(
-                    if (mode == currentMode)
-                        atmMapScreenButtonTextSelectedColor
-                    else
-                        atmMapScreenButtonTextNotSelectedColor
-                )
-
-                Box(
-                    modifier = Modifier
-                        .clickable {
-                            proceedIntent(
-                                IAtmMapNotRegisteredUserIntent.UpdateCurrentScreenMode(mode)
-                            )
-                        }
-                        .padding(AtmMapNotRegisteredUserScreenTopBarButtonOuterPadding)
-                        .weight(1f)
-                        .background(
-                            color = backgroundColor,
-                            shape = AtmMapNotRegisteredUserScreenTopBarButtonShape
+            listOfElements = listOfScreenModes.map { element ->
+                ClickableElement(
+                    text = stringResource(element.toUiString()),
+                    onClick = {
+                        proceedIntent(
+                            IAtmMapScreenIntent.UpdateCurrentScreenMode(element)
                         )
-                        .padding(AtmMapNotRegisteredUserScreenTopBarButtonInnerPadding)
-                ) {
-
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = stringResource(mode.toUiString()),
-                        style = bodyStyle.copy(
-                            color = textColor,
-                            fontSize = MapLocationItemContentTextSize
-                        )
-                    )
-                }
-            }
-        }
+                    }
+                )
+            },
+            currentElement = ClickableElement(
+                text = stringResource(currentMode.toUiString()),
+                onClick = {}
+            )
+        )
     }
 }
 
@@ -331,7 +330,7 @@ private fun TopBarContent(
 @Preview
 private fun AtmMapNotRegisteredUserScreenPreview() {
     AtmMapNotRegisteredUserScreenUi(
-        state = AtmMapNotRegisteredUserScreenState(
+        state = AtmMapScreenState(
             screenMode = MapScreenMode.List,
             bankMapItems = listOf(
                 MapsElementModelUi(
@@ -372,6 +371,7 @@ private fun AtmMapNotRegisteredUserScreenPreview() {
                 )
             )
         ),
-        proceedIntent = {}
+        proceedIntent = {},
+        isUserRegistered = false
     )
 }

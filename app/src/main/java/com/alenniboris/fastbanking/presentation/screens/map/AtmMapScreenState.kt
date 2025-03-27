@@ -1,11 +1,11 @@
-package com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered
+package com.alenniboris.fastbanking.presentation.screens.map
 
 import android.location.Location
 import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
-import com.alenniboris.fastbanking.presentation.screens.map.MapScreenMode
+import com.alenniboris.fastbanking.presentation.screens.map.views.MapScreenMode
 import com.alenniboris.fastbanking.presentation.uikit.utils.PermissionType
 
-data class AtmMapNotRegisteredUserScreenState(
+data class AtmMapScreenState(
     val screenMode: MapScreenMode = MapScreenMode.Map,
     val listOfScreenModes: List<MapScreenMode> = MapScreenMode.entries.toList(),
     val isBankItemsLoading: Boolean = false,

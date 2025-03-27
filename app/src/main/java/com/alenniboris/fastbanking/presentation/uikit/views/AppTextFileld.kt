@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,6 +51,7 @@ fun AppTextField(
     isPasswordVisible: Boolean = false,
     onPasswordVisibilityChange: () -> Unit = {},
     isEnabled: Boolean = true,
+    keyboardType: KeyboardType = KeyboardType.Unspecified
 ) {
     val customTextSelectionColors = TextSelectionColors(
         handleColor = selectedTextHandlesColor,
@@ -65,7 +67,8 @@ fun AppTextField(
             isPasswordField = isPasswordField,
             isPasswordVisible = isPasswordVisible,
             onPasswordVisibilityChange = onPasswordVisibilityChange,
-            isEnabled = isEnabled
+            isEnabled = isEnabled,
+            keyboardType = keyboardType
         )
     }
 }
@@ -80,12 +83,14 @@ private fun EnterValueTextField(
     isPasswordVisible: Boolean = false,
     onPasswordVisibilityChange: () -> Unit = {},
     isEnabled: Boolean = true,
+    keyboardType: KeyboardType = KeyboardType.Unspecified,
 ) {
     BasicTextField(
         value = value,
         onValueChange = onValueChanged,
         keyboardOptions = KeyboardOptions.Default.copy(
-            imeAction = ImeAction.Done
+            imeAction = ImeAction.Done,
+            keyboardType = keyboardType
         ),
         enabled = isEnabled,
         modifier = modifier

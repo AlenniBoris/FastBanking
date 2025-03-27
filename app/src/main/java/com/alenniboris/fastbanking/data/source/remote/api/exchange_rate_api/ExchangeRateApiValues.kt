@@ -8,7 +8,11 @@ object ExchangeRateApiValues {
 
     const val REQUEST_PAIR = "/pair/{from}/{to}"
 
+    const val REQUEST_LATEST_COURSE = "/latest/{currency}"
+
     const val PARAMETER_FROM = "from"
 
     const val PARAMETER_TO = "to"
+
+    const val PARAMETER_CURRENCY = "currency"
 }

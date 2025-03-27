@@ -125,6 +125,7 @@ private fun RegistrationOptionsScreenUi(
             Spacer(modifier = Modifier.height(RegistrationOptionsScreenSpacerDoubleHeight))
 
             AppCustomButton(
+                modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.being_bank_client_text),
                 onClick = {
                     proceedIntent(IRegistrationOptionsScreenIntent.NavigateToRegistrationAsAppClient)

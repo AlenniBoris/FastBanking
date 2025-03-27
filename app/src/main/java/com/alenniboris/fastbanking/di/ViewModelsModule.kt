@@ -1,14 +1,18 @@
 package com.alenniboris.fastbanking.di
 
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
+import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
-import com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered.AtmMapNotRegisteredUserScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.RegistrationAsAppClientScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.register.registration_options.RegistrationOptionsScreenViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -41,10 +45,18 @@ val ViewModelsModule = module {
         )
     }
 
-    viewModel<AtmMapNotRegisteredUserScreenViewModel> {
-        AtmMapNotRegisteredUserScreenViewModel(
+    viewModel<AtmMapScreenViewModel> {
+        AtmMapScreenViewModel(
             apl = androidApplication(),
             getBankLocationsUseCase = get<IGetBankLocationsUseCase>()
+        )
+    }
+
+    viewModel<CurrencyScreenViewModel> {
+        CurrencyScreenViewModel(
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            getAllCurrenciesInfoUseCase = get<IGetAllCurrenciesInfoUseCase>(),
+            getAllExchangeRatesForCurrencyUseCase = get<IGetAllExchangeRatesForCurrencyUseCase>()
         )
     }
 }

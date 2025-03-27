@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.map.atm_map_user_not_registered
+package com.alenniboris.fastbanking.presentation.screens.map
 
 import android.app.Application
 import android.content.Intent
@@ -11,7 +11,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUse
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
-import com.alenniboris.fastbanking.presentation.screens.map.MapScreenMode
+import com.alenniboris.fastbanking.presentation.screens.map.views.MapScreenMode
 import com.alenniboris.fastbanking.presentation.uikit.utils.PermissionType
 import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,15 +20,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class AtmMapNotRegisteredUserScreenViewModel(
+class AtmMapScreenViewModel(
     private val apl: Application,
     private val getBankLocationsUseCase: IGetBankLocationsUseCase
 ) : ViewModel() {
 
-    private val _screenState = MutableStateFlow(AtmMapNotRegisteredUserScreenState())
+    private val _screenState = MutableStateFlow(AtmMapScreenState())
     val state = _screenState.asStateFlow()
 
-    private val _event = SingleFlowEvent<IAtmMapNotRegisteredUserEvent>(viewModelScope)
+    private val _event = SingleFlowEvent<IAtmMapScreenEvent>(viewModelScope)
     val event = _event.flow
 
     init {
@@ -52,7 +52,7 @@ class AtmMapNotRegisteredUserScreenViewModel(
 
                 is CustomResultModelDomain.Error -> {
                     _event.emit(
-                        IAtmMapNotRegisteredUserEvent.ShowToastMessage(
+                        IAtmMapScreenEvent.ShowToastMessage(
                             result.exception.toUiMessageString()
                         )
                     )
@@ -62,27 +62,36 @@ class AtmMapNotRegisteredUserScreenViewModel(
         }
     }
 
-    fun proceedIntent(intent: IAtmMapNotRegisteredUserIntent) {
+    fun proceedIntent(intent: IAtmMapScreenIntent) {
         when (intent) {
-            is IAtmMapNotRegisteredUserIntent.GetUserCurrentLocation -> getUserCurrentLocation(
+            is IAtmMapScreenIntent.GetUserCurrentLocation -> getUserCurrentLocation(
                 intent.fusedLocationProviderClient
             )
 
-            is IAtmMapNotRegisteredUserIntent.UpdateRequestedPermissionAndShowDialog ->
+            is IAtmMapScreenIntent.UpdateRequestedPermissionAndShowDialog ->
                 updateRequestedPermissionAndShowDialog(intent.newRequestedPermission)
 
-            is IAtmMapNotRegisteredUserIntent.HidePermissionDialog ->
+            is IAtmMapScreenIntent.HidePermissionDialog ->
                 hidePermissionDialog()
 
-            is IAtmMapNotRegisteredUserIntent.OpenSettingsAndHidePermissionDialog ->
+            is IAtmMapScreenIntent.OpenSettingsAndHidePermissionDialog ->
                 openSettingsAndHidePermissionDialog()
 
-            is IAtmMapNotRegisteredUserIntent.UpdateClickedMapElement ->
+            is IAtmMapScreenIntent.UpdateClickedMapElement ->
                 updateClickedMapElement(intent.newValue)
 
-            is IAtmMapNotRegisteredUserIntent.UpdateCurrentScreenMode ->
+            is IAtmMapScreenIntent.UpdateCurrentScreenMode ->
                 updateCurrentScreenMode(intent.newValue)
+
+            is IAtmMapScreenIntent.NavigateBack ->
+                navigateBack()
         }
+    }
+
+    private fun navigateBack() {
+        _event.emit(
+            IAtmMapScreenEvent.NavigateBack
+        )
     }
 
     private fun updateCurrentScreenMode(newValue: MapScreenMode) {

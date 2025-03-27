@@ -59,8 +59,8 @@ fun FastBankingTheme(
 
             val appBarColor = Color.Transparent
 
-            window.statusBarColor = appBarColor.toArgb()
-            window.navigationBarColor = appBarColor.toArgb()
+            window.statusBarColor = appColor.toArgb()
+            window.navigationBarColor = bottomBarColor.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
                 themeMode.value is ThemeMode.Light
             WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars =

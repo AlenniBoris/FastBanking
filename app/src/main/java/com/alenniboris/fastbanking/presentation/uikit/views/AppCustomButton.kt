@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.presentation.uikit.theme.EnterValueTextFieldShape
+import com.alenniboris.fastbanking.presentation.uikit.theme.EnterValueTextFieldTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationOptionsScreenButtonBorderWidth
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationOptionsScreenButtonPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationOptionsScreenRegistrationTypeTextSize
@@ -32,7 +32,6 @@ fun AppCustomButton(
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
             .background(enterTextFieldColor, EnterValueTextFieldShape)
             .border(
                 RegistrationOptionsScreenButtonBorderWidth,
@@ -45,7 +44,9 @@ fun AppCustomButton(
         content?.let {
             it()
         } ?: Text(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(EnterValueTextFieldTextPadding),
             text = text,
             style = bodyStyle.copy(
                 fontSize = RegistrationOptionsScreenRegistrationTypeTextSize,

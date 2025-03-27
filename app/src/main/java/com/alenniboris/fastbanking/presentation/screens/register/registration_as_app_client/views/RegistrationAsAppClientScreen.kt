@@ -178,7 +178,8 @@ private fun RegistrationAsAppClientScreenUi(
 
             AppCustomButton(
                 modifier = Modifier
-                    .padding(RegistrationAsAppClientContinueButtonPadding),
+                    .padding(RegistrationAsAppClientContinueButtonPadding)
+                    .fillMaxWidth(),
                 onClick = {
                     proceedIntent(
                         IRegistrationAsAppClientScreenIntent.DoForwardAction

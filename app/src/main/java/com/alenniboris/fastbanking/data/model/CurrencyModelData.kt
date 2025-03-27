@@ -1,16 +1,16 @@
 package com.alenniboris.fastbanking.data.model
 
 import android.util.Log
-import com.alenniboris.fastbanking.domain.model.currency.CurrencyInfoModelDomain
+import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
 
-data class CurrencyInfoModelData(
+data class CurrencyModelData(
     val code: String?,
     val fullName: String?
 )
 
-fun CurrencyInfoModelData.toModelDomain(): CurrencyInfoModelDomain? =
+fun CurrencyModelData.toModelDomain(): CurrencyModelDomain? =
     runCatching {
-        CurrencyInfoModelDomain(
+        CurrencyModelDomain(
             code = this.code!!,
             fullName = this.fullName!!
         )

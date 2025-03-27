@@ -11,6 +11,7 @@ val EnterValueTextFieldTextSize = 20.sp
 val EnterValueTextFieldInnerBoxPadding = PaddingValues(all = 4.dp)
 val EnterValueTextFieldShape = RoundedCornerShape(percent = 20)
 val EnterValueTextFieldPadding = PaddingValues(all = 10.dp)
+val EnterValueTextFieldTextPadding = PaddingValues(horizontal = 10.dp)
 
 // TopBar (Login)
 val TopBarPadding = PaddingValues(horizontal = 15.dp, vertical = 15.dp)
@@ -25,9 +26,10 @@ val LoginScreenButtonTextSize = 20.sp
 val LoginScreenBottomTextPadding = PaddingValues(vertical = 20.dp)
 
 // Bottom bar
-val BottomBarHeight = 64.dp
+val BottomBarHeight = 70.dp
+val BottomBarItemHeight = BottomBarHeight
 val BottomBarIndicatorWidth = 24.dp
-val BottomBarIndicatorHeight = 3.dp
+val BottomBarIndicatorHeight = 5.dp
 
 // Registration options screen
 val RegistrationOptionsScreenRegistrationTypeTextSize = 20.sp
@@ -87,9 +89,9 @@ val MapLocationItemTextPadding = PaddingValues(top = 10.dp)
 
 // Map user not registered screen
 val AtmMapNotRegisteredUserScreenTopBarPadding = PaddingValues(bottom = 10.dp)
-val AtmMapNotRegisteredUserScreenTopBarButtonInnerPadding = PaddingValues(vertical = 5.dp)
-val AtmMapNotRegisteredUserScreenTopBarButtonOuterPadding = PaddingValues(horizontal = 5.dp)
-val AtmMapNotRegisteredUserScreenTopBarButtonShape = RoundedCornerShape(20)
+val appButtonRowButtonInnerPadding = PaddingValues(vertical = 5.dp)
+val appButtonRowButtonOuterPadding = PaddingValues(horizontal = 5.dp)
+val appButtonRowButtonShape = RoundedCornerShape(20)
 val AtmMapNotRegisteredUserScreenContentPadding = PaddingValues(horizontal = 20.dp)
 
 // Map screen
@@ -99,3 +101,18 @@ val AtmMapListScreenItemIconPadding = PaddingValues(horizontal = 15.dp)
 val AtmMapListScreenItemBorderSize = 1.dp
 val AtmMapListScreenItemBorderShape = RoundedCornerShape(20)
 
+// Currency screen
+val CurrencyScreenEnterFieldPadding = PaddingValues(end = 10.dp)
+val CurrencyScreeChangeButtonPadding = PaddingValues(vertical = 15.dp)
+val CurrencyScreenExchangeModePadding = PaddingValues(start = 20.dp, end = 20.dp, top = 10.dp)
+val CurrencyScreenRateUpdateTimeTextPadding = PaddingValues(vertical = 10.dp)
+val CurrencyScreenRateUpdateTimeTextTopPadding = PaddingValues(top = 10.dp)
+val CurrencyScreenUpdateTimeTextSize = 20.sp
+val CurrencyScreenItemTextSize = 20.sp
+val CurrencyScreenItemPadding = PaddingValues(vertical = 5.dp)
+val CurrencyScreenItemContentPadding = PaddingValues(vertical = 10.dp, horizontal = 15.dp)
+
+
+// Empty screen
+val EmptyScreenSpacerHeight = 15.dp
+val EmptyScreenFontSize = 20.sp

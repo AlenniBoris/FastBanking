@@ -39,7 +39,7 @@ fun NotAuthorizedActions.toBottomBarModel(onClick: () -> Unit) = when (this) {
             onClick = onClick,
             iconId = AtmLocalePicture,
             textId = R.string.atm_locale_icon_text,
-            route = AtmMapNotRegisteredUserScreenRoute
+            route = AtmMapScreenRoute
         )
 
     NotAuthorizedActions.Exchange ->
@@ -47,7 +47,7 @@ fun NotAuthorizedActions.toBottomBarModel(onClick: () -> Unit) = when (this) {
             onClick = onClick,
             iconId = ExchangePicture,
             textId = R.string.exchange_icon_text,
-            route = ExchangeScreenRoute
+            route = CurrencyScreenRoute
         )
 
     NotAuthorizedActions.Help ->

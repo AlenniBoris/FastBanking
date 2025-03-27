@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.map
+package com.alenniboris.fastbanking.presentation.screens.map.views
 
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -17,7 +17,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @OptIn(MapsComposeExperimentalApi::class)
 @Composable
-fun AtmMapScreen(
+fun AtmMapUi(
     modifier: Modifier = Modifier,
     mapLocations: List<MapsElementModelUi>,
     mapProperties: MapProperties = MapProperties(),

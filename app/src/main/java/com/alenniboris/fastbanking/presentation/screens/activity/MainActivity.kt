@@ -9,32 +9,30 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.model.currency.CurrencyInfoModelDomain
-import com.alenniboris.fastbanking.domain.repository.ICurrencyRepository
 import com.alenniboris.fastbanking.presentation.screens.NavGraphs
-import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapNotRegisteredUserScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.CurrencyScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.LoginScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.MainScreenDestination
 import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
-import com.alenniboris.fastbanking.presentation.uikit.theme.enterTextFieldColor
-import com.alenniboris.fastbanking.presentation.uikit.values.AtmMapNotRegisteredUserScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.theme.bottomBarColor
+import com.alenniboris.fastbanking.presentation.uikit.values.AtmMapScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.AuthorizedActions
+import com.alenniboris.fastbanking.presentation.uikit.values.CurrencyScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.LoginScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.NotAuthorizedActions
 import com.alenniboris.fastbanking.presentation.uikit.values.RoutesWithoutBottomBar
@@ -44,12 +42,9 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.rememberNavHostEngine
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import com.ramcosta.composedestinations.utils.destination
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +73,7 @@ fun FastBankingUi() {
 
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = currentBackStackEntry?.destination?.route ?: ""
+    val currentRoute = currentBackStackEntry?.destination()?.baseRoute ?: ""
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -87,7 +82,7 @@ fun FastBankingUi() {
                 AppBottomBar(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(enterTextFieldColor)
+                        .background(bottomBarColor)
                         .height(BottomBarHeight),
                     currentRoute = currentRoute,
                     items = if (isUserAuthenticated) {
@@ -126,16 +121,19 @@ fun FastBankingUi() {
                                         }
 
                                         NotAuthorizedActions.Atms -> {
-                                            if (currentRoute != AtmMapNotRegisteredUserScreenRoute) {
+                                            if (currentRoute != AtmMapScreenRoute) {
                                                 navController.navigate(
-                                                    AtmMapNotRegisteredUserScreenDestination
+                                                    AtmMapScreenDestination()
                                                 )
                                             }
-                                            Log.e("!!!", "Atms")
                                         }
 
                                         NotAuthorizedActions.Exchange -> {
-                                            Log.e("!!!", "Exchange")
+                                            if (currentRoute != CurrencyScreenRoute) {
+                                                navController.navigate(
+                                                    CurrencyScreenDestination()
+                                                )
+                                            }
                                         }
 
                                         NotAuthorizedActions.Help -> {
@@ -154,7 +152,7 @@ fun FastBankingUi() {
             }
         }
     ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
+        Box(modifier = Modifier.padding(paddingValues)) {
             DestinationsNavHost(
                 navGraph = NavGraphs.root,
                 startRoute = if (isUserAuthenticated) MainScreenDestination else LoginScreenDestination,

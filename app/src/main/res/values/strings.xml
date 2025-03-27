@@ -68,5 +68,18 @@
     <string name="map_mode_text">Map</string>
     <string name="list_mode_text">List</string>
     <string name="map_top_bar_header_text">BBank map</string>
+    <string name="exchange_screen_mode_text">Exchange</string>
+    <string name="currency_rate_screen_mode_text">Rates</string>
+    <string name="currency_top_bar_header_text">Currency</string>
+    <string name="from_currecy_value_placeholder_text">Enter value</string>
+    <string name="no_currency_text">---</string>
+    <string name="to_currecy_value_placeholder_text">After exchange</string>
+    <string name="equals_text">equals</string>
+    <string name="exception_some_currency_not_chosen">You should choose both currencies</string>
+    <string name="exception_error_mapping">Sorry, try this action again</string>
+    <string name="empty_screen_icon_description">empty screen icon\n</string>
+    <string name="nothing_found">Nothing found</string>
+    <string name="last_update_text">"Last update: "</string>
+    <string name="next_update_text">"Next update: "</string>
 
 </resources>
