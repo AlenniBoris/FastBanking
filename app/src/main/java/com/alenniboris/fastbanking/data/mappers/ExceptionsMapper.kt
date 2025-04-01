@@ -2,6 +2,7 @@ package com.alenniboris.fastbanking.data.mappers
 
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CurrencyExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.HelpExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.MapsExceptionModelDomain
 import java.net.ConnectException
 import java.net.UnknownHostException
@@ -25,4 +26,11 @@ fun Throwable.toCurrencyException(): CurrencyExceptionModelDomain =
         is CurrencyExceptionModelDomain -> this
         is UnknownHostException, is ConnectException -> CurrencyExceptionModelDomain.WebException
         else -> CurrencyExceptionModelDomain.Other
+    }
+
+fun Throwable.toHelpException(): HelpExceptionModelDomain =
+    when (this) {
+        is HelpExceptionModelDomain -> this
+        is AccessDeniedException, is SecurityException -> HelpExceptionModelDomain.PermissionException
+        else -> HelpExceptionModelDomain.Other
     }

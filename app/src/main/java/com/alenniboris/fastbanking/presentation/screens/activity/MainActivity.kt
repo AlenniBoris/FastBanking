@@ -16,12 +16,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
+import com.alenniboris.fastbanking.domain.repository.IHelpRepository
 import com.alenniboris.fastbanking.presentation.screens.NavGraphs
 import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.CurrencyScreenDestination
@@ -44,6 +47,7 @@ import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.rememberNavHostEngine
 import com.ramcosta.composedestinations.utils.destination
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +74,21 @@ fun FastBankingUi() {
             exitTransition = { fadeOut(animationSpec = tween(600)) }
         )
     )
+
+    val repos = koinInject<IHelpRepository>()
+    LaunchedEffect(Unit) {
+        when (
+            val res = repos.makePhoneCall("+375291920609")
+        ) {
+            is CustomResultModelDomain.Success -> {
+                Log.e("!!!", "Success call")
+            }
+
+            is CustomResultModelDomain.Error -> {
+                Log.e("!!!", "Error ${res.exception.stackTraceToString()}")
+            }
+        }
+    }
 
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
