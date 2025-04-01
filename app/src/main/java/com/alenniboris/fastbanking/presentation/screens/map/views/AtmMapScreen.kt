@@ -284,47 +284,6 @@ private fun AtmMapNotRegisteredUserScreenUi(
     }
 }
 
-@Composable
-private fun TopBarContent(
-    currentMode: MapScreenMode,
-    listOfScreenModes: List<MapScreenMode>,
-    proceedIntent: (IAtmMapScreenIntent) -> Unit
-) {
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            modifier = Modifier.padding(AtmMapNotRegisteredUserScreenTopBarPadding),
-            text = stringResource(R.string.map_top_bar_header_text),
-            color = appTopBarElementsColor,
-            style = bodyStyle.copy(
-                fontSize = TopBarHeaderTextSize,
-                fontWeight = FontWeight.Bold
-            )
-        )
-
-        AppButtonRow(
-            modifier = Modifier.fillMaxWidth(),
-            listOfElements = listOfScreenModes.map { element ->
-                ClickableElement(
-                    text = stringResource(element.toUiString()),
-                    onClick = {
-                        proceedIntent(
-                            IAtmMapScreenIntent.UpdateCurrentScreenMode(element)
-                        )
-                    }
-                )
-            },
-            currentElement = ClickableElement(
-                text = stringResource(currentMode.toUiString()),
-                onClick = {}
-            )
-        )
-    }
-}
-
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 @Preview

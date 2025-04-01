@@ -1,11 +1,14 @@
 package com.alenniboris.fastbanking.di
 
 import com.alenniboris.fastbanking.domain.repository.ICurrencyRepository
+import com.alenniboris.fastbanking.domain.repository.IHelpRepository
 import com.alenniboris.fastbanking.domain.repository.IMapsRepository
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllCurrenciesInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllExchangeRatesForCurrencyUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetCurrenciesExchangeRateUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneNumberUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.CheckVerificationCodeForRegistrationUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetCurrentUserUseCaseImpl
@@ -16,6 +19,8 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.user.SignOutUse
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
@@ -92,6 +97,18 @@ val UseCaseModule = module {
         GetAllExchangeRatesForCurrencyUseCaseImpl(
             currencyRepository = get<ICurrencyRepository>(),
             dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<ICallPhoneNumberUseCase> {
+        CallPhoneNumberUseCaseImpl(
+            helpRepository = get<IHelpRepository>()
+        )
+    }
+
+    factory<IOpenMessengerUseCase> {
+        OpenMessengerUseCaseImpl(
+            helpRepository = get<IHelpRepository>()
         )
     }
 }
