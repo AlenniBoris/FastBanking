@@ -81,5 +81,26 @@
     <string name="nothing_found">Nothing found</string>
     <string name="last_update_text">"Last update: "</string>
     <string name="next_update_text">"Next update: "</string>
+    <string name="exception_permission_not_granted">Please check, if this permission is granted</string>
+    <string name="help_screen_header_text">Online help</string>
+    <string name="call_us_text">Call us</string>
+    <string name="message_us_text">Message us</string>
+    <string name="bank_info_text">Bank info</string>
+    <string name="phone_icon_description">phone filter icon</string>
+    <string name="make_call_permission_explanation">This permission is needed for application to make direct calls</string>
+    <string name="make_call_permission_name">Make calls</string>
+    <string name="viber_messenger_name">Viber</string>
+    <string name="telegram_messenger_name">Telegram</string>
+    <string name="bank_official_name">Official name</string>
+    <string name="bank_official_address_name">Official address</string>
+    <string name="bank_swift_code_name">Swift certificate</string>
+    <string name="bank_unp_number_name">UNP number</string>
+    <string name="bank_okpo_number_name">OKPO number</string>
+    <string name="bank_official_value">ОАО \"ББанк\"</string>
+    <string name="bank_official_address_value">111111,Minsk,st. Veri Haruzhei, 31D</string>
+    <string name="bank_swift_code_value">AAABBB2C</string>
+    <string name="bank_unp_number_value">111111111</string>
+    <string name="bank_okpo_number_value">11111111</string>
+    <string name="copy_to_clipboard_description">Copy to clipboard icon</string>
 
 </resources>

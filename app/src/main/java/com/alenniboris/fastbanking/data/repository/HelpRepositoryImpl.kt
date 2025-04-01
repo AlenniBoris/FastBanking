@@ -38,7 +38,9 @@ class HelpRepositoryImpl(
     ): CustomResultModelDomain<Unit, HelpExceptionModelDomain> =
         runCatching {
 
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
             apl.startActivity(intent)
 
             CustomResultModelDomain.Success<Unit, HelpExceptionModelDomain>(Unit)

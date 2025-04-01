@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.map.views
+package com.alenniboris.fastbanking.presentation.screens.map
 
 import com.alenniboris.fastbanking.R
 

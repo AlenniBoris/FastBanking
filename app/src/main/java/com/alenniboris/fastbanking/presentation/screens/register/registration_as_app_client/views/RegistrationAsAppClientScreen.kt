@@ -2,12 +2,14 @@ package com.alenniboris.fastbanking.presentation.screens.register.registration_a
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
@@ -28,9 +31,13 @@ import com.alenniboris.fastbanking.presentation.screens.register.registration_as
 import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.RegistrationAsAppClientScreenState
 import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
 import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.toDocumentTypeString
+import com.alenniboris.fastbanking.presentation.uikit.theme.FilterTextPadding
+import com.alenniboris.fastbanking.presentation.uikit.theme.FilterTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationAsAppClientContinueButtonPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationAsAppClientProgressBarPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
+import com.alenniboris.fastbanking.presentation.uikit.theme.appFilterTextColor
+import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 import com.alenniboris.fastbanking.presentation.uikit.values.RegistrationAsAppClientScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.views.AppCustomButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppFilter
@@ -96,7 +103,7 @@ private fun RegistrationAsAppClientScreenUi(
     state: RegistrationAsAppClientScreenState,
     proceedIntent: (IRegistrationAsAppClientScreenIntent) -> Unit
 ) {
-    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -192,18 +199,32 @@ private fun RegistrationAsAppClientScreenUi(
         if (state.isOptionsBottomSheetVisible) {
             AppFilter(
                 elements = state.dataInputPartState.possibleRegistrationDocuments,
-                currentElement = state.dataInputPartState.registrationDocumentType,
-                elementsStringsIds = state.dataInputPartState.possibleRegistrationDocuments.map { it.toDocumentTypeString() },
-                onElementClick = { documentType ->
-                    proceedIntent(
-                        IRegistrationAsAppClientScreenIntent.UpdateRegistrationDocumentType(
-                            documentType
-                        )
-                    )
-                },
                 onDismiss = {
                     proceedIntent(
                         IRegistrationAsAppClientScreenIntent.UpdateOptionsBottomSheetVisibility
+                    )
+                },
+                itemContent = { document ->
+                    Text(
+                        modifier = Modifier
+                            .padding(FilterTextPadding)
+                            .clickable {
+                                proceedIntent(
+                                    IRegistrationAsAppClientScreenIntent.UpdateRegistrationDocumentType(
+                                        document
+                                    )
+                                )
+                            },
+                        text = stringResource(document.toDocumentTypeString()),
+                        style = bodyStyle.copy(
+                            fontWeight = if (document == state.dataInputPartState.registrationDocumentType) {
+                                FontWeight.Bold
+                            } else {
+                                FontWeight.Normal
+                            },
+                            color = appFilterTextColor,
+                            fontSize = FilterTextSize
+                        )
                     )
                 }
             )

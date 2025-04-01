@@ -3,6 +3,8 @@ package com.alenniboris.fastbanking.di
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
@@ -11,6 +13,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBa
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
 import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.RegistrationAsAppClientScreenViewModel
@@ -57,6 +60,14 @@ val ViewModelsModule = module {
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             getAllCurrenciesInfoUseCase = get<IGetAllCurrenciesInfoUseCase>(),
             getAllExchangeRatesForCurrencyUseCase = get<IGetAllExchangeRatesForCurrencyUseCase>()
+        )
+    }
+
+    viewModel<HelpScreenViewModel> {
+        HelpScreenViewModel(
+            apl = androidApplication(),
+            callPhoneNumberUseCase = get<ICallPhoneNumberUseCase>(),
+            openMessengerUseCase = get<IOpenMessengerUseCase>()
         )
     }
 }

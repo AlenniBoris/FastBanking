@@ -3,6 +3,7 @@ package com.alenniboris.fastbanking.presentation.mappers
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CurrencyExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.HelpExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.MapsExceptionModelDomain
 
 fun AuthenticationExceptionModelDomain.toUiMessageString(): Int =
@@ -35,4 +36,9 @@ fun CurrencyExceptionModelDomain.toUiMessageString(): Int = when (this) {
     CurrencyExceptionModelDomain.SomeCurrencyNotChosen -> R.string.exception_some_currency_not_chosen
     CurrencyExceptionModelDomain.WebException -> R.string.exception_internet_error
     CurrencyExceptionModelDomain.ErrorMapping -> R.string.exception_error_mapping
+}
+
+fun HelpExceptionModelDomain.toUiMessageString(): Int = when(this){
+    HelpExceptionModelDomain.Other -> R.string.exception_unknown
+    HelpExceptionModelDomain.PermissionException -> R.string.exception_permission_not_granted
 }

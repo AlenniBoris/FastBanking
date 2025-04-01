@@ -11,7 +11,6 @@ import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUse
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
-import com.alenniboris.fastbanking.presentation.screens.map.views.MapScreenMode
 import com.alenniboris.fastbanking.presentation.uikit.utils.PermissionType
 import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -106,6 +105,7 @@ class AtmMapScreenViewModel(
         val openingIntent =
             Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                 data = Uri.fromParts("package", apl.packageName, null)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
         apl.startActivity(openingIntent)
         hidePermissionDialog()

@@ -116,3 +116,10 @@ val CurrencyScreenItemContentPadding = PaddingValues(vertical = 10.dp, horizonta
 // Empty screen
 val EmptyScreenSpacerHeight = 15.dp
 val EmptyScreenFontSize = 20.sp
+
+// Help screeen
+val HelpScreenUiContainerPadding = PaddingValues(horizontal = 20.dp)
+val HelpScreenUiTextFontSize = 20.sp
+val HelpScreenBottomSheetButtonContentPadding = PaddingValues(vertical = 5.dp, horizontal = 15.dp)
+val HelpScreenFilterElementTopPadding = PaddingValues(vertical = 10.dp)
+val HelpScreenFilterTextStartPadding = PaddingValues(start = 5.dp)

@@ -41,23 +41,27 @@ fun launchForPermission(
 
 enum class PermissionType {
     PERMISSION_COARSE_LOCATION,
-    PERMISSION_FINE_LOCATION
+    PERMISSION_FINE_LOCATION,
+    PERMISSION_MAKE_CALL
 }
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun PermissionType.toPermission(): String = when (this) {
     PermissionType.PERMISSION_COARSE_LOCATION -> Manifest.permission.ACCESS_COARSE_LOCATION
     PermissionType.PERMISSION_FINE_LOCATION -> Manifest.permission.ACCESS_FINE_LOCATION
+    PermissionType.PERMISSION_MAKE_CALL -> Manifest.permission.CALL_PHONE
 }
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun PermissionType.toPermissionExplanation(): Int = when (this) {
     PermissionType.PERMISSION_COARSE_LOCATION -> R.string.coarse_location_permission_explanation
     PermissionType.PERMISSION_FINE_LOCATION -> R.string.fine_location_permission_explanation
+    PermissionType.PERMISSION_MAKE_CALL -> R.string.make_call_permission_explanation
 }
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun PermissionType.toPermissionName(): Int = when (this) {
     PermissionType.PERMISSION_COARSE_LOCATION -> R.string.coarse_location_permission_name
     PermissionType.PERMISSION_FINE_LOCATION -> R.string.fine_location_permission_name
+    PermissionType.PERMISSION_MAKE_CALL -> R.string.make_call_permission_name
 }
