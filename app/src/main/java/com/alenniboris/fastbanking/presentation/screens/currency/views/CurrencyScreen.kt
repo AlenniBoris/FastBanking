@@ -43,7 +43,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 @Destination(route = CurrencyScreenRoute)
 fun CurrencyScreen(
-    isUserAuthenticated: Boolean = false,
+    isBackButtonNeeded: Boolean = false,
     navigator: DestinationsNavigator
 ) {
 
@@ -80,7 +80,7 @@ fun CurrencyScreen(
     }
 
     CurrencyScreenUi(
-        isUserAuthenticated = isUserAuthenticated,
+        isBackButtonNeeded = isBackButtonNeeded,
         state = state,
         proceedIntent = proceedIntent
     )
@@ -88,7 +88,7 @@ fun CurrencyScreen(
 
 @Composable
 private fun CurrencyScreenUi(
-    isUserAuthenticated: Boolean,
+    isBackButtonNeeded: Boolean,
     state: CurrencyScreenState,
     proceedIntent: (ICurrencyScreenIntent) -> Unit
 ) {
@@ -99,7 +99,7 @@ private fun CurrencyScreenUi(
             .background(appColor)
     ) {
 
-        if (isUserAuthenticated) {
+        if (isBackButtonNeeded) {
             AppTopBar(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -178,7 +178,7 @@ private fun CurrencyScreenUi(
 @Preview
 private fun CurrencyUserNotRegisteredScreenPreview() {
     CurrencyScreenUi(
-        isUserAuthenticated = false,
+        isBackButtonNeeded = false,
         state = CurrencyScreenState(),
         proceedIntent = {}
     )

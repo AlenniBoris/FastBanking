@@ -12,6 +12,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBanki
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
+import com.alenniboris.fastbanking.presentation.screens.additions.AdditionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
@@ -69,5 +70,9 @@ val ViewModelsModule = module {
             callPhoneNumberUseCase = get<ICallPhoneNumberUseCase>(),
             openMessengerUseCase = get<IOpenMessengerUseCase>()
         )
+    }
+
+    viewModel<AdditionsScreenViewModel>{
+        AdditionsScreenViewModel()
     }
 }

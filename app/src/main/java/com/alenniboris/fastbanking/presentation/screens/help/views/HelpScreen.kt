@@ -61,7 +61,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 @Destination(route = HelpScreenRoute)
 fun HelpScreen(
-    isUserAuthenticated: Boolean = false,
+    isBackButtonNeeded: Boolean = false,
     navigator: DestinationsNavigator
 ) {
 
@@ -94,7 +94,7 @@ fun HelpScreen(
     }
 
     HelpScreenUi(
-        isUserAuthenticated = isUserAuthenticated,
+        isBackButtonNeeded = isBackButtonNeeded,
         state = state,
         proceedIntent = proceedIntent
     )
@@ -104,7 +104,7 @@ fun HelpScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HelpScreenUi(
-    isUserAuthenticated: Boolean,
+    isBackButtonNeeded: Boolean,
     state: HelpScreenState,
     proceedIntent: (IHelpScreenIntent) -> Unit
 ) {
@@ -143,7 +143,7 @@ private fun HelpScreenUi(
             modifier = Modifier.fillMaxSize()
         ) {
 
-            if (isUserAuthenticated) {
+            if (isBackButtonNeeded) {
                 AppTopBar(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -370,7 +370,7 @@ private fun HelpScreenUi(
 private fun HelpScreenUiPreview() {
 
     HelpScreenUi(
-        isUserAuthenticated = false,
+        isBackButtonNeeded = false,
         state = HelpScreenState(),
         proceedIntent = {}
     )

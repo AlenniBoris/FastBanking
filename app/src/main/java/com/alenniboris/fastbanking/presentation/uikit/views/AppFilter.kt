@@ -24,7 +24,6 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.FilterDragHandleWidt
 import com.alenniboris.fastbanking.presentation.uikit.theme.FilterSheetShape
 import com.alenniboris.fastbanking.presentation.uikit.theme.FilterSheetTonalElevation
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.appFilterColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,8 +35,6 @@ fun <T> AppFilter(
     itemContent: @Composable (T) -> Unit = {}
 ) {
     ModalBottomSheet(
-        modifier = Modifier
-            .background(appFilterColor),
         onDismissRequest = onDismiss,
         sheetState = sheetState,
         shape = FilterSheetShape,

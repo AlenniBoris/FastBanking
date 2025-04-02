@@ -2,7 +2,6 @@ package com.alenniboris.fastbanking.presentation.screens.register.registration_a
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -30,7 +29,6 @@ import com.alenniboris.fastbanking.presentation.screens.register.registration_as
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContainerPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContentHintFontSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContentTextFontSize
-import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiDocumentTypeContentPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiDocumentTypePadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiTextFontSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiTextPadding
@@ -131,25 +129,25 @@ fun DataInputProcessUi(
 private fun DocumentOptionsButtonContent(
     registrationDocumentType: RegistrationDocumentType
 ) {
-    Column(
+    Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(DataInputProcessUiDocumentTypeContentPadding)
+            .padding(EnterValueTextFieldPadding)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            textAlign = TextAlign.Center,
-            text = stringResource(R.string.document_type_text),
-            style = bodyStyle.copy(
-                color = enterTextFieldTextColor,
-                fontSize = DataInputProcessUiContentHintFontSize
-            )
-        )
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+        Column(
+            modifier = Modifier.weight(1f)
         ) {
+
+            Text(
+                textAlign = TextAlign.Center,
+                text = stringResource(R.string.document_type_text),
+                style = bodyStyle.copy(
+                    color = enterTextFieldTextColor,
+                    fontSize = DataInputProcessUiContentHintFontSize
+                )
+            )
 
             Text(
                 textAlign = TextAlign.Center,
@@ -159,13 +157,13 @@ private fun DocumentOptionsButtonContent(
                     fontSize = DataInputProcessUiContentTextFontSize
                 )
             )
-
-            Icon(
-                painter = painterResource(R.drawable.open_options_icon),
-                tint = enterTextFieldTextColor,
-                contentDescription = stringResource(R.string.document_options_description)
-            )
         }
+
+        Icon(
+            painter = painterResource(R.drawable.open_options_icon),
+            tint = enterTextFieldTextColor,
+            contentDescription = stringResource(R.string.document_options_description)
+        )
     }
 }
 

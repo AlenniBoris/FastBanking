@@ -123,3 +123,12 @@ val HelpScreenUiTextFontSize = 20.sp
 val HelpScreenBottomSheetButtonContentPadding = PaddingValues(vertical = 5.dp, horizontal = 15.dp)
 val HelpScreenFilterElementTopPadding = PaddingValues(vertical = 10.dp)
 val HelpScreenFilterTextStartPadding = PaddingValues(start = 5.dp)
+
+// Additions screen
+val AdditionsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val AdditionsScreenCategoryPadding = PaddingValues(vertical = 20.dp)
+val AdditionsScreenCategoryZeroPadding = PaddingValues(top = 0.dp, bottom = 20.dp)
+val AdditionsScreenActionPadding = PaddingValues(vertical = 10.dp)
+val AdditionsScreenCategoryTextStartPadding = PaddingValues(start = 10.dp)
+val AdditionsScreenCategoryHeaderSize = 25.sp
+val AdditionsScreenCategoryTextSize = 20.sp

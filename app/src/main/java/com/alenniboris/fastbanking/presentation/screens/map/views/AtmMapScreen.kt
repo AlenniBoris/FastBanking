@@ -62,7 +62,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 @Destination(route = AtmMapScreenRoute)
 fun AtmMapScreen(
-    isUserAuthenticated: Boolean = false,
+    isBackButtonNeeded: Boolean = false,
     navigator: DestinationsNavigator
 ) {
 
@@ -100,7 +100,7 @@ fun AtmMapScreen(
     }
 
     AtmMapNotRegisteredUserScreenUi(
-        isUserRegistered = isUserAuthenticated,
+        isBackButtonNeeded = isBackButtonNeeded,
         state = state,
         proceedIntent = proceedIntent
     )
@@ -109,7 +109,7 @@ fun AtmMapScreen(
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 private fun AtmMapNotRegisteredUserScreenUi(
-    isUserRegistered: Boolean,
+    isBackButtonNeeded: Boolean,
     state: AtmMapScreenState,
     proceedIntent: (IAtmMapScreenIntent) -> Unit
 ) {
@@ -120,7 +120,7 @@ private fun AtmMapNotRegisteredUserScreenUi(
             .background(appColor)
     ) {
 
-        if (isUserRegistered) {
+        if (isBackButtonNeeded) {
             AppTopBar(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -327,6 +327,6 @@ private fun AtmMapNotRegisteredUserScreenPreview() {
             )
         ),
         proceedIntent = {},
-        isUserRegistered = false
+        isBackButtonNeeded = false
     )
 }

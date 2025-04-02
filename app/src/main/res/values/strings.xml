@@ -23,7 +23,7 @@
     <string name="atm_locale_icon_text">Atm</string>
     <string name="exchange_icon_text">Exchange</string>
     <string name="support_icon_text">Support</string>
-    <string name="additions_icon_text">More</string>
+    <string name="additions_icon_text">Extra</string>
     <string name="home_icon_text">Home</string>
     <string name="history_icon_text">History</string>
     <string name="payment_icon_text">Payment</string>
@@ -102,5 +102,17 @@
     <string name="bank_unp_number_value">111111111</string>
     <string name="bank_okpo_number_value">11111111</string>
     <string name="copy_to_clipboard_description">Copy to clipboard icon</string>
+    <string name="recovery_and_info_header_text">Registration and recovery</string>
+    <string name="courses_header_text">Courses</string>
+    <string name="information_header_text">Information</string>
+    <string name="password_recovery_text">Recover password</string>
+    <string name="currency_exchanger_text">Currency exchanger</string>
+    <string name="bank_news_text">Bank news</string>
+    <string name="app_version_text">Application information</string>
+    <string name="places_of_bank_header_text">Places of service</string>
+    <string name="atms_and_offices_text">Atms and offices</string>
+    <string name="praise_application_text">Praise application</string>
+    <string name="in_development_text">In development</string>
+    <string name="additions_screen_header_text">Extra</string>
 
 </resources>

@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.alenniboris.fastbanking.presentation.screens.NavGraphs
+import com.alenniboris.fastbanking.presentation.screens.destinations.AdditionsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.CurrencyScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.HelpScreenDestination
@@ -31,6 +32,7 @@ import com.alenniboris.fastbanking.presentation.screens.destinations.MainScreenD
 import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.bottomBarColor
+import com.alenniboris.fastbanking.presentation.uikit.values.AdditionsScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.AtmMapScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.AuthorizedActions
 import com.alenniboris.fastbanking.presentation.uikit.values.CurrencyScreenRoute
@@ -147,7 +149,11 @@ fun FastBankingUi() {
                                         }
 
                                         NotAuthorizedActions.Additions -> {
-                                            Log.e("!!!", "Additions")
+                                            if (currentRoute != AdditionsScreenRoute) {
+                                                navController.navigate(
+                                                    AdditionsScreenDestination()
+                                                )
+                                            }
                                         }
                                     }
                                 }
