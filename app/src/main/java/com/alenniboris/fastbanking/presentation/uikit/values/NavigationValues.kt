@@ -11,6 +11,8 @@ const val HelpScreenRoute = "Help screen"
 const val AdditionsScreenRoute = "Additions screen"
 const val HistoryScreenRoute = "History screen"
 const val PaymentScreenRoute = "Payment screen"
+const val ApplicationInformationScreenRoute = "Application information screen"
+const val BankNewsScreenRoute = "Bank news screen"
 
 val RoutesWithoutBottomBar = listOf(
     RegistrationOptionsScreenRoute,

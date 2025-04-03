@@ -89,7 +89,10 @@ fun HelpScreen(
         }
 
         event.filterIsInstance<IHelpScreenEvent.NavigateBack>().collect {
-            navigator.popBackStack()
+            navigator.popBackStack(
+                route = HelpScreenRoute,
+                inclusive = true
+            )
         }
     }
 

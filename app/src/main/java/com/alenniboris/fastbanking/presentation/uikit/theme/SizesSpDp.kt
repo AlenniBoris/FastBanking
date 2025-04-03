@@ -132,3 +132,22 @@ val AdditionsScreenActionPadding = PaddingValues(vertical = 10.dp)
 val AdditionsScreenCategoryTextStartPadding = PaddingValues(start = 10.dp)
 val AdditionsScreenCategoryHeaderSize = 25.sp
 val AdditionsScreenCategoryTextSize = 20.sp
+
+// Application info screen
+val ApplicationInformationScreenHeaderTextSize = 25.sp
+val ApplicationInformationScreenTextSize = 20.sp
+val ApplicationInformationScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val ApplicationInformationScreenInfoSectionPadding = PaddingValues(bottom = 15.dp)
+val ApplicationInformationScreenInfoSectionTextPadding = PaddingValues(top = 10.dp)
+
+
+// Bank news screen
+val BankNewsScreenItemFieldShape = RoundedCornerShape(percent = 20)
+val BankNewsScreenItemOuterPaddingFirst = PaddingValues(bottom = 5.dp)
+val BankNewsScreenItemOuterPadding = PaddingValues(vertical = 5.dp)
+val BankNewsScreenItemInnerPadding = PaddingValues(vertical = 5.dp, horizontal = 10.dp)
+val BankNewsScreenItemColumnPadding = PaddingValues(start = 10.dp)
+val BankNewsScreenItemImageSize = 100.dp
+val BankNewsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val BankNewsScreenItemTitleSize = 25.sp
+val BankNewsScreenItemTextSize = 15.sp

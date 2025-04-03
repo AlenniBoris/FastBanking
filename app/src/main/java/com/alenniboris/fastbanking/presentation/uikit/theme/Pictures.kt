@@ -1,6 +1,7 @@
 package com.alenniboris.fastbanking.presentation.uikit.theme
 
 import com.alenniboris.fastbanking.R
+import com.alenniboris.fastbanking.presentation.uikit.utils.currentThemeMode
 
 val PasswordShowPicture = R.drawable.password_opened_icon
 
@@ -25,3 +26,9 @@ val HomePicture = R.drawable.home_icon
 val HistoryPicture = R.drawable.history_icon
 
 val PaymentPicture = R.drawable.payment_icon
+
+val Placeholder
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> R.drawable.ic_placeholder_light
+        true -> R.drawable.ic_placeholder_dark
+    }

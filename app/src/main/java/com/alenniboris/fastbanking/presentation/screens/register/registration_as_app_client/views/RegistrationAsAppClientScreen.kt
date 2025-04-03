@@ -86,7 +86,10 @@ fun RegistrationAsAppClientScreen(
         launch {
             event.filterIsInstance<IRegistrationAsAppClientScreenEvent.NavigateToPreviousScreen>()
                 .collect {
-                    navigator.popBackStack()
+                    navigator.popBackStack(
+                        route = RegistrationAsAppClientScreenRoute,
+                        inclusive = true
+                    )
                 }
         }
     }

@@ -114,5 +114,10 @@
     <string name="praise_application_text">Praise application</string>
     <string name="in_development_text">In development</string>
     <string name="additions_screen_header_text">Extra</string>
+    <string name="application_info_screen_header_text">About app</string>
+    <string name="application_version_header_text">Version</string>
+    <string name="no_info_text">No information</string>
+    <string name="application_date_header_text">Release date</string>
+    <string name="application_updates_header_text">Updated</string>
 
 </resources>

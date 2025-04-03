@@ -12,7 +12,8 @@ data class BankNewsModelData(
     val mainText: String?,
     val reference: String?,
     val synopsys: String?,
-    val title: String?
+    val title: String?,
+    val imageUrl: String?
 ) {
 
     val hasSomeValueMissing: Boolean
@@ -23,6 +24,7 @@ data class BankNewsModelData(
                 || reference == null
                 || synopsys == null
                 || title == null
+                || imageUrl == null
 }
 
 fun BankNewsModelData.toModelDomain(): BankNewsModelDomain? = runCatching {
@@ -36,7 +38,8 @@ fun BankNewsModelData.toModelDomain(): BankNewsModelDomain? = runCatching {
         mainText = this.mainText!!,
         reference = reference,
         synopsys = this.synopsys!!,
-        title = this.title!!
+        title = this.title!!,
+        image = this.imageUrl!!
     )
 }.getOrElse { exception ->
     Log.e(

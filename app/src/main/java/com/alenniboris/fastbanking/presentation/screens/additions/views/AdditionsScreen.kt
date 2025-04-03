@@ -37,7 +37,9 @@ import com.alenniboris.fastbanking.presentation.screens.additions.IAdditionsScre
 import com.alenniboris.fastbanking.presentation.screens.additions.toListOfActions
 import com.alenniboris.fastbanking.presentation.screens.additions.toUiIcon
 import com.alenniboris.fastbanking.presentation.screens.additions.toUiString
+import com.alenniboris.fastbanking.presentation.screens.destinations.ApplicationInformationScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.BankNewsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.CurrencyScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.RegistrationOptionsScreenDestination
 import com.alenniboris.fastbanking.presentation.uikit.theme.AdditionsScreenActionPadding
@@ -137,28 +139,18 @@ fun AdditionsScreen(
         }
 
         launch {
-            event.filterIsInstance<IAdditionsScreenEvent.OpenApplicationVersionPage>().collect {
-                toastMessage?.cancel()
-                toastMessage =
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
-                    )
-                toastMessage?.show()
+            event.filterIsInstance<IAdditionsScreenEvent.OpenApplicationInformationPage>().collect {
+                navigator.navigate(
+                    ApplicationInformationScreenDestination
+                )
             }
         }
 
         launch {
             event.filterIsInstance<IAdditionsScreenEvent.OpenBankNewsPage>().collect {
-                toastMessage?.cancel()
-                toastMessage =
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
-                    )
-                toastMessage?.show()
+                navigator.navigate(
+                    BankNewsScreenDestination
+                )
             }
         }
     }

@@ -38,7 +38,7 @@ class AdditionsScreenViewModel() : ViewModel() {
                     IAdditionsScreenEvent.OpenBankNewsPage
 
                 AdditionsCategoriesAction.APP_VERSION ->
-                    IAdditionsScreenEvent.OpenApplicationVersionPage
+                    IAdditionsScreenEvent.OpenApplicationInformationPage
 
                 AdditionsCategoriesAction.ATMS_AND_OFFICES ->
                     IAdditionsScreenEvent.OpenMapPage

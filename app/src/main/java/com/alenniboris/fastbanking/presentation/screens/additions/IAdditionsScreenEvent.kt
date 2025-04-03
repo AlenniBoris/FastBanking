@@ -12,7 +12,7 @@ sealed interface IAdditionsScreenEvent {
 
     data object OpenBankNewsPage : IAdditionsScreenEvent
 
-    data object OpenApplicationVersionPage : IAdditionsScreenEvent
+    data object OpenApplicationInformationPage : IAdditionsScreenEvent
 
     data object OpenMapPage : IAdditionsScreenEvent
 

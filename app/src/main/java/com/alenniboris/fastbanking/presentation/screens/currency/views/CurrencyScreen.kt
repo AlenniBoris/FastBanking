@@ -62,7 +62,10 @@ fun CurrencyScreen(
 
         launch {
             event.filterIsInstance<ICurrencyScreenEvent.NavigateBack>().collect {
-                navigator.popBackStack()
+                navigator.popBackStack(
+                    route = CurrencyScreenRoute,
+                    inclusive = true
+                )
             }
         }
 

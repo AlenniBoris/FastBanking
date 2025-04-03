@@ -10,5 +10,6 @@ data class BankNewsModelDomain(
     val mainText: String,
     val reference: Uri,
     val synopsys: String,
-    val title: String
+    val title: String,
+    val image: String
 )

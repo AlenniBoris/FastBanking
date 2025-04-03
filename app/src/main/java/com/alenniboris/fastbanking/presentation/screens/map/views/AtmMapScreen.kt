@@ -94,7 +94,10 @@ fun AtmMapScreen(
 
         launch {
             event.filterIsInstance<IAtmMapScreenEvent.NavigateBack>().collect {
-                navigator.popBackStack()
+                navigator.popBackStack(
+                    route = AtmMapScreenRoute,
+                    inclusive = true
+                )
             }
         }
     }

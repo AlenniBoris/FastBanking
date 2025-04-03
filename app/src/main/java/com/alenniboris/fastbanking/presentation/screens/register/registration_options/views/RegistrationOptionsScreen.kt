@@ -60,7 +60,10 @@ fun RegistrationOptionsScreen(
         launch {
             event.filterIsInstance<IRegistrationOptionsScreenEvent.NavigateToPreviousScreen>()
                 .collect {
-                    navigator.popBackStack()
+                    navigator.popBackStack(
+                        route = RegistrationOptionsScreenRoute,
+                        inclusive = true
+                    )
                 }
         }
 

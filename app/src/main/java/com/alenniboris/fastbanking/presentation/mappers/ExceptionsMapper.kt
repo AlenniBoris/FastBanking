@@ -2,6 +2,7 @@ package com.alenniboris.fastbanking.presentation.mappers
 
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.CommonInfoExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CurrencyExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.HelpExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.MapsExceptionModelDomain
@@ -41,4 +42,11 @@ fun CurrencyExceptionModelDomain.toUiMessageString(): Int = when (this) {
 fun HelpExceptionModelDomain.toUiMessageString(): Int = when (this) {
     HelpExceptionModelDomain.Other -> R.string.exception_unknown
     HelpExceptionModelDomain.PermissionException -> R.string.exception_permission_not_granted
+}
+
+fun CommonInfoExceptionModelDomain.toUiMessageString(): Int = when (this) {
+    CommonInfoExceptionModelDomain.ErrorGettingData -> R.string.exception_getting_data
+    CommonInfoExceptionModelDomain.Other -> R.string.exception_unknown
+    CommonInfoExceptionModelDomain.ServerError -> R.string.exception_getting_data
+    CommonInfoExceptionModelDomain.WebException -> R.string.exception_internet_error
 }

@@ -1,5 +1,7 @@
 package com.alenniboris.fastbanking.di
 
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
@@ -13,6 +15,8 @@ import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBa
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
 import com.alenniboris.fastbanking.presentation.screens.additions.AdditionsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.application_information.ApplicationInformationScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.bank_news.BankNewsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
@@ -74,5 +78,17 @@ val ViewModelsModule = module {
 
     viewModel<AdditionsScreenViewModel> {
         AdditionsScreenViewModel()
+    }
+
+    viewModel<ApplicationInformationScreenViewModel> {
+        ApplicationInformationScreenViewModel(
+            getApplicationInfoUseCase = get<IGetApplicationInfoUseCase>()
+        )
+    }
+
+    viewModel<BankNewsScreenViewModel> {
+        BankNewsScreenViewModel(
+            getBankNewsUseCase = get<IGetBankNewsUseCase>()
+        )
     }
 }
