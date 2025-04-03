@@ -10,10 +10,12 @@ import com.alenniboris.fastbanking.data.model.toModelDomain
 import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.SEND_MESSAGE_WITH_VERIFICATION_CODE_ACTION
 import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.VERIFICATION_CODE
 import com.alenniboris.fastbanking.data.utils.CodeGenerator
-import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
+import com.alenniboris.fastbanking.domain.utils.GsonUtil.fromJson
+import com.alenniboris.fastbanking.domain.utils.GsonUtil.toJson
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -80,29 +82,27 @@ class UserRepositoryImpl(
                         .get()
                         .await()
                 val user = snapshot.getValue(UserModelData::class.java)
-
-                user?.let {
-                    if (user.hasSomeValueMissing) {
-                        return@withContext CustomResultModelDomain.Error<Unit, AuthenticationExceptionModelDomain>(
-                            AuthenticationExceptionModelDomain.ErrorGettingData
-                        )
-                    }
-
-                    if (user.password != password) {
-                        return@withContext CustomResultModelDomain.Error<Unit, AuthenticationExceptionModelDomain>(
-                            AuthenticationExceptionModelDomain.WrongEnteringFieldException
-                        )
-                    }
-
-                    userFlow.update { user.toModelDomain() }
-
-                    return@withContext CustomResultModelDomain.Success<Unit, AuthenticationExceptionModelDomain>(
-                        Unit
-                    )
-                }
-                    ?: return@withContext CustomResultModelDomain.Error<Unit, AuthenticationExceptionModelDomain>(
+                    ?: return@withContext CustomResultModelDomain.Error(
                         AuthenticationExceptionModelDomain.NoSuchUserException
                     )
+
+                if (user.hasSomeValueMissing) {
+                    return@withContext CustomResultModelDomain.Error<Unit, AuthenticationExceptionModelDomain>(
+                        AuthenticationExceptionModelDomain.ErrorGettingData
+                    )
+                }
+
+                if (user.password != password) {
+                    return@withContext CustomResultModelDomain.Error<Unit, AuthenticationExceptionModelDomain>(
+                        AuthenticationExceptionModelDomain.WrongEnteringFieldException
+                    )
+                }
+
+                userFlow.update { user.toModelDomain() }
+
+                return@withContext CustomResultModelDomain.Success<Unit, AuthenticationExceptionModelDomain>(
+                    Unit
+                )
             }.getOrElse { exception ->
                 Log.e("!!!", exception.stackTraceToString())
                 return@withContext CustomResultModelDomain.Error<Unit, AuthenticationExceptionModelDomain>(
@@ -125,7 +125,7 @@ class UserRepositoryImpl(
                     .get()
                     .await()
 
-                val user = snapshot.getValue(UserModelData::class.java)?.toModelDomain()
+                val user = snapshot.value.toJson().fromJson<UserModelData>().toModelDomain()
 
                 user?.let {
                     if (!user.hasOnlineBanking) {

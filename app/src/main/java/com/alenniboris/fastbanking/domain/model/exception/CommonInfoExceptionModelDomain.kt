@@ -4,6 +4,8 @@ sealed class CommonInfoExceptionModelDomain : Throwable() {
 
     data object WebException : CommonInfoExceptionModelDomain()
 
+    data object ServerError : CommonInfoExceptionModelDomain()
+
     data object ErrorGettingData : CommonInfoExceptionModelDomain()
 
     data object Other : CommonInfoExceptionModelDomain()

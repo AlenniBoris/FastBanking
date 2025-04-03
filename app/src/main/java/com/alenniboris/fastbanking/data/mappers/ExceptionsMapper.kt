@@ -1,6 +1,7 @@
 package com.alenniboris.fastbanking.data.mappers
 
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.CommonInfoExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CurrencyExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.HelpExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.MapsExceptionModelDomain
@@ -33,4 +34,11 @@ fun Throwable.toHelpException(): HelpExceptionModelDomain =
         is HelpExceptionModelDomain -> this
         is AccessDeniedException, is SecurityException -> HelpExceptionModelDomain.PermissionException
         else -> HelpExceptionModelDomain.Other
+    }
+
+fun Throwable.toCommonInfoException(): CommonInfoExceptionModelDomain =
+    when (this) {
+        is CommonInfoExceptionModelDomain -> this
+        is UnknownHostException, is ConnectException -> CommonInfoExceptionModelDomain.WebException
+        else -> CommonInfoExceptionModelDomain.Other
     }
