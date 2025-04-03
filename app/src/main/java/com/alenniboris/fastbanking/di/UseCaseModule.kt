@@ -60,6 +60,33 @@ val UseCaseModule = module {
         )
     }
 
+    single<IGetCurrentUserUseCase> {
+        GetCurrentUserUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<ILoginUserIntoBankingUseCase> {
+        LoginUserIntoBankingUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IRegisterUserIntoBankingUseCase> {
+        RegisterUserIntoBankingUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<ISignOutUseCase> {
+        SignOutUseCaseImpl(
+            userRepository = get<IUserRepository>()
+        )
+    }
+
     factory<ISendVerificationCodeForRegistrationUseCase> {
         SendVerificationCodeForRegistrationUseCaseImpl(
             userRepository = get<IUserRepository>()

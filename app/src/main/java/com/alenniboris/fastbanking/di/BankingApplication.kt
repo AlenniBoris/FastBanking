@@ -8,13 +8,12 @@ import org.koin.core.logger.Level
 
 val myModules = listOf(
     DispatchersModule,
-    UserModule,
+    AuthModule,
     DatabaseModule,
     ViewModelsModule,
     UseCaseModule,
-    MapsModule,
-    CurrencyModule,
-    HelpModule
+    ApiServiceModule,
+    RepositoryModule
 )
 
 class BankingApplication : Application() {

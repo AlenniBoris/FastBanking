@@ -72,7 +72,7 @@ val ViewModelsModule = module {
         )
     }
 
-    viewModel<AdditionsScreenViewModel>{
+    viewModel<AdditionsScreenViewModel> {
         AdditionsScreenViewModel()
     }
 }

@@ -38,7 +38,7 @@ fun CurrencyExceptionModelDomain.toUiMessageString(): Int = when (this) {
     CurrencyExceptionModelDomain.ErrorMapping -> R.string.exception_error_mapping
 }
 
-fun HelpExceptionModelDomain.toUiMessageString(): Int = when(this){
+fun HelpExceptionModelDomain.toUiMessageString(): Int = when (this) {
     HelpExceptionModelDomain.Other -> R.string.exception_unknown
     HelpExceptionModelDomain.PermissionException -> R.string.exception_permission_not_granted
 }

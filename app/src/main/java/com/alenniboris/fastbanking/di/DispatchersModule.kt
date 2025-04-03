@@ -14,5 +14,4 @@ val DispatchersModule = module {
             override val Default: CoroutineDispatcher = Dispatchers.Default
         }
     }
-
 }
