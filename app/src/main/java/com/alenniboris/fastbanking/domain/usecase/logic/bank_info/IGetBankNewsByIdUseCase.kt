@@ -8,5 +8,5 @@ interface IGetBankNewsByIdUseCase {
 
     suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<BankNewsModelDomain, CommonInfoExceptionModelDomain>
+    ): CustomResultModelDomain<BankNewsModelDomain?, CommonInfoExceptionModelDomain>
 }

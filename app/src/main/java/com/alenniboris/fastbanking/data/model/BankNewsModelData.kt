@@ -6,26 +6,15 @@ import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain
 import java.util.Date
 
 data class BankNewsModelData(
-    val id: String?,
-    val author: String?,
-    val creationDate: String?,
-    val mainText: String?,
-    val reference: String?,
-    val synopsys: String?,
-    val title: String?,
-    val imageUrl: String?
-) {
-
-    val hasSomeValueMissing: Boolean
-        get() = id == null
-                || author == null
-                || creationDate == null
-                || mainText == null
-                || reference == null
-                || synopsys == null
-                || title == null
-                || imageUrl == null
-}
+    val id: String? = null,
+    val author: String? = null,
+    val creationDate: String? = null,
+    val mainText: String? = null,
+    val reference: String? = null,
+    val synopsys: String? = null,
+    val title: String? = null,
+    val imageUrl: String? = null
+)
 
 fun BankNewsModelData.toModelDomain(): BankNewsModelDomain? = runCatching {
     val date = Date(this.creationDate?.toLong()!!)

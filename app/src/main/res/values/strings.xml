@@ -119,5 +119,6 @@
     <string name="no_info_text">No information</string>
     <string name="application_date_header_text">Release date</string>
     <string name="application_updates_header_text">Updated</string>
+    <string name="exception_no_such_data">Data for this page couldnt be found</string>
 
 </resources>

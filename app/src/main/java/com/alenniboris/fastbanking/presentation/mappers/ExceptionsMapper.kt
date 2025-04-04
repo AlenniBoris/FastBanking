@@ -49,4 +49,5 @@ fun CommonInfoExceptionModelDomain.toUiMessageString(): Int = when (this) {
     CommonInfoExceptionModelDomain.Other -> R.string.exception_unknown
     CommonInfoExceptionModelDomain.ServerError -> R.string.exception_getting_data
     CommonInfoExceptionModelDomain.WebException -> R.string.exception_internet_error
+    CommonInfoExceptionModelDomain.NoSuchDataException -> R.string.exception_no_such_data
 }

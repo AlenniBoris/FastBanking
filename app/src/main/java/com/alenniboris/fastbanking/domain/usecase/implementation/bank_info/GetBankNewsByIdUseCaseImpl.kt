@@ -15,7 +15,7 @@ class GetBankNewsByIdUseCaseImpl(
 
     override suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<BankNewsModelDomain, CommonInfoExceptionModelDomain> =
+    ): CustomResultModelDomain<BankNewsModelDomain?, CommonInfoExceptionModelDomain> =
         withContext(dispatchers.IO) {
             return@withContext infoRepository.getBankNewsById(id = id)
         }

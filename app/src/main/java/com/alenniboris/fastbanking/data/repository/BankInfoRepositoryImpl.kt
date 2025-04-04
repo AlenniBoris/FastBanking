@@ -76,7 +76,27 @@ class BankInfoRepositoryImpl(
 
     override suspend fun getBankNewsById(
         id: String
-    ): CustomResultModelDomain<BankNewsModelDomain, CommonInfoExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
+    ): CustomResultModelDomain<BankNewsModelDomain?, CommonInfoExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            runCatching {
+
+                val snapshot = database.reference
+                    .child(FirebaseDatabaseValues.TABLE_BANK_NEWS)
+                    .child(id)
+                    .get()
+                    .await()
+
+                val result = snapshot.getValue(BankNewsModelData::class.java)
+                    ?: return@withContext CustomResultModelDomain.Error(
+                        CommonInfoExceptionModelDomain.ErrorGettingData
+                    )
+
+                return@withContext CustomResultModelDomain.Success(
+                    result.toModelDomain()
+                )
+            }.getOrElse { exception ->
+                Log.e("!!!", "getBankNews ${exception.stackTraceToString()}")
+                return@withContext CustomResultModelDomain.Error(exception.toCommonInfoException())
+            }
+        }
 }

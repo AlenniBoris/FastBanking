@@ -8,5 +8,7 @@ sealed class CommonInfoExceptionModelDomain : Throwable() {
 
     data object ErrorGettingData : CommonInfoExceptionModelDomain()
 
+    data object NoSuchDataException : CommonInfoExceptionModelDomain()
+
     data object Other : CommonInfoExceptionModelDomain()
 }
