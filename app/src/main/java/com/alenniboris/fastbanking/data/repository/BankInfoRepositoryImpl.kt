@@ -73,4 +73,10 @@ class BankInfoRepositoryImpl(
                 return@withContext CustomResultModelDomain.Error(exception.toCommonInfoException())
             }
         }
+
+    override suspend fun getBankNewsById(
+        id: String
+    ): CustomResultModelDomain<BankNewsModelDomain, CommonInfoExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
 }

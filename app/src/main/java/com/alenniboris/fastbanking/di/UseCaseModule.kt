@@ -6,6 +6,7 @@ import com.alenniboris.fastbanking.domain.repository.IHelpRepository
 import com.alenniboris.fastbanking.domain.repository.IMapsRepository
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetApplicationInfoUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllCurrenciesInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllExchangeRatesForCurrencyUseCaseImpl
@@ -20,6 +21,7 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.user.RegisterUs
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.SendVerificationCodeForRegistrationUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.SignOutUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
@@ -153,6 +155,13 @@ val UseCaseModule = module {
 
     factory<IGetBankNewsUseCase> {
         GetBankNewsUseCaseImpl(
+            infoRepository = get<IBankInfoRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetBankNewsByIdUseCase> {
+        GetBankNewsByIdUseCaseImpl(
             infoRepository = get<IBankInfoRepository>(),
             dispatchers = get<IAppDispatchers>()
         )

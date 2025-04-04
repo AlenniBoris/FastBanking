@@ -10,4 +10,8 @@ interface IBankInfoRepository {
     suspend fun getApplicationInformation(): CustomResultModelDomain<ApplicationInfoModelDomain, CommonInfoExceptionModelDomain>
 
     suspend fun getBankNews(): CustomResultModelDomain<List<BankNewsModelDomain>, CommonInfoExceptionModelDomain>
+
+    suspend fun getBankNewsById(
+        id: String
+    ): CustomResultModelDomain<BankNewsModelDomain, CommonInfoExceptionModelDomain>
 }
