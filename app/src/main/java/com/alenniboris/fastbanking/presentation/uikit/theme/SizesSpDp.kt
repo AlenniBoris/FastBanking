@@ -151,3 +151,12 @@ val BankNewsScreenItemImageSize = 100.dp
 val BankNewsScreenContentPadding = PaddingValues(horizontal = 20.dp)
 val BankNewsScreenItemTitleSize = 25.sp
 val BankNewsScreenItemTextSize = 15.sp
+
+// News details screen
+val NewsDetailsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val NewsDetailsScreenImageFieldShape = RoundedCornerShape(percent = 20)
+val NewsDetailsScreenTextPadding = PaddingValues(vertical = 15.dp)
+val NewsDetailsScreenImagePadding = PaddingValues(top = 15.dp)
+val NewsDetailsScreenSmallTextSize = 15.sp
+val NewsDetailsScreenMainTextSize = 20.sp
+val NewsDetailsScreenHeaderTextSize = 35.sp

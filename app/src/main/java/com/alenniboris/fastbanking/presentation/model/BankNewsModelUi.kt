@@ -10,6 +10,8 @@ data class BankNewsModelUi(
 
     val dateText =
         SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(domainModel.creationDate)
+
+    val formattedMainText = domainModel.mainText.replace("|", "\n")
 }
 
 fun BankNewsModelDomain.toModelUi(): BankNewsModelUi =

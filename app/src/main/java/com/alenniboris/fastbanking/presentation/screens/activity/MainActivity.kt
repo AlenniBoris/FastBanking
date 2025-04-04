@@ -16,15 +16,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.presentation.screens.NavGraphs
 import com.alenniboris.fastbanking.presentation.screens.destinations.AdditionsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
@@ -50,12 +47,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.rememberNavHostEngine
 import com.ramcosta.composedestinations.utils.destination
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 
 
 class MainActivity : ComponentActivity() {
@@ -82,22 +74,6 @@ fun FastBankingUi() {
             exitTransition = { fadeOut(animationSpec = tween(600)) }
         )
     )
-
-    val useCase = koinInject<IGetBankNewsByIdUseCase>()
-    LaunchedEffect(Unit) {
-        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
-            when(
-                val res = useCase.invoke("198")
-            ){
-                is CustomResultModelDomain.Success -> {
-                    Log.e("!!!", res.result.toString())
-                }
-                is CustomResultModelDomain.Error -> {
-                    Log.e("!!!", res.exception.stackTraceToString())
-                }
-            }
-        }
-    }
 
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()

@@ -1,7 +1,6 @@
 package com.alenniboris.fastbanking.presentation.screens.bank_news.views
 
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +38,7 @@ import com.alenniboris.fastbanking.presentation.screens.bank_news.BankNewsScreen
 import com.alenniboris.fastbanking.presentation.screens.bank_news.BankNewsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.bank_news.IBankNewsScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.bank_news.IBankNewsScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.destinations.NewsDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.uikit.theme.BankNewsScreenContentPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.BankNewsScreenItemColumnPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.BankNewsScreenItemFieldShape
@@ -94,7 +94,11 @@ fun BankNewsScreen(
 
         launch {
             event.filterIsInstance<IBankNewsScreenEvent.OpenNewsDetailsScreen>().collect { coming ->
-                Log.e("!!!", coming.newsId)
+                navigator.navigate(
+                    NewsDetailsScreenDestination(
+                        id = coming.newsId
+                    )
+                )
             }
         }
 

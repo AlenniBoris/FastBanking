@@ -1,6 +1,7 @@
 package com.alenniboris.fastbanking.di
 
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
@@ -21,6 +22,7 @@ import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenV
 import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.news_details.NewsDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.RegistrationAsAppClientScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.register.registration_options.RegistrationOptionsScreenViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -89,6 +91,13 @@ val ViewModelsModule = module {
     viewModel<BankNewsScreenViewModel> {
         BankNewsScreenViewModel(
             getBankNewsUseCase = get<IGetBankNewsUseCase>()
+        )
+    }
+
+    viewModel<NewsDetailsScreenViewModel> { (newsId: String) ->
+        NewsDetailsScreenViewModel(
+            newsId = newsId,
+            getNewsByIdUseCase = get<IGetBankNewsByIdUseCase>()
         )
     }
 }
