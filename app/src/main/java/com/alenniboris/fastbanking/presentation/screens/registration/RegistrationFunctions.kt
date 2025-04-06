@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.register
+package com.alenniboris.fastbanking.presentation.screens.registration
 
 import android.util.Patterns
 

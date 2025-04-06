@@ -22,4 +22,6 @@ sealed interface IHelpScreenIntent {
     data object OpenSettingsAndHidePermissionDialog : IHelpScreenIntent
 
     data class OpenMessenger(val messenger: BankSupportedMessenger) : IHelpScreenIntent
+
+    data class CopyToClipboard(val text: String) : IHelpScreenIntent
 }

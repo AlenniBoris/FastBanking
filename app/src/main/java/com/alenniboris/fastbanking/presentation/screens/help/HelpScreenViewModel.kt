@@ -47,7 +47,12 @@ class HelpScreenViewModel(
             is IHelpScreenIntent.HidePermissionDialog -> hidePermissionDialog()
             is IHelpScreenIntent.OpenSettingsAndHidePermissionDialog -> openSettingsAndHidePermissionDialog()
             is IHelpScreenIntent.OpenMessenger -> openMessenger(intent.messenger)
+            is IHelpScreenIntent.CopyToClipboard -> copyToClipboard(intent.text)
         }
+    }
+
+    private fun copyToClipboard(text: String) {
+        _event.emit(IHelpScreenEvent.CopyToClipboard(text = text))
     }
 
     private fun openMessenger(messenger: BankSupportedMessenger) {

@@ -1,7 +1,6 @@
-package com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.views
+package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.views
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,8 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.IRegistrationAsAppClientScreenIntent
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.PhoneNumberInputPartState
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.IRegistrationAsAppClientScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.PhoneNumberInputPartState
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiDocumentTypePadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiTextFontSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.EnterValueTextFieldPadding

@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client
+package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,10 +10,10 @@ import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBa
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
-import com.alenniboris.fastbanking.presentation.screens.register.RegistrationFunctions
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.RegistrationAsAppClientScreenState
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.RegistrationDocumentType
+import com.alenniboris.fastbanking.presentation.screens.registration.RegistrationFunctions
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.RegistrationAsAppClientScreenState
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationDocumentType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

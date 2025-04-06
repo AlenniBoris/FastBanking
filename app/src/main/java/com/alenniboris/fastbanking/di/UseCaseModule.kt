@@ -14,8 +14,10 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetCur
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.user.ChangePasswordUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.CheckVerificationCodeForRegistrationUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetCurrentUserUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetUserByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.LoginUserIntoBankingUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.RegisterUserIntoBankingUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.SendVerificationCodeForRegistrationUseCaseImpl
@@ -29,8 +31,10 @@ import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesE
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetUserByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
@@ -163,6 +167,20 @@ val UseCaseModule = module {
     factory<IGetBankNewsByIdUseCase> {
         GetBankNewsByIdUseCaseImpl(
             infoRepository = get<IBankInfoRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetUserByIdUseCase> {
+        GetUserByIdUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IChangePasswordUseCase> {
+        ChangePasswordUseCaseImpl(
+            userRepository = get<IUserRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

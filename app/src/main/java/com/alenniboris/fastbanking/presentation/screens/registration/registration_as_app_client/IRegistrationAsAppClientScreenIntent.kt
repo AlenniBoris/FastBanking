@@ -1,6 +1,6 @@
-package com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client
+package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client
 
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.RegistrationDocumentType
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationDocumentType
 
 sealed interface IRegistrationAsAppClientScreenIntent {
 

@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.register.registration_options.views
+package com.alenniboris.fastbanking.presentation.screens.registration.registration_options.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,9 +23,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.presentation.screens.destinations.RegistrationAsAppClientScreenDestination
-import com.alenniboris.fastbanking.presentation.screens.register.registration_options.IRegistrationOptionsScreenEvent
-import com.alenniboris.fastbanking.presentation.screens.register.registration_options.IRegistrationOptionsScreenIntent
-import com.alenniboris.fastbanking.presentation.screens.register.registration_options.RegistrationOptionsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_options.IRegistrationOptionsScreenEvent
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_options.IRegistrationOptionsScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_options.RegistrationOptionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.uikit.theme.BackButtonPicture
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationOptionsScreenColumnOnlyHorizontalPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationOptionsScreenRegistrationTypeTextSize

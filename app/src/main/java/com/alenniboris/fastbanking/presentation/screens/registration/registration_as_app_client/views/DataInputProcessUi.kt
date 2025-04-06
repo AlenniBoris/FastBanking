@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.views
+package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,12 +20,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.IRegistrationAsAppClientScreenIntent
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.DataInputPartState
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.RegistrationDocumentType
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.toDocumentHintDescriptionString
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.toDocumentHintString
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.toDocumentTypeString
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.IRegistrationAsAppClientScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.DataInputPartState
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationDocumentType
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.toDocumentHintDescriptionString
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.toDocumentHintString
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.toDocumentTypeString
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContainerPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContentHintFontSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContentTextFontSize

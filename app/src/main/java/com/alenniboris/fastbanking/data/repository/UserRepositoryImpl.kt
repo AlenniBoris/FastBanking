@@ -35,6 +35,21 @@ class UserRepositoryImpl(
 
     private var verificationCode: String = ""
 
+    override suspend fun changeUserPassword(
+        userId: String,
+        newPassword: String
+    ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            TODO("Not yet implemented")
+        }
+
+    override suspend fun getUserById(
+        id: String
+    ): CustomResultModelDomain<UserModelDomain, AuthenticationExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            TODO("Not yet implemented")
+        }
+
     /**
      * Normal verification code verification is needed to be implemented
      *  **/

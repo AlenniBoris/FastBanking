@@ -1,5 +1,6 @@
 package com.alenniboris.fastbanking.presentation.screens.help.views
 
+import android.content.ClipData
 import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -24,6 +25,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ClipEntry
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -55,6 +58,7 @@ import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -75,24 +79,44 @@ fun HelpScreen(
             Toast.makeText(context, "", Toast.LENGTH_SHORT)
         )
     }
+    val clipboardManager = LocalClipboardManager.current
 
     LaunchedEffect(event) {
 
-        event.filterIsInstance<IHelpScreenEvent.ShowToastMessage>().collect { coming ->
-            toastMessage?.cancel()
-            toastMessage = Toast.makeText(
-                context,
-                context.getString(coming.messageId),
-                Toast.LENGTH_SHORT
-            )
-            toastMessage?.show()
+        launch {
+            event.filterIsInstance<IHelpScreenEvent.ShowToastMessage>().collect { coming ->
+                toastMessage?.cancel()
+                toastMessage = Toast.makeText(
+                    context,
+                    context.getString(coming.messageId),
+                    Toast.LENGTH_SHORT
+                )
+                toastMessage?.show()
+            }
         }
 
-        event.filterIsInstance<IHelpScreenEvent.NavigateBack>().collect {
-            navigator.popBackStack(
-                route = HelpScreenRoute,
-                inclusive = true
-            )
+        launch {
+            event.filterIsInstance<IHelpScreenEvent.NavigateBack>().collect {
+                navigator.popBackStack(
+                    route = HelpScreenRoute,
+                    inclusive = true
+                )
+            }
+        }
+
+        launch {
+            event.filterIsInstance<IHelpScreenEvent.CopyToClipboard>().collect { coming ->
+                val clipData = ClipData.newPlainText("text", coming.text)
+                val clipEntry = ClipEntry(clipData)
+                clipboardManager.setClip(clipEntry)
+                toastMessage?.cancel()
+                toastMessage = Toast.makeText(
+                    context,
+                    context.getString(R.string.copied_to_clipboard_text),
+                    Toast.LENGTH_SHORT
+                )
+                toastMessage?.show()
+            }
         }
     }
 
@@ -359,7 +383,8 @@ private fun HelpScreenUi(
                         modifier = Modifier
                             .padding(HelpScreenFilterElementTopPadding)
                             .fillMaxWidth(),
-                        infoCategory = infoCategory
+                        infoCategory = infoCategory,
+                        proceedIntent = proceedIntent
                     )
                 }
             )

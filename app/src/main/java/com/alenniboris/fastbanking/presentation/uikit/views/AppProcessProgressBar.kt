@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
 import com.alenniboris.fastbanking.presentation.uikit.theme.ProcessProgressBarItemHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.ProcessProgressBarItemPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor

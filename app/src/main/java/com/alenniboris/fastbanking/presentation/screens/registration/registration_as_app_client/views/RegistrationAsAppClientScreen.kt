@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.views
+package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.views
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -25,12 +25,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.IRegistrationAsAppClientScreenEvent
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.IRegistrationAsAppClientScreenIntent
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.RegistrationAsAppClientScreenViewModel
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.RegistrationAsAppClientScreenState
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
-import com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.state.values.toDocumentTypeString
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.IRegistrationAsAppClientScreenEvent
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.IRegistrationAsAppClientScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.RegistrationAsAppClientScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.RegistrationAsAppClientScreenState
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
+import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.toDocumentTypeString
 import com.alenniboris.fastbanking.presentation.uikit.theme.FilterTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.FilterTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationAsAppClientContinueButtonPadding

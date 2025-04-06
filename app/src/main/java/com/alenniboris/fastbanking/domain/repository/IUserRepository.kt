@@ -1,7 +1,7 @@
 package com.alenniboris.fastbanking.domain.repository
 
-import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import kotlinx.coroutines.flow.StateFlow
 
@@ -24,5 +24,14 @@ interface IUserRepository {
 
     fun checkVerificationCodeForRegistration(
         code: String
+    ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
+
+    suspend fun getUserById(
+        id: String
+    ): CustomResultModelDomain<UserModelDomain, AuthenticationExceptionModelDomain>
+
+    suspend fun changeUserPassword(
+        userId: String,
+        newPassword: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain>
 }

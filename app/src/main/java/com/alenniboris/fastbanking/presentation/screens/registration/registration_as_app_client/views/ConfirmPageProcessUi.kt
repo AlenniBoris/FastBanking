@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.register.registration_as_app_client.views
+package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
