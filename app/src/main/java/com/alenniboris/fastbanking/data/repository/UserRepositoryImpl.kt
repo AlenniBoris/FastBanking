@@ -40,14 +40,62 @@ class UserRepositoryImpl(
         newPassword: String
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            TODO("Not yet implemented")
+            runCatching {
+
+                val databaseReference = database.reference
+                val snapshot = databaseReference
+                    .child(FirebaseDatabaseValues.TABLE_USERS)
+                    .child(userId)
+                    .get()
+                    .await()
+                val user = snapshot.value.toJson().fromJson<UserModelData>().toModelDomain()
+
+                user?.let {
+
+                    val updatedUser = user.copy(password = newPassword).toModelData().toUpdatesMap()
+                    val updates = hashMapOf<String, Any>(
+                        "/users/${user.id}" to updatedUser
+                    )
+                    databaseReference.updateChildren(updates)
+
+                    return@withContext CustomResultModelDomain.Success<Unit, AuthenticationExceptionModelDomain>(
+                        Unit
+                    )
+                }
+                    ?: return@withContext CustomResultModelDomain.Error<Unit, AuthenticationExceptionModelDomain>(
+                        AuthenticationExceptionModelDomain.NoSuchUserException
+                    )
+            }.getOrElse { exception ->
+                Log.e("!!!", exception.stackTraceToString())
+                return@withContext CustomResultModelDomain.Error(
+                    exception.toAuthenticationException()
+                )
+            }
         }
 
     override suspend fun getUserById(
         id: String
     ): CustomResultModelDomain<UserModelDomain, AuthenticationExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            TODO("Not yet implemented")
+            runCatching {
+
+                val snapshot = database.reference
+                    .child(FirebaseDatabaseValues.TABLE_USERS)
+                    .child(id)
+                    .get()
+                    .await()
+                val user = snapshot.value.toJson().fromJson<UserModelData>().toModelDomain()
+                user?.let {
+                    return@withContext CustomResultModelDomain.Success(user)
+                } ?: return@withContext CustomResultModelDomain.Error(
+                    AuthenticationExceptionModelDomain.NoSuchUserException
+                )
+            }.getOrElse { exception ->
+                Log.e("!!!", exception.stackTraceToString())
+                return@withContext CustomResultModelDomain.Error(
+                    exception.toAuthenticationException()
+                )
+            }
         }
 
     /**
