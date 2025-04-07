@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.views
+package com.alenniboris.fastbanking.presentation.screens.password_reset.views
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -25,11 +25,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.IRegistrationAsAppClientScreenEvent
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.IRegistrationAsAppClientScreenIntent
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.RegistrationAsAppClientScreenViewModel
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.RegistrationAsAppClientScreenState
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
+import com.alenniboris.fastbanking.presentation.screens.password_reset.IPasswordResetScreenEvent
+import com.alenniboris.fastbanking.presentation.screens.password_reset.IPasswordResetScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.password_reset.PasswordResetScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.password_reset.state.PasswordResetProcessPart
+import com.alenniboris.fastbanking.presentation.screens.password_reset.state.PasswordResetScreenState
 import com.alenniboris.fastbanking.presentation.uikit.theme.FilterTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.FilterTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationAsAppClientContinueButtonPadding
@@ -37,7 +37,8 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.RegistrationAsAppCli
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appFilterTextColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
-import com.alenniboris.fastbanking.presentation.uikit.values.RegistrationAsAppClientScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.values.LoginScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.values.PasswordResetScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.toDocumentTypeString
 import com.alenniboris.fastbanking.presentation.uikit.views.AppCustomButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppFilter
@@ -45,23 +46,21 @@ import com.alenniboris.fastbanking.presentation.uikit.views.AppProcessProgressBa
 import com.alenniboris.fastbanking.presentation.uikit.views.AppProgressBar
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
-@RootNavGraph
-@Destination(route = RegistrationAsAppClientScreenRoute)
 @Composable
-fun RegistrationAsAppClientScreen(
+@Destination(route = PasswordResetScreenRoute)
+fun PasswordResetScreen(
     navigator: DestinationsNavigator
 ) {
 
-    val viewModel = koinViewModel<RegistrationAsAppClientScreenViewModel>()
-    val proceedIntent by remember { mutableStateOf(viewModel::proceedIntent) }
+    val viewModel = koinViewModel<PasswordResetScreenViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
     val event by remember { mutableStateOf(viewModel.event) }
+    val proceedIntent by remember { mutableStateOf(viewModel::proceedIntent) }
     val context = LocalContext.current
     var toastMessage by remember {
         mutableStateOf(
@@ -70,32 +69,44 @@ fun RegistrationAsAppClientScreen(
     }
 
     LaunchedEffect(event) {
+
         launch {
-            event.filterIsInstance<IRegistrationAsAppClientScreenEvent.ShowToastMessage>()
-                .collect { coming ->
-                    toastMessage.cancel()
-                    toastMessage =
-                        Toast.makeText(
-                            context,
-                            context.getString(coming.messageId),
-                            Toast.LENGTH_SHORT
-                        )
-                    toastMessage.show()
-                }
+            event.filterIsInstance<IPasswordResetScreenEvent.ShowToastMessage>().collect { coming ->
+                toastMessage?.cancel()
+                toastMessage =
+                    Toast.makeText(context, context.getString(coming.messageId), Toast.LENGTH_SHORT)
+                toastMessage?.show()
+            }
         }
 
         launch {
-            event.filterIsInstance<IRegistrationAsAppClientScreenEvent.NavigateToPreviousScreen>()
-                .collect {
-                    navigator.popBackStack(
-                        route = RegistrationAsAppClientScreenRoute,
-                        inclusive = true
+            event.filterIsInstance<IPasswordResetScreenEvent.NavigateBack>().collect {
+                navigator.popBackStack(
+                    route = PasswordResetScreenRoute,
+                    inclusive = true
+                )
+            }
+        }
+
+        launch {
+            event.filterIsInstance<IPasswordResetScreenEvent.NavigateToLoginPage>().collect {
+                toastMessage?.cancel()
+                toastMessage =
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.password_reset_complete_text),
+                        Toast.LENGTH_SHORT
                     )
-                }
+                toastMessage?.show()
+                navigator.popBackStack(
+                    route = LoginScreenRoute,
+                    inclusive = false
+                )
+            }
         }
     }
 
-    RegistrationAsAppClientScreenUi(
+    PasswordResetScreenUi(
         state = state,
         proceedIntent = proceedIntent
     )
@@ -103,20 +114,19 @@ fun RegistrationAsAppClientScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun RegistrationAsAppClientScreenUi(
-    state: RegistrationAsAppClientScreenState,
-    proceedIntent: (IRegistrationAsAppClientScreenIntent) -> Unit
+private fun PasswordResetScreenUi(
+    state: PasswordResetScreenState,
+    proceedIntent: (IPasswordResetScreenIntent) -> Unit
 ) {
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(appColor),
+            .background(appColor)
     ) {
 
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -124,9 +134,9 @@ private fun RegistrationAsAppClientScreenUi(
                 modifier = Modifier.fillMaxWidth(),
                 leftBtnPainter = painterResource(R.drawable.back_icon),
                 onLeftBtnClicked = {
-                    proceedIntent(IRegistrationAsAppClientScreenIntent.DoBackwardAction)
+                    proceedIntent(IPasswordResetScreenIntent.DoBackwardAction)
                 },
-                headerTextString = stringResource(R.string.registration_text)
+                headerTextString = stringResource(R.string.passwort_reset_text)
             )
 
             AppProcessProgressBar(
@@ -134,7 +144,7 @@ private fun RegistrationAsAppClientScreenUi(
                     .padding(RegistrationAsAppClientProgressBarPadding)
                     .fillMaxWidth(),
                 currentProcess = state.currentProcessPart,
-                allProcesses = state.processPartList
+                allProcesses = state.resettingProcessParts
             )
 
             if (state.isLoading) {
@@ -143,53 +153,39 @@ private fun RegistrationAsAppClientScreenUi(
                 )
             } else {
                 when (state.currentProcessPart) {
-                    RegistrationAsAppClientProcessPart.DataInput -> {
-                        DataInputProcessUi(
+                    PasswordResetProcessPart.DocumentInput ->
+                        DocumentInputUi(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(1f),
                             state = state.dataInputPartState,
                             proceedIntent = proceedIntent
                         )
-                    }
 
-                    RegistrationAsAppClientProcessPart.PhoneNumberInput -> {
-                        PhoneNumberInputProcessUi(
+                    PasswordResetProcessPart.CheckingCode ->
+                        CheckingCodeUi(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(1f),
-                            state = state.phoneNumberInputPartState,
+                            enteredCode = state.enteredCode,
                             proceedIntent = proceedIntent
                         )
-                    }
 
-                    RegistrationAsAppClientProcessPart.PhoneCodeCheck -> {
-                        PhoneCodeCheckProcessUi(
+                    PasswordResetProcessPart.PasswordChange ->
+                        PasswordChangeUi(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(1f),
-                            state = state.phoneCodeCheckPartState,
+                            state = state.passwordChangePartState,
                             proceedIntent = proceedIntent
                         )
-                    }
 
-                    RegistrationAsAppClientProcessPart.SettingPassword -> {
-                        SettingPasswordProcessUi(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .weight(1f),
-                            state = state.settingPasswordPartState,
-                            proceedIntent = proceedIntent
-                        )
-                    }
-
-                    RegistrationAsAppClientProcessPart.ConfirmPage -> {
-                        ConfirmPageProcessUi(
+                    PasswordResetProcessPart.ConfirmPage ->
+                        ConfirmPageUi(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(1f)
                         )
-                    }
                 }
             }
         }
@@ -202,7 +198,7 @@ private fun RegistrationAsAppClientScreenUi(
             isClickable = !state.isLoading,
             onClick = {
                 proceedIntent(
-                    IRegistrationAsAppClientScreenIntent.DoForwardAction
+                    IPasswordResetScreenIntent.DoForwardAction
                 )
             },
             text = stringResource(R.string.continue_text)
@@ -210,10 +206,10 @@ private fun RegistrationAsAppClientScreenUi(
 
         if (state.isOptionsBottomSheetVisible) {
             AppFilter(
-                elements = state.dataInputPartState.possibleRegistrationDocuments,
+                elements = state.dataInputPartState.allPossibleDocumentTypes,
                 onDismiss = {
                     proceedIntent(
-                        IRegistrationAsAppClientScreenIntent.UpdateOptionsBottomSheetVisibility
+                        IPasswordResetScreenIntent.UpdateOptionsBottomSheetVisibility
                     )
                 },
                 itemContent = { document ->
@@ -222,14 +218,14 @@ private fun RegistrationAsAppClientScreenUi(
                             .padding(FilterTextPadding)
                             .clickable {
                                 proceedIntent(
-                                    IRegistrationAsAppClientScreenIntent.UpdateRegistrationDocumentType(
+                                    IPasswordResetScreenIntent.UpdateRegistrationDocumentType(
                                         document
                                     )
                                 )
                             },
                         text = stringResource(document.toDocumentTypeString()),
                         style = bodyStyle.copy(
-                            fontWeight = if (document == state.dataInputPartState.registrationDocumentType) {
+                            fontWeight = if (document == state.dataInputPartState.selectedDocument) {
                                 FontWeight.Bold
                             } else {
                                 FontWeight.Normal
@@ -246,9 +242,9 @@ private fun RegistrationAsAppClientScreenUi(
 
 @Composable
 @Preview
-private fun RegistrationAsAppClientScreenPreview() {
-    RegistrationAsAppClientScreenUi(
-        state = RegistrationAsAppClientScreenState(),
+private fun PasswordResetScreenUiPreview() {
+    PasswordResetScreenUi(
+        state = PasswordResetScreenState(),
         proceedIntent = {}
     )
 }

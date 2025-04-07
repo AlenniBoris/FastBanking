@@ -15,12 +15,12 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneN
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.ChangePasswordUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.CheckVerificationCodeForRegistrationUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.user.CheckVerificationCodeUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetCurrentUserUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetUserByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.LoginUserIntoBankingUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.RegisterUserIntoBankingUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.SendVerificationCodeForRegistrationUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.user.SendVerificationCodeUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.SignOutUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
@@ -32,12 +32,12 @@ import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUse
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetUserByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISignOutUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import org.koin.dsl.module
@@ -98,14 +98,14 @@ val UseCaseModule = module {
         )
     }
 
-    factory<ISendVerificationCodeForRegistrationUseCase> {
-        SendVerificationCodeForRegistrationUseCaseImpl(
+    factory<ISendVerificationCodeUseCase> {
+        SendVerificationCodeUseCaseImpl(
             userRepository = get<IUserRepository>()
         )
     }
 
-    factory<ICheckVerificationCodeForRegistrationUseCase> {
-        CheckVerificationCodeForRegistrationUseCaseImpl(
+    factory<ICheckVerificationCodeUseCase> {
+        CheckVerificationCodeUseCaseImpl(
             userRepository = get<IUserRepository>()
         )
     }

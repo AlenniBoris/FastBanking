@@ -3,25 +3,25 @@ package com.alenniboris.fastbanking.presentation.screens.registration.registrati
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
-import com.alenniboris.fastbanking.presentation.screens.registration.RegistrationFunctions
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.RegistrationAsAppClientScreenState
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationAsAppClientProcessPart
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.RegistrationDocumentType
+import com.alenniboris.fastbanking.presentation.uikit.functions.CommonFunctions
+import com.alenniboris.fastbanking.presentation.uikit.values.RegistrationDocumentType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class RegistrationAsAppClientScreenViewModel(
-    private val sendVerificationCodeForRegistrationToNumberUseCase: ISendVerificationCodeForRegistrationUseCase,
-    private val checkVerificationCodeForRegistrationUseCase: ICheckVerificationCodeForRegistrationUseCase,
+    private val sendVerificationCodeForRegistrationToNumberUseCase: ISendVerificationCodeUseCase,
+    private val checkVerificationCodeForRegistrationUseCase: ICheckVerificationCodeUseCase,
     private val registerUserIntoBankingUseCase: IRegisterUserIntoBankingUseCase
 ) : ViewModel() {
 
@@ -221,16 +221,7 @@ class RegistrationAsAppClientScreenViewModel(
 
     private fun clearCurrentPartState(processPart: RegistrationAsAppClientProcessPart) {
         when (processPart) {
-            RegistrationAsAppClientProcessPart.DataInput -> {
-                _screenState.update { state ->
-                    state.copy(
-                        dataInputPartState = state.dataInputPartState.copy(
-                            registrationDocumentType = RegistrationDocumentType.Passport,
-                            identificationNumber = ""
-                        )
-                    )
-                }
-            }
+            RegistrationAsAppClientProcessPart.DataInput -> {}
 
             RegistrationAsAppClientProcessPart.PhoneNumberInput -> {
                 _screenState.update { state ->
@@ -310,6 +301,7 @@ class RegistrationAsAppClientScreenViewModel(
 
     private fun registerUserAndMoveToLogin() {
         viewModelScope.launch {
+            _screenState.update { it.copy(isLoading = true) }
             when (
                 val result = registerUserIntoBankingUseCase.invoke(
                     login = when (_screenState.value.dataInputPartState.registrationDocumentType) {
@@ -334,6 +326,7 @@ class RegistrationAsAppClientScreenViewModel(
                     )
                 }
             }
+            _screenState.update { it.copy(isLoading = false) }
         }
     }
 
@@ -371,21 +364,24 @@ class RegistrationAsAppClientScreenViewModel(
                     return false
                 }
 
-
-                if (!RegistrationFunctions.checkIdentificationNumberFormat(state.identificationNumber)) {
-                    _event.emit(
-                        IRegistrationAsAppClientScreenEvent.ShowToastMessage(
-                            AuthenticationExceptionModelDomain.IdentificationNumberIsInWrongFormat.toUiMessageString()
-                        )
-                    )
-                    return false
+                when (state.registrationDocumentType) {
+                    RegistrationDocumentType.Passport -> {
+                        if (!CommonFunctions.checkIdentificationNumberFormat(state.identificationNumber)) {
+                            _event.emit(
+                                IRegistrationAsAppClientScreenEvent.ShowToastMessage(
+                                    AuthenticationExceptionModelDomain.IdentificationNumberIsInWrongFormat.toUiMessageString()
+                                )
+                            )
+                            return false
+                        }
+                    }
                 }
             }
 
             RegistrationAsAppClientProcessPart.PhoneNumberInput -> {
                 val state = _screenState.value.phoneNumberInputPartState
 
-                if (!RegistrationFunctions.checkPhoneNumberFormat(state.phoneNumber)) {
+                if (!CommonFunctions.checkPhoneNumberFormat(state.phoneNumber)) {
                     _event.emit(
                         IRegistrationAsAppClientScreenEvent.ShowToastMessage(
                             AuthenticationExceptionModelDomain.PhoneNumberIsInWrongFormat.toUiMessageString()
@@ -401,7 +397,7 @@ class RegistrationAsAppClientScreenViewModel(
                 val state = _screenState.value.settingPasswordPartState
 
                 if (
-                    RegistrationFunctions.checkIfSomePasswordIsEmpty(
+                    CommonFunctions.checkIfSomePasswordIsEmpty(
                         first = state.password,
                         second = state.passwordCheck
                     )
@@ -415,7 +411,7 @@ class RegistrationAsAppClientScreenViewModel(
                 }
 
                 if (
-                    !RegistrationFunctions.checkIfPasswordsAreSame(
+                    !CommonFunctions.checkIfPasswordsAreSame(
                         first = state.password,
                         second = state.passwordCheck
                     )
@@ -428,7 +424,7 @@ class RegistrationAsAppClientScreenViewModel(
                     return false
                 }
 
-                if (RegistrationFunctions.checkIfPasswordIsWeak(state.password)) {
+                if (CommonFunctions.checkIfPasswordIsWeak(state.password)) {
                     _event.emit(
                         IRegistrationAsAppClientScreenEvent.ShowToastMessage(
                             AuthenticationExceptionModelDomain.WeakPasswordException.toUiMessageString()

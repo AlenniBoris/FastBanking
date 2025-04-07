@@ -6,4 +6,6 @@ sealed interface ILoginScreenEvent {
 
     data object NavigateToRegistrationOptionsScreen : ILoginScreenEvent
 
+    data object OpenResetPasswordPage: ILoginScreenEvent
+
 }

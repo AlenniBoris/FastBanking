@@ -9,11 +9,13 @@ import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesE
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetUserByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
 import com.alenniboris.fastbanking.presentation.screens.additions.AdditionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.application_information.ApplicationInformationScreenViewModel
@@ -23,6 +25,7 @@ import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.news_details.NewsDetailsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.password_reset.PasswordResetScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.RegistrationAsAppClientScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_options.RegistrationOptionsScreenViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -49,8 +52,8 @@ val ViewModelsModule = module {
 
     viewModel<RegistrationAsAppClientScreenViewModel> {
         RegistrationAsAppClientScreenViewModel(
-            sendVerificationCodeForRegistrationToNumberUseCase = get<ISendVerificationCodeForRegistrationUseCase>(),
-            checkVerificationCodeForRegistrationUseCase = get<ICheckVerificationCodeForRegistrationUseCase>(),
+            sendVerificationCodeForRegistrationToNumberUseCase = get<ISendVerificationCodeUseCase>(),
+            checkVerificationCodeForRegistrationUseCase = get<ICheckVerificationCodeUseCase>(),
             registerUserIntoBankingUseCase = get<IRegisterUserIntoBankingUseCase>()
         )
     }
@@ -98,6 +101,15 @@ val ViewModelsModule = module {
         NewsDetailsScreenViewModel(
             newsId = newsId,
             getNewsByIdUseCase = get<IGetBankNewsByIdUseCase>()
+        )
+    }
+
+    viewModel<PasswordResetScreenViewModel> {
+        PasswordResetScreenViewModel(
+            getUserByIdUseCase = get<IGetUserByIdUseCase>(),
+            checkVerificationCode = get<ICheckVerificationCodeUseCase>(),
+            sendVerificationCode = get<ISendVerificationCodeUseCase>(),
+            changePasswordUseCase = get<IChangePasswordUseCase>()
         )
     }
 }

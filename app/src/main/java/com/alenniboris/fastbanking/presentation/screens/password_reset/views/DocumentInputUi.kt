@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.views
+package com.alenniboris.fastbanking.presentation.screens.password_reset.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.IRegistrationAsAppClientScreenIntent
-import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.values.DataInputPartState
+import com.alenniboris.fastbanking.presentation.screens.password_reset.IPasswordResetScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.password_reset.state.DocumentInputPartState
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContainerPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContentHintFontSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.DataInputProcessUiContentTextFontSize
@@ -44,10 +44,10 @@ import com.alenniboris.fastbanking.presentation.uikit.views.AppTextField
 import java.util.Locale
 
 @Composable
-fun DataInputProcessUi(
-    modifier: Modifier = Modifier,
-    state: DataInputPartState,
-    proceedIntent: (IRegistrationAsAppClientScreenIntent) -> Unit
+fun DocumentInputUi(
+    modifier: Modifier,
+    state: DocumentInputPartState,
+    proceedIntent: (IPasswordResetScreenIntent) -> Unit
 ) {
 
     Column(
@@ -79,11 +79,11 @@ fun DataInputProcessUi(
                 .padding(DataInputProcessUiDocumentTypePadding)
                 .fillMaxWidth(),
             onClick = {
-                proceedIntent(IRegistrationAsAppClientScreenIntent.UpdateOptionsBottomSheetVisibility)
+                proceedIntent(IPasswordResetScreenIntent.UpdateOptionsBottomSheetVisibility)
             },
             content = {
                 DocumentOptionsButtonContent(
-                    registrationDocumentType = state.registrationDocumentType
+                    registrationDocumentType = state.selectedDocument
                 )
             }
         )
@@ -97,25 +97,27 @@ fun DataInputProcessUi(
                 )
                 .padding(EnterValueTextFieldPadding)
                 .fillMaxWidth(),
-            value = when (state.registrationDocumentType) {
-                RegistrationDocumentType.Passport -> state.identificationNumber.uppercase(Locale.getDefault())
+            value = when (state.selectedDocument) {
+                RegistrationDocumentType.Passport -> state.identificationNumber.uppercase(
+                    Locale.getDefault()
+                )
             },
             onValueChanged = { newValue ->
                 proceedIntent(
-                    IRegistrationAsAppClientScreenIntent.UpdateDataInputField(
-                        documentType = state.registrationDocumentType,
+                    IPasswordResetScreenIntent.UpdateDocumentValue(
+                        documentType = state.selectedDocument,
                         newValue = newValue.uppercase(Locale.getDefault())
                     )
                 )
             },
-            placeholder = stringResource(state.registrationDocumentType.toDocumentHintString())
+            placeholder = stringResource(state.selectedDocument.toDocumentHintString())
         )
 
         Text(
             modifier = Modifier
                 .padding(DataInputProcessUiTextPadding)
                 .width(IntrinsicSize.Max),
-            text = stringResource(state.registrationDocumentType.toDocumentHintDescriptionString()),
+            text = stringResource(state.selectedDocument.toDocumentHintDescriptionString()),
             style = bodyStyle.copy(
                 color = enterTextFieldTextColor,
                 fontSize = DataInputProcessUiContentTextFontSize
@@ -171,11 +173,11 @@ private fun DocumentOptionsButtonContent(
 @Preview
 private fun DataInputProcessUiPreview() {
 
-    DataInputProcessUi(
+    DocumentInputUi(
         modifier = Modifier
             .fillMaxSize()
             .background(appColor),
-        state = DataInputPartState(),
+        state = DocumentInputPartState(),
         proceedIntent = {}
     )
 

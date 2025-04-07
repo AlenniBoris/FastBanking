@@ -11,6 +11,7 @@ data class RegistrationAsAppClientScreenState(
         RegistrationAsAppClientProcessPart.DataInput,
     val processPartList: List<RegistrationAsAppClientProcessPart> =
         RegistrationAsAppClientProcessPart.entries.toList(),
+    val isLoading: Boolean = false,
     val isOptionsBottomSheetVisible: Boolean = false,
     val dataInputPartState: DataInputPartState = DataInputPartState(),
     val phoneNumberInputPartState: PhoneNumberInputPartState = PhoneNumberInputPartState(),

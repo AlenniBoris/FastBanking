@@ -21,15 +21,15 @@ import com.alenniboris.fastbanking.presentation.uikit.utils.currentThemeMode
 import com.alenniboris.fastbanking.presentation.uikit.utils.getLastThemeAndApply
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFF673AB7),
-    background = Color(0xFF3F51B5),
-    onBackground = Color(0xFF2196F3),
+    primary = Color(0xff404040),
+    background = Color(0xff404040),
+    onBackground = Color(0xffffffff),
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFF673AB7),
-    background = Color(0xFF3F51B5),
-    onBackground = Color(0xFF2196F3)
+    primary = Color(0xffdbdbdb),
+    background = Color(0xffdbdbdb),
+    onBackground = Color(0xff000000)
 )
 
 @Composable

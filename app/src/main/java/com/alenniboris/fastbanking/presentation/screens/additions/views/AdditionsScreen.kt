@@ -41,6 +41,7 @@ import com.alenniboris.fastbanking.presentation.screens.destinations.Application
 import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.BankNewsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.CurrencyScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.PasswordResetScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.RegistrationOptionsScreenDestination
 import com.alenniboris.fastbanking.presentation.uikit.theme.AdditionsScreenActionPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.AdditionsScreenCategoryHeaderSize
@@ -121,14 +122,7 @@ fun AdditionsScreen(
 
         launch {
             event.filterIsInstance<IAdditionsScreenEvent.OpenPasswordRecoveryPage>().collect {
-                toastMessage?.cancel()
-                toastMessage =
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
-                    )
-                toastMessage?.show()
+                navigator.navigate(PasswordResetScreenDestination)
             }
         }
 

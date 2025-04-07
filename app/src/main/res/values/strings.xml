@@ -121,5 +121,10 @@
     <string name="application_updates_header_text">Updated</string>
     <string name="exception_no_such_data">Data for this page couldnt be found</string>
     <string name="copied_to_clipboard_text">Copied</string>
+    <string name="password_reset_complete_text">Your password was changed. Now, log in</string>
+    <string name="password_resetting_verification_code_text">We have sent verification code to the number, which you told in bank. Enter this code and proceed</string>
+    <string name="resetting_password_confirmation_process_text">Tab the button below to finish password reset process</string>
+    <string name="forgot_password_text">Forgot password? Reset it</string>
+    <string name="passwort_reset_text">Resetting</string>
 
 </resources>

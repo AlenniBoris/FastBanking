@@ -1,8 +1,8 @@
-package com.alenniboris.fastbanking.presentation.screens.registration
+package com.alenniboris.fastbanking.presentation.uikit.functions
 
 import android.util.Patterns
 
-object RegistrationFunctions {
+object CommonFunctions {
 
     fun checkIdentificationNumberFormat(number: String): Boolean {
         val regex = "^(?=.*\\d)[A-Za-z0-9]+$".toRegex()

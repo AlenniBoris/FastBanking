@@ -26,6 +26,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.enterTextFieldTextCo
 @Composable
 fun AppCustomButton(
     modifier: Modifier = Modifier,
+    isClickable: Boolean = true,
     onClick: () -> Unit = {},
     text: String = "",
     content: (@Composable () -> Unit)? = null
@@ -39,7 +40,11 @@ fun AppCustomButton(
                 EnterValueTextFieldShape
             )
             .padding(RegistrationOptionsScreenButtonPadding)
-            .clickable { onClick() },
+            .clickable {
+                if (isClickable) {
+                    onClick()
+                }
+            },
     ) {
         content?.let {
             it()

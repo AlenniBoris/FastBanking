@@ -1,11 +1,11 @@
 package com.alenniboris.fastbanking.domain.usecase.implementation.user
 
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeForRegistrationUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
 
-class SendVerificationCodeForRegistrationUseCaseImpl(
+class SendVerificationCodeUseCaseImpl(
     private val userRepository: IUserRepository
-) : ISendVerificationCodeForRegistrationUseCase {
+) : ISendVerificationCodeUseCase {
 
     override fun invoke() {
         userRepository.sendVerificationCode()

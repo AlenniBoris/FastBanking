@@ -11,4 +11,6 @@ sealed interface ILoginScreenIntent {
     data object LoginIntoBanking : ILoginScreenIntent
 
     data object StartRegistration : ILoginScreenIntent
+
+    data object OpenResetPasswordPage : ILoginScreenIntent
 }

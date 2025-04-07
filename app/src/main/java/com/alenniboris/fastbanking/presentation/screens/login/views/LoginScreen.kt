@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
+import com.alenniboris.fastbanking.presentation.screens.destinations.PasswordResetScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.RegistrationOptionsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.login.ILoginScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.login.ILoginScreenIntent
@@ -95,6 +96,12 @@ fun LoginScreen(
                 .collect {
                     navigator.navigate(RegistrationOptionsScreenDestination)
                 }
+        }
+
+        launch {
+            event.filterIsInstance<ILoginScreenEvent.OpenResetPasswordPage>().collect {
+                navigator.navigate(PasswordResetScreenDestination)
+            }
         }
     }
 
@@ -204,20 +211,38 @@ private fun LoginScreenUi(
 
         }
 
-        Text(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(LoginScreenBottomTextPadding)
-                .clickable {
-                    proceedIntent(ILoginScreenIntent.StartRegistration)
-                },
-            text = stringResource(R.string.register_text),
-            style = bodyStyle.copy(
-                fontSize = LoginScreenButtonTextSize,
-                fontWeight = FontWeight.Medium
-            ),
-            color = appTopBarElementsColor
-        )
+        Column(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(LoginScreenBottomTextPadding)
+                    .clickable {
+                        proceedIntent(ILoginScreenIntent.OpenResetPasswordPage)
+                    },
+                text = stringResource(R.string.forgot_password_text),
+                style = bodyStyle.copy(
+                    fontSize = LoginScreenButtonTextSize,
+                    fontWeight = FontWeight.Medium
+                ),
+                color = appTopBarElementsColor
+            )
+
+            Text(
+                modifier = Modifier
+                    .padding(LoginScreenBottomTextPadding)
+                    .clickable {
+                        proceedIntent(ILoginScreenIntent.StartRegistration)
+                    },
+                text = stringResource(R.string.register_text),
+                style = bodyStyle.copy(
+                    fontSize = LoginScreenButtonTextSize,
+                    fontWeight = FontWeight.Medium
+                ),
+                color = appTopBarElementsColor
+            )
+        }
     }
 }
 

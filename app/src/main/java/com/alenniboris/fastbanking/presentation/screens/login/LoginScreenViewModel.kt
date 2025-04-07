@@ -28,7 +28,12 @@ class LoginScreenViewModel(
             is ILoginScreenIntent.UpdatePasswordVisibility -> updatePasswordVisibility()
             is ILoginScreenIntent.LoginIntoBanking -> loginIntoBanking()
             is ILoginScreenIntent.StartRegistration -> startRegistration()
+            is ILoginScreenIntent.OpenResetPasswordPage -> openResetPasswordPage()
         }
+    }
+
+    private fun openResetPasswordPage() {
+        _event.emit(ILoginScreenEvent.OpenResetPasswordPage)
     }
 
     private fun startRegistration() {
