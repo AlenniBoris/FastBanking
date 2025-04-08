@@ -1,11 +1,13 @@
 package com.alenniboris.fastbanking.di
 
+import com.alenniboris.fastbanking.data.repository.AuthenticationRepositoryImpl
 import com.alenniboris.fastbanking.data.repository.BankInfoRepositoryImpl
 import com.alenniboris.fastbanking.data.repository.CurrencyRepositoryImpl
 import com.alenniboris.fastbanking.data.repository.HelpRepositoryImpl
 import com.alenniboris.fastbanking.data.repository.MapsRepositoryImpl
 import com.alenniboris.fastbanking.data.repository.UserRepositoryImpl
 import com.alenniboris.fastbanking.data.source.remote.api.exchange_rate_api.IExchangeRateApiService
+import com.alenniboris.fastbanking.domain.repository.IAuthenticationRepository
 import com.alenniboris.fastbanking.domain.repository.IBankInfoRepository
 import com.alenniboris.fastbanking.domain.repository.ICurrencyRepository
 import com.alenniboris.fastbanking.domain.repository.IHelpRepository
@@ -18,8 +20,8 @@ import org.koin.dsl.module
 
 val RepositoryModule = module {
 
-    single<IUserRepository> {
-        UserRepositoryImpl(
+    single<IAuthenticationRepository> {
+        AuthenticationRepositoryImpl(
             apl = androidApplication(),
             database = get<FirebaseDatabase>(),
             dispatchers = get<IAppDispatchers>()
@@ -48,6 +50,13 @@ val RepositoryModule = module {
 
     single<IBankInfoRepository> {
         BankInfoRepositoryImpl(
+            database = get<FirebaseDatabase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    single<IUserRepository> {
+        UserRepositoryImpl(
             database = get<FirebaseDatabase>(),
             dispatchers = get<IAppDispatchers>()
         )

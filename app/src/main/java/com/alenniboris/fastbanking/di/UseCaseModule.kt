@@ -1,5 +1,6 @@
 package com.alenniboris.fastbanking.di
 
+import com.alenniboris.fastbanking.domain.repository.IAuthenticationRepository
 import com.alenniboris.fastbanking.domain.repository.IBankInfoRepository
 import com.alenniboris.fastbanking.domain.repository.ICurrencyRepository
 import com.alenniboris.fastbanking.domain.repository.IHelpRepository
@@ -8,12 +9,14 @@ import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetApplicationInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetAllUserCardsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllCurrenciesInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllExchangeRatesForCurrencyUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetCurrenciesExchangeRateUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.ChangePasswordUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.CheckVerificationCodeUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetCurrentUserUseCaseImpl
@@ -25,12 +28,14 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.user.SignOutUse
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
@@ -46,67 +51,41 @@ val UseCaseModule = module {
 
     single<IGetCurrentUserUseCase> {
         GetCurrentUserUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            authRepository = get<IAuthenticationRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
 
     factory<ILoginUserIntoBankingUseCase> {
         LoginUserIntoBankingUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            authRepository = get<IAuthenticationRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
 
     factory<IRegisterUserIntoBankingUseCase> {
         RegisterUserIntoBankingUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            authRepository = get<IAuthenticationRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
 
     factory<ISignOutUseCase> {
         SignOutUseCaseImpl(
-            userRepository = get<IUserRepository>()
+            authRepository = get<IAuthenticationRepository>()
         )
     }
 
-    single<IGetCurrentUserUseCase> {
-        GetCurrentUserUseCaseImpl(
-            userRepository = get<IUserRepository>(),
-            dispatchers = get<IAppDispatchers>()
-        )
-    }
-
-    factory<ILoginUserIntoBankingUseCase> {
-        LoginUserIntoBankingUseCaseImpl(
-            userRepository = get<IUserRepository>(),
-            dispatchers = get<IAppDispatchers>()
-        )
-    }
-
-    factory<IRegisterUserIntoBankingUseCase> {
-        RegisterUserIntoBankingUseCaseImpl(
-            userRepository = get<IUserRepository>(),
-            dispatchers = get<IAppDispatchers>()
-        )
-    }
-
-    factory<ISignOutUseCase> {
-        SignOutUseCaseImpl(
-            userRepository = get<IUserRepository>()
-        )
-    }
 
     factory<ISendVerificationCodeUseCase> {
         SendVerificationCodeUseCaseImpl(
-            userRepository = get<IUserRepository>()
+            authRepository = get<IAuthenticationRepository>()
         )
     }
 
     factory<ICheckVerificationCodeUseCase> {
         CheckVerificationCodeUseCaseImpl(
-            userRepository = get<IUserRepository>()
+            authRepository = get<IAuthenticationRepository>()
         )
     }
 
@@ -173,14 +152,30 @@ val UseCaseModule = module {
 
     factory<IGetUserByIdUseCase> {
         GetUserByIdUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            authRepository = get<IAuthenticationRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
 
     factory<IChangePasswordUseCase> {
         ChangePasswordUseCaseImpl(
+            authRepository = get<IAuthenticationRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllUserCardsUseCase> {
+        GetAllUserCardsUseCaseImpl(
             userRepository = get<IUserRepository>(),
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllUserTransactionsUseCase> {
+        GetAllUserTransactionsUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

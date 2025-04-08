@@ -2,13 +2,13 @@ package com.alenniboris.fastbanking.domain.usecase.implementation.user
 
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.repository.IUserRepository
+import com.alenniboris.fastbanking.domain.repository.IAuthenticationRepository
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import kotlinx.coroutines.withContext
 
 class RegisterUserIntoBankingUseCaseImpl(
-    private val userRepository: IUserRepository,
+    private val authRepository: IAuthenticationRepository,
     private val dispatchers: IAppDispatchers
 ) : IRegisterUserIntoBankingUseCase {
 
@@ -18,12 +18,12 @@ class RegisterUserIntoBankingUseCaseImpl(
     ): CustomResultModelDomain<Unit, AuthenticationExceptionModelDomain> =
         withContext(dispatchers.IO) {
             when (
-                val res = userRepository.registerUserIntoBanking(
+                val res = authRepository.registerUserIntoBanking(
                     login = login,
                     password = password
                 )
             ) {
-                is CustomResultModelDomain.Success -> userRepository.loginUserIntoBanking(
+                is CustomResultModelDomain.Success -> authRepository.loginUserIntoBanking(
                     login = login,
                     password = password
                 )
