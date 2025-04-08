@@ -13,4 +13,6 @@ object FirebaseDatabaseValues {
     const val APPLICATION_DATA = "app_verison"
 
     const val TABLE_BANK_NEWS = "bank_news"
+
+    const val TABLE_TRANSACTION = "transaction"
 }

@@ -8,7 +8,7 @@ data class CardModelDomain(
     val amount: Double,
     val owner: OwnerModelDomain,
     val expireDate: Date,
-    val number: Long,
-    val cvv: Int,
+    val number: String,
+    val cvv: String,
     val type: CardType
 )
