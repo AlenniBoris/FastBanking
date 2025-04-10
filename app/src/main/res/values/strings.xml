@@ -126,5 +126,22 @@
     <string name="resetting_password_confirmation_process_text">Tab the button below to finish password reset process</string>
     <string name="forgot_password_text">Forgot password? Reset it</string>
     <string name="passwort_reset_text">Resetting</string>
+    <string name="recommended_text">Recommended</string>
+    <string name="my_products_text">My products</string>
+    <string name="cards_products_text">Cards</string>
+    <string name="credits_products_text">Credits</string>
+    <string name="deposits_and_accounts_products_text">Accounts and deposits</string>
+    <string name="no_bank_product_found_text">You dont have this type of product. Tap button to add it</string>
+    <string name="make_order_text">Change</string>
+    <string name="no_transactions_found">No transactions found</string>
+    <string name="transaction_text">transaction type\n</string>
+    <string name="online_text">Online</string>
+    <string name="accounts_sum_text">General sum</string>
+    <string name="all_accounts_text">All accounts</string>
+    <string name="sigma_icon_text">summa icon</string>
+    <string name="no_value_text">---</string>
+    <string name="apply_for_card_text">Apply for card</string>
+    <string name="apply_for_credit_text">Apply for credit</string>
+    <string name="apply_for_deposit_text">Apply for deposit</string>
 
 </resources>

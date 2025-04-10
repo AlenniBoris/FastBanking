@@ -239,7 +239,11 @@ private fun AtmMapNotRegisteredUserScreenUi(
             },
             currentElement = ClickableElement(
                 text = stringResource(state.screenMode.toUiString()),
-                onClick = {}
+                onClick = {
+                    proceedIntent(
+                        IAtmMapScreenIntent.UpdateCurrentScreenMode(state.screenMode)
+                    )
+                }
             )
         )
 

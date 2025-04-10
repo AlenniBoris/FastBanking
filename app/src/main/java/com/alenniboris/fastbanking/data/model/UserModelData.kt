@@ -15,7 +15,8 @@ data class UserModelData(
     val country: String? = null,
     val accountId: String? = null,
     val hasOnlineBanking: String? = null,
-    val phoneNumber: String? = null
+    val phoneNumber: String? = null,
+    val job: String? = null
 ) {
     val hasSomeValueMissing: Boolean
         get() = id == null
@@ -59,7 +60,8 @@ fun UserModelData.toModelDomain(): UserModelDomain? = runCatching {
         country = this.country!!,
         accountId = this.accountId!!,
         hasOnlineBanking = this.hasOnlineBanking?.toBoolean()!!,
-        phoneNumber = this.phoneNumber!!
+        phoneNumber = this.phoneNumber!!,
+        job = this.job!!
     )
 }.getOrElse {
     Log.e("!!!", "UserModelData.toModelDomain")

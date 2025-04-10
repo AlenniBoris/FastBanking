@@ -4,10 +4,12 @@ import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toCommonInfoException
 import com.alenniboris.fastbanking.data.model.ApplicationInfoModelData
 import com.alenniboris.fastbanking.data.model.BankNewsModelData
+import com.alenniboris.fastbanking.data.model.RecommendedNewsModelData
 import com.alenniboris.fastbanking.data.model.toModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.ApplicationInfoModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain
+import com.alenniboris.fastbanking.domain.model.bank_info.RecommendedNewsModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonInfoExceptionModelDomain
 import com.alenniboris.fastbanking.domain.repository.IBankInfoRepository
 import com.alenniboris.fastbanking.domain.utils.GsonUtil.fromJson
@@ -55,48 +57,55 @@ class BankInfoRepositoryImpl(
     override suspend fun getBankNews():
             CustomResultModelDomain<List<BankNewsModelDomain>, CommonInfoExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            runCatching {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_BANK_NEWS,
+                jsonMapping = { json -> json.fromJson<BankNewsModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel -> true },
+                exceptionMapping = { exception ->
+                    exception.toCommonInfoException()
+                }
+            )
+        }
 
-                val snapshot = database.reference
-                    .child(FirebaseDatabaseValues.TABLE_BANK_NEWS)
-                    .get()
-                    .await()
-
-                val elements = snapshot.children
-                    .toList()
-                    .map { it.value.toJson().fromJson<BankNewsModelData>() }
-                    .mapNotNull { it.toModelDomain() }
-
-                return@withContext CustomResultModelDomain.Success(elements)
-            }.getOrElse { exception ->
-                Log.e("!!!", "getBankNews ${exception.stackTraceToString()}")
-                return@withContext CustomResultModelDomain.Error(exception.toCommonInfoException())
-            }
+    override suspend fun getBankRecommendedNews():
+            CustomResultModelDomain<List<RecommendedNewsModelDomain>, CommonInfoExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_RECOMMENDED_NEWS,
+                jsonMapping = { json -> json.fromJson<RecommendedNewsModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel -> true },
+                exceptionMapping = { exception ->
+                    exception.toCommonInfoException()
+                }
+            )
         }
 
     override suspend fun getBankNewsById(
         id: String
     ): CustomResultModelDomain<BankNewsModelDomain?, CommonInfoExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            runCatching {
-
-                val snapshot = database.reference
-                    .child(FirebaseDatabaseValues.TABLE_BANK_NEWS)
-                    .child(id)
-                    .get()
-                    .await()
-
-                val result = snapshot.getValue(BankNewsModelData::class.java)
-                    ?: return@withContext CustomResultModelDomain.Error(
-                        CommonInfoExceptionModelDomain.ErrorGettingData
-                    )
-
-                return@withContext CustomResultModelDomain.Success(
-                    result.toModelDomain()
-                )
-            }.getOrElse { exception ->
-                Log.e("!!!", "getBankNews ${exception.stackTraceToString()}")
-                return@withContext CustomResultModelDomain.Error(exception.toCommonInfoException())
-            }
+            return@withContext DatabaseFunctions.requestElementById<BankNewsModelData, BankNewsModelDomain, CommonInfoExceptionModelDomain>(
+                id = id,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_BANK_NEWS,
+                resultCheck = { dataModel ->
+                    if (dataModel == null) {
+                        throw CommonInfoExceptionModelDomain.ErrorGettingData
+                    }
+                },
+                resultMapping = { dataModel ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonInfoException()
+                }
+            )
         }
 }

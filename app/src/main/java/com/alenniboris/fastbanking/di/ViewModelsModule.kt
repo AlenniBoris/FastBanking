@@ -1,14 +1,20 @@
 package com.alenniboris.fastbanking.di
 
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankRecommendedNewsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetAllUserCreditsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
@@ -23,6 +29,7 @@ import com.alenniboris.fastbanking.presentation.screens.bank_news.BankNewsScreen
 import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.main.MainScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.news_details.NewsDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.password_reset.PasswordResetScreenViewModel
@@ -110,6 +117,18 @@ val ViewModelsModule = module {
             checkVerificationCode = get<ICheckVerificationCodeUseCase>(),
             sendVerificationCode = get<ISendVerificationCodeUseCase>(),
             changePasswordUseCase = get<IChangePasswordUseCase>()
+        )
+    }
+
+    viewModel<MainScreenViewModel> {
+        MainScreenViewModel(
+            getBankRecommendedNewsUseCase = get<IGetBankRecommendedNewsUseCase>(),
+            getAllUserCardsUseCase = get<IGetAllUserCardsUseCase>(),
+            getAllUserCreditsUseCase = get<IGetAllUserCreditsUseCase>(),
+            getAllUserAccountsUseCase = get<IGetAllUserAccountsUseCase>(),
+            getAllUserTransactionsByCardUseCase = get<IGetAllUserTransactionsByCardUseCase>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            getAllUserAccountsCurrencyAmountUseCase = get<IGetAllUserAccountsCurrencyAmountUseCase>()
         )
     }
 }

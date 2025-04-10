@@ -1,29 +1,69 @@
 package com.alenniboris.fastbanking.domain.usecase.implementation.cards
 
+import android.util.Log
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
+import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 
 class GetAllUserCardsUseCaseImpl(
     private val userRepository: IUserRepository,
     private val getCurrentUserUseCase: IGetCurrentUserUseCase,
+    private val getCurrenciesExchangeRateUseCase: IGetCurrenciesExchangeRateUseCase,
     private val dispatchers: IAppDispatchers
 ) : IGetAllUserCardsUseCase {
 
     override suspend fun invoke():
             CustomResultModelDomain<List<CardModelDomain>, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext getCurrentUserUseCase.userFlow.value?.let { user ->
-                userRepository.getAllUserCards(
-                    user = user
+
+            val user = getCurrentUserUseCase.userFlow.value
+                ?: return@withContext CustomResultModelDomain.Error(
+                    CommonExceptionModelDomain.Other
                 )
-            } ?: CustomResultModelDomain.Error(
-                CommonExceptionModelDomain.Other
-            )
+
+            val cardsResult = userRepository.getAllUserCards(user = user)
+
+            cardsResult.result?.let { cards ->
+
+                val rates = cards
+                    .map { card ->
+                        async {
+                            getCurrenciesExchangeRateUseCase.invoke(
+                                fromCurrency = CurrencyModelDomain(
+                                    code = card.currency,
+                                    fullName = card.currency
+                                ),
+                                toCurrency = CurrencyModelDomain(
+                                    code = card.reserveCurrency,
+                                    fullName = card.reserveCurrency
+                                )
+                            )
+                        }
+                    }.awaitAll()
+
+                val res = cards.mapIndexed { index, card ->
+                    val rateResult = rates[index]
+                    (rateResult as? CustomResultModelDomain.Success)?.let {
+                        val rate = rateResult.result
+                        Log.e("!!!", rate.toString())
+                        card.copy(
+                            amountInReserveCurrency = card.amount * rate
+                        )
+                    } ?: card
+                }
+
+                return@withContext CustomResultModelDomain.Success(
+                    res
+                )
+            } ?: return@withContext cardsResult
         }
 }

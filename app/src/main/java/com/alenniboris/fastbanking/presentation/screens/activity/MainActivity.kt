@@ -79,7 +79,6 @@ fun FastBankingUi() {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination()?.baseRoute ?: ""
 
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {

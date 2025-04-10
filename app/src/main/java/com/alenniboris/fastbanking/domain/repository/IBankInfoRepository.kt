@@ -3,6 +3,7 @@ package com.alenniboris.fastbanking.domain.repository
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.ApplicationInfoModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain
+import com.alenniboris.fastbanking.domain.model.bank_info.RecommendedNewsModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonInfoExceptionModelDomain
 
 interface IBankInfoRepository {
@@ -14,4 +15,6 @@ interface IBankInfoRepository {
     suspend fun getBankNewsById(
         id: String
     ): CustomResultModelDomain<BankNewsModelDomain?, CommonInfoExceptionModelDomain>
+
+    suspend fun getBankRecommendedNews(): CustomResultModelDomain<List<RecommendedNewsModelDomain>, CommonInfoExceptionModelDomain>
 }

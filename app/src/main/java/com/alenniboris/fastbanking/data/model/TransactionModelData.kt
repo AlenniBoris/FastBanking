@@ -14,7 +14,7 @@ data class TransactionModelData(
     val priceAmount: String?,
     val senderId: String?,
     val type: String?,
-    val usedCardNumber: String?
+    val usedCardId: String?
 )
 
 fun TransactionModelData.toModelDomain(): TransactionModelDomain? = runCatching {
@@ -32,7 +32,7 @@ fun TransactionModelData.toModelDomain(): TransactionModelDomain? = runCatching 
             "p2p" -> TransactionType.P2P
             else -> TransactionType.Undefined
         },
-        usedCardNumber = this.usedCardNumber!!
+        usedCardId = this.usedCardId!!
     )
 }.getOrElse { exception ->
     Log.e("!!!", "TransactionModelData.toModelDomain ${exception.stackTraceToString()}")

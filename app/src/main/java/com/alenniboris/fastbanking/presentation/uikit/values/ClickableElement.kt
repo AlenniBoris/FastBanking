@@ -4,10 +4,10 @@ data class ClickableElement(
     val text: String,
     val onClick: () -> Unit
 ) {
-
     override fun equals(other: Any?): Boolean {
-        return (other as? ClickableElement)?.let {
-            this.text == other.text
-        } ?: false
+        (other as? ClickableElement)?.let {
+            return other.text == this.text
+        }
+        return false
     }
 }

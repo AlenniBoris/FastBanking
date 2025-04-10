@@ -170,3 +170,82 @@ val CurrencyRateItemTextColor
         false -> CurrencyRateItemTextColorLight
         true -> CurrencyRateItemTextColorDark
     }
+
+
+// Main screen
+
+private val MainScreenItemColorLight = Color(0xffbcb8b8)
+private val MainScreenItemColorDark = Color(0xD21C1C1C)
+
+val mainScreenItemColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MainScreenItemColorLight
+        true -> MainScreenItemColorDark
+    }
+
+private val MainScreenOnItemColorLight = Color(0x60F5F4F4)
+private val MainScreenOnItemColorDark = Color(0x520C0C0C)
+
+val mainScreenOnItemColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MainScreenOnItemColorLight
+        true -> MainScreenOnItemColorDark
+    }
+
+private val MainScreenTextColorLight = Color(0xff000000)
+private val MainScreenTextColorDark = Color(0xffffffff)
+
+val mainScreenTextColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MainScreenTextColorLight
+        true -> MainScreenTextColorDark
+    }
+
+val mainScreenRecommendedNewsOnPictureTextColor = Color(0xffffffff)
+
+val TransparentColor = Color.Transparent
+val BlackColor = Color(0xBC000000)
+
+val mainScreenProductsButtonColor = Color(0xfff9e753)
+val mainScreenProductsButtonIconTintColor = Color(0xBC000000)
+
+// main screen filter item
+
+private val MainScreenFilterItemColorLight = Color(0xA4FDFDFD)
+private val MainScreenFilterItemColorDark = Color(0x520C0C0C)
+
+val mainScreenFilterItemColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MainScreenFilterItemColorLight
+        true -> MainScreenFilterItemColorDark
+    }
+
+private val MainScreenFilterItemSelectedColorLight = Color(0xD51C1C1C)
+private val MainScreenFilterItemSelectedColorDark = Color(0xA4FDFDFD)
+
+val mainScreenFilterItemSelectedColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MainScreenFilterItemSelectedColorLight
+        true -> MainScreenFilterItemSelectedColorDark
+    }
+
+private val MainScreenFilterItemTextColorLight = Color(0xFF000000)
+private val MainScreenFilterItemTextColorDark = Color(0xFFFCFCFC)
+
+val mainScreenFilterItemTextColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MainScreenFilterItemTextColorLight
+        true -> MainScreenFilterItemTextColorDark
+    }
+
+private val MainScreenFilterItemSelectedTextColorLight = Color(0xFFFCFCFC)
+private val MainScreenFilterItemSelectedTextColorDark = Color(0xFF000000)
+
+val mainScreenFilterItemSelectedTextColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> MainScreenFilterItemSelectedTextColorLight
+        true -> MainScreenFilterItemSelectedTextColorDark
+    }
+
+// main screen product section
+val mainScreenProductSectionElementOrderChanger = Color(0xFF0363F4)

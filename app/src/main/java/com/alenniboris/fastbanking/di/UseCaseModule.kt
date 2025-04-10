@@ -6,17 +6,24 @@ import com.alenniboris.fastbanking.domain.repository.ICurrencyRepository
 import com.alenniboris.fastbanking.domain.repository.IHelpRepository
 import com.alenniboris.fastbanking.domain.repository.IMapsRepository
 import com.alenniboris.fastbanking.domain.repository.IUserRepository
+import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAccountByIdUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsCurrencyAmountUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetApplicationInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankRecommendedNewsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetAllUserCardsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetCardByIdUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.credits.GetAllUserCreditsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.credits.GetCreditByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllCurrenciesInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllExchangeRatesForCurrencyUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetCurrenciesExchangeRateUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsByCardUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.ChangePasswordUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.CheckVerificationCodeUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetCurrentUserUseCaseImpl
@@ -25,17 +32,24 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.user.LoginUserI
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.RegisterUserIntoBankingUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.SendVerificationCodeUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.user.SignOutUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankRecommendedNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetAllUserCreditsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
@@ -168,14 +182,72 @@ val UseCaseModule = module {
         GetAllUserCardsUseCaseImpl(
             userRepository = get<IUserRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
 
-    factory<IGetAllUserTransactionsUseCase> {
-        GetAllUserTransactionsUseCaseImpl(
+    factory<IGetAllUserTransactionsByCardUseCase> {
+        GetAllUserTransactionsByCardUseCaseImpl(
             userRepository = get<IUserRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetBankRecommendedNewsUseCase> {
+        GetBankRecommendedNewsUseCaseImpl(
+            bankInfoRepository = get<IBankInfoRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetCardByIdUseCase> {
+        GetCardByIdUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllUserAccountsUseCase> {
+        GetAllUserAccountsUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAccountByIdUseCase> {
+        GetAccountByIdUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllUserCreditsUseCase> {
+        GetAllUserCreditsUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetCreditByIdUseCase> {
+        GetCreditByIdUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllUserAccountsCurrencyAmountUseCase> {
+        GetAllUserAccountsCurrencyAmountUseCaseImpl(
+            getAllUserAccountsUseCase = get<IGetAllUserAccountsUseCase>(),
+            getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

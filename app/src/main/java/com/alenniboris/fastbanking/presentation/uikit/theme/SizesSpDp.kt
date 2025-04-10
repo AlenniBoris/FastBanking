@@ -160,3 +160,78 @@ val NewsDetailsScreenImagePadding = PaddingValues(top = 15.dp)
 val NewsDetailsScreenSmallTextSize = 15.sp
 val NewsDetailsScreenMainTextSize = 20.sp
 val NewsDetailsScreenHeaderTextSize = 35.sp
+
+// Main screen
+val MainScreenTopBarButtonsPadding = PaddingValues(horizontal = 5.dp)
+val MainScreenTopBarShape = RoundedCornerShape(bottomEnd = 50f, bottomStart = 50f)
+val MainScreenContentShape = RoundedCornerShape(topEnd = 50f, topStart = 50f)
+val MainScreenContentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 10.dp)
+val MainScreenContentOuterPadding = PaddingValues(top = 20.dp)
+val MainScreenRecommendationsTextSize = 20.sp
+val MainScreenRecommendationsPictureTextSize = 25.sp
+val MainScreenRecommendedNewsFirstItemPadding = PaddingValues(end = 5.dp)
+val MainScreenRecommendedNewsItemPadding = PaddingValues(horizontal = 5.dp)
+val MainScreenRecommendedNewsContainerHeight = 100.dp
+val MainScreenRecommendedNewsContainerGradientStart = 0f
+val MainScreenRecommendedNewsContainerGradientEnd =
+    3 * MainScreenRecommendedNewsContainerHeight.value
+val MainScreenRecommendedNewsContainerWidth = 200.dp
+val MainScreenRecommendedNewsContainerShape = RoundedCornerShape(percent = 20)
+val MainScreenRecommendedNewsHeaderPadding = PaddingValues(vertical = 10.dp, horizontal = 5.dp)
+val MainScreenContentHeaderSize = 25.sp
+val MainScreenProductsButtonShape = RoundedCornerShape(25)
+val MainScreenProductsButtonPadding = PaddingValues(horizontal = 5.dp)
+val MainScreenRowItemPadding = PaddingValues(vertical = 10.dp)
+
+// App row filter
+val AppRowFilterFirstItemPadding = PaddingValues(end = 5.dp)
+val AppRowFilterItemPadding = PaddingValues(horizontal = 5.dp)
+val AppRowFilterItemTextPadding = PaddingValues(horizontal = 10.dp, vertical = 5.dp)
+val AppRowFilterItemShape = RoundedCornerShape(30)
+val AppRowFilterItemTextSize = 20.sp
+
+// Main screen product section
+val MainScreenProductSectionHeight = 150.dp
+val MainScreenProductSectionShape = RoundedCornerShape(size = 20.dp)
+val MainScreenProductSectionInnerPadding = PaddingValues(vertical = 15.dp, horizontal = 20.dp)
+val MainScreenProductSectionNothingTextSize = 20.sp
+val MainScreenProductSectionOrderTextPadding = PaddingValues(start = 5.dp)
+val MainScreenProductSectionOrderTextSize = 20.sp
+val MainScreenProductSectionEmptyTextPadding = PaddingValues(vertical = 30.dp)
+
+// Card product ui
+val CardProductUiNumberTextPadding = PaddingValues(start = 10.dp)
+val CardProductUiTextSize = 20.sp
+val CardProductUiReserveCurrencyPadding = PaddingValues(top = 10.dp)
+
+// Credit product ui
+val CreditProductUiTextSize = 25.sp
+val CreditProductUiReserveCurrencyPadding = PaddingValues(top = 10.dp)
+
+// transactionsHistory
+val MainScreenTransactionsHistoryMinHeight = 50.dp
+val MainScreenTransactionsHistoryShape = RoundedCornerShape(size = 50f)
+val MainScreenTransactionsHistoryOuterPadding = PaddingValues(top = 20.dp)
+val MainScreenTransactionsHistoryPadding = PaddingValues(vertical = 15.dp, horizontal = 10.dp)
+val MainScreenTransactionsHistoryEmptyTextSize = 20.sp
+val TransactionHistoryItemFirstPadding = PaddingValues(bottom = 7.dp)
+val TransactionHistoryItemPadding = PaddingValues(vertical = 10.dp)
+val TransactionHistoryItemTextSize = 20.sp
+val TransactionHistoryItemExtraTextSize = 20.sp
+val TransactionHistoryItemExtraTextPadding = PaddingValues(start = 25.dp)
+val TransactionHistoryItemColumnPadding = PaddingValues(start = 15.dp)
+
+// MainScreenInformationSection
+val MainScreenInformationSectionContainerPadding = PaddingValues(vertical = 15.dp)
+val MainScreenInformationSectionContentPadding = PaddingValues(start = 10.dp)
+val MainScreenInformationSectionContentShape = RoundedCornerShape(size = 50f)
+val MainScreenInformationSectionContentTextSize = 20.sp
+val MainScreenInformationSectionContentBigTextSize = 25.sp
+val MainScreenInformationSectionContentMainTextSize = 20.sp
+val MainScreenInformationSectionContentInnerPadding =
+    PaddingValues(vertical = 15.dp, horizontal = 15.dp)
+val MainScreenInformationSectionContentTextPadding = PaddingValues(top = 10.dp)
+
+// Actions sheet
+val MainScreenActionsSheetElementTopPadding = PaddingValues(vertical = 10.dp)
+val MainScreenActionsSheetElementTextPadding = PaddingValues(start = 15.dp)

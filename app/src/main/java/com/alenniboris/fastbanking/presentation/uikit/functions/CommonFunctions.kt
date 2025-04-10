@@ -1,6 +1,9 @@
 package com.alenniboris.fastbanking.presentation.uikit.functions
 
 import android.util.Patterns
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 object CommonFunctions {
 
@@ -24,4 +27,12 @@ object CommonFunctions {
     fun checkIfPasswordIsWeak(password: String): Boolean {
         return password.length < 6
     }
+
+    fun formatAmount(amount: Double): String = String.format(
+        "%.2f",
+        amount
+    )
+
+    fun formatDate(date: Date): String =
+        SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date)
 }

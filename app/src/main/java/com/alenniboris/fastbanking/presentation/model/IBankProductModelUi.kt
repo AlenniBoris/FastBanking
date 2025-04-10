@@ -1,0 +1,3 @@
+package com.alenniboris.fastbanking.presentation.model
+
+sealed interface IBankProductModelUi
