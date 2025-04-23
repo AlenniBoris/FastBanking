@@ -15,11 +15,21 @@ const val ApplicationInformationScreenRoute = "Application information screen"
 const val BankNewsScreenRoute = "Bank news screen"
 const val NewsDetailsScreenRoute = "News details screen"
 const val PasswordResetScreenRoute = "Password reset screen"
+const val PersonalScreenRoute = "Personal screen"
+const val PersonalDetailsScreenRoute = "Personal details screen"
+const val ThemeSettingsScreenRoute = "Theme settings screen"
+const val LanguageSettingsScreenRoute = "Language settings screen"
+const val AccountSettingsScreenRoute = "account settings screen"
 
 val RoutesWithoutBottomBar = listOf(
     RegistrationOptionsScreenRoute,
     RegistrationAsBankClientScreenRoute,
     RegistrationAsAppClientScreenRoute,
     NewsDetailsScreenRoute,
-    PasswordResetScreenRoute
+    PasswordResetScreenRoute,
+    PersonalScreenRoute,
+    PersonalDetailsScreenRoute,
+    ThemeSettingsScreenRoute,
+    LanguageSettingsScreenRoute,
+    AccountSettingsScreenRoute
 )

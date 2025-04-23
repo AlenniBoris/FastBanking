@@ -136,7 +136,7 @@ private fun PasswordResetScreenUi(
                 onLeftBtnClicked = {
                     proceedIntent(IPasswordResetScreenIntent.DoBackwardAction)
                 },
-                headerTextString = stringResource(R.string.passwort_reset_text)
+                headerTextString = stringResource(R.string.password_reset_text)
             )
 
             AppProcessProgressBar(

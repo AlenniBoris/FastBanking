@@ -235,3 +235,32 @@ val MainScreenInformationSectionContentTextPadding = PaddingValues(top = 10.dp)
 // Actions sheet
 val MainScreenActionsSheetElementTopPadding = PaddingValues(vertical = 10.dp)
 val MainScreenActionsSheetElementTextPadding = PaddingValues(start = 15.dp)
+
+// Personal screen
+val PersonalScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val PersonalScreenUserTitleTextSize = 20.sp
+val PersonalScreenUserTitlePadding = PaddingValues(top = 10.dp)
+val PersonalScreenButtonRowPadding = PaddingValues(vertical = 15.dp)
+val PersonalScreenProfileActionTextPadding = PaddingValues(start = 20.dp)
+val PersonalScreenProfileActionDescriptionTextPadding = PaddingValues(top = 5.dp)
+val PersonalScreenProfileActionFontSize = 20.sp
+val PersonalScreenProfileActionBigFontSize = 25.sp
+val PersonalScreenProfileActionColumnFirstPadding = PaddingValues(bottom = 10.dp)
+val PersonalScreenProfileActionColumnPadding = PaddingValues(vertical = 10.dp)
+
+// Personal details screen
+val PersonalDetailsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val PersonalDetailsScreenDetailsContentTextPadding = PaddingValues(top = 10.dp)
+val PersonalDetailsScreenDetailsContentTextSize = 20.sp
+val PersonalDetailsScreenDetailsContentItemPadding = PaddingValues(vertical = 10.dp)
+
+// Theme and language settings
+val SettingsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val SettingsScreenItemPadding = PaddingValues(vertical = 15.dp)
+val SettingsScreenItemFontSize = 25.sp
+val SettingsScreenItemCheckboxBorderWidth = 1.dp
+val SettingsScreenFirstItemPadding = PaddingValues(bottom = 15.dp)
+
+// Account settings screen
+val AccountSettingsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val AccountSettingsScreenContentTextPadding = PaddingValues(top = 10.dp)

@@ -125,7 +125,7 @@
     <string name="password_resetting_verification_code_text">We have sent verification code to the number, which you told in bank. Enter this code and proceed</string>
     <string name="resetting_password_confirmation_process_text">Tab the button below to finish password reset process</string>
     <string name="forgot_password_text">Forgot password? Reset it</string>
-    <string name="passwort_reset_text">Resetting</string>
+    <string name="password_reset_text">Resetting</string>
     <string name="recommended_text">Recommended</string>
     <string name="my_products_text">My products</string>
     <string name="cards_products_text">Cards</string>
@@ -143,5 +143,38 @@
     <string name="apply_for_card_text">Apply for card</string>
     <string name="apply_for_credit_text">Apply for credit</string>
     <string name="apply_for_deposit_text">Apply for deposit</string>
+    <string name="user_gender_text">user gender\n</string>
+    <string name="personal_data_text">Personal data</string>
+    <string name="user_appliances_for_products_text">Appliances for products</string>
+    <string name="general_settiings_category_text">General</string>
+    <string name="safety_settings_category_text">Safety</string>
+    <string name="application_theme_text">Application theme</string>
+    <string name="application_language_text">Application language</string>
+    <string name="contacting_with_bank_text">Contacting with bank</string>
+    <string name="my_account_text">My account</string>
+    <string name="profile_text">Profile</string>
+    <string name="settings_text">Settings</string>
+    <string name="personal_data_description_text">SNSN, phone number, email</string>
+    <string name="user_appliances_for_products_description_text">Filled appliances</string>
+    <string name="application_theme_description_text">Change app theme</string>
+    <string name="application_language_description_text">Change app language</string>
+    <string name="contacting_with_bank_description_text">Change notification settings</string>
+    <string name="my_account_description_text">Login, password</string>
+    <string name="personal_details_screen_header">Information</string>
+    <string name="user_name_text">Name</string>
+    <string name="user_surname_text">Surname</string>
+    <string name="user_phone_number_text">Phone number</string>
+    <string name="user_phone_email_text">Email</string>
+    <string name="light_theme_mode_text">Light</string>
+    <string name="dark_theme_mode_text">Dark</string>
+    <string name="system_theme_mode_text">System</string>
+    <string name="checkbox_button_description">checnkbox button</string>
+    <string name="application_Language_text">App language</string>
+    <string name="russian_language_text">Russian</string>
+    <string name="english_language_text">English</string>
+    <string name="system_language_text">System</string>
+    <string name="accounts_settings_header_text">Account settings</string>
+    <string name="category_login_text">Login</string>
+    <string name="category_password_text">Password</string>
 
 </resources>

@@ -38,6 +38,7 @@ import com.alenniboris.fastbanking.presentation.uikit.values.AuthorizedActions
 import com.alenniboris.fastbanking.presentation.uikit.values.CurrencyScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.HelpScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.LoginScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.values.MainScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.NotAuthorizedActions
 import com.alenniboris.fastbanking.presentation.uikit.values.RoutesWithoutBottomBar
 import com.alenniboris.fastbanking.presentation.uikit.values.toBottomBarModel
@@ -47,10 +48,14 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.rememberNavHostEngine
 import com.ramcosta.composedestinations.utils.destination
+import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.koinViewModel
 
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel by inject<MainActivityViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -59,6 +64,11 @@ class MainActivity : ComponentActivity() {
                 FastBankingUi()
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.signOut()
     }
 }
 
@@ -95,7 +105,11 @@ fun FastBankingUi() {
                                 onClick = {
                                     when (action) {
                                         AuthorizedActions.Main -> {
-                                            Log.e("!!!", "Main")
+                                            if (currentRoute != MainScreenRoute) {
+                                                navController.navigate(
+                                                    MainScreenDestination
+                                                )
+                                            }
                                         }
 
                                         AuthorizedActions.History -> {
@@ -107,7 +121,13 @@ fun FastBankingUi() {
                                         }
 
                                         AuthorizedActions.Additions -> {
-                                            Log.e("!!!", "Additions")
+                                            if (currentRoute != AdditionsScreenRoute) {
+                                                navController.navigate(
+                                                    AdditionsScreenDestination(
+                                                        isUserAuthenticated = true
+                                                    )
+                                                )
+                                            }
                                         }
                                     }
                                 }

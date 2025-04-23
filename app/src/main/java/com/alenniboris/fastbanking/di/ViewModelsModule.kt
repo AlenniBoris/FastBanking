@@ -22,19 +22,25 @@ import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetUserByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.user.ISignOutUseCase
+import com.alenniboris.fastbanking.presentation.screens.account_settings.AccountSettingsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
 import com.alenniboris.fastbanking.presentation.screens.additions.AdditionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.application_information.ApplicationInformationScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.bank_news.BankNewsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.language_settings.LanguageSettingsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.login.LoginScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.main.MainScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.news_details.NewsDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.password_reset.PasswordResetScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.personal.PersonalScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.personal_details.PersonalDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.RegistrationAsAppClientScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_options.RegistrationOptionsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.theme_settings.ThemeSettingsScreenViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -43,7 +49,8 @@ val ViewModelsModule = module {
 
     viewModel<MainActivityViewModel> {
         MainActivityViewModel(
-            getCurrentUserUseCase = get<IGetCurrentUserUseCase>()
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            signOutUseCase = get<ISignOutUseCase>()
         )
     }
 
@@ -129,6 +136,33 @@ val ViewModelsModule = module {
             getAllUserTransactionsByCardUseCase = get<IGetAllUserTransactionsByCardUseCase>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             getAllUserAccountsCurrencyAmountUseCase = get<IGetAllUserAccountsCurrencyAmountUseCase>()
+        )
+    }
+
+    viewModel<PersonalScreenViewModel>() {
+        PersonalScreenViewModel(
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            signOutUseCase = get<ISignOutUseCase>()
+        )
+    }
+
+    viewModel<PersonalDetailsScreenViewModel>() {
+        PersonalDetailsScreenViewModel(
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>()
+        )
+    }
+
+    viewModel<ThemeSettingsScreenViewModel>() {
+        ThemeSettingsScreenViewModel()
+    }
+
+    viewModel<LanguageSettingsScreenViewModel>() {
+        LanguageSettingsScreenViewModel()
+    }
+
+    viewModel<AccountSettingsScreenViewModel>() {
+        AccountSettingsScreenViewModel(
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>()
         )
     }
 }

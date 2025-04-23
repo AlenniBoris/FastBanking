@@ -249,3 +249,7 @@ val mainScreenFilterItemSelectedTextColor
 
 // main screen product section
 val mainScreenProductSectionElementOrderChanger = Color(0xFF0363F4)
+
+// settings screen for theme and language
+val settingsScreenCheckBoxChecked = Color(0xfff9e753)
+val settingsScreenCheckBoxCheckedItemColor = Color(0xFF000000)

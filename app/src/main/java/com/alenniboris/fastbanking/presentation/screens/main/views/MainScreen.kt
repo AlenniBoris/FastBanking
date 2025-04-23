@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.presentation.screens.destinations.HelpScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.PersonalScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.main.IMainScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.main.IMainScreenIntent
 import com.alenniboris.fastbanking.presentation.screens.main.MainScreenState
@@ -134,13 +135,9 @@ fun MainScreen(
 
         launch {
             event.filterIsInstance<IMainScreenEvent.OpenPersonalDetailsScreen>().collect {
-                toastMessage?.cancel()
-                toastMessage = Toast.makeText(
-                    context,
-                    context.getString(R.string.in_development_text),
-                    Toast.LENGTH_SHORT
+                navigator.navigate(
+                    PersonalScreenDestination
                 )
-                toastMessage?.show()
             }
         }
 

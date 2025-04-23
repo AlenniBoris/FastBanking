@@ -1,6 +1,8 @@
 package com.alenniboris.fastbanking.presentation.uikit.utils
 
 import android.content.Context
+import android.util.Log
+import com.alenniboris.fastbanking.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -10,6 +12,12 @@ enum class AppTheme {
     LIGHT,
     DARK,
     SYSTEM
+}
+
+fun AppTheme.toUiString(): Int = when (this) {
+    AppTheme.LIGHT -> R.string.light_theme_mode_text
+    AppTheme.DARK -> R.string.dark_theme_mode_text
+    AppTheme.SYSTEM -> R.string.system_theme_mode_text
 }
 
 sealed class ThemeMode(
@@ -46,6 +54,7 @@ fun Context.setTheme(
     theme: AppTheme,
     isThemeDark: Boolean
 ) {
+    Log.e("!!!", theme.name)
     applicationContext.getSharedPreferences(PREFERENCIES_NAME, Context.MODE_PRIVATE)
         .edit()
         .putString(THEME_STRING_NAME, theme.name)
