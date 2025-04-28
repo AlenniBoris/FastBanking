@@ -5,7 +5,6 @@ import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.appliances.CardApplianceModelDomain
 import com.alenniboris.fastbanking.domain.model.appliances.CreditApplianceModelDomain
 import com.alenniboris.fastbanking.domain.model.appliances.DepositApplianceModelDomain
-import com.alenniboris.fastbanking.domain.model.appliances.IProductAppliance
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.credit.CreditModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
@@ -43,20 +42,28 @@ interface IUserRepository {
         id: String
     ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain>
 
-    suspend fun getAllUserAppliances(
+    suspend fun getAllUserAppliancesForCards(
         user: UserModelDomain
-    ): CustomResultModelDomain<List<IProductAppliance>, CommonExceptionModelDomain>
+    ): CustomResultModelDomain<List<CardApplianceModelDomain>, CommonExceptionModelDomain>
+
+    suspend fun getAllUserAppliancesForCredits(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<CreditApplianceModelDomain>, CommonExceptionModelDomain>
+
+    suspend fun getAllUserAppliancesForDeposits(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<DepositApplianceModelDomain>, CommonExceptionModelDomain>
 
     suspend fun getCardApplianceById(
         id: String
-    ): CustomResultModelDomain<CardApplianceModelDomain, CommonExceptionModelDomain>
+    ): CustomResultModelDomain<CardApplianceModelDomain?, CommonExceptionModelDomain>
 
     suspend fun getCreditApplianceById(
         id: String
-    ): CustomResultModelDomain<CreditApplianceModelDomain, CommonExceptionModelDomain>
+    ): CustomResultModelDomain<CreditApplianceModelDomain?, CommonExceptionModelDomain>
 
     suspend fun getDepositApplianceById(
         id: String
-    ): CustomResultModelDomain<DepositApplianceModelDomain, CommonExceptionModelDomain>
+    ): CustomResultModelDomain<DepositApplianceModelDomain?, CommonExceptionModelDomain>
 
 }

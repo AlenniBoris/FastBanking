@@ -15,7 +15,7 @@ class GetDepositApplianceByIdUseCaseImpl(
 
     override suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<DepositApplianceModelDomain, CommonExceptionModelDomain> =
+    ): CustomResultModelDomain<DepositApplianceModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
             return@withContext userRepository.getDepositApplianceById(id = id)
         }

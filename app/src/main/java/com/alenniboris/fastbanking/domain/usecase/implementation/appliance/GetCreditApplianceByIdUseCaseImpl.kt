@@ -15,7 +15,7 @@ class GetCreditApplianceByIdUseCaseImpl(
 
     override suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<CreditApplianceModelDomain, CommonExceptionModelDomain> =
+    ): CustomResultModelDomain<CreditApplianceModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
             return@withContext userRepository.getCreditApplianceById(id = id)
         }

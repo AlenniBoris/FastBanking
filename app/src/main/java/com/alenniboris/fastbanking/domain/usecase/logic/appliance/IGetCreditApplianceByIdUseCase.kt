@@ -8,5 +8,5 @@ interface IGetCreditApplianceByIdUseCase {
 
     suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<CreditApplianceModelDomain, CommonExceptionModelDomain>
+    ): CustomResultModelDomain<CreditApplianceModelDomain?, CommonExceptionModelDomain>
 }

@@ -19,4 +19,10 @@ object FirebaseDatabaseValues {
     const val TABLE_TRANSACTION = "transaction"
 
     const val TABLE_RECOMMENDED_NEWS = "recommended_news"
+
+    const val TABLE_APPLIANCES_CARDS = "appliances_cards"
+
+    const val TABLE_APPLIANCES_CREDITS = "appliances_credits"
+
+    const val TABLE_APPLIANCES_DEPOSITS = "appliances_deposits"
 }

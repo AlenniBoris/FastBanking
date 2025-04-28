@@ -1,17 +1,23 @@
 package com.alenniboris.fastbanking.data.repository
 
 import com.alenniboris.fastbanking.data.mappers.toCommonException
-import com.alenniboris.fastbanking.data.model.AccountModelData
-import com.alenniboris.fastbanking.data.model.CardModelData
-import com.alenniboris.fastbanking.data.model.CreditModelData
-import com.alenniboris.fastbanking.data.model.TransactionModelData
-import com.alenniboris.fastbanking.data.model.toModelDomain
+import com.alenniboris.fastbanking.data.model.account.AccountModelData
+import com.alenniboris.fastbanking.data.model.account.toModelDomain
+import com.alenniboris.fastbanking.data.model.appliances.CardApplianceModelData
+import com.alenniboris.fastbanking.data.model.appliances.CreditApplianceModelData
+import com.alenniboris.fastbanking.data.model.appliances.DepositApplianceModelData
+import com.alenniboris.fastbanking.data.model.appliances.toModelDomain
+import com.alenniboris.fastbanking.data.model.card.CardModelData
+import com.alenniboris.fastbanking.data.model.card.toModelDomain
+import com.alenniboris.fastbanking.data.model.credit.CreditModelData
+import com.alenniboris.fastbanking.data.model.credit.toModelDomain
+import com.alenniboris.fastbanking.data.model.transaction.TransactionModelData
+import com.alenniboris.fastbanking.data.model.transaction.toModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.appliances.CardApplianceModelDomain
 import com.alenniboris.fastbanking.domain.model.appliances.CreditApplianceModelDomain
 import com.alenniboris.fastbanking.domain.model.appliances.DepositApplianceModelDomain
-import com.alenniboris.fastbanking.domain.model.appliances.IProductAppliance
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.credit.CreditModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
@@ -169,23 +175,123 @@ class UserRepositoryImpl(
             )
         }
 
-    override suspend fun getAllUserAppliances(
+    override suspend fun getAllUserAppliancesForCards(
         user: UserModelDomain
-    ): CustomResultModelDomain<List<IProductAppliance>, CommonExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
+    ): CustomResultModelDomain<List<CardApplianceModelDomain>, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_APPLIANCES_CARDS,
+                jsonMapping = { json -> json.fromJson<CardApplianceModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel -> domainModel.userId == user.id },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getAllUserAppliancesForCredits(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<CreditApplianceModelDomain>, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_APPLIANCES_CREDITS,
+                jsonMapping = { json -> json.fromJson<CreditApplianceModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel -> domainModel.userId == user.id },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getAllUserAppliancesForDeposits(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<DepositApplianceModelDomain>, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_APPLIANCES_DEPOSITS,
+                jsonMapping = { json -> json.fromJson<DepositApplianceModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel -> domainModel.userId == user.id },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
 
     override suspend fun getCardApplianceById(
         id: String
-    ): CustomResultModelDomain<CardApplianceModelDomain, CommonExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
+    ): CustomResultModelDomain<CardApplianceModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementById<CardApplianceModelData, CardApplianceModelDomain, CommonExceptionModelDomain>(
+                id = id,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_APPLIANCES_CARDS,
+                resultCheck = { dataModel ->
+                    if (dataModel == null) {
+                        throw CommonExceptionModelDomain.ErrorGettingData
+                    }
+                },
+                resultMapping = { dataModel ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
 
-    override suspend fun getCreditApplianceById(id: String): CustomResultModelDomain<CreditApplianceModelDomain, CommonExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCreditApplianceById(
+        id: String
+    ): CustomResultModelDomain<CreditApplianceModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementById<CreditApplianceModelData, CreditApplianceModelDomain, CommonExceptionModelDomain>(
+                id = id,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_APPLIANCES_CREDITS,
+                resultCheck = { dataModel ->
+                    if (dataModel == null) {
+                        throw CommonExceptionModelDomain.ErrorGettingData
+                    }
+                },
+                resultMapping = { dataModel ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
 
-    override suspend fun getDepositApplianceById(id: String): CustomResultModelDomain<DepositApplianceModelDomain, CommonExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getDepositApplianceById(
+        id: String
+    ): CustomResultModelDomain<DepositApplianceModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementById<DepositApplianceModelData, DepositApplianceModelDomain, CommonExceptionModelDomain>(
+                id = id,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_APPLIANCES_DEPOSITS,
+                resultCheck = { dataModel ->
+                    if (dataModel == null) {
+                        throw CommonExceptionModelDomain.ErrorGettingData
+                    }
+                },
+                resultMapping = { dataModel ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
 }

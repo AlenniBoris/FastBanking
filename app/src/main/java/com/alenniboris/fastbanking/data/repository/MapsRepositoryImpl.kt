@@ -1,8 +1,8 @@
 package com.alenniboris.fastbanking.data.repository
 
 import com.alenniboris.fastbanking.data.mappers.toMapsException
-import com.alenniboris.fastbanking.data.model.MapsElementModelData
-import com.alenniboris.fastbanking.data.model.toModelDomain
+import com.alenniboris.fastbanking.data.model.map.MapsElementModelData
+import com.alenniboris.fastbanking.data.model.map.toModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.MapsExceptionModelDomain
 import com.alenniboris.fastbanking.domain.model.map.MapsElementModelDomain

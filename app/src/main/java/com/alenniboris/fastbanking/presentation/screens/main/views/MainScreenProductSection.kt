@@ -330,8 +330,8 @@ private fun LightThemePreview() {
                             expireDate = Calendar.getInstance().time,
                             number = "1111111111111111",
                             cvv = "",
-                            type = CardType.DEBUT,
-                            system = CardSystem.VISA
+                            type = CardType.Dedut,
+                            system = CardSystem.Visa
                         )
                     ),
                     isLoading = false,
@@ -466,8 +466,8 @@ private fun DarkThemePreview() {
                             expireDate = Calendar.getInstance().time,
                             number = "1111111111111111",
                             cvv = "",
-                            type = CardType.DEBUT,
-                            system = CardSystem.VISA
+                            type = CardType.Dedut,
+                            system = CardSystem.Visa
                         )
                     ),
                     isLoading = false,

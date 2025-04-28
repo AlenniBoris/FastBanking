@@ -15,7 +15,7 @@ class GetCardApplianceByIdUseCaseImpl(
 
     override suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<CardApplianceModelDomain, CommonExceptionModelDomain> =
+    ): CustomResultModelDomain<CardApplianceModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
             return@withContext userRepository.getCardApplianceById(id = id)
         }

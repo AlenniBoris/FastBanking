@@ -1,6 +1,11 @@
-package com.alenniboris.fastbanking.data.model
+package com.alenniboris.fastbanking.data.model.account
 
 import android.util.Log
+import com.alenniboris.fastbanking.data.model.OwnerModelData
+import com.alenniboris.fastbanking.data.model.card.SimpleCardModelData
+import com.alenniboris.fastbanking.data.model.card.toModelDomain
+import com.alenniboris.fastbanking.data.model.toModelDomain
+import com.alenniboris.fastbanking.data.model.transaction.toModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.card.SimpleCardModelDomain
 

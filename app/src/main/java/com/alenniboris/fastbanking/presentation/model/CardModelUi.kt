@@ -21,10 +21,10 @@ data class CardModelUi(
 }
 
 fun CardSystem.toUiPicture(): Int = when (this) {
-    CardSystem.VISA -> R.drawable.visa_card
-    CardSystem.MASTERCARD -> R.drawable.mastercard_card
-    CardSystem.MIR -> R.drawable.mir_card
-    CardSystem.UNDEFINED -> R.drawable.undefined_card
+    CardSystem.Visa -> R.drawable.visa_card
+    CardSystem.Mastercard -> R.drawable.mastercard_card
+    CardSystem.Mir -> R.drawable.mir_card
+    CardSystem.Undefined -> R.drawable.undefined_card
 }
 
 fun CardModelDomain.toModelUi(): CardModelUi = CardModelUi(

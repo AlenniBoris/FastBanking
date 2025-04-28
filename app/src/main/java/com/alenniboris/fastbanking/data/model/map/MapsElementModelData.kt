@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.data.model
+package com.alenniboris.fastbanking.data.model.map
 
 import android.util.Log
 import com.alenniboris.fastbanking.domain.model.map.MapsElementModelDomain

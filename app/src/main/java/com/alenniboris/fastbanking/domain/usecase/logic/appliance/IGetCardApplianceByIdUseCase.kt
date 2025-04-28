@@ -8,5 +8,5 @@ interface IGetCardApplianceByIdUseCase {
 
     suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<CardApplianceModelDomain, CommonExceptionModelDomain>
+    ): CustomResultModelDomain<CardApplianceModelDomain?, CommonExceptionModelDomain>
 }

@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.data.model
+package com.alenniboris.fastbanking.data.model.credit
 
 import android.util.Log
 import com.alenniboris.fastbanking.domain.model.credit.CreditModelDomain

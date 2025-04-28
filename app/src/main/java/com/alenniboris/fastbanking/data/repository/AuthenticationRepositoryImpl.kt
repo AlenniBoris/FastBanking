@@ -4,9 +4,9 @@ import android.app.Application
 import android.content.Intent
 import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toAuthenticationException
-import com.alenniboris.fastbanking.data.model.UserModelData
-import com.alenniboris.fastbanking.data.model.toModelData
-import com.alenniboris.fastbanking.data.model.toModelDomain
+import com.alenniboris.fastbanking.data.model.user.UserModelData
+import com.alenniboris.fastbanking.data.model.user.toModelData
+import com.alenniboris.fastbanking.data.model.user.toModelDomain
 import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.SEND_MESSAGE_WITH_VERIFICATION_CODE_ACTION
 import com.alenniboris.fastbanking.data.receiver.MessageReceiver.Companion.VERIFICATION_CODE
 import com.alenniboris.fastbanking.data.utils.CodeGenerator

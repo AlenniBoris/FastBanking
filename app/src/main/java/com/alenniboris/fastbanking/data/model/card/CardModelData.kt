@@ -1,6 +1,8 @@
-package com.alenniboris.fastbanking.data.model
+package com.alenniboris.fastbanking.data.model.card
 
 import android.util.Log
+import com.alenniboris.fastbanking.data.model.OwnerModelData
+import com.alenniboris.fastbanking.data.model.toModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardSystem
 import com.alenniboris.fastbanking.domain.model.card.CardType
@@ -32,15 +34,15 @@ fun CardModelData.toModelDomain(): CardModelDomain? = runCatching {
         number = this.number!!,
         cvv = this.cvv!!,
         type = when (this.type!!) {
-            "Credit" -> CardType.CREDIT
-            "Debut" -> CardType.DEBUT
-            else -> CardType.UNDEFINED
+            "Credit" -> CardType.Credit
+            "Debut" -> CardType.Dedut
+            else -> CardType.Undefined
         },
         system = when (this.system!!) {
-            "Visa" -> CardSystem.VISA
-            "Mastercard" -> CardSystem.MASTERCARD
-            "Mir" -> CardSystem.MIR
-            else -> CardSystem.UNDEFINED
+            "Visa" -> CardSystem.Visa
+            "Mastercard" -> CardSystem.Mastercard
+            "Mir" -> CardSystem.Mir
+            else -> CardSystem.Undefined
         }
     )
 }.getOrElse { exception ->

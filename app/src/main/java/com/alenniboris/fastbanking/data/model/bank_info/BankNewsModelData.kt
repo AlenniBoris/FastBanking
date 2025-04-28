@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.data.model
+package com.alenniboris.fastbanking.data.model.bank_info
 
 import android.net.Uri
 import android.util.Log

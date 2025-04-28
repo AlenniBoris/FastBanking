@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.data.model
+package com.alenniboris.fastbanking.data.model.currency
 
 import android.util.Log
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain

@@ -2,10 +2,10 @@ package com.alenniboris.fastbanking.data.repository
 
 import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toCommonInfoException
-import com.alenniboris.fastbanking.data.model.ApplicationInfoModelData
-import com.alenniboris.fastbanking.data.model.BankNewsModelData
-import com.alenniboris.fastbanking.data.model.RecommendedNewsModelData
-import com.alenniboris.fastbanking.data.model.toModelDomain
+import com.alenniboris.fastbanking.data.model.bank_info.ApplicationInfoModelData
+import com.alenniboris.fastbanking.data.model.bank_info.BankNewsModelData
+import com.alenniboris.fastbanking.data.model.bank_info.RecommendedNewsModelData
+import com.alenniboris.fastbanking.data.model.bank_info.toModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.ApplicationInfoModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain

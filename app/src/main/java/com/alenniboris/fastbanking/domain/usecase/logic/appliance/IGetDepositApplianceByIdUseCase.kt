@@ -8,5 +8,5 @@ interface IGetDepositApplianceByIdUseCase {
 
     suspend fun invoke(
         id: String
-    ): CustomResultModelDomain<DepositApplianceModelDomain, CommonExceptionModelDomain>
+    ): CustomResultModelDomain<DepositApplianceModelDomain?, CommonExceptionModelDomain>
 }

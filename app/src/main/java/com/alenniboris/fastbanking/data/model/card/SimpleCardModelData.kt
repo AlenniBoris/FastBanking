@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.data.model
+package com.alenniboris.fastbanking.data.model.card
 
 import android.util.Log
 import com.alenniboris.fastbanking.domain.model.card.CardSystem
@@ -16,10 +16,10 @@ fun SimpleCardModelData.toModelDomain(): SimpleCardModelDomain? =
             id = this.id!!,
             number = this.number!!,
             system = when (this.system!!) {
-                "Visa" -> CardSystem.VISA
-                "Mastercard" -> CardSystem.MASTERCARD
-                "Mir" -> CardSystem.MIR
-                else -> CardSystem.UNDEFINED
+                "Visa" -> CardSystem.Visa
+                "Mastercard" -> CardSystem.Mastercard
+                "Mir" -> CardSystem.Mir
+                else -> CardSystem.Undefined
             }
         )
     }.getOrElse { exception ->

@@ -1,7 +1,7 @@
 package com.alenniboris.fastbanking.domain.model.card
 
 enum class CardType {
-    CREDIT,
-    DEBUT,
-    UNDEFINED
+    Credit,
+    Dedut,
+    Undefined
 }

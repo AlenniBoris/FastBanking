@@ -2,10 +2,10 @@ package com.alenniboris.fastbanking.data.repository
 
 import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toCurrencyException
-import com.alenniboris.fastbanking.data.model.CurrencyModelData
-import com.alenniboris.fastbanking.data.model.CurrencyRatesModelData
-import com.alenniboris.fastbanking.data.model.RateModelData
-import com.alenniboris.fastbanking.data.model.toModelDomain
+import com.alenniboris.fastbanking.data.model.currency.CurrencyModelData
+import com.alenniboris.fastbanking.data.model.currency.CurrencyRatesModelData
+import com.alenniboris.fastbanking.data.model.currency.RateModelData
+import com.alenniboris.fastbanking.data.model.currency.toModelDomain
 import com.alenniboris.fastbanking.data.source.remote.api.exchange_rate_api.IExchangeRateApiService
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
