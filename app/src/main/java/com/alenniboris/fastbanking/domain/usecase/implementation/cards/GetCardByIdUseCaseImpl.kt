@@ -27,12 +27,12 @@ class GetCardByIdUseCaseImpl(
 
                 val rateResult = getCurrenciesExchangeRateUseCase.invoke(
                     fromCurrency = CurrencyModelDomain(
-                        code = card.currency,
-                        fullName = card.currency
+                        code = card.currencyCode,
+                        fullName = card.currencyCode
                     ),
                     toCurrency = CurrencyModelDomain(
-                        code = card.reserveCurrency,
-                        fullName = card.reserveCurrency
+                        code = card.reserveCurrencyCode,
+                        fullName = card.reserveCurrencyCode
                     )
                 )
 

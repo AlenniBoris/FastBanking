@@ -166,8 +166,6 @@ class MainScreenViewModel(
         viewModelScope.launch {
             _screenState.update { it.copy(isUserTransactionsHistoryLoading = true) }
 
-            Log.e("!!!", card.domainModel.toString())
-
             when (
                 val result =
                     getAllUserTransactionsByCardUseCase.invoke(card = card.domainModel)

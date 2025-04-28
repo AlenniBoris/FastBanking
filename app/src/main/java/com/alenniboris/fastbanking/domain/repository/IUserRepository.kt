@@ -2,6 +2,10 @@ package com.alenniboris.fastbanking.domain.repository
 
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.CardApplianceModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.CreditApplianceModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.DepositApplianceModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.IProductAppliance
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.credit.CreditModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
@@ -38,4 +42,21 @@ interface IUserRepository {
     suspend fun getUserCreditById(
         id: String
     ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain>
+
+    suspend fun getAllUserAppliances(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<IProductAppliance>, CommonExceptionModelDomain>
+
+    suspend fun getCardApplianceById(
+        id: String
+    ): CustomResultModelDomain<CardApplianceModelDomain, CommonExceptionModelDomain>
+
+    suspend fun getCreditApplianceById(
+        id: String
+    ): CustomResultModelDomain<CreditApplianceModelDomain, CommonExceptionModelDomain>
+
+    suspend fun getDepositApplianceById(
+        id: String
+    ): CustomResultModelDomain<DepositApplianceModelDomain, CommonExceptionModelDomain>
+
 }

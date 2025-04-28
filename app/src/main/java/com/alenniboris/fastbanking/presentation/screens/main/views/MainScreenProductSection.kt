@@ -318,8 +318,8 @@ private fun LightThemePreview() {
                     currentUserProduct = CardModelUi(
                         domainModel = CardModelDomain(
                             id = "",
-                            currency = "bbyn",
-                            reserveCurrency = "byn",
+                            currencyCode = "bbyn",
+                            reserveCurrencyCode = "byn",
                             amountInReserveCurrency = 0.0,
                             amount = 0.0,
                             owner = OwnerModelDomain(
@@ -383,7 +383,7 @@ private fun LightThemePreview() {
                             currency = "byn",
                             amountInReserveCurrency = 11.2,
                             reserveCurrency = "usd",
-                            attachedCards = emptyList(),
+                            attachedCards = emptyMap(),
                             owner = OwnerModelDomain(
                                 id = "",
                                 name = "",
@@ -454,8 +454,8 @@ private fun DarkThemePreview() {
                     currentUserProduct = CardModelUi(
                         domainModel = CardModelDomain(
                             id = "",
-                            currency = "bbyn",
-                            reserveCurrency = "byn",
+                            currencyCode = "bbyn",
+                            reserveCurrencyCode = "byn",
                             amountInReserveCurrency = 0.0,
                             amount = 0.0,
                             owner = OwnerModelDomain(
@@ -519,7 +519,7 @@ private fun DarkThemePreview() {
                             currency = "byn",
                             amountInReserveCurrency = 11.2,
                             reserveCurrency = "usd",
-                            attachedCards = emptyList(),
+                            attachedCards = emptyMap(),
                             owner = OwnerModelDomain(
                                 id = "",
                                 name = "",

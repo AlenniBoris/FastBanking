@@ -1,6 +1,5 @@
 package com.alenniboris.fastbanking.domain.usecase.implementation.accounts
 
-import android.util.Log
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
@@ -54,7 +53,6 @@ class GetAllUserAccountsUseCaseImpl(
                     val rateResult = rates[index]
                     (rateResult as? CustomResultModelDomain.Success)?.let {
                         val rate = rateResult.result
-                        Log.e("!!!", rate.toString())
                         acc.copy(
                             amountInReserveCurrency = acc.amount * rate
                         )

@@ -54,7 +54,6 @@ fun Context.setTheme(
     theme: AppTheme,
     isThemeDark: Boolean
 ) {
-    Log.e("!!!", theme.name)
     applicationContext.getSharedPreferences(PREFERENCIES_NAME, Context.MODE_PRIVATE)
         .edit()
         .putString(THEME_STRING_NAME, theme.name)

@@ -54,7 +54,6 @@ class GetAllUserCreditsUseCaseImpl(
                     val rateResult = rates[index]
                     (rateResult as? CustomResultModelDomain.Success)?.let {
                         val rate = rateResult.result
-                        Log.e("!!!", rate.toString())
                         credit.copy(
                             amountInReserveCurrency = credit.initialAmount * rate
                         )

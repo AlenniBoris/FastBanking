@@ -1,6 +1,7 @@
 package com.alenniboris.fastbanking.domain.model.account
 
 import com.alenniboris.fastbanking.domain.model.OwnerModelDomain
+import com.alenniboris.fastbanking.domain.model.card.SimpleCardModelDomain
 
 data class AccountModelDomain(
     val id: String,
@@ -8,6 +9,6 @@ data class AccountModelDomain(
     val amountInReserveCurrency: Double,
     val currency: String,
     val reserveCurrency: String,
-    val attachedCards: List<String>,
+    val attachedCards: Map<String, SimpleCardModelDomain>,
     val owner: OwnerModelDomain
 )

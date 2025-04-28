@@ -10,10 +10,10 @@ data class CardModelUi(
 ) : IBankProductModelUi {
 
     val amountText: String =
-        CommonFunctions.formatAmount(domainModel.amount) + " " + domainModel.currency
+        CommonFunctions.formatAmount(domainModel.amount) + " " + domainModel.currencyCode
 
     val reserveAmountText: String =
-        CommonFunctions.formatAmount(domainModel.amountInReserveCurrency) + " " + domainModel.reserveCurrency
+        CommonFunctions.formatAmount(domainModel.amountInReserveCurrency) + " " + domainModel.reserveCurrencyCode
 
     val picture: Int = domainModel.system.toUiPicture()
 

@@ -8,6 +8,10 @@ import com.alenniboris.fastbanking.data.model.TransactionModelData
 import com.alenniboris.fastbanking.data.model.toModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.CardApplianceModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.CreditApplianceModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.DepositApplianceModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.IProductAppliance
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.credit.CreditModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
@@ -164,4 +168,24 @@ class UserRepositoryImpl(
                 }
             )
         }
+
+    override suspend fun getAllUserAppliances(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<IProductAppliance>, CommonExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCardApplianceById(
+        id: String
+    ): CustomResultModelDomain<CardApplianceModelDomain, CommonExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCreditApplianceById(id: String): CustomResultModelDomain<CreditApplianceModelDomain, CommonExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getDepositApplianceById(id: String): CustomResultModelDomain<DepositApplianceModelDomain, CommonExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
 }

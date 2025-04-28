@@ -9,6 +9,10 @@ import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAccountByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsCurrencyAmountUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetAllUserAppliancesUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetCardApplianceByIdUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetCreditApplianceByIdUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetDepositApplianceByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetApplicationInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsUseCaseImpl
@@ -35,6 +39,10 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.user.SignOutUse
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetAllUserAppliancesUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetCardApplianceByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetCreditApplianceByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetDepositApplianceByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
@@ -248,6 +256,35 @@ val UseCaseModule = module {
         GetAllUserAccountsCurrencyAmountUseCaseImpl(
             getAllUserAccountsUseCase = get<IGetAllUserAccountsUseCase>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllUserAppliancesUseCase> {
+        GetAllUserAppliancesUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetCardApplianceByIdUseCase> {
+        GetCardApplianceByIdUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetCreditApplianceByIdUseCase> {
+        GetCreditApplianceByIdUseCaseImpl(
+            userRepository = get<IUserRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetDepositApplianceByIdUseCase> {
+        GetDepositApplianceByIdUseCaseImpl(
+            userRepository = get<IUserRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

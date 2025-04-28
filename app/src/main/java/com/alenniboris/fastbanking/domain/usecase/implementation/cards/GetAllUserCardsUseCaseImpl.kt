@@ -1,6 +1,5 @@
 package com.alenniboris.fastbanking.domain.usecase.implementation.cards
 
-import android.util.Log
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
@@ -39,12 +38,12 @@ class GetAllUserCardsUseCaseImpl(
                         async {
                             getCurrenciesExchangeRateUseCase.invoke(
                                 fromCurrency = CurrencyModelDomain(
-                                    code = card.currency,
-                                    fullName = card.currency
+                                    code = card.currencyCode,
+                                    fullName = card.currencyCode
                                 ),
                                 toCurrency = CurrencyModelDomain(
-                                    code = card.reserveCurrency,
-                                    fullName = card.reserveCurrency
+                                    code = card.reserveCurrencyCode,
+                                    fullName = card.reserveCurrencyCode
                                 )
                             )
                         }
@@ -54,7 +53,6 @@ class GetAllUserCardsUseCaseImpl(
                     val rateResult = rates[index]
                     (rateResult as? CustomResultModelDomain.Success)?.let {
                         val rate = rateResult.result
-                        Log.e("!!!", rate.toString())
                         card.copy(
                             amountInReserveCurrency = card.amount * rate
                         )

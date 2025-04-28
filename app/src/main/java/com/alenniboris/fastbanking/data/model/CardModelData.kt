@@ -24,8 +24,8 @@ fun CardModelData.toModelDomain(): CardModelDomain? = runCatching {
     CardModelDomain(
         id = this.id!!,
         amountInReserveCurrency = this.amountInReserveCurrency?.toDouble()!!,
-        currency = this.currency!!,
-        reserveCurrency = this.reserveCurrency!!,
+        currencyCode = this.currency!!,
+        reserveCurrencyCode = this.reserveCurrency!!,
         amount = this.amount?.toDouble()!!,
         owner = this.owner?.toModelDomain()!!,
         expireDate = Date(this.expireDate?.toLong()!!),

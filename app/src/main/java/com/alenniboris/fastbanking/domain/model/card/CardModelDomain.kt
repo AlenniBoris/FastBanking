@@ -5,8 +5,8 @@ import java.util.Date
 
 data class CardModelDomain(
     val id: String,
-    val currency: String,
-    val reserveCurrency: String,
+    val currencyCode: String,
+    val reserveCurrencyCode: String,
     val amountInReserveCurrency: Double,
     val amount: Double,
     val owner: OwnerModelDomain,
