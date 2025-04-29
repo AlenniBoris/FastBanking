@@ -3,7 +3,6 @@ package com.alenniboris.fastbanking.presentation.screens.main
 import com.alenniboris.fastbanking.R
 
 enum class ActionsWithProducts {
-
     GET_OWN_CARD,
     SEND_APPLY_FOR_CREDIT,
     OPEN_ONLINE_DEPOSIT

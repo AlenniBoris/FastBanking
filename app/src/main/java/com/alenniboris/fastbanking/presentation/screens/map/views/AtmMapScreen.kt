@@ -25,7 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.map.MapElementType
 import com.alenniboris.fastbanking.domain.model.map.MapsElementModelDomain
-import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_info.MapsElementModelUi
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenState
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.map.IAtmMapScreenEvent

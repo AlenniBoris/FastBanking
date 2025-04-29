@@ -1,8 +1,12 @@
 package com.alenniboris.fastbanking.data.model.user
 
+import android.icu.util.Calendar
 import android.util.Log
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.domain.model.user.toUserGender
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 data class UserModelData(
     val id: String? = null,
@@ -10,13 +14,13 @@ data class UserModelData(
     val surname: String? = null,
     val email: String? = null,
     val password: String? = null,
-    val age: String? = null,
     val gender: String? = null,
     val country: String? = null,
     val accountId: String? = null,
     val hasOnlineBanking: String? = null,
     val phoneNumber: String? = null,
-    val job: String? = null
+    val job: String? = null,
+    val dateOfBirth: String? = null
 ) {
     val hasSomeValueMissing: Boolean
         get() = id == null
@@ -24,7 +28,6 @@ data class UserModelData(
                 || name == null
                 || surname == null
                 || email == null
-                || age == null
                 || gender == null
                 || country == null
                 || accountId == null
@@ -38,7 +41,7 @@ data class UserModelData(
             "name" to name,
             "surname" to surname,
             "email" to email,
-            "age" to age,
+            "dateOfBirth" to dateOfBirth,
             "gender" to gender,
             "country" to country,
             "accountId" to accountId,
@@ -49,13 +52,22 @@ data class UserModelData(
 }
 
 fun UserModelData.toModelDomain(): UserModelDomain? = runCatching {
+
+    val dateOfBirth = Date(this.dateOfBirth?.toLong()!!)
+    val userBirth = SimpleDateFormat(
+        "yyyy",
+        Locale.getDefault()
+    ).format(dateOfBirth).toInt()
+    val age = Calendar.getInstance()[Calendar.YEAR] - userBirth
+
     UserModelDomain(
         id = this.id!!,
         name = this.name!!,
         surname = this.surname!!,
         email = this.email!!,
         password = this.password!!,
-        age = this.age?.toInt()!!,
+        age = age,
+        dateOfBirth = dateOfBirth,
         gender = this.gender?.toUserGender()!!,
         country = this.country!!,
         accountId = this.accountId!!,
@@ -75,7 +87,7 @@ fun UserModelDomain.toModelData(): UserModelData =
         surname = this.surname,
         email = this.email,
         password = this.password,
-        age = this.age.toString(),
+        dateOfBirth = this.dateOfBirth.time.toString(),
         gender = this.gender.name,
         country = this.country,
         accountId = this.accountId,

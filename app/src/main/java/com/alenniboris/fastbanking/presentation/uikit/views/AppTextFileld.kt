@@ -51,6 +51,7 @@ fun AppTextField(
     isPasswordVisible: Boolean = false,
     onPasswordVisibilityChange: () -> Unit = {},
     isEnabled: Boolean = true,
+    maxLines: Int = 1,
     keyboardType: KeyboardType = KeyboardType.Unspecified
 ) {
     val customTextSelectionColors = TextSelectionColors(
@@ -68,6 +69,7 @@ fun AppTextField(
             isPasswordVisible = isPasswordVisible,
             onPasswordVisibilityChange = onPasswordVisibilityChange,
             isEnabled = isEnabled,
+            maxLines = maxLines,
             keyboardType = keyboardType
         )
     }
@@ -83,6 +85,7 @@ private fun EnterValueTextField(
     isPasswordVisible: Boolean = false,
     onPasswordVisibilityChange: () -> Unit = {},
     isEnabled: Boolean = true,
+    maxLines: Int = 1,
     keyboardType: KeyboardType = KeyboardType.Unspecified,
 ) {
     BasicTextField(
@@ -135,7 +138,7 @@ private fun EnterValueTextField(
         cursorBrush = SolidColor(enterTextFieldTextColor),
         visualTransformation = if (isPasswordField && !isPasswordVisible) PasswordVisualTransformation()
         else VisualTransformation.None,
-        maxLines = 1
+        maxLines = maxLines
     )
 }
 

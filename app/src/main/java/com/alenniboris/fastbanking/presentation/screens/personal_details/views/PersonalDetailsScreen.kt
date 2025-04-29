@@ -26,7 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.user.UserGender
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
-import com.alenniboris.fastbanking.presentation.model.toModelUi
+import com.alenniboris.fastbanking.presentation.model.user.toModelUi
 import com.alenniboris.fastbanking.presentation.screens.personal_details.IPersonalDetailsScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.personal_details.IPersonalDetailsScreenIntent
 import com.alenniboris.fastbanking.presentation.screens.personal_details.PersonalDetailsScreenState
@@ -49,6 +49,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import java.util.Calendar
 
 @Destination(route = PersonalDetailsScreenRoute)
 @Composable
@@ -221,7 +222,8 @@ private fun LightTheme() {
                         accountId = "aaa",
                         hasOnlineBanking = true,
                         phoneNumber = "1111111",
-                        job = "asasas"
+                        job = "asasas",
+                        dateOfBirth = Calendar.getInstance().time
                     ).toModelUi()
                 ),
                 proceedIntent = {}
@@ -256,7 +258,8 @@ private fun DarkTheme() {
                         accountId = "aaa",
                         hasOnlineBanking = true,
                         phoneNumber = "1111111",
-                        job = "asasas"
+                        job = "asasas",
+                        dateOfBirth = Calendar.getInstance().time
                     ).toModelUi()
                 ),
                 proceedIntent = {}

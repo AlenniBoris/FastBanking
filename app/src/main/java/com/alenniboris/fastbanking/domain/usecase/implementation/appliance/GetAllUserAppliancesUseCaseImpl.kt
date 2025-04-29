@@ -3,16 +3,16 @@ package com.alenniboris.fastbanking.domain.usecase.implementation.appliance
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.appliances.IProductAppliance
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
-import com.alenniboris.fastbanking.domain.repository.IUserRepository
+import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
 import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetAllUserAppliancesUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 class GetAllUserAppliancesUseCaseImpl(
     private val getCurrentUserUseCase: IGetCurrentUserUseCase,
-    private val userRepository: IUserRepository,
+    private val bankRepository: IBankProductsRepository,
     private val dispatchers: IAppDispatchers
 ) : IGetAllUserAppliancesUseCase {
 
@@ -25,19 +25,19 @@ class GetAllUserAppliancesUseCaseImpl(
                 )
 
             val _cards = async {
-                userRepository.getAllUserAppliancesForCards(
+                bankRepository.getAllUserAppliancesForCards(
                     user = user
                 )
             }
 
             val _credits = async {
-                userRepository.getAllUserAppliancesForCredits(
+                bankRepository.getAllUserAppliancesForCredits(
                     user = user
                 )
             }
 
             val _deposits = async {
-                userRepository.getAllUserAppliancesForDeposits(
+                bankRepository.getAllUserAppliancesForDeposits(
                     user = user
                 )
             }

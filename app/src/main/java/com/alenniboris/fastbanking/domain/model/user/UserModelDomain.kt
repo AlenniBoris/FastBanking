@@ -1,5 +1,7 @@
 package com.alenniboris.fastbanking.domain.model.user
 
+import java.util.Date
+
 data class UserModelDomain(
     val id: String,
     val password: String,
@@ -7,6 +9,7 @@ data class UserModelDomain(
     val surname: String,
     val email: String,
     val age: Int,
+    val dateOfBirth: Date,
     val gender: UserGender,
     val country: String,
     val accountId: String,

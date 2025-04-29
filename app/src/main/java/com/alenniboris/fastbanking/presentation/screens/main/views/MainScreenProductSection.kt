@@ -32,11 +32,11 @@ import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardSystem
 import com.alenniboris.fastbanking.domain.model.card.CardType
 import com.alenniboris.fastbanking.domain.model.credit.CreditModelDomain
-import com.alenniboris.fastbanking.presentation.model.AccountModelUi
-import com.alenniboris.fastbanking.presentation.model.CardModelUi
-import com.alenniboris.fastbanking.presentation.model.CreditModelUi
-import com.alenniboris.fastbanking.presentation.model.IBankProductModelUi
-import com.alenniboris.fastbanking.presentation.screens.main.BankProduct
+import com.alenniboris.fastbanking.presentation.model.bank_product.AccountModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.CardModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.CreditModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductModelUi
+import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import com.alenniboris.fastbanking.presentation.screens.main.IMainScreenIntent
 import com.alenniboris.fastbanking.presentation.uikit.theme.CardProductUiNumberTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CardProductUiReserveCurrencyPadding

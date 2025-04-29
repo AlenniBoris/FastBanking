@@ -9,7 +9,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchange
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
-import com.alenniboris.fastbanking.presentation.model.toModelUi
+import com.alenniboris.fastbanking.presentation.model.currency.toModelUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

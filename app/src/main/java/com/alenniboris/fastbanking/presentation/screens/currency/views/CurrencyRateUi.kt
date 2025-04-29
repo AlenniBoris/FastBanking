@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.currency.RateModelDomain
-import com.alenniboris.fastbanking.presentation.model.CurrencyRatesModelUi
+import com.alenniboris.fastbanking.presentation.model.currency.CurrencyRatesModelUi
 import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapListScreenItemBorderShape
 import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapListScreenItemBorderSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.CurrencyRateItemTextColor

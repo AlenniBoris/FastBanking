@@ -2,10 +2,10 @@ package com.alenniboris.fastbanking.presentation.screens.personal
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISignOutUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IGetCurrentUserUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ISignOutUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
-import com.alenniboris.fastbanking.presentation.model.toModelUi
+import com.alenniboris.fastbanking.presentation.model.user.toModelUi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

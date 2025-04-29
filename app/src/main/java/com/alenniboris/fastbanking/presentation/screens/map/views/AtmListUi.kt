@@ -21,9 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.domain.model.map.MapElementType
 import com.alenniboris.fastbanking.domain.model.map.MapsElementModelDomain
-import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
-import com.alenniboris.fastbanking.presentation.model.toTypeIcon
-import com.alenniboris.fastbanking.presentation.model.toTypeTitle
+import com.alenniboris.fastbanking.presentation.model.bank_info.MapsElementModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_info.toTypeIcon
+import com.alenniboris.fastbanking.presentation.model.bank_info.toTypeTitle
 import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapListScreenItemBorderShape
 import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapListScreenItemBorderSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapListScreenItemIconPadding

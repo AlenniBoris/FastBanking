@@ -9,5 +9,6 @@ data class CreditApplianceModelDomain(
     override val selectedOffice: OfficeModelDomain,
     override val userId: String,
     override val currencyCode: String,
+    val detailedCreditApplianceType: CreditDetailedApplianceType,
     val creditGoal: String
 ) : IProductAppliance

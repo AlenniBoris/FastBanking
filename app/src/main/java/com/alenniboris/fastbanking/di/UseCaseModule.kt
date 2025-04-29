@@ -2,10 +2,10 @@ package com.alenniboris.fastbanking.di
 
 import com.alenniboris.fastbanking.domain.repository.IAuthenticationRepository
 import com.alenniboris.fastbanking.domain.repository.IBankInfoRepository
+import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
 import com.alenniboris.fastbanking.domain.repository.ICurrencyRepository
 import com.alenniboris.fastbanking.domain.repository.IHelpRepository
 import com.alenniboris.fastbanking.domain.repository.IMapsRepository
-import com.alenniboris.fastbanking.domain.repository.IUserRepository
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAccountByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsCurrencyAmountUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsUseCaseImpl
@@ -13,6 +13,9 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetAl
 import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetCardApplianceByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetCreditApplianceByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.GetDepositApplianceByIdUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.SendApplianceForCardUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.SendApplianceForCreditUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.appliance.SendApplianceForDepositUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetApplicationInfoUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsUseCaseImpl
@@ -28,14 +31,14 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneN
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsByCardUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.ChangePasswordUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.CheckVerificationCodeUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetCurrentUserUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.GetUserByIdUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.LoginUserIntoBankingUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.RegisterUserIntoBankingUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.SendVerificationCodeUseCaseImpl
-import com.alenniboris.fastbanking.domain.usecase.implementation.user.SignOutUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.ChangePasswordUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.CheckVerificationCodeUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.GetCurrentUserUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.GetUserByIdUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.LoginUserIntoBankingUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.RegisterUserIntoBankingUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.SendVerificationCodeUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.authorization.SignOutUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
@@ -43,6 +46,9 @@ import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetAllUserApp
 import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetCardApplianceByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetCreditApplianceByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetDepositApplianceByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.appliance.ISendApplianceForCardUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.appliance.ISendApplianceForCreditUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.appliance.ISendApplianceForDepositUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicationInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
@@ -58,14 +64,14 @@ import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUse
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetUserByIdUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBankingUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISignOutUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IChangePasswordUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ICheckVerificationCodeUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IGetCurrentUserUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IGetUserByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ILoginUserIntoBankingUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IRegisterUserIntoBankingUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ISendVerificationCodeUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ISignOutUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import org.koin.dsl.module
 
@@ -188,7 +194,7 @@ val UseCaseModule = module {
 
     factory<IGetAllUserCardsUseCase> {
         GetAllUserCardsUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
@@ -197,7 +203,7 @@ val UseCaseModule = module {
 
     factory<IGetAllUserTransactionsByCardUseCase> {
         GetAllUserTransactionsByCardUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
@@ -212,7 +218,7 @@ val UseCaseModule = module {
 
     factory<IGetCardByIdUseCase> {
         GetCardByIdUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
@@ -220,7 +226,7 @@ val UseCaseModule = module {
 
     factory<IGetAllUserAccountsUseCase> {
         GetAllUserAccountsUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
@@ -229,7 +235,7 @@ val UseCaseModule = module {
 
     factory<IGetAccountByIdUseCase> {
         GetAccountByIdUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
@@ -237,7 +243,7 @@ val UseCaseModule = module {
 
     factory<IGetAllUserCreditsUseCase> {
         GetAllUserCreditsUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
@@ -246,7 +252,7 @@ val UseCaseModule = module {
 
     factory<IGetCreditByIdUseCase> {
         GetCreditByIdUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrenciesExchangeRateUseCase = get<IGetCurrenciesExchangeRateUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
@@ -262,7 +268,7 @@ val UseCaseModule = module {
 
     factory<IGetAllUserAppliancesUseCase> {
         GetAllUserAppliancesUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
@@ -270,21 +276,42 @@ val UseCaseModule = module {
 
     factory<IGetCardApplianceByIdUseCase> {
         GetCardApplianceByIdUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
 
     factory<IGetCreditApplianceByIdUseCase> {
         GetCreditApplianceByIdUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
 
     factory<IGetDepositApplianceByIdUseCase> {
         GetDepositApplianceByIdUseCaseImpl(
-            userRepository = get<IUserRepository>(),
+            bankRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<ISendApplianceForCardUseCase> {
+        SendApplianceForCardUseCaseImpl(
+            bankRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<ISendApplianceForCreditUseCase> {
+        SendApplianceForCreditUseCaseImpl(
+            bankRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<ISendApplianceForDepositUseCase> {
+        SendApplianceForDepositUseCaseImpl(
+            bankRepository = get<IBankProductsRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

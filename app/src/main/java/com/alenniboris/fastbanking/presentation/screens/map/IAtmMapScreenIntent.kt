@@ -1,6 +1,6 @@
 package com.alenniboris.fastbanking.presentation.screens.map
 
-import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_info.MapsElementModelUi
 import com.alenniboris.fastbanking.presentation.uikit.utils.PermissionType
 import com.google.android.gms.location.FusedLocationProviderClient
 

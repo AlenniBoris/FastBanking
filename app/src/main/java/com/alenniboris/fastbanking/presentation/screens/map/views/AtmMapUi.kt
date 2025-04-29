@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_info.MapsElementModelUi
 import com.alenniboris.fastbanking.presentation.uikit.theme.locationPinColor
 import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap

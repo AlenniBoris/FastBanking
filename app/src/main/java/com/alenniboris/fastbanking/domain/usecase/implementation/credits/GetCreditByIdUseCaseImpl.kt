@@ -4,14 +4,14 @@ import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.credit.CreditModelDomain
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
-import com.alenniboris.fastbanking.domain.repository.IUserRepository
+import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import kotlinx.coroutines.withContext
 
 class GetCreditByIdUseCaseImpl(
-    private val userRepository: IUserRepository,
+    private val bankRepository: IBankProductsRepository,
     private val getCurrenciesExchangeRateUseCase: IGetCurrenciesExchangeRateUseCase,
     private val dispatchers: IAppDispatchers
 ) : IGetCreditByIdUseCase {
@@ -21,7 +21,7 @@ class GetCreditByIdUseCaseImpl(
     ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
 
-            val creditResult = userRepository.getUserCreditById(id = id)
+            val creditResult = bankRepository.getUserCreditById(id = id)
 
             creditResult.result?.let { credit ->
 

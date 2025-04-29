@@ -1,7 +1,7 @@
 package com.alenniboris.fastbanking.presentation.screens.map
 
 import android.location.Location
-import com.alenniboris.fastbanking.presentation.model.MapsElementModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_info.MapsElementModelUi
 import com.alenniboris.fastbanking.presentation.uikit.utils.PermissionType
 
 data class AtmMapScreenState(

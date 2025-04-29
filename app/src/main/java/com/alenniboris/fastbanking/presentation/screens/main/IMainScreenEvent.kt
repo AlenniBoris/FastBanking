@@ -1,5 +1,7 @@
 package com.alenniboris.fastbanking.presentation.screens.main
 
+import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
+
 sealed interface IMainScreenEvent {
 
     data class ShowToastMessage(val messageId: Int) : IMainScreenEvent
@@ -10,9 +12,5 @@ sealed interface IMainScreenEvent {
 
     data class OpenRecommendedNewsDetails(val newsId: String) : IMainScreenEvent
 
-    data object OpenCreditCardAppliance: IMainScreenEvent
-
-    data object OpenCreditAppliance: IMainScreenEvent
-
-    data object OpenDepositAppliance: IMainScreenEvent
+    data class OpenProductApplianceChoosingScreen(val productType: BankProduct) : IMainScreenEvent
 }

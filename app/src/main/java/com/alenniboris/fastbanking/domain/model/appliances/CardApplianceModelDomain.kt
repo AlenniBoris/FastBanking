@@ -11,6 +11,7 @@ data class CardApplianceModelDomain(
     override val status: ApplianceStatus,
     override val selectedOffice: OfficeModelDomain,
     override val userId: String,
+    val detailedCardApplianceType: CardDetailedApplianceType,
     val isNewAccountNecessary: Boolean,
     val isSalaryCard: Boolean,
     val isVirtual: Boolean,

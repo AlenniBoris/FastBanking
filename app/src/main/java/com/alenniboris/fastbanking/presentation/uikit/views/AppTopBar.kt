@@ -30,6 +30,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 fun AppTopBar(
     modifier: Modifier = Modifier,
     headerTextString: String = "",
+    textAlignment: Alignment = Alignment.Center,
     isLeftBtnAnimated: Boolean = false,
     leftBtnPainter: Painter? = null,
     onLeftBtnClicked: () -> Unit = {},
@@ -56,7 +57,9 @@ fun AppTopBar(
         content?.let { content ->
             content()
         } ?: Text(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier.align(
+                textAlignment
+            ),
             text = headerTextString,
             color = appTopBarElementsColor,
             style = bodyStyle.copy(

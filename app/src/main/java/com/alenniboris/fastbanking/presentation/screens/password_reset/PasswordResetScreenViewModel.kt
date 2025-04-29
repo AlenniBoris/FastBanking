@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IChangePasswordUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetUserByIdUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IChangePasswordUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ICheckVerificationCodeUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IGetUserByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ISendVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import com.alenniboris.fastbanking.presentation.screens.password_reset.state.PasswordResetProcessPart

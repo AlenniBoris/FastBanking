@@ -1,6 +1,6 @@
 package com.alenniboris.fastbanking.presentation.screens.personal
 
-import com.alenniboris.fastbanking.presentation.model.UserModelUi
+import com.alenniboris.fastbanking.presentation.model.user.UserModelUi
 
 data class PersonalScreenState(
     val user: UserModelUi? = null,

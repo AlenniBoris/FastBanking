@@ -1,8 +1,9 @@
 package com.alenniboris.fastbanking.presentation.screens.main
 
 import com.alenniboris.fastbanking.domain.model.bank_info.RecommendedNewsModelDomain
-import com.alenniboris.fastbanking.presentation.model.IBankProductModelUi
-import com.alenniboris.fastbanking.presentation.model.TransactionModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.TransactionModelUi
+import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 
 data class MainScreenState(
     val isRecommendedNewsLoading: Boolean = false,

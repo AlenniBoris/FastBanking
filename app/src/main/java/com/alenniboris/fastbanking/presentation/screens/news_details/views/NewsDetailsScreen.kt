@@ -31,7 +31,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain
-import com.alenniboris.fastbanking.presentation.model.BankNewsModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_info.BankNewsModelUi
 import com.alenniboris.fastbanking.presentation.screens.news_details.INewsDetailsScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.news_details.INewsDetailsScreenIntent
 import com.alenniboris.fastbanking.presentation.screens.news_details.NewsDetailsScreenState

@@ -1,6 +1,5 @@
 package com.alenniboris.fastbanking.presentation.screens.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
@@ -14,10 +13,11 @@ import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesE
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
-import com.alenniboris.fastbanking.presentation.model.CardModelUi
-import com.alenniboris.fastbanking.presentation.model.toModelUi
-import com.alenniboris.fastbanking.presentation.model.toUiModel
+import com.alenniboris.fastbanking.presentation.model.bank_product.CardModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.toModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.toUiModel
 import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyFlow
+import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -331,22 +331,29 @@ class MainScreenViewModel(
     }
 
     private fun proceedProductAction(action: ActionsWithProducts) {
+        updateProductsSheetVisibility()
         when (action) {
             ActionsWithProducts.GET_OWN_CARD -> {
                 _event.emit(
-                    IMainScreenEvent.OpenCreditCardAppliance
+                    IMainScreenEvent.OpenProductApplianceChoosingScreen(
+                        BankProduct.CARD
+                    )
                 )
             }
 
             ActionsWithProducts.SEND_APPLY_FOR_CREDIT -> {
                 _event.emit(
-                    IMainScreenEvent.OpenCreditAppliance
+                    IMainScreenEvent.OpenProductApplianceChoosingScreen(
+                        BankProduct.CREDIT
+                    )
                 )
             }
 
             ActionsWithProducts.OPEN_ONLINE_DEPOSIT -> {
                 _event.emit(
-                    IMainScreenEvent.OpenDepositAppliance
+                    IMainScreenEvent.OpenProductApplianceChoosingScreen(
+                        BankProduct.DEPOSITS_AND_ACCOUNTS
+                    )
                 )
             }
         }

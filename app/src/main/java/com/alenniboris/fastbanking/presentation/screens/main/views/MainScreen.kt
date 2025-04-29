@@ -3,7 +3,6 @@ package com.alenniboris.fastbanking.presentation.screens.main.views
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,9 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,17 +34,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.presentation.screens.destinations.HelpScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.PersonalScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.ProductApplianceChoosingScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.main.IMainScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.main.IMainScreenIntent
 import com.alenniboris.fastbanking.presentation.screens.main.MainScreenState
 import com.alenniboris.fastbanking.presentation.screens.main.MainScreenViewModel
-import com.alenniboris.fastbanking.presentation.screens.main.toUiPicture
-import com.alenniboris.fastbanking.presentation.screens.main.toUiString
-import com.alenniboris.fastbanking.presentation.screens.main.toUiText
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
-import com.alenniboris.fastbanking.presentation.uikit.theme.FilterTextSize
-import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenActionsSheetElementTextPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenActionsSheetElementTopPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenContentHeaderSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenContentOuterPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenContentPadding
@@ -66,7 +58,6 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenTransactio
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenTransactionsHistoryShape
 import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.appFilterTextColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenFilterItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenFilterItemSelectedColor
@@ -80,7 +71,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
 import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyFlow
 import com.alenniboris.fastbanking.presentation.uikit.values.ClickableElement
 import com.alenniboris.fastbanking.presentation.uikit.values.MainScreenRoute
-import com.alenniboris.fastbanking.presentation.uikit.views.AppFilter
+import com.alenniboris.fastbanking.presentation.uikit.values.toUiText
 import com.alenniboris.fastbanking.presentation.uikit.views.AppIconButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppRowFilter
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
@@ -155,41 +146,13 @@ fun MainScreen(
         }
 
         launch {
-            event.filterIsInstance<IMainScreenEvent.OpenCreditCardAppliance>()
+            event.filterIsInstance<IMainScreenEvent.OpenProductApplianceChoosingScreen>()
                 .collect { coming ->
-                    toastMessage?.cancel()
-                    toastMessage = Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
+                    navigator.navigate(
+                        ProductApplianceChoosingScreenDestination(
+                            bankProduct = coming.productType
+                        )
                     )
-                    toastMessage?.show()
-                }
-        }
-
-        launch {
-            event.filterIsInstance<IMainScreenEvent.OpenCreditAppliance>()
-                .collect { coming ->
-                    toastMessage?.cancel()
-                    toastMessage = Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
-                    )
-                    toastMessage?.show()
-                }
-        }
-
-        launch {
-            event.filterIsInstance<IMainScreenEvent.OpenDepositAppliance>()
-                .collect { coming ->
-                    toastMessage?.cancel()
-                    toastMessage = Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
-                    )
-                    toastMessage?.show()
                 }
         }
     }
@@ -200,7 +163,6 @@ fun MainScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainScreenUi(
     state: MainScreenState,
@@ -215,7 +177,10 @@ private fun MainScreenUi(
             .fillMaxSize()
     ) {
 
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
 
             AppTopBar(
                 modifier = Modifier
@@ -338,46 +303,9 @@ private fun MainScreenUi(
         }
 
         if (state.isProductsSheetVisible) {
-            AppFilter(
-                elements = state.actionsWithProducts,
-                onDismiss = {
-                    proceedIntent(IMainScreenIntent.UpdateActionsWithProductsSheetVisibility)
-                },
-                itemContent = { action ->
 
-                    Row(
-                        modifier = Modifier
-                            .padding(MainScreenActionsSheetElementTopPadding)
-                            .fillMaxWidth()
-                            .clickable {
-                                proceedIntent(
-                                    IMainScreenIntent.ProceedProductAction(
-                                        action
-                                    )
-                                )
-                            },
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-
-                        AppIconButton(
-                            modifier = Modifier
-                                .background(shape = CircleShape, color = mainScreenOnItemColor),
-                            onClick = {},
-                            iconPainter = painterResource(action.toUiPicture()),
-                            tint = mainScreenTextColor
-                        )
-
-                        Text(
-                            modifier = Modifier.padding(MainScreenActionsSheetElementTextPadding),
-                            text = stringResource(action.toUiString()),
-                            style = bodyStyle.copy(
-                                color = appFilterTextColor,
-                                fontWeight = FontWeight.Medium,
-                                fontSize = FilterTextSize
-                            )
-                        )
-                    }
-                }
+            MainScreenProductsActionsSheet(
+                proceedIntent = proceedIntent
             )
         }
     }

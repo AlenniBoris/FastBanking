@@ -4,17 +4,17 @@ import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonExceptionModelDomain
-import com.alenniboris.fastbanking.domain.repository.IUserRepository
+import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IGetCurrentUserUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IGetCurrentUserUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 
 class GetAllUserAccountsUseCaseImpl(
-    private val userRepository: IUserRepository,
+    private val bankRepository: IBankProductsRepository,
     private val dispatchers: IAppDispatchers,
     private val getCurrenciesExchangeRateUseCase: IGetCurrenciesExchangeRateUseCase,
     private val getCurrentUserUseCase: IGetCurrentUserUseCase
@@ -29,7 +29,7 @@ class GetAllUserAccountsUseCaseImpl(
                     CommonExceptionModelDomain.Other
                 )
 
-            val accountsResult = userRepository.getAllUserAccounts(user = user)
+            val accountsResult = bankRepository.getAllUserAccounts(user = user)
 
             accountsResult.result?.let { account ->
 

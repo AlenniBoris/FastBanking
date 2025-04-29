@@ -32,7 +32,7 @@ fun <T> AppFilter(
     elements: List<T>,
     onDismiss: () -> Unit = {},
     sheetState: SheetState = rememberModalBottomSheetState(),
-    itemContent: @Composable (T) -> Unit = {}
+    itemContent: @Composable (T) -> Unit
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,

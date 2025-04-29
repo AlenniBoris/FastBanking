@@ -3,7 +3,7 @@ package com.alenniboris.fastbanking.presentation.screens.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ILoginUserIntoBankingUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ILoginUserIntoBankingUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,5 +1,7 @@
 package com.alenniboris.fastbanking.presentation.screens.main
 
+import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
+
 sealed interface IMainScreenIntent {
 
     data object UpdateRecommendedNewsVisibility : IMainScreenIntent

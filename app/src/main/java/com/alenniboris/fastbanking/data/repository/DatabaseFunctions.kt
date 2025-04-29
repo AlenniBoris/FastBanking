@@ -73,4 +73,35 @@ object DatabaseFunctions {
             )
         }
     }
+
+    suspend inline fun <reified SavingModel, ExceptionModel> sendApplianceForProduct(
+        dispatcher: CoroutineDispatcher,
+        database: FirebaseDatabase,
+        table: String,
+        crossinline exceptionMapping: (Throwable) -> ExceptionModel,
+        crossinline onGeneratingError: () -> ExceptionModel,
+        crossinline editingAppliance: (newId: String) -> SavingModel,
+    ): CustomResultModelDomain<Unit, ExceptionModel> = withContext(dispatcher) {
+        runCatching {
+
+            val tableRef = database.getReference(table)
+            val newTableRef = tableRef.push()
+
+            val newApplianceId =
+                newTableRef.key ?: return@withContext CustomResultModelDomain.Error(
+                    onGeneratingError()
+                )
+
+            val editedAppliance = editingAppliance(newApplianceId)
+
+            newTableRef.setValue(editedAppliance)
+
+            return@withContext CustomResultModelDomain.Success(Unit)
+        }.getOrElse { exception ->
+            Log.e("!!!", exception.stackTraceToString())
+            return@withContext CustomResultModelDomain.Error(
+                exceptionMapping(exception)
+            )
+        }
+    }
 }

@@ -183,6 +183,15 @@ val MainScreenProductsButtonShape = RoundedCornerShape(25)
 val MainScreenProductsButtonPadding = PaddingValues(horizontal = 5.dp)
 val MainScreenRowItemPadding = PaddingValues(vertical = 10.dp)
 
+val MainScreenProductsActionSheetElementPadding = PaddingValues(vertical = 10.dp)
+val MainScreenProductsActionSheetElementInnerPadding = PaddingValues(all = 15.dp)
+val MainScreenProductsActionSheetElementShape = RoundedCornerShape(size = 50f)
+val MainScreenProductsActionSheetHeaderFontSize = 25.sp
+val MainScreenProductsActionSheetTextFontSize = 20.sp
+val MainScreenProductsActionSheetTextTopPadding = PaddingValues(top = 20.dp)
+val MainScreenProductsActionSheetElementEndPadding = PaddingValues(end = 5.dp)
+val MainScreenProductsActionSheetElementStartPadding = PaddingValues(start = 5.dp)
+
 // App row filter
 val AppRowFilterFirstItemPadding = PaddingValues(end = 5.dp)
 val AppRowFilterItemPadding = PaddingValues(horizontal = 5.dp)
@@ -264,3 +273,64 @@ val SettingsScreenFirstItemPadding = PaddingValues(bottom = 15.dp)
 // Account settings screen
 val AccountSettingsScreenContentPadding = PaddingValues(horizontal = 20.dp)
 val AccountSettingsScreenContentTextPadding = PaddingValues(top = 10.dp)
+
+// User appliances screen
+val UserAppliancesScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val UserAppliancesScreenCardPadding = PaddingValues(vertical = 10.dp)
+val UserAppliancesScreenCardTextTopPadding = PaddingValues(top = 5.dp)
+val UserAppliancesScreenCardColumnStartPadding = PaddingValues(start = 10.dp)
+val UserAppliancesScreenCardTextSize = 15.sp
+val UserAppliancesScreenCardMainTextSize = 25.sp
+val UserAppliancesScreenCardSpacerHeight = 1.dp
+
+// Product Appliance Choosing Screen
+val ProductApplianceChoosingScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val ProductApplianceChoosingScreenItemPadding = PaddingValues(vertical = 15.dp)
+val ProductApplianceChoosingScreenItemTextSize = 22.sp
+val ProductApplianceChoosingScreenItemSpacerHeight = 1.dp
+val ProductApplianceChoosingScreenItemSpacerPadding = PaddingValues(top = 10.dp)
+
+// Card appliance form screen
+val ProductApplianceFormScreenSheetItemPadding = PaddingValues(vertical = 10.dp)
+val ProductApplianceFormScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val ProductApplianceFormScreenProcessProgressBarPadding =
+    PaddingValues(vertical = 10.dp, horizontal = 20.dp)
+val ProductApplianceFormScreenMainSectionOuterPadding = PaddingValues(top = 15.dp)
+val ProductApplianceFormScreenMainSectionInnerPadding =
+    PaddingValues(vertical = 10.dp, horizontal = 20.dp)
+val ProductApplianceFormScreenSheetItemFontSize = 20.sp
+val ProductApplianceFormScreenSheetHeaderDescriptionFontSize = 20.sp
+val ProductApplianceFormScreenTextFontSize = 20.sp
+val CardApplianceFormScreenCheckboxesFontSize = 15.sp
+val ProductApplianceFormScreenItemsOuterPadding = PaddingValues(top = 25.dp)
+val CardApplianceFormScreenCardOpeningTypeItemPadding = PaddingValues(top = 15.dp)
+val CardApplianceFormScreenCardOpeningTypeItemTextPadding = PaddingValues(start = 20.dp)
+val ProductApplianceFormScreenFillingDataContainerOuterPadding = PaddingValues(top = 20.dp)
+val ProductApplianceFormScreenCardCurrencyProgressBarHeight = 50.dp
+val ProductApplianceFormScreenCardCurrencyListOuterPadding = PaddingValues(top = 15.dp)
+val ProductApplianceFormScreenCardCurrencyListItemInnerPadding =
+    PaddingValues(vertical = 10.dp, horizontal = 15.dp)
+val ProductApplianceFormScreenCardCurrencyListItemOuterPadding = PaddingValues(horizontal = 10.dp)
+val ProductApplianceFormScreenCardCurrencyListFirstItemOuterPadding = PaddingValues(end = 10.dp)
+val CardApplianceFormScreenCardTypeButtonTextSize = 20.sp
+val ProductApplianceFormScreenBottomButtonInnerPadding =
+    PaddingValues(vertical = 10.dp, horizontal = 15.dp)
+val ProductApplianceScreenBottomButtonShape = RoundedCornerShape(percent = 20)
+val ProductApplianceScreenBottomButtonTextSize = 25.sp
+val ProductApplianceScreenOfficeSelectionContainerOuterPadding = PaddingValues(horizontal = 20.dp)
+val ProductApplianceScreenOfficeSelectionContainerItemOuterPadding = PaddingValues(vertical = 10.dp)
+val ProductApplianceScreenOfficeSelectionContainerItemInnerPadding =
+    PaddingValues(vertical = 10.dp, horizontal = 15.dp)
+val ProductApplianceScreenProcessFinalTextSize = 20.sp
+val CreditApplianceFormScreenCreditGoalFieldOuterPadding = PaddingValues(top = 15.dp)
+val CreditApplianceFormScreenCreditGoalFieldInnerPadding =
+    PaddingValues(vertical = 10.dp, horizontal = 15.dp)
+
+
+// product appliance details screen
+val ProductApplianceDetailsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val ProductApplianceDetailsScreenTextSize = 20.sp
+val ProductApplianceDetailsScreenInfoSectionPadding = PaddingValues(top = 15.dp)
+val ProductApplianceDetailsScreenInfoSectionTextPadding = PaddingValues(start = 10.dp)
+val ProductApplianceDetailsScreenInfoSectionImagePadding = PaddingValues(bottom = 10.dp)
+val ProductApplianceDetailsScreenInfoSectionImageSize = 40.dp

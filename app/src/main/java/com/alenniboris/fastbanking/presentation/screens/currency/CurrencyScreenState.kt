@@ -1,7 +1,7 @@
 package com.alenniboris.fastbanking.presentation.screens.currency
 
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
-import com.alenniboris.fastbanking.presentation.model.CurrencyRatesModelUi
+import com.alenniboris.fastbanking.presentation.model.currency.CurrencyRatesModelUi
 
 data class CurrencyScreenState(
     val screenMode: CurrencyScreenMode = CurrencyScreenMode.Exchange,

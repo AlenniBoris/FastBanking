@@ -253,3 +253,31 @@ val mainScreenProductSectionElementOrderChanger = Color(0xFF0363F4)
 // settings screen for theme and language
 val settingsScreenCheckBoxChecked = Color(0xfff9e753)
 val settingsScreenCheckBoxCheckedItemColor = Color(0xFF000000)
+
+// Card appliance form screen
+private val ProductApplianceFormScreenCheckboxUncheckedTrackColorLight = Color(0x60F5F4F4)
+private val ProductApplianceFormCheckboxUncheckedTrackColorDark = Color(0x520C0C0C)
+
+val productApplianceFormCheckboxUncheckedTrackColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> ProductApplianceFormScreenCheckboxUncheckedTrackColorLight
+        true -> ProductApplianceFormCheckboxUncheckedTrackColorDark
+    }
+
+private val ProductApplianceFormScreenCheckboxUncheckedContentColorLight = Color(0xFF000000)
+private val ProductApplianceFormScreenCheckboxUncheckedContentColorDark = Color(0xFFFCFCFC)
+
+val productApplianceFormScreenCheckboxUncheckedContentColor
+    get() = when (currentThemeMode.value.isThemeDark) {
+        false -> ProductApplianceFormScreenCheckboxUncheckedContentColorLight
+        true -> ProductApplianceFormScreenCheckboxUncheckedContentColorDark
+    }
+
+val productApplianceFormCheckboxCheckedTrackColor = Color(0xfff9e753)
+val productApplianceFormBottomButtonColor = Color(0xfff9e753)
+val productApplianceFormBottomButtonTextColor = Color(0xFF000000)
+
+// Product appliance details screen
+val productApplianceStatusApprovedColor = Color(0xFF4CAF50)
+val productApplianceStatusWaitingColor = Color(0xfff9e753)
+val productApplianceStatusDeclinedColor = Color(0xFFE91E1E)

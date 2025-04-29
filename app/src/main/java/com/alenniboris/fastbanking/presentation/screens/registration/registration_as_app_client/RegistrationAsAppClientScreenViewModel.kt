@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.AuthenticationExceptionModelDomain
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ICheckVerificationCodeUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.IRegisterUserIntoBankingUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.user.ISendVerificationCodeUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ICheckVerificationCodeUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.IRegisterUserIntoBankingUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.authorization.ISendVerificationCodeUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.state.RegistrationAsAppClientScreenState

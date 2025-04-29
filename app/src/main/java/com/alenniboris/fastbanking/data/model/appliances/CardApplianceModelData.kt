@@ -3,22 +3,24 @@ package com.alenniboris.fastbanking.data.model.appliances
 import android.util.Log
 import com.alenniboris.fastbanking.domain.model.appliances.ApplianceStatus
 import com.alenniboris.fastbanking.domain.model.appliances.CardApplianceModelDomain
+import com.alenniboris.fastbanking.domain.model.appliances.CardDetailedApplianceType
 import com.alenniboris.fastbanking.domain.model.card.CardSystem
 import com.alenniboris.fastbanking.domain.model.card.CardType
 import java.util.Date
 
 data class CardApplianceModelData(
-    val currency: String? = null,
+    val currencyCode: String? = null,
     val dateOfAppliance: String? = null,
     val id: String? = null,
-    val isNewAccountNecessary: String? = null,
-    val isSalaryCard: String? = null,
+    val newAccountNecessary: String? = null,
+    val salaryCard: String? = null,
     val isVirtual: String? = null,
     val selectedOffice: OfficeModelData? = null,
     val status: String? = null,
     val system: String? = null,
     val type: String? = null,
-    val userId: String? = null
+    val userId: String? = null,
+    val detailedCardApplianceType: String? = null
 )
 
 fun CardApplianceModelData.toModelDomain(): CardApplianceModelDomain? =
@@ -26,7 +28,7 @@ fun CardApplianceModelData.toModelDomain(): CardApplianceModelDomain? =
 
         CardApplianceModelDomain(
             id = this.id!!,
-            currencyCode = this.currency!!,
+            currencyCode = this.currencyCode!!,
             dateOfAppliance = Date(this.dateOfAppliance?.toLong()!!),
             status = when (this.status!!) {
                 "Approved" -> ApplianceStatus.Approved
@@ -36,8 +38,8 @@ fun CardApplianceModelData.toModelDomain(): CardApplianceModelDomain? =
             },
             selectedOffice = this.selectedOffice?.toModelDomain()!!,
             userId = this.userId!!,
-            isNewAccountNecessary = this.isNewAccountNecessary.toBoolean(),
-            isSalaryCard = this.isSalaryCard.toBoolean(),
+            isNewAccountNecessary = this.newAccountNecessary.toBoolean(),
+            isSalaryCard = this.salaryCard.toBoolean(),
             isVirtual = this.isVirtual.toBoolean(),
             system = when (this.system!!) {
                 "Visa" -> CardSystem.Visa
@@ -49,6 +51,13 @@ fun CardApplianceModelData.toModelDomain(): CardApplianceModelDomain? =
                 "Debut" -> CardType.Dedut
                 "Credit" -> CardType.Credit
                 else -> CardType.Undefined
+            },
+            detailedCardApplianceType = when (this.detailedCardApplianceType!!) {
+                "ISSUE_PAYMENT_CARD" -> CardDetailedApplianceType.ISSUE_PAYMENT_CARD
+                "ISSUE_VIRTUAL_CARD" -> CardDetailedApplianceType.ISSUE_VIRTUAL_CARD
+                "REISSUE_PAYMENT_CARD" -> CardDetailedApplianceType.REISSUE_PAYMENT_CARD
+                "REISSUE_VIRTUAL_CARD" -> CardDetailedApplianceType.REISSUE_VIRTUAL_CARD
+                else -> CardDetailedApplianceType.UNDEFINED
             }
         )
     }.getOrElse { exception ->

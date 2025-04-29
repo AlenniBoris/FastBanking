@@ -1,18 +1,12 @@
 package com.alenniboris.fastbanking.presentation.screens.language_settings.views
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,18 +30,16 @@ import com.alenniboris.fastbanking.presentation.screens.language_settings.Langua
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.SettingsScreenContentPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.SettingsScreenFirstItemPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.SettingsScreenItemCheckboxBorderWidth
 import com.alenniboris.fastbanking.presentation.uikit.theme.SettingsScreenItemFontSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.SettingsScreenItemPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
-import com.alenniboris.fastbanking.presentation.uikit.theme.settingsScreenCheckBoxChecked
-import com.alenniboris.fastbanking.presentation.uikit.theme.settingsScreenCheckBoxCheckedItemColor
 import com.alenniboris.fastbanking.presentation.uikit.utils.setLanguage
 import com.alenniboris.fastbanking.presentation.uikit.utils.toUiString
 import com.alenniboris.fastbanking.presentation.uikit.values.LanguageSettingsScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.views.AppCheckButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -76,9 +67,10 @@ fun LanguageSettingsScreen(
             }
         }
         launch {
-            event.filterIsInstance<ILanguageSettingsScreenEvent.UpdateAppLanguage>().collect { coming ->
-                context.setLanguage(coming.newValue)
-            }
+            event.filterIsInstance<ILanguageSettingsScreenEvent.UpdateAppLanguage>()
+                .collect { coming ->
+                    context.setLanguage(coming.newValue)
+                }
         }
     }
 
@@ -141,36 +133,14 @@ private fun LanguageSettingsScreenUi(
                         )
                     )
 
-                    val boxBackgroundColor by animateColorAsState(
-                        if (state.currentLanguage == language) settingsScreenCheckBoxChecked
-                        else appColor
-                    )
-                    val boxElementColor by animateColorAsState(
-                        if (state.currentLanguage == language) settingsScreenCheckBoxCheckedItemColor
-                        else appTopBarElementsColor
-                    )
-                    Box(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .border(
-                                width = SettingsScreenItemCheckboxBorderWidth,
-                                color = boxElementColor,
-                                shape = CircleShape
+                    AppCheckButton(
+                        isChecked = state.currentLanguage == language,
+                        onClick = {
+                            proceedIntent(
+                                ILanguageSettingsScreenIntent.UpdateAppLanguage(language)
                             )
-                            .background(boxBackgroundColor)
-                            .clickable {
-                                proceedIntent(
-                                    ILanguageSettingsScreenIntent.UpdateAppLanguage(language)
-                                )
-                            }
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.selected_check_box_icon),
-                            tint = if (state.currentLanguage == language) boxElementColor
-                            else appColor,
-                            contentDescription = stringResource(R.string.checkbox_button_description)
-                        )
-                    }
+                        }
+                    )
                 }
             }
         }

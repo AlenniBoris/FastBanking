@@ -26,7 +26,7 @@ import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
 import com.alenniboris.fastbanking.domain.model.transaction.TransactionModelDomain
 import com.alenniboris.fastbanking.domain.model.transaction.TransactionType
-import com.alenniboris.fastbanking.presentation.model.TransactionModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.TransactionModelUi
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenTransactionsHistoryEmptyTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenTransactionsHistoryMinHeight
