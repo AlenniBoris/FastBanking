@@ -240,6 +240,7 @@ val MainScreenInformationSectionContentMainTextSize = 20.sp
 val MainScreenInformationSectionContentInnerPadding =
     PaddingValues(vertical = 15.dp, horizontal = 15.dp)
 val MainScreenInformationSectionContentTextPadding = PaddingValues(top = 10.dp)
+val MainScreenUserProductsModalSheetItemOuterPadding = PaddingValues(vertical = 10.dp)
 
 // Actions sheet
 val MainScreenActionsSheetElementTopPadding = PaddingValues(vertical = 10.dp)
@@ -334,3 +335,15 @@ val ProductApplianceDetailsScreenInfoSectionPadding = PaddingValues(top = 15.dp)
 val ProductApplianceDetailsScreenInfoSectionTextPadding = PaddingValues(start = 10.dp)
 val ProductApplianceDetailsScreenInfoSectionImagePadding = PaddingValues(bottom = 10.dp)
 val ProductApplianceDetailsScreenInfoSectionImageSize = 40.dp
+
+// transactions history screen
+val TransactionsHistoryScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val TransactionsHistoryScreenTextFontSize = 20.sp
+
+// app transaction details section
+val AppTransactionDetailsSectionHeaderTextSize = 25.sp
+val AppTransactionDetailsSectionCategoryTextSize = 20.sp
+val AppTransactionDetailsSectionElementOuterPadding = PaddingValues(vertical = 10.dp)
+val AppTransactionDetailsSectionElementContainerPadding = PaddingValues(top = 10.dp)
+val AppTransactionDetailsSectionElementTextPadding = PaddingValues(top = 10.dp, bottom = 3.dp)
+val AppTransactionDetailsSectionElementSpacerHeight = 1.dp

@@ -14,5 +14,6 @@ data class CardModelDomain(
     val number: String,
     val cvv: String,
     val type: CardType,
-    val system: CardSystem
+    val system: CardSystem,
+    val name: String
 )

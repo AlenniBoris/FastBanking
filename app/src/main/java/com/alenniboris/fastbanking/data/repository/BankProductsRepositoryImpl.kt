@@ -352,4 +352,21 @@ class BankProductsRepositoryImpl(
             }
         )
     }
+
+    override suspend fun getAllUserTransactions(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_TRANSACTION,
+                jsonMapping = { json -> json.fromJson<TransactionModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel -> domainModel.senderId == user.id },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
 }

@@ -11,5 +11,6 @@ data class BankNewsModelDomain(
     val reference: Uri,
     val synopsys: String,
     val title: String,
-    val image: String
+    val image: String,
+    val isRecommended: Boolean
 )

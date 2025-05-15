@@ -14,7 +14,8 @@ data class CreditModelData(
     val startDate: String? = null,
     val goalDescription: String? = null,
     val ownerId: String? = null,
-    val amountInReserveCurrency: String? = null
+    val amountInReserveCurrency: String? = null,
+    val name: String? = null
 )
 
 fun CreditModelData.toModelDomain(): CreditModelDomain? = runCatching {
@@ -29,7 +30,8 @@ fun CreditModelData.toModelDomain(): CreditModelDomain? = runCatching {
         lastPayment = Date(this.lastPayment?.toLong()!!),
         startDate = Date(this.startDate?.toLong()!!),
         goalDescription = this.goalDescription!!,
-        ownerId = this.ownerId!!
+        ownerId = this.ownerId!!,
+        name = this.name!!
     )
 }.getOrElse { exception ->
     Log.e("!!!", "CreditModelData.toModelDomain, ${exception.stackTraceToString()}")

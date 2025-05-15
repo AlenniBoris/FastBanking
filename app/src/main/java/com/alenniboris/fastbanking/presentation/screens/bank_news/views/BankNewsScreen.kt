@@ -238,7 +238,8 @@ private fun BankNewsScreenUiPreview() {
                         mainText = "328928328923",
                         reference = Uri.parse("amdoimasdoiasoid"),
                         synopsys = "ajkndjaskndkjnasd",
-                        title = "1"
+                        title = "1",
+                        isRecommended = true
                     )
                 ),
                 BankNewsModelUi(
@@ -250,7 +251,8 @@ private fun BankNewsScreenUiPreview() {
                         mainText = "328928328923",
                         reference = Uri.parse("amdoimasdoiasoid"),
                         synopsys = "jknoiamclsamlas",
-                        title = "2"
+                        title = "2",
+                        isRecommended = true
                     )
                 ),
                 BankNewsModelUi(
@@ -262,7 +264,8 @@ private fun BankNewsScreenUiPreview() {
                         mainText = "328928328923",
                         reference = Uri.parse("amdoimasdoiasoid"),
                         synopsys = ".;;;;;;;;;;;wdwdwd",
-                        title = "3"
+                        title = "3",
+                        isRecommended = true
                     )
                 ),
                 BankNewsModelUi(
@@ -274,7 +277,8 @@ private fun BankNewsScreenUiPreview() {
                         mainText = "328928328923",
                         reference = Uri.parse("amdoimasdoiasoid"),
                         synopsys = ".;;;;;;;;;;;wdwdwd",
-                        title = "3"
+                        title = "3",
+                        isRecommended = true
                     )
                 ),
                 BankNewsModelUi(
@@ -286,7 +290,8 @@ private fun BankNewsScreenUiPreview() {
                         mainText = "328928328923",
                         reference = Uri.parse("amdoimasdoiasoid"),
                         synopsys = ".;;;;;;;;;;;wdwdwd",
-                        title = "3"
+                        title = "3",
+                        isRecommended = true
                     )
                 )
             )

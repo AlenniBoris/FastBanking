@@ -14,6 +14,8 @@ import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUser
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import com.alenniboris.fastbanking.presentation.model.bank_product.CardModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.TransactionModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.toModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.toUiModel
 import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyFlow
@@ -177,7 +179,7 @@ class MainScreenViewModel(
                     } else
                         result.result.subList(0, 2)
 
-                    val res = list.map { it.toUiModel(cardNumber = card.domainModel.number) }
+                    val res = list.map { it.toUiModel() }
 
                     _screenState.update {
                         it.copy(
@@ -327,6 +329,23 @@ class MainScreenViewModel(
                 updateUserBankProductsSheetVisibility()
 
             is IMainScreenIntent.ProceedProductAction -> proceedProductAction(intent.action)
+            is IMainScreenIntent.UpdateCurrentViewedUserProduct ->
+                updateCurrentViewedUserProduct(intent.product)
+
+            is IMainScreenIntent.UpdateSelectedTransaction ->
+                updateSelectedTransaction(intent.transaction)
+        }
+    }
+
+    private fun updateSelectedTransaction(transaction: TransactionModelUi?) {
+        _screenState.update { it.copy(selectedTransaction = transaction) }
+    }
+
+    private fun updateCurrentViewedUserProduct(product: IBankProductModelUi) {
+        _screenState.update {
+            it.copy(
+                currentViewedUserProduct = if (it.currentViewedUserProduct == product) null else product
+            )
         }
     }
 

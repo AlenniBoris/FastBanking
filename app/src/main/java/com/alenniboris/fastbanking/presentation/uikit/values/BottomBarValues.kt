@@ -88,7 +88,7 @@ fun AuthorizedActions.toBottomBarModel(onClick: () -> Unit) = when (this) {
             onClick = onClick,
             iconId = HistoryPicture,
             textId = R.string.history_icon_text,
-            route = HistoryScreenRoute
+            route = TransactionsHistoryScreenRoute
         )
 
     AuthorizedActions.Payment ->

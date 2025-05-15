@@ -4,12 +4,10 @@ import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toCommonInfoException
 import com.alenniboris.fastbanking.data.model.bank_info.ApplicationInfoModelData
 import com.alenniboris.fastbanking.data.model.bank_info.BankNewsModelData
-import com.alenniboris.fastbanking.data.model.bank_info.RecommendedNewsModelData
 import com.alenniboris.fastbanking.data.model.bank_info.toModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.ApplicationInfoModelDomain
 import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain
-import com.alenniboris.fastbanking.domain.model.bank_info.RecommendedNewsModelDomain
 import com.alenniboris.fastbanking.domain.model.exception.CommonInfoExceptionModelDomain
 import com.alenniboris.fastbanking.domain.repository.IBankInfoRepository
 import com.alenniboris.fastbanking.domain.utils.GsonUtil.fromJson
@@ -71,15 +69,15 @@ class BankInfoRepositoryImpl(
         }
 
     override suspend fun getBankRecommendedNews():
-            CustomResultModelDomain<List<RecommendedNewsModelDomain>, CommonInfoExceptionModelDomain> =
+            CustomResultModelDomain<List<BankNewsModelDomain>, CommonInfoExceptionModelDomain> =
         withContext(dispatchers.IO) {
             return@withContext DatabaseFunctions.requestListOfElements(
                 dispatcher = dispatchers.IO,
                 database = database,
-                table = FirebaseDatabaseValues.TABLE_RECOMMENDED_NEWS,
-                jsonMapping = { json -> json.fromJson<RecommendedNewsModelData>() },
+                table = FirebaseDatabaseValues.TABLE_BANK_NEWS,
+                jsonMapping = { json -> json.fromJson<BankNewsModelData>() },
                 modelsMapping = { dataModel -> dataModel.toModelDomain() },
-                filterPredicate = { domainModel -> true },
+                filterPredicate = { domainModel -> domainModel.isRecommended },
                 exceptionMapping = { exception ->
                     exception.toCommonInfoException()
                 }

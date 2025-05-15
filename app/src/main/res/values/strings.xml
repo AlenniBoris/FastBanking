@@ -225,5 +225,13 @@
     <string name="appliance_deposit_minimum_contribution_header_text">Minimum contribution</string>
     <string name="appliance_deposit_period_header_text">Deposit period</string>
     <string name="appliance_deposit_procent_header_text">Deposit procent</string>
+    <string name="select_bank_product_text">Select product to view its info</string>
+    <string name="history_screen_text">History</string>
+    <string name="error_loading_text">Ooops, something happened. Tap to reload</string>
+    <string name="details_text">Details</string>
+    <string name="transaction_details_card_section_text">Card</string>
+    <string name="transaction_details_date_section_text">Date of transaction</string>
+    <string name="transaction_details_name_section_text">Transaction name</string>
+    <string name="transaction_details_sum_section_text">Transaction sum text</string>
 
 </resources>

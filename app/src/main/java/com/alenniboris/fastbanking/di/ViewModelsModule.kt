@@ -33,6 +33,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUse
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
 import com.alenniboris.fastbanking.presentation.model.appliance.ProductApplianceType
 import com.alenniboris.fastbanking.presentation.screens.account_settings.AccountSettingsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
@@ -57,6 +58,7 @@ import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_as_app_client.RegistrationAsAppClientScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_options.RegistrationOptionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.theme_settings.ThemeSettingsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.transactions_history.TransactionsHistoryScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.user_appliances.UserAppliancesScreenViewModel
 import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import org.koin.android.ext.koin.androidApplication
@@ -233,6 +235,12 @@ val ViewModelsModule = module {
             getCardApplianceByIdUseCase = get<IGetCardApplianceByIdUseCase>(),
             getCreditApplianceByIdUseCase = get<IGetCreditApplianceByIdUseCase>(),
             getDepositApplianceByIdUseCase = get<IGetDepositApplianceByIdUseCase>()
+        )
+    }
+
+    viewModel<TransactionsHistoryScreenViewModel>() {
+        TransactionsHistoryScreenViewModel(
+            getAllUserTransactionsUseCase = get<IGetAllUserTransactionsUseCase>()
         )
     }
 }

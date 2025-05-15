@@ -19,7 +19,8 @@ data class CardModelData(
     val type: String? = null,
     val system: String? = null,
     val reserveCurrency: String? = null,
-    val amountInReserveCurrency: String? = null
+    val amountInReserveCurrency: String? = null,
+    val name: String? = null
 )
 
 fun CardModelData.toModelDomain(): CardModelDomain? = runCatching {
@@ -43,7 +44,8 @@ fun CardModelData.toModelDomain(): CardModelDomain? = runCatching {
             "Mastercard" -> CardSystem.Mastercard
             "Mir" -> CardSystem.Mir
             else -> CardSystem.Undefined
-        }
+        },
+        name = this.name!!
     )
 }.getOrElse { exception ->
     Log.e("!!!", "CardModelData.toModelDomain ${exception.stackTraceToString()}")

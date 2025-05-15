@@ -77,4 +77,8 @@ interface IBankProductsRepository {
     suspend fun sendApplianceForDeposit(
         appliance: DepositApplianceModelDomain
     ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+
+    suspend fun getAllUserTransactions(
+        user: UserModelDomain
+    ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain>
 }

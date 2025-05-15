@@ -11,5 +11,6 @@ data class TransactionModelDomain(
     val priceAmount: Double,
     val senderId: String,
     val type: TransactionType,
-    val usedCardId: String
+    val usedCardId: String,
+    val cardNumber: String
 )

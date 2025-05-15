@@ -14,6 +14,9 @@ data class AccountModelUi(
 
     val reserveCurrencyText =
         CommonFunctions.formatAmount(domainModel.amountInReserveCurrency) + " " + domainModel.reserveCurrency
+
+    override val name: String
+        get() = domainModel.name
 }
 
 fun AccountModelDomain.toModelUi(): AccountModelUi =

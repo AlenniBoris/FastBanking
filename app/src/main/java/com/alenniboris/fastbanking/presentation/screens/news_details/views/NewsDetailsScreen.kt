@@ -243,7 +243,8 @@ private fun NewsDetailsScreenUiPreview() {
                     mainText = "3289283289|||23|sxsajhbascxhjbsxjhbaxsjbjasxbjhsb",
                     reference = Uri.parse("amdoimasdoiasoid"),
                     synopsys = ".;;;;;;;;;;;wdwdwd",
-                    title = "3"
+                    title = "3",
+                    isRecommended = true
                 )
             ),
             isLoading = false

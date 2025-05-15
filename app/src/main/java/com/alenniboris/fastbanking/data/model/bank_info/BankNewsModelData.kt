@@ -13,7 +13,8 @@ data class BankNewsModelData(
     val reference: String? = null,
     val synopsys: String? = null,
     val title: String? = null,
-    val imageUrl: String? = null
+    val imageUrl: String? = null,
+    val isRecommended: String? = null
 )
 
 fun BankNewsModelData.toModelDomain(): BankNewsModelDomain? = runCatching {
@@ -28,7 +29,8 @@ fun BankNewsModelData.toModelDomain(): BankNewsModelDomain? = runCatching {
         reference = reference,
         synopsys = this.synopsys!!,
         title = this.title!!,
-        image = this.imageUrl!!
+        image = this.imageUrl!!,
+        isRecommended = this.isRecommended.toBoolean()
     )
 }.getOrElse { exception ->
     Log.e(

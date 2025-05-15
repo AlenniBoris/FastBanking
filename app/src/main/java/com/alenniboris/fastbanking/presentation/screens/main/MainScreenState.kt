@@ -1,13 +1,13 @@
 package com.alenniboris.fastbanking.presentation.screens.main
 
-import com.alenniboris.fastbanking.domain.model.bank_info.RecommendedNewsModelDomain
+import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain
 import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.TransactionModelUi
 import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 
 data class MainScreenState(
     val isRecommendedNewsLoading: Boolean = false,
-    val recommendedNews: List<RecommendedNewsModelDomain> = emptyList(),
+    val recommendedNews: List<BankNewsModelDomain> = emptyList(),
     val isRecommendedNewsVisible: Boolean = false,
     val isProductsSheetVisible: Boolean = false,
     val bankProducts: List<BankProduct> = BankProduct.entries.toList(),
@@ -23,5 +23,6 @@ data class MainScreenState(
     val exchangedCurrencyAmount: Double? = null,
     val isUserAccountsSumLoading: Boolean = false,
     val userAccountsSum: Double? = null,
-    val actionsWithProducts: List<ActionsWithProducts> = ActionsWithProducts.entries.toList()
+    val actionsWithProducts: List<ActionsWithProducts> = ActionsWithProducts.entries.toList(),
+    val selectedTransaction: TransactionModelUi? = null
 )

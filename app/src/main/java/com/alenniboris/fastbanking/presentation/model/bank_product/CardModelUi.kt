@@ -18,6 +18,9 @@ data class CardModelUi(
     val picture: Int = domainModel.system.toUiPicture()
 
     val numberText: String = "**** " + domainModel.number.substring(domainModel.number.length - 4)
+
+    override val name: String
+        get() = domainModel.name
 }
 
 fun CardSystem.toUiPicture(): Int = when (this) {

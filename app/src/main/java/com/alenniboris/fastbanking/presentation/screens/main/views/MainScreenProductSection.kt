@@ -36,7 +36,6 @@ import com.alenniboris.fastbanking.presentation.model.bank_product.AccountModelU
 import com.alenniboris.fastbanking.presentation.model.bank_product.CardModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.CreditModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductModelUi
-import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import com.alenniboris.fastbanking.presentation.screens.main.IMainScreenIntent
 import com.alenniboris.fastbanking.presentation.uikit.theme.CardProductUiNumberTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CardProductUiReserveCurrencyPadding
@@ -56,14 +55,15 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenOnItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenProductSectionElementOrderChanger
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
+import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import com.alenniboris.fastbanking.presentation.uikit.views.AppProgressBar
 import java.util.Calendar
-import java.util.Date
 
 @Composable
 fun MainScreenProductSection(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
+    isUserHaveProducts: Boolean,
     currentProduct: BankProduct,
     currentUserProduct: IBankProductModelUi?,
     proceedIntent: (IMainScreenIntent) -> Unit
@@ -82,7 +82,7 @@ fun MainScreenProductSection(
                 )
             }
 
-            !isLoading && currentUserProduct == null -> {
+            !isLoading && !isUserHaveProducts -> {
                 Text(
                     modifier = Modifier
                         .padding(MainScreenProductSectionEmptyTextPadding),
@@ -94,6 +94,47 @@ fun MainScreenProductSection(
                         textAlign = TextAlign.Center
                     )
                 )
+            }
+
+            isUserHaveProducts && currentUserProduct == null -> {
+
+                Text(
+                    modifier = Modifier
+                        .padding(MainScreenProductSectionEmptyTextPadding),
+                    text = stringResource(R.string.select_bank_product_text),
+                    style = bodyStyle.copy(
+                        color = mainScreenTextColor,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MainScreenProductSectionNothingTextSize,
+                        textAlign = TextAlign.Center
+                    )
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable {
+                            proceedIntent(IMainScreenIntent.UpdateUserBankProductsSheetVisibility)
+                        },
+                    verticalAlignment = Alignment.Bottom,
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.order_button_icon),
+                        contentDescription = stringResource(R.string.make_order_text),
+                        tint = mainScreenProductSectionElementOrderChanger
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(MainScreenProductSectionOrderTextPadding),
+                        text = stringResource(R.string.make_order_text),
+                        style = bodyStyle.copy(
+                            fontWeight = FontWeight.Normal,
+                            color = mainScreenProductSectionElementOrderChanger,
+                            fontSize = MainScreenProductSectionOrderTextSize
+                        )
+                    )
+                }
             }
 
             else -> {
@@ -331,10 +372,12 @@ private fun LightThemePreview() {
                             number = "1111111111111111",
                             cvv = "",
                             type = CardType.Dedut,
-                            system = CardSystem.Visa
+                            system = CardSystem.Visa,
+                            name = "odsklmclksd"
                         )
                     ),
                     isLoading = false,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -359,10 +402,12 @@ private fun LightThemePreview() {
                             lastPayment = Calendar.getInstance().time,
                             startDate = Calendar.getInstance().time,
                             goalDescription = "wwdwd",
-                            ownerId = "111"
+                            ownerId = "111",
+                            name = "odsklmclksd"
                         )
                     ),
                     isLoading = false,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -389,9 +434,11 @@ private fun LightThemePreview() {
                                 name = "",
                                 surname = ""
                             ),
+                            name = "odsklmclksd"
                         )
                     ),
                     isLoading = false,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -407,6 +454,23 @@ private fun LightThemePreview() {
                     currentProduct = BankProduct.CARD,
                     currentUserProduct = null,
                     isLoading = true,
+                    isUserHaveProducts = true,
+                    proceedIntent = {}
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                MainScreenProductSection(
+                    modifier = Modifier
+                        .clip(MainScreenProductSectionShape)
+                        .fillMaxWidth()
+                        .heightIn(min = MainScreenProductSectionHeight)
+                        .background(mainScreenOnItemColor)
+                        .padding(MainScreenProductSectionInnerPadding),
+                    currentProduct = BankProduct.CARD,
+                    currentUserProduct = null,
+                    isLoading = false,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -423,6 +487,7 @@ private fun LightThemePreview() {
                     currentProduct = BankProduct.CARD,
                     currentUserProduct = null,
                     isLoading = false,
+                    isUserHaveProducts = false,
                     proceedIntent = {}
                 )
             }
@@ -467,10 +532,12 @@ private fun DarkThemePreview() {
                             number = "1111111111111111",
                             cvv = "",
                             type = CardType.Dedut,
-                            system = CardSystem.Visa
+                            system = CardSystem.Visa,
+                            name = "odsklmclksd"
                         )
                     ),
                     isLoading = false,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -491,14 +558,16 @@ private fun DarkThemePreview() {
                             currency = "byn",
                             amountInReserveCurrency = 11.2,
                             reserveCurrency = "usd",
-                            percentage = 15.0,
+                            percentage = 5.0,
                             lastPayment = Calendar.getInstance().time,
-                            startDate = Date(1354392000000),
+                            startDate = Calendar.getInstance().time,
                             goalDescription = "wwdwd",
-                            ownerId = "111"
+                            ownerId = "111",
+                            name = "odsklmclksd"
                         )
                     ),
                     isLoading = false,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -525,9 +594,11 @@ private fun DarkThemePreview() {
                                 name = "",
                                 surname = ""
                             ),
+                            name = "odsklmclksd"
                         )
                     ),
                     isLoading = false,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -543,6 +614,7 @@ private fun DarkThemePreview() {
                     currentProduct = BankProduct.CARD,
                     currentUserProduct = null,
                     isLoading = true,
+                    isUserHaveProducts = true,
                     proceedIntent = {}
                 )
 
@@ -559,6 +631,7 @@ private fun DarkThemePreview() {
                     currentProduct = BankProduct.CARD,
                     currentUserProduct = null,
                     isLoading = false,
+                    isUserHaveProducts = false,
                     proceedIntent = {}
                 )
             }

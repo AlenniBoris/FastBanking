@@ -33,6 +33,9 @@ object CommonFunctions {
         amount
     )
 
-    fun formatDate(date: Date): String =
+    fun formatDateToDateText(date: Date): String =
         SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date)
+
+    fun formatDateToDateAndTimeText(date: Date): String =
+        SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(date)
 }

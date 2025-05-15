@@ -12,5 +12,6 @@ data class CreditModelDomain(
     val lastPayment: Date,
     val startDate: Date,
     val goalDescription: String,
-    val ownerId: String
+    val ownerId: String,
+    val name: String
 )

@@ -25,6 +25,9 @@ data class CreditModelUi(
 
         return CommonFunctions.formatAmount(totalAmount)
     }
+
+    override val name: String
+        get() = domainModel.name
 }
 
 fun CreditModelDomain.toModelUi(): CreditModelUi =

@@ -6,8 +6,7 @@ import com.alenniboris.fastbanking.domain.model.transaction.TransactionType
 import com.alenniboris.fastbanking.presentation.uikit.functions.CommonFunctions
 
 data class TransactionModelUi(
-    val domainModel: TransactionModelDomain,
-    val cardNumber: String
+    val domainModel: TransactionModelDomain
 ) {
 
     val picture: Int = domainModel.type.toUiPicture()
@@ -15,10 +14,14 @@ data class TransactionModelUi(
     val priceText: String =
         CommonFunctions.formatAmount(domainModel.priceAmount) + " " + domainModel.currency.code
 
-    val timeText: String =
-        CommonFunctions.formatDate(domainModel.date)
+    val dateText: String =
+        CommonFunctions.formatDateToDateText(domainModel.date)
 
-    val numberText: String = "**** " + cardNumber.substring(cardNumber.length - 4)
+    val dateAndTimeText: String =
+        CommonFunctions.formatDateToDateAndTimeText(domainModel.date)
+
+    val numberText: String =
+        "**** " + domainModel.cardNumber.substring(domainModel.cardNumber.length - 4)
 }
 
 
@@ -27,8 +30,7 @@ fun TransactionType.toUiPicture(): Int = when (this) {
     TransactionType.Undefined -> R.drawable.undefined_transaction_icon
 }
 
-fun TransactionModelDomain.toUiModel(cardNumber: String): TransactionModelUi =
+fun TransactionModelDomain.toUiModel(): TransactionModelUi =
     TransactionModelUi(
-        domainModel = this,
-        cardNumber = cardNumber
+        domainModel = this
     )

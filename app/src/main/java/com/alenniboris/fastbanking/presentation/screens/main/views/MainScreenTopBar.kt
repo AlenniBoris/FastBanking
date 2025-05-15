@@ -1,5 +1,6 @@
 package com.alenniboris.fastbanking.presentation.screens.main.views
 
+import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.alenniboris.fastbanking.R
-import com.alenniboris.fastbanking.domain.model.bank_info.RecommendedNewsModelDomain
+import com.alenniboris.fastbanking.domain.model.bank_info.BankNewsModelDomain
 import com.alenniboris.fastbanking.presentation.screens.main.IMainScreenIntent
 import com.alenniboris.fastbanking.presentation.uikit.theme.BlackColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenRecommendationsPictureTextSize
@@ -54,11 +55,12 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenRecommende
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
 import com.alenniboris.fastbanking.presentation.uikit.views.AppIconButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppProgressBar
+import java.util.Calendar
 
 @Composable
 fun MainScreenTopBar(
     isLoading: Boolean,
-    elements: List<RecommendedNewsModelDomain>,
+    elements: List<BankNewsModelDomain>,
     isVisible: Boolean,
     proceedIntent: (IMainScreenIntent) -> Unit
 ) {
@@ -156,7 +158,7 @@ fun MainScreenTopBar(
 @Composable
 private fun RecommendedNewsItem(
     index: Int,
-    element: RecommendedNewsModelDomain,
+    element: BankNewsModelDomain,
     onClick: () -> Unit
 ) {
 
@@ -174,7 +176,7 @@ private fun RecommendedNewsItem(
     ) {
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
-            model = element.picture,
+            model = element.image,
             placeholder = painterResource(Placeholder),
             contentDescription = stringResource(R.string.bank_news_text),
             error = painterResource(Placeholder),
@@ -201,7 +203,7 @@ private fun RecommendedNewsItem(
                 .padding(MainScreenRecommendedNewsHeaderPadding)
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter),
-            text = element.header,
+            text = element.title,
             style = bodyStyle.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = MainScreenRecommendationsPictureTextSize,
@@ -227,11 +229,16 @@ private fun MainScreenTopBarPreview() {
             MainScreenTopBar(
                 isLoading = true,
                 elements = listOf(
-                    RecommendedNewsModelDomain(
-                        picture = "",
-                        header = "First",
-                        text = "wesxrdcvgnjmk",
-                        id = "jdaenxasjkx"
+                    BankNewsModelDomain(
+                        id = "2",
+                        author = "aaaa",
+                        creationDate = Calendar.getInstance().time,
+                        image = "2322121",
+                        mainText = "328928328923",
+                        reference = Uri.parse("amdoimasdoiasoid"),
+                        synopsys = "jknoiamclsamlas",
+                        title = "2",
+                        isRecommended = true
                     )
                 ),
                 isVisible = true,
@@ -249,11 +256,16 @@ private fun MainScreenTopBarPreview() {
             MainScreenTopBar(
                 isLoading = false,
                 elements = listOf(
-                    RecommendedNewsModelDomain(
-                        picture = "",
-                        header = "First",
-                        text = "wesxrdcvgnjmk",
-                        id = "jdaenxasjkx"
+                    BankNewsModelDomain(
+                        id = "2",
+                        author = "aaaa",
+                        creationDate = Calendar.getInstance().time,
+                        image = "2322121",
+                        mainText = "328928328923",
+                        reference = Uri.parse("amdoimasdoiasoid"),
+                        synopsys = "jknoiamclsamlas",
+                        title = "2",
+                        isRecommended = true
                     )
                 ),
                 isVisible = true,

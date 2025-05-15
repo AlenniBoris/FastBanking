@@ -1,6 +1,7 @@
-package com.alenniboris.fastbanking.presentation.screens.main.views
+package com.alenniboris.fastbanking.presentation.uikit.views
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,14 +43,14 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenOnItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
-import com.alenniboris.fastbanking.presentation.uikit.views.AppProgressBar
 import java.util.Calendar
 
 @Composable
-fun MainScreenTransactionsSection(
+fun AppTransactionsSection(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
-    transactions: List<TransactionModelUi>
+    transactions: List<TransactionModelUi>,
+    onItemClicked: (TransactionModelUi) -> Unit = {}
 ) {
 
     Column(
@@ -83,7 +84,10 @@ fun MainScreenTransactionsSection(
                                 if (index == 0) TransactionHistoryItemFirstPadding
                                 else TransactionHistoryItemPadding
                             )
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .clickable {
+                                onItemClicked(transaction)
+                            },
                         transaction = transaction
                     )
                 }
@@ -159,7 +163,7 @@ private fun TransactionItem(
 
                 Text(
                     modifier = Modifier.padding(TransactionHistoryItemExtraTextPadding),
-                    text = transaction.timeText,
+                    text = transaction.dateText,
                     style = bodyStyle.copy(
                         color = mainScreenTextColor,
                         fontWeight = FontWeight.Normal,
@@ -184,7 +188,7 @@ private fun LightTheme() {
                     .fillMaxSize()
             ) {
 
-                MainScreenTransactionsSection(
+                AppTransactionsSection(
                     modifier = Modifier
                         .clip(MainScreenTransactionsHistoryShape)
                         .fillMaxWidth()
@@ -197,7 +201,7 @@ private fun LightTheme() {
 
                 Spacer(Modifier.height(25.dp))
 
-                MainScreenTransactionsSection(
+                AppTransactionsSection(
                     modifier = Modifier
                         .clip(MainScreenTransactionsHistoryShape)
                         .fillMaxWidth()
@@ -210,7 +214,7 @@ private fun LightTheme() {
 
                 Spacer(Modifier.height(25.dp))
 
-                MainScreenTransactionsSection(
+                AppTransactionsSection(
                     modifier = Modifier
                         .clip(MainScreenTransactionsHistoryShape)
                         .fillMaxWidth()
@@ -231,9 +235,9 @@ private fun LightTheme() {
                                 type = TransactionType.P2P,
                                 usedCardId = "dqwdwwqd",
                                 senderId = "sasadasd",
+                                cardNumber = "1111222233334444",
                                 priceAmount = 11.0
-                            ),
-                            cardNumber = "1111222233334444"
+                            )
                         ),
                         TransactionModelUi(
                             domainModel = TransactionModelDomain(
@@ -247,9 +251,9 @@ private fun LightTheme() {
                                 type = TransactionType.Undefined,
                                 usedCardId = "dqwdwwqd",
                                 senderId = "sasadasd",
+                                cardNumber = "1111222233334444",
                                 priceAmount = 11.0
-                            ),
-                            cardNumber = "1111222233334444"
+                            )
                         )
                     )
                 )
@@ -273,7 +277,7 @@ private fun DarkTheme() {
                     .fillMaxSize()
             ) {
 
-                MainScreenTransactionsSection(
+                AppTransactionsSection(
                     modifier = Modifier
                         .clip(MainScreenTransactionsHistoryShape)
                         .fillMaxWidth()
@@ -286,7 +290,7 @@ private fun DarkTheme() {
 
                 Spacer(Modifier.height(15.dp))
 
-                MainScreenTransactionsSection(
+                AppTransactionsSection(
                     modifier = Modifier
                         .clip(MainScreenTransactionsHistoryShape)
                         .fillMaxWidth()
@@ -299,7 +303,7 @@ private fun DarkTheme() {
 
                 Spacer(Modifier.height(15.dp))
 
-                MainScreenTransactionsSection(
+                AppTransactionsSection(
                     modifier = Modifier
                         .clip(MainScreenTransactionsHistoryShape)
                         .fillMaxWidth()
@@ -320,9 +324,9 @@ private fun DarkTheme() {
                                 type = TransactionType.P2P,
                                 usedCardId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                priceAmount = 11.0
-                            ),
-                            cardNumber = "1111222233334444"
+                                priceAmount = 11.0,
+                                cardNumber = "1111222233334444",
+                            )
                         ),
                         TransactionModelUi(
                             domainModel = TransactionModelDomain(
@@ -336,9 +340,9 @@ private fun DarkTheme() {
                                 type = TransactionType.Undefined,
                                 usedCardId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                priceAmount = 11.0
-                            ),
-                            cardNumber = "1111222233334444"
+                                priceAmount = 11.0,
+                                cardNumber = "1111222233334444",
+                            )
                         )
                     )
                 )
