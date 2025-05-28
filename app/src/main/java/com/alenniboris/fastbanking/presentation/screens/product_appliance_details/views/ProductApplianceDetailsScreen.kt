@@ -41,10 +41,10 @@ import com.alenniboris.fastbanking.domain.model.appliances.DepositDetailedApplia
 import com.alenniboris.fastbanking.domain.model.appliances.OfficeModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardSystem
 import com.alenniboris.fastbanking.domain.model.card.CardType
-import com.alenniboris.fastbanking.presentation.mappers.toUiString
 import com.alenniboris.fastbanking.presentation.model.appliance.ProductApplianceModelUi
 import com.alenniboris.fastbanking.presentation.model.appliance.ProductApplianceType
 import com.alenniboris.fastbanking.presentation.model.bank_product.toUiPicture
+import com.alenniboris.fastbanking.presentation.model.bank_product.toUiString
 import com.alenniboris.fastbanking.presentation.screens.product_appliance_details.IProductApplianceDetailsScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.product_appliance_details.IProductApplianceDetailsScreenEventIntent
 import com.alenniboris.fastbanking.presentation.screens.product_appliance_details.ProductApplianceDetailsScreenState

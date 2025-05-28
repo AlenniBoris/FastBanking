@@ -36,6 +36,7 @@ import com.alenniboris.fastbanking.domain.model.appliances.OfficeModelDomain
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
 import com.alenniboris.fastbanking.presentation.mappers.toUiString
 import com.alenniboris.fastbanking.presentation.model.bank_product.toUiPicture
+import com.alenniboris.fastbanking.presentation.model.bank_product.toUiString
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormOfficeSelectionScreen
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormProceedButton
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormProcessFinalScreen

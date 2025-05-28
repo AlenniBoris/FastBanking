@@ -277,7 +277,9 @@ val productApplianceFormCheckboxCheckedTrackColor = Color(0xfff9e753)
 val productApplianceFormBottomButtonColor = Color(0xfff9e753)
 val productApplianceFormBottomButtonTextColor = Color(0xFF000000)
 
-// Product appliance details screen
-val productApplianceStatusApprovedColor = Color(0xFF4CAF50)
-val productApplianceStatusWaitingColor = Color(0xfff9e753)
-val productApplianceStatusDeclinedColor = Color(0xFFE91E1E)
+// card details screen
+val cardSystemVisaColor = Color(0xFF98A1A1)
+val cardSystemMastercardColor = Color(0xFFCB8B46)
+val cardSystemMirColor = Color(0xFF3198D5)
+val cardSystemUndefinedColor = Color(0xFF000000)
+val cardDetailsPlaceholderTextColor = Color(0xFFFCFCFC)

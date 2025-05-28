@@ -347,3 +347,31 @@ val AppTransactionDetailsSectionElementOuterPadding = PaddingValues(vertical = 1
 val AppTransactionDetailsSectionElementContainerPadding = PaddingValues(top = 10.dp)
 val AppTransactionDetailsSectionElementTextPadding = PaddingValues(top = 10.dp, bottom = 3.dp)
 val AppTransactionDetailsSectionElementSpacerHeight = 1.dp
+
+// Card details placeholder
+val CardDetailsPlaceholderShape = RoundedCornerShape(60f)
+val CardDetailsPlaceholderMainTextSize = 20.sp
+val CardDetailsPlaceholderSubtleTextSize = 15.sp
+val CardDetailsPlaceholderContainerInnerPadding =
+    PaddingValues(vertical = 15.dp, horizontal = 20.dp)
+val CardDetailsPlaceholderElementPadding = PaddingValues(top = 10.dp)
+val CardDetailsPlaceholderElementDoublePadding = PaddingValues(top = 20.dp)
+val CardDetailsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val CardDetailsScreenCardPlaceholderPadding = PaddingValues(bottom = 20.dp)
+val CardDetailsScreenNumberOfColumns = 2
+val CardDetailsScreenActionButtonSize = 50.dp
+val CardDetailsScreenActionButtonTextSize = 20.sp
+val CardDetailsScreenActionButtonTextPadding = PaddingValues(top = 10.dp)
+val CardDetailsScreenButtonsVerticalSpacing = 15.dp
+
+// Product Information Screen
+val ProductInformationScreenSectionPadding = PaddingValues(bottom = 15.dp)
+val ProductInformationScreenSectionSpacerPadding = PaddingValues(top = 5.dp)
+val ProductInformationScreenSectionSpacerHeight = 1.dp
+val ProductInformationScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val ProductInformationScreenCopySectionTextPadding = PaddingValues(top = 10.dp)
+val ProductInformationScreenCopySectionIconPadding = PaddingValues(start = 15.dp)
+val ProductInformationScreenCopySectionTextSize = 15.sp
+val ProductInformationScreenCopySectionHeaderTextSize = 25.sp
+
+

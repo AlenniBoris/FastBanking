@@ -26,6 +26,9 @@ const val CreditApplianceFormScreenRoute = "credit appliance form screen"
 const val DepositApplianceFormScreenRoute = "deposit appliance form screen"
 const val ProductApplianceDetailsScreenRoute = "product appliance details screen"
 const val TransactionsHistoryScreenRoute = "transactions history screen"
+const val ProductHistoryScreenRoute = "product history screen"
+const val CardDetailsScreenRoute = "card details screen"
+const val ProductInformationScreenRoute = "product information screen"
 
 val RoutesWithoutBottomBar = listOf(
     RegistrationOptionsScreenRoute,
@@ -42,5 +45,8 @@ val RoutesWithoutBottomBar = listOf(
     CardApplianceFormScreenRoute,
     CreditApplianceFormScreenRoute,
     DepositApplianceFormScreenRoute,
-    ProductApplianceDetailsScreenRoute
+    ProductApplianceDetailsScreenRoute,
+    ProductHistoryScreenRoute,
+    CardDetailsScreenRoute,
+    ProductInformationScreenRoute
 )

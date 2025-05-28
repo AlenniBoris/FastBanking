@@ -145,7 +145,11 @@ fun MainScreenProductSection(
                             CardProductUi(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable { },
+                                    .clickable {
+                                        proceedIntent(
+                                            IMainScreenIntent.OpenProductDetailsScreen(card)
+                                        )
+                                    },
                                 card = card
                             )
                         }
@@ -155,7 +159,11 @@ fun MainScreenProductSection(
                             CreditProductUi(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable { },
+                                    .clickable {
+                                        proceedIntent(
+                                            IMainScreenIntent.OpenProductDetailsScreen(credit)
+                                        )
+                                    },
                                 credit = credit
                             )
                         }
@@ -166,7 +174,11 @@ fun MainScreenProductSection(
                             DepositsAndAccountsProductUi(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable { },
+                                    .clickable {
+                                        proceedIntent(
+                                            IMainScreenIntent.OpenProductDetailsScreen(account)
+                                        )
+                                    },
                                 account = account
                             )
                         }
@@ -373,7 +385,10 @@ private fun LightThemePreview() {
                             cvv = "",
                             type = CardType.Dedut,
                             system = CardSystem.Visa,
-                            name = "odsklmclksd"
+                            name = "odsklmclksd",
+                            erip = "ncjasncjasnxk",
+                            iban = "21912029nsknac",
+                            bankIdCode = "dsjkcnkjsndc"
                         )
                     ),
                     isLoading = false,
@@ -403,7 +418,10 @@ private fun LightThemePreview() {
                             startDate = Calendar.getInstance().time,
                             goalDescription = "wwdwd",
                             ownerId = "111",
-                            name = "odsklmclksd"
+                            name = "odsklmclksd",
+                            erip = "kjjsdnkjcsndk",
+                            contractNumber = "kjdnak2313",
+                            bankIdCode = "sdilakjlkasnx"
                         )
                     ),
                     isLoading = false,
@@ -533,7 +551,10 @@ private fun DarkThemePreview() {
                             cvv = "",
                             type = CardType.Dedut,
                             system = CardSystem.Visa,
-                            name = "odsklmclksd"
+                            name = "odsklmclksd",
+                            erip = "ncjasncjasnxk",
+                            iban = "21912029nsknac",
+                            bankIdCode = "dsjkcnkjsndc"
                         )
                     ),
                     isLoading = false,
@@ -563,7 +584,10 @@ private fun DarkThemePreview() {
                             startDate = Calendar.getInstance().time,
                             goalDescription = "wwdwd",
                             ownerId = "111",
-                            name = "odsklmclksd"
+                            name = "odsklmclksd",
+                            erip = "kjjsdnkjcsndk",
+                            contractNumber = "kjdnak2313",
+                            bankIdCode = "sdilakjlkasnx"
                         )
                     ),
                     isLoading = false,

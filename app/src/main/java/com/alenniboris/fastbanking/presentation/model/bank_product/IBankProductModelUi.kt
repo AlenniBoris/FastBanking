@@ -1,5 +1,5 @@
 package com.alenniboris.fastbanking.presentation.model.bank_product
 
-sealed interface IBankProductModelUi {
+sealed interface IBankProductModelUi{
     val name: String
 }

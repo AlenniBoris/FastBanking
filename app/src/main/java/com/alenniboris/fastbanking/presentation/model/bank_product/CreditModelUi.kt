@@ -8,6 +8,8 @@ data class CreditModelUi(
     val domainModel: CreditModelDomain
 ) : IBankProductModelUi {
 
+    val creditStartDateText: String = CommonFunctions.formatDateToDateText(domainModel.startDate)
+
     val creditBodyText: String =
         getCreditBody(domainModel.initialAmount) + " " + domainModel.currency
 

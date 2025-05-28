@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
+import com.alenniboris.fastbanking.presentation.screens.destinations.CardDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.HelpScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.NewsDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.PersonalScreenDestination
@@ -160,6 +161,43 @@ fun MainScreen(
                             bankProduct = coming.productType
                         )
                     )
+                }
+        }
+
+        launch {
+            event.filterIsInstance<IMainScreenEvent.OpenAccountDetailsScreen>()
+                .collect { coming ->
+                    toastMessage?.cancel()
+                    toastMessage = Toast.makeText(
+                        context,
+                        context.getString(R.string.in_development_text),
+                        Toast.LENGTH_SHORT
+                    )
+                    toastMessage?.show()
+                }
+        }
+
+        launch {
+            event.filterIsInstance<IMainScreenEvent.OpenCardDetailsScreen>()
+                .collect { coming ->
+                    navigator.navigate(
+                        CardDetailsScreenDestination(
+                            cardId = coming.cardId
+                        )
+                    )
+                }
+        }
+
+        launch {
+            event.filterIsInstance<IMainScreenEvent.OpenCreditDetailsScreen>()
+                .collect { coming ->
+                    toastMessage?.cancel()
+                    toastMessage = Toast.makeText(
+                        context,
+                        context.getString(R.string.in_development_text),
+                        Toast.LENGTH_SHORT
+                    )
+                    toastMessage?.show()
                 }
         }
     }

@@ -25,4 +25,6 @@ sealed interface IMainScreenIntent {
     data class UpdateCurrentViewedUserProduct(val product: IBankProductModelUi) : IMainScreenIntent
 
     data class UpdateSelectedTransaction(val transaction: TransactionModelUi?) : IMainScreenIntent
+
+    data class OpenProductDetailsScreen(val product: IBankProductModelUi) : IMainScreenIntent
 }

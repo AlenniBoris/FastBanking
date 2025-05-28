@@ -235,5 +235,15 @@
     <string name="transaction_details_date_section_text">Date of transaction</string>
     <string name="transaction_details_name_section_text">Transaction name</string>
     <string name="transaction_details_sum_section_text">Transaction sum text</string>
+    <string name="card_date_of_expire_text">Date of expire</string>
+    <string name="erip_number_text">The number of the agreement for card replenishment and refund of ERIP payments</string>
+    <string name="iban_number_text">International bank account number(IBAN)</string>
+    <string name="bank_id_code_text">Bank identification code</string>
+    <string name="contract_number_text">Number of contract used to transfer money</string>
+    <string name="credit_start_date_text">Credit start date</string>
+    <string name="account_number_text">Account number. Use it for sending and receiving money</string>
+    <string name="attached_cards_text">Attached cards</string>
+    <string name="history_action_text">Operations history</string>
+    <string name="details_action_text">Details</string>
 
 </resources>

@@ -13,7 +13,9 @@ import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesE
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
+import com.alenniboris.fastbanking.presentation.model.bank_product.AccountModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.CardModelUi
+import com.alenniboris.fastbanking.presentation.model.bank_product.CreditModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.TransactionModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.toModelUi
@@ -334,7 +336,19 @@ class MainScreenViewModel(
 
             is IMainScreenIntent.UpdateSelectedTransaction ->
                 updateSelectedTransaction(intent.transaction)
+
+            is IMainScreenIntent.OpenProductDetailsScreen -> openProductDetailsScreen(intent.product)
         }
+    }
+
+    private fun openProductDetailsScreen(product: IBankProductModelUi) {
+        _event.emit(
+            when (product) {
+                is AccountModelUi -> IMainScreenEvent.OpenAccountDetailsScreen(product.domainModel.id)
+                is CardModelUi -> IMainScreenEvent.OpenCardDetailsScreen(product.domainModel.id)
+                is CreditModelUi -> IMainScreenEvent.OpenCreditDetailsScreen(product.domainModel.id)
+            }
+        )
     }
 
     private fun updateSelectedTransaction(transaction: TransactionModelUi?) {
