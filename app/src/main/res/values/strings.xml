@@ -243,5 +243,8 @@
     <string name="attached_cards_text">Attached cards</string>
     <string name="history_action_text">Operations history</string>
     <string name="details_action_text">Details</string>
+    <string name="amount_in_main_currency_text">Amount in main currency</string>
+    <string name="amount_in_reserve_currency_text">Amount in reserve currency</string>
+    <string name="credit_percentage_text">Procent</string>
 
 </resources>

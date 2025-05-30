@@ -135,13 +135,15 @@ private fun TransactionDetailsContent(
             )
         )
 
-        TransactionDetailsTextSection(
-            modifier = Modifier
-                .padding(AppTransactionDetailsSectionElementContainerPadding)
-                .fillMaxWidth(),
-            sectionHeader = stringResource(R.string.transaction_details_card_section_text),
-            sectionText = transaction.numberText
-        )
+        transaction.usedCard?.let {
+            TransactionDetailsTextSection(
+                modifier = Modifier
+                    .padding(AppTransactionDetailsSectionElementContainerPadding)
+                    .fillMaxWidth(),
+                sectionHeader = stringResource(R.string.transaction_details_card_section_text),
+                sectionText = transaction.numberText
+            )
+        }
 
         TransactionDetailsTextSection(
             modifier = Modifier
@@ -232,10 +234,9 @@ private fun LightTheme() {
                             details = "dkscsdlkmc",
                             id = "cdsmkcds",
                             type = TransactionType.P2P,
-                            usedCardId = "dqwdwwqd",
+                            receiverId = "dqwdwwqd",
                             senderId = "sasadasd",
-                            priceAmount = 11.0,
-                            cardNumber = "1111222233334444",
+                            priceAmount = 11.0
                         )
                     )
                 )
@@ -269,10 +270,9 @@ private fun DarkTheme() {
                             details = "dkscsdlkmc",
                             id = "cdsmkcds",
                             type = TransactionType.P2P,
-                            usedCardId = "dqwdwwqd",
+                            receiverId = "dqwdwwqd",
                             senderId = "sasadasd",
-                            priceAmount = 11.0,
-                            cardNumber = "1111222233334444",
+                            priceAmount = 11.0
                         )
                     )
                 )

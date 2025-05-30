@@ -233,9 +233,8 @@ private fun LightTheme() {
                                 details = "awdawdawdawdawdwwdwadw",
                                 id = "cdsmkcds",
                                 type = TransactionType.P2P,
-                                usedCardId = "dqwdwwqd",
+                                receiverId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                cardNumber = "1111222233334444",
                                 priceAmount = 11.0
                             )
                         ),
@@ -249,9 +248,8 @@ private fun LightTheme() {
                                 details = "dkscsdlkmc",
                                 id = "cdsmkcds",
                                 type = TransactionType.Undefined,
-                                usedCardId = "dqwdwwqd",
+                                receiverId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                cardNumber = "1111222233334444",
                                 priceAmount = 11.0
                             )
                         )
@@ -322,10 +320,9 @@ private fun DarkTheme() {
                                 details = "dkscsdlkmc",
                                 id = "cdsmkcds",
                                 type = TransactionType.P2P,
-                                usedCardId = "dqwdwwqd",
+                                receiverId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                priceAmount = 11.0,
-                                cardNumber = "1111222233334444",
+                                priceAmount = 11.0
                             )
                         ),
                         TransactionModelUi(
@@ -338,10 +335,9 @@ private fun DarkTheme() {
                                 details = "awdawdawdawdawdwwdwadw",
                                 id = "cdsmkcds",
                                 type = TransactionType.Undefined,
-                                usedCardId = "dqwdwwqd",
+                                receiverId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                priceAmount = 11.0,
-                                cardNumber = "1111222233334444",
+                                priceAmount = 11.0
                             )
                         )
                     )

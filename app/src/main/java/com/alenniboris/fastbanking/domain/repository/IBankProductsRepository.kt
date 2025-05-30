@@ -81,4 +81,8 @@ interface IBankProductsRepository {
     suspend fun getAllUserTransactions(
         user: UserModelDomain
     ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain>
+
+    suspend fun getAllTransactionsForCreditById(
+        creditId: String
+    ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain>
 }

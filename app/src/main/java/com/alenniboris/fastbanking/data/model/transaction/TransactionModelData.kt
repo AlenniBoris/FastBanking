@@ -13,9 +13,8 @@ data class TransactionModelData(
     val id: String?,
     val priceAmount: String?,
     val senderId: String?,
-    val type: String?,
-    val usedCardId: String?,
-    val cardNumber: String?
+    val receiverId: String?,
+    val type: String?
 )
 
 fun TransactionModelData.toModelDomain(): TransactionModelDomain? = runCatching {
@@ -29,12 +28,12 @@ fun TransactionModelData.toModelDomain(): TransactionModelDomain? = runCatching 
         id = this.id!!,
         priceAmount = this.priceAmount?.toDouble()!!,
         senderId = this.senderId!!,
+        receiverId = this.receiverId!!,
         type = when (this.type!!) {
-            "p2p" -> TransactionType.P2P
+            "P2P" -> TransactionType.P2P
+            "Credit" -> TransactionType.Credit
             else -> TransactionType.Undefined
-        },
-        usedCardId = this.usedCardId!!,
-        cardNumber = this.cardNumber!!
+        }
     )
 }.getOrElse { exception ->
     Log.e("!!!", "TransactionModelData.toModelDomain ${exception.stackTraceToString()}")

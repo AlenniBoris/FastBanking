@@ -16,6 +16,8 @@ data class CreditModelUi(
     val reserveCreditBodyText: String =
         getCreditBody(domainModel.amountInReserveCurrency) + " " + domainModel.reserveCurrency
 
+    val percentageText: String = domainModel.percentage.toString() + "%"
+
     private fun getCreditBody(amount: Double): String {
         val currentDate = Calendar.getInstance().time
         val timeDiff = currentDate.time - domainModel.lastPayment.time

@@ -24,7 +24,6 @@ import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.currency.CurrencyModelDomain
 import com.alenniboris.fastbanking.domain.model.transaction.TransactionModelDomain
 import com.alenniboris.fastbanking.domain.model.transaction.TransactionType
-import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.TransactionModelUi
 import com.alenniboris.fastbanking.presentation.screens.product_history.IProductHistoryScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.product_history.IProductHistoryScreenIntent
@@ -55,7 +54,8 @@ fun ProductHistoryScreen(
     product: String
 ) {
 
-    val viewModel = koinViewModel<ProductHistoryScreenViewModel>() { parametersOf(productType, product) }
+    val viewModel =
+        koinViewModel<ProductHistoryScreenViewModel>() { parametersOf(productType, product) }
     val state by viewModel.state.collectAsStateWithLifecycle()
     val event by remember { mutableStateOf(viewModel.event) }
     val proceedIntent by remember { mutableStateOf(viewModel::proceedIntent) }
@@ -167,10 +167,9 @@ private fun LightTheme() {
                                 details = "dkscsdlkmc",
                                 id = "cdsmkcds",
                                 type = TransactionType.P2P,
-                                usedCardId = "dqwdwwqd",
+                                receiverId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                priceAmount = 11.0,
-                                cardNumber = "1111222233334444",
+                                priceAmount = 11.0
                             )
                         ),
                         TransactionModelUi(
@@ -183,10 +182,9 @@ private fun LightTheme() {
                                 details = "awdawdawdawdawdwwdwadw",
                                 id = "cdsmkcds",
                                 type = TransactionType.Undefined,
-                                usedCardId = "dqwdwwqd",
+                                receiverId = "dqwdwwqd",
                                 senderId = "sasadasd",
-                                priceAmount = 11.0,
-                                cardNumber = "1111222233334444",
+                                priceAmount = 11.0
                             )
                         )
                     )
@@ -229,10 +227,9 @@ private fun DarkTheme() {
 //                                details = "dkscsdlkmc",
 //                                id = "cdsmkcds",
 //                                type = TransactionType.P2P,
-//                                usedCardId = "dqwdwwqd",
+//                                receiverId = "dqwdwwqd",
 //                                senderId = "sasadasd",
-//                                priceAmount = 11.0,
-//                                cardNumber = "1111222233334444",
+//                                priceAmount = 11.0
 //                            )
 //                        ),
 //                        TransactionModelUi(
@@ -245,10 +242,9 @@ private fun DarkTheme() {
 //                                details = "awdawdawdawdawdwwdwadw",
 //                                id = "cdsmkcds",
 //                                type = TransactionType.Undefined,
-//                                usedCardId = "dqwdwwqd",
+//                                receiverId = "dqwdwwqd",
 //                                senderId = "sasadasd",
-//                                priceAmount = 11.0,
-//                                cardNumber = "1111222233334444",
+//                                priceAmount = 11.0
 //                            )
 //                        )
 //                    )

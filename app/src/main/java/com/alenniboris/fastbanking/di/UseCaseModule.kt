@@ -38,6 +38,7 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetCur
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllTransactionsForCreditByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsByCardUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
@@ -72,6 +73,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesE
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTransactionsForCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
@@ -322,6 +324,13 @@ val UseCaseModule = module {
         GetAllUserTransactionsUseCaseImpl(
             bankProductsRepository = get<IBankProductsRepository>(),
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllTransactionsForCreditByIdUseCase> {
+        GetAllTransactionsForCreditByIdUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

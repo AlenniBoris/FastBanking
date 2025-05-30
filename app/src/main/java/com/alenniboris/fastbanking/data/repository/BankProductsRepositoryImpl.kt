@@ -64,7 +64,7 @@ class BankProductsRepositoryImpl(
                 jsonMapping = { json -> json.fromJson<TransactionModelData>() },
                 modelsMapping = { dataModel -> dataModel.toModelDomain() },
                 filterPredicate = { domainModel ->
-                    domainModel.usedCardId == cardId
+                    domainModel.receiverId == cardId || domainModel.senderId == cardId
                 },
                 exceptionMapping = { exception ->
                     exception.toCommonException()
@@ -364,6 +364,23 @@ class BankProductsRepositoryImpl(
                 jsonMapping = { json -> json.fromJson<TransactionModelData>() },
                 modelsMapping = { dataModel -> dataModel.toModelDomain() },
                 filterPredicate = { domainModel -> domainModel.senderId == user.id },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getAllTransactionsForCreditById(
+        creditId: String
+    ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_TRANSACTION,
+                jsonMapping = { json -> json.fromJson<TransactionModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel -> domainModel.receiverId == creditId },
                 exceptionMapping = { exception ->
                     exception.toCommonException()
                 }

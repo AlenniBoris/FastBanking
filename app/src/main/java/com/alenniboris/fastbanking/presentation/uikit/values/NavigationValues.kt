@@ -29,6 +29,7 @@ const val TransactionsHistoryScreenRoute = "transactions history screen"
 const val ProductHistoryScreenRoute = "product history screen"
 const val CardDetailsScreenRoute = "card details screen"
 const val ProductInformationScreenRoute = "product information screen"
+const val CreditDetailsScreenRoute = "credit details screen"
 
 val RoutesWithoutBottomBar = listOf(
     RegistrationOptionsScreenRoute,
@@ -48,5 +49,6 @@ val RoutesWithoutBottomBar = listOf(
     ProductApplianceDetailsScreenRoute,
     ProductHistoryScreenRoute,
     CardDetailsScreenRoute,
-    ProductInformationScreenRoute
+    ProductInformationScreenRoute,
+    CreditDetailsScreenRoute
 )

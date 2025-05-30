@@ -181,7 +181,7 @@ class MainScreenViewModel(
                     } else
                         result.result.subList(0, 2)
 
-                    val res = list.map { it.toUiModel() }
+                    val res = list.map { it.toUiModel(usedCard = card.domainModel) }
 
                     _screenState.update {
                         it.copy(

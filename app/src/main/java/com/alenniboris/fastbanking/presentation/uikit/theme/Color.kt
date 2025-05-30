@@ -283,3 +283,5 @@ val cardSystemMastercardColor = Color(0xFFCB8B46)
 val cardSystemMirColor = Color(0xFF3198D5)
 val cardSystemUndefinedColor = Color(0xFF000000)
 val cardDetailsPlaceholderTextColor = Color(0xFFFCFCFC)
+
+// credit details screen

@@ -374,4 +374,21 @@ val ProductInformationScreenCopySectionIconPadding = PaddingValues(start = 15.dp
 val ProductInformationScreenCopySectionTextSize = 15.sp
 val ProductInformationScreenCopySectionHeaderTextSize = 25.sp
 
+// Credit details screen
+val CreditDetailsPlaceholderShape = RoundedCornerShape(60f)
+val CreditDetailsPlaceholderMainTextSize = 20.sp
+val CreditDetailsPlaceholderSubtleTextSize = 15.sp
+val CreditDetailsPlaceholderContainerInnerPadding =
+    PaddingValues(vertical = 15.dp, horizontal = 20.dp)
+val CreditDetailsPlaceholderElementPadding = PaddingValues(top = 10.dp)
+val CreditDetailsPlaceholderElementTextPadding = PaddingValues(top = 5.dp)
+val CreditDetailsPlaceholderElementDoublePadding = PaddingValues(top = 20.dp)
+val CreditDetailsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val CreditDetailsScreenCardPlaceholderPadding = PaddingValues(bottom = 20.dp)
+val CreditDetailsScreenNumberOfColumns = 2
+val CreditDetailsScreenActionButtonSize = 50.dp
+val CreditDetailsScreenActionButtonTextSize = 20.sp
+val CreditDetailsScreenActionButtonTextPadding = PaddingValues(top = 10.dp)
+val CreditDetailsScreenButtonsVerticalSpacing = 15.dp
+
 

@@ -27,12 +27,14 @@ import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankRecomm
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetAllUserCreditsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllExchangeRatesForCurrencyUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesExchangeRateUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTransactionsForCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
 import com.alenniboris.fastbanking.presentation.model.appliance.ProductApplianceType
@@ -42,6 +44,7 @@ import com.alenniboris.fastbanking.presentation.screens.additions.AdditionsScree
 import com.alenniboris.fastbanking.presentation.screens.application_information.ApplicationInformationScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.bank_news.BankNewsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.card_details.CardDetailsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.credit_details.CreditDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.help.HelpScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.language_settings.LanguageSettingsScreenViewModel
@@ -252,7 +255,8 @@ val ViewModelsModule = module {
         ProductHistoryScreenViewModel(
             productType = productType,
             product = product,
-            getAllUserTransactionsByCardUseCase = get<IGetAllUserTransactionsByCardUseCase>()
+            getAllUserTransactionsByCardUseCase = get<IGetAllUserTransactionsByCardUseCase>(),
+            getAllTransactionsForCreditByIdUseCase = get<IGetAllTransactionsForCreditByIdUseCase>()
         )
     }
 
@@ -264,6 +268,13 @@ val ViewModelsModule = module {
         CardDetailsScreenViewModel(
             cardId = cardId,
             getCardByIdUseCase = get<IGetCardByIdUseCase>()
+        )
+    }
+
+    viewModel<CreditDetailsScreenViewModel>() { (creditId: String) ->
+        CreditDetailsScreenViewModel(
+            creditId = creditId,
+            getCreditByIdUseCase = get<IGetCreditByIdUseCase>()
         )
     }
 }
