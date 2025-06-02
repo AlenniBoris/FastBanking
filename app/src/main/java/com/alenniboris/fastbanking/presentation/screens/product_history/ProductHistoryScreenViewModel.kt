@@ -1,6 +1,5 @@
 package com.alenniboris.fastbanking.presentation.screens.product_history
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
@@ -45,8 +44,35 @@ class ProductHistoryScreenViewModel(
             }
 
             BankProduct.DEPOSITS_AND_ACCOUNTS -> {
-                Log.e("!!!", "In development")
+                loadAccountHistory(account = product.fromJson<AccountModelUi>())
             }
+        }
+    }
+
+    private fun loadAccountHistory(account: AccountModelUi) {
+        viewModelScope.launch {
+            _screenState.update { it.copy(isLoading = true) }
+            when (
+                val res =
+                    getAllTransactionsForCreditByIdUseCase.invoke(creditId = account.domainModel.id)
+            ) {
+                is CustomResultModelDomain.Success -> {
+                    _screenState.update {
+                        it.copy(
+                            transactions = res.result.map { it.toUiModel() }
+                        )
+                    }
+                }
+
+                is CustomResultModelDomain.Error -> {
+                    _event.emit(
+                        IProductHistoryScreenEvent.ShowToastMessage(
+                            res.exception.toUiMessageString()
+                        )
+                    )
+                }
+            }
+            _screenState.update { it.copy(isLoading = false) }
         }
     }
 

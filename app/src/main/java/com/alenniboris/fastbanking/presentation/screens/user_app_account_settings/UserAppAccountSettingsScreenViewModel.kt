@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.account_settings
+package com.alenniboris.fastbanking.presentation.screens.user_app_account_settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,14 +13,14 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class AccountSettingsScreenViewModel(
+class UserAppAccountSettingsScreenViewModel(
     private val getCurrentUserUseCase: IGetCurrentUserUseCase
 ) : ViewModel() {
 
-    private val _screenState = MutableStateFlow(AccountSettingsScreenState())
+    private val _screenState = MutableStateFlow(UserAppAccountSettingsScreenState())
     val state = _screenState.asStateFlow()
 
-    private val _event = SingleFlowEvent<IAccountSettingsScreenEvent>(viewModelScope)
+    private val _event = SingleFlowEvent<IUserAppAccountSettingsScreenEvent>(viewModelScope)
     val event = _event.flow
 
     init {
@@ -34,22 +34,22 @@ class AccountSettingsScreenViewModel(
         }
     }
 
-    fun proceedIntent(intent: IAccountSettingsScreenIntent) {
+    fun proceedIntent(intent: IUserAppAccountSettingsScreenIntent) {
         when (intent) {
-            is IAccountSettingsScreenIntent.NavigateBack -> navigateBack()
-            is IAccountSettingsScreenIntent.OpenPasswordResetScreen -> openPasswordResetScreen()
+            is IUserAppAccountSettingsScreenIntent.NavigateBack -> navigateBack()
+            is IUserAppAccountSettingsScreenIntent.OpenPasswordResetScreen -> openPasswordResetScreen()
         }
     }
 
     private fun navigateBack() {
         _event.emit(
-            IAccountSettingsScreenEvent.NavigateBack
+            IUserAppAccountSettingsScreenEvent.NavigateBack
         )
     }
 
     private fun openPasswordResetScreen() {
         _event.emit(
-            IAccountSettingsScreenEvent.OpenPasswordResetScreen
+            IUserAppAccountSettingsScreenEvent.OpenPasswordResetScreen
         )
     }
 }

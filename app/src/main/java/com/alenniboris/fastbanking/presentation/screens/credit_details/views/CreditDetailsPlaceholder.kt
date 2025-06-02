@@ -22,7 +22,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsPlaceho
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsPlaceholderMainTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsPlaceholderShape
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsPlaceholderSubtleTextSize
-import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenCardPlaceholderPadding
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenCreditPlaceholderPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenContentPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
@@ -120,7 +120,7 @@ private fun LightTheme() {
 
                 CreditDetailsPlaceholder(
                     modifier = Modifier
-                        .padding(CreditDetailsScreenCardPlaceholderPadding)
+                        .padding(CreditDetailsScreenCreditPlaceholderPadding)
                         .clip(CreditDetailsPlaceholderShape)
                         .fillMaxWidth()
                         .background(mainScreenItemColor)
@@ -165,7 +165,7 @@ private fun DarkTheme() {
 
                 CreditDetailsPlaceholder(
                     modifier = Modifier
-                        .padding(CreditDetailsScreenCardPlaceholderPadding)
+                        .padding(CreditDetailsScreenCreditPlaceholderPadding)
                         .clip(CreditDetailsPlaceholderShape)
                         .fillMaxWidth()
                         .background(mainScreenItemColor)

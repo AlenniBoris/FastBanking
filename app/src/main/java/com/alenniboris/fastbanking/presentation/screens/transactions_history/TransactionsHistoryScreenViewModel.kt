@@ -1,5 +1,6 @@
 package com.alenniboris.fastbanking.presentation.screens.transactions_history
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
@@ -43,6 +44,7 @@ class TransactionsHistoryScreenViewModel(
                 val res = getAllUserTransactionsUseCase.invoke()
             ) {
                 is CustomResultModelDomain.Success -> {
+                    Log.e("!!!", res.result.toString())
                     _screenState.update {
                         it.copy(
                             transactions = res.result.map { it.toUiModel() }

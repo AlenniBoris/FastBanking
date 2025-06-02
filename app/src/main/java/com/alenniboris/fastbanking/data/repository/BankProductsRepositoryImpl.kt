@@ -1,5 +1,6 @@
 package com.alenniboris.fastbanking.data.repository
 
+import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toCommonException
 import com.alenniboris.fastbanking.data.model.account.AccountModelData
 import com.alenniboris.fastbanking.data.model.account.toModelDomain
@@ -28,6 +29,8 @@ import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
 import com.alenniboris.fastbanking.domain.utils.GsonUtil.fromJson
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 
 class BankProductsRepositoryImpl(
@@ -357,17 +360,42 @@ class BankProductsRepositoryImpl(
         user: UserModelDomain
     ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestListOfElements(
-                dispatcher = dispatchers.IO,
-                database = database,
-                table = FirebaseDatabaseValues.TABLE_TRANSACTION,
-                jsonMapping = { json -> json.fromJson<TransactionModelData>() },
-                modelsMapping = { dataModel -> dataModel.toModelDomain() },
-                filterPredicate = { domainModel -> domainModel.senderId == user.id },
-                exceptionMapping = { exception ->
-                    exception.toCommonException()
+
+            val cards = getAllUserCards(user)
+            return@withContext if (cards is CustomResultModelDomain.Success) {
+                val list = cards.result
+                    .map { card ->
+                        async {
+                            getAllUserTransactionsByCard(
+                                user = user,
+                                cardId = card.id
+                            )
+                        }
+                    }
+                    .awaitAll()
+                    .map { transRes ->
+                        if (transRes is CustomResultModelDomain.Success) {
+                            Log.e("!!!", transRes.result.toString())
+                            transRes.result
+                        } else {
+                            return@withContext CustomResultModelDomain.Error(
+                                transRes.exception!!
+                            )
+                        }
+                    }
+                val res: MutableMap<String, TransactionModelDomain> = mutableMapOf()
+                list.forEach { listOfTransactions ->
+                    listOfTransactions.forEach { transaction ->
+                        res.put(transaction.id, transaction)
+                    }
                 }
-            )
+
+                CustomResultModelDomain.Success(res.values.toList())
+            } else {
+                CustomResultModelDomain.Error(
+                    cards.exception!!
+                )
+            }
         }
 
     override suspend fun getAllTransactionsForCreditById(
@@ -381,6 +409,25 @@ class BankProductsRepositoryImpl(
                 jsonMapping = { json -> json.fromJson<TransactionModelData>() },
                 modelsMapping = { dataModel -> dataModel.toModelDomain() },
                 filterPredicate = { domainModel -> domainModel.receiverId == creditId },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getAllTransactionsForAccountById(
+        accountId: String
+    ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestListOfElements(
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_TRANSACTION,
+                jsonMapping = { json -> json.fromJson<TransactionModelData>() },
+                modelsMapping = { dataModel -> dataModel.toModelDomain() },
+                filterPredicate = { domainModel ->
+                    domainModel.receiverId == accountId || domainModel.senderId == accountId
+                },
                 exceptionMapping = { exception ->
                     exception.toCommonException()
                 }

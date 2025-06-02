@@ -3,6 +3,7 @@ package com.alenniboris.fastbanking.di
 import com.alenniboris.fastbanking.domain.model.appliances.CardDetailedApplianceType
 import com.alenniboris.fastbanking.domain.model.appliances.CreditDetailedApplianceType
 import com.alenniboris.fastbanking.domain.model.appliances.DepositDetailedApplianceType
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.appliance.IGetAllUserAppliancesUseCase
@@ -26,6 +27,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUs
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankRecommendedNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetFullModelsForAllSimpleCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetAllUserCreditsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
@@ -38,7 +40,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTran
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
 import com.alenniboris.fastbanking.presentation.model.appliance.ProductApplianceType
-import com.alenniboris.fastbanking.presentation.screens.account_settings.AccountSettingsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.account_details.AccountDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
 import com.alenniboris.fastbanking.presentation.screens.additions.AdditionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.application_information.ApplicationInformationScreenViewModel
@@ -66,6 +68,7 @@ import com.alenniboris.fastbanking.presentation.screens.registration.registratio
 import com.alenniboris.fastbanking.presentation.screens.registration.registration_options.RegistrationOptionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.theme_settings.ThemeSettingsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.transactions_history.TransactionsHistoryScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.user_app_account_settings.UserAppAccountSettingsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.user_appliances.UserAppliancesScreenViewModel
 import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import org.koin.android.ext.koin.androidApplication
@@ -187,8 +190,8 @@ val ViewModelsModule = module {
         LanguageSettingsScreenViewModel()
     }
 
-    viewModel<AccountSettingsScreenViewModel>() {
-        AccountSettingsScreenViewModel(
+    viewModel<UserAppAccountSettingsScreenViewModel>() {
+        UserAppAccountSettingsScreenViewModel(
             getCurrentUserUseCase = get<IGetCurrentUserUseCase>()
         )
     }
@@ -275,6 +278,14 @@ val ViewModelsModule = module {
         CreditDetailsScreenViewModel(
             creditId = creditId,
             getCreditByIdUseCase = get<IGetCreditByIdUseCase>()
+        )
+    }
+
+    viewModel<AccountDetailsScreenViewModel>() { (accountId: String) ->
+        AccountDetailsScreenViewModel(
+            accountId = accountId,
+            getAccountByIdUseCase = get<IGetAccountByIdUseCase>(),
+            getFullModelsForAllSimpleCardsUseCase = get<IGetFullModelsForAllSimpleCardsUseCase>()
         )
     }
 }

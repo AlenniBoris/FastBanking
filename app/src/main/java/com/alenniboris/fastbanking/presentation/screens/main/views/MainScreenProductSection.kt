@@ -452,7 +452,8 @@ private fun LightThemePreview() {
                                 name = "",
                                 surname = ""
                             ),
-                            name = "odsklmclksd"
+                            name = "odsklmclksd",
+                            erip = "dshc bsdhcbsdc"
                         )
                     ),
                     isLoading = false,
@@ -618,7 +619,8 @@ private fun DarkThemePreview() {
                                 name = "",
                                 surname = ""
                             ),
-                            name = "odsklmclksd"
+                            name = "odsklmclksd",
+                            erip = "dshc bsdhcbsdc"
                         )
                     ),
                     isLoading = false,

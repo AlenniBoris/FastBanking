@@ -5,17 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.OwnerModelDomain
@@ -26,12 +19,8 @@ import com.alenniboris.fastbanking.presentation.model.bank_product.AccountModelU
 import com.alenniboris.fastbanking.presentation.screens.product_information.IProductInformationScreenIntent
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.ProductInformationScreenContentPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.ProductInformationScreenCopySectionHeaderTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.ProductInformationScreenSectionPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
-import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
-import com.alenniboris.fastbanking.presentation.uikit.views.AppEmptyScreen
 
 @Composable
 fun AccountInformationUi(
@@ -59,43 +48,20 @@ fun AccountInformationUi(
             }
         )
 
-        Text(
+        ProductInformationCopySection(
             modifier = Modifier
                 .padding(ProductInformationScreenSectionPadding)
                 .fillMaxWidth(),
-            text = stringResource(R.string.attached_cards_text),
-            style = bodyStyle.copy(
-                color = appTopBarElementsColor,
-                fontWeight = FontWeight.Bold,
-                fontSize = ProductInformationScreenCopySectionHeaderTextSize
-            )
-        )
-
-        val listOfAttachedCards by remember { mutableStateOf(account.domainModel.attachedCards.values.toList()) }
-        if (listOfAttachedCards.isEmpty()) {
-            AppEmptyScreen(
-                modifier = Modifier.fillMaxSize()
-            )
-        } else {
-            LazyColumn {
-                items(listOfAttachedCards) { card ->
-                    ProductInformationCopySection(
-                        modifier = Modifier
-                            .padding(ProductInformationScreenSectionPadding)
-                            .fillMaxWidth(),
-                        header = "",
-                        text = card.number,
-                        onClick = {
-                            proceedIntent(
-                                IProductInformationScreenIntent.CopyTextToClipboard(
-                                    card.number
-                                )
-                            )
-                        }
+            header = stringResource(R.string.erip_number_text),
+            text = account.domainModel.erip,
+            onClick = {
+                proceedIntent(
+                    IProductInformationScreenIntent.CopyTextToClipboard(
+                        account.domainModel.erip
                     )
-                }
+                )
             }
-        }
+        )
     }
 }
 
@@ -181,7 +147,8 @@ private fun LightTheme() {
                             name = "",
                             surname = ""
                         ),
-                        name = "odsklmclksd"
+                        name = "odsklmclksd",
+                        erip = "dshc bsdhcbsdc"
                     )
                 ),
                 proceedIntent = {}
@@ -215,7 +182,8 @@ private fun DarkTheme() {
                             name = "",
                             surname = ""
                         ),
-                        name = "odsklmclksd"
+                        name = "odsklmclksd",
+                        erip = "dshc bsdhcbsdc"
                     )
                 ),
                 proceedIntent = {}

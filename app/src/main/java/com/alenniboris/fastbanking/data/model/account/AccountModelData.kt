@@ -9,6 +9,7 @@ import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.card.SimpleCardModelDomain
 
 data class AccountModelData(
+    val ERIP: String? = null,
     val amount: String? = null,
     val attachedCards: Map<String?, SimpleCardModelData?>? = null,
     val id: String? = null,
@@ -35,7 +36,8 @@ fun AccountModelData.toModelDomain(): AccountModelDomain? = runCatching {
         owner = this.owner?.toModelDomain()!!,
         currency = this.currency!!,
         reserveCurrency = this.reserveCurrency!!,
-        name = this.name!!
+        name = this.name!!,
+        erip = this.ERIP!!
     )
 }.getOrElse { exception ->
     Log.e("!!!", "AccountModelData.toModelDomain, ${exception.stackTraceToString()}")

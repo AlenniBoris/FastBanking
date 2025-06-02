@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.R
+import com.alenniboris.fastbanking.presentation.screens.destinations.AccountDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.CardDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.CreditDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.HelpScreenDestination
@@ -168,13 +169,11 @@ fun MainScreen(
         launch {
             event.filterIsInstance<IMainScreenEvent.OpenAccountDetailsScreen>()
                 .collect { coming ->
-                    toastMessage?.cancel()
-                    toastMessage = Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
+                    navigator.navigate(
+                        AccountDetailsScreenDestination(
+                            accountId = coming.accountId
+                        )
                     )
-                    toastMessage?.show()
                 }
         }
 

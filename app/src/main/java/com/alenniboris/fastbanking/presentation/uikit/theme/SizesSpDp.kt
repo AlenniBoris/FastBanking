@@ -382,13 +382,28 @@ val CreditDetailsPlaceholderContainerInnerPadding =
     PaddingValues(vertical = 15.dp, horizontal = 20.dp)
 val CreditDetailsPlaceholderElementPadding = PaddingValues(top = 10.dp)
 val CreditDetailsPlaceholderElementTextPadding = PaddingValues(top = 5.dp)
-val CreditDetailsPlaceholderElementDoublePadding = PaddingValues(top = 20.dp)
 val CreditDetailsScreenContentPadding = PaddingValues(horizontal = 20.dp)
-val CreditDetailsScreenCardPlaceholderPadding = PaddingValues(bottom = 20.dp)
+val CreditDetailsScreenCreditPlaceholderPadding = PaddingValues(bottom = 20.dp)
 val CreditDetailsScreenNumberOfColumns = 2
 val CreditDetailsScreenActionButtonSize = 50.dp
 val CreditDetailsScreenActionButtonTextSize = 20.sp
 val CreditDetailsScreenActionButtonTextPadding = PaddingValues(top = 10.dp)
 val CreditDetailsScreenButtonsVerticalSpacing = 15.dp
 
+// Account details screen
+val AccountDetailsPlaceholderShape = RoundedCornerShape(60f)
+val AccountDetailsPlaceholderMainTextSize = 20.sp
+val AccountDetailsPlaceholderSubtleTextSize = 15.sp
+val AccountDetailsPlaceholderContainerInnerPadding =
+    PaddingValues(vertical = 15.dp, horizontal = 20.dp)
+val AccountDetailsPlaceholderElementPadding = PaddingValues(top = 10.dp)
+val AccountDetailsPlaceholderElementTextPadding = PaddingValues(top = 5.dp)
+val AccountDetailsScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val AccountDetailsScreenAccountPlaceholderPadding = PaddingValues(bottom = 20.dp)
+val AccountDetailsScreenNumberOfColumns = 2
+val AccountDetailsScreenActionButtonSize = 50.dp
+val AccountDetailsScreenActionButtonTextSize = 20.sp
+val AccountDetailsScreenActionButtonTextPadding = PaddingValues(top = 10.dp)
+val AccountDetailsScreenButtonsVerticalSpacing = 15.dp
+val AccountDetailsScreenSpacerHeight = 1.dp
 

@@ -32,10 +32,10 @@ import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.user.UserGender
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.presentation.model.user.toModelUi
-import com.alenniboris.fastbanking.presentation.screens.destinations.AccountSettingsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.LanguageSettingsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.PersonalDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.ThemeSettingsScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.UserAppAccountSettingsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.UserAppliancesScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.personal.IPersonalScreenEvent
 import com.alenniboris.fastbanking.presentation.screens.personal.IPersonalScreenIntent
@@ -114,7 +114,7 @@ fun PersonalScreen(
 
         launch {
             event.filterIsInstance<IPersonalScreenEvent.OpenAccountDataScreen>().collect {
-                navigator.navigate(AccountSettingsScreenDestination)
+                navigator.navigate(UserAppAccountSettingsScreenDestination)
             }
         }
 

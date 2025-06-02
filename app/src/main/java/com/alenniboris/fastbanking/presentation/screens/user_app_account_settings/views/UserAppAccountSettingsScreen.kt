@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.account_settings.views
+package com.alenniboris.fastbanking.presentation.screens.user_app_account_settings.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,10 +27,10 @@ import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.user.UserGender
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.presentation.model.user.toModelUi
-import com.alenniboris.fastbanking.presentation.screens.account_settings.AccountSettingsScreenState
-import com.alenniboris.fastbanking.presentation.screens.account_settings.AccountSettingsScreenViewModel
-import com.alenniboris.fastbanking.presentation.screens.account_settings.IAccountSettingsScreenEvent
-import com.alenniboris.fastbanking.presentation.screens.account_settings.IAccountSettingsScreenIntent
+import com.alenniboris.fastbanking.presentation.screens.user_app_account_settings.UserAppAccountSettingsScreenState
+import com.alenniboris.fastbanking.presentation.screens.user_app_account_settings.UserAppAccountSettingsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.user_app_account_settings.IUserAppAccountSettingsScreenEvent
+import com.alenniboris.fastbanking.presentation.screens.user_app_account_settings.IUserAppAccountSettingsScreenIntent
 import com.alenniboris.fastbanking.presentation.screens.destinations.PasswordResetScreenDestination
 import com.alenniboris.fastbanking.presentation.uikit.theme.AccountSettingsScreenContentPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.AccountSettingsScreenContentTextPadding
@@ -42,7 +42,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
-import com.alenniboris.fastbanking.presentation.uikit.values.AccountSettingsScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.values.UserAppAccountSettingsScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.views.AppCustomButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.ramcosta.composedestinations.annotation.Destination
@@ -52,13 +52,13 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import java.util.Calendar
 
-@Destination(route = AccountSettingsScreenRoute)
+@Destination(route = UserAppAccountSettingsScreenRoute)
 @Composable
-fun AccountSettingsScreen(
+fun UserAppAccountSettingsScreen(
     navigator: DestinationsNavigator
 ) {
 
-    val viewModel = koinViewModel<AccountSettingsScreenViewModel>()
+    val viewModel = koinViewModel<UserAppAccountSettingsScreenViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
     val event by remember { mutableStateOf(viewModel.event) }
     val proceedIntent by remember { mutableStateOf(viewModel::proceedIntent) }
@@ -66,13 +66,13 @@ fun AccountSettingsScreen(
     LaunchedEffect(event) {
 
         launch {
-            event.filterIsInstance<IAccountSettingsScreenEvent.NavigateBack>().collect {
+            event.filterIsInstance<IUserAppAccountSettingsScreenEvent.NavigateBack>().collect {
                 navigator.popBackStack()
             }
         }
 
         launch {
-            event.filterIsInstance<IAccountSettingsScreenEvent.OpenPasswordResetScreen>().collect {
+            event.filterIsInstance<IUserAppAccountSettingsScreenEvent.OpenPasswordResetScreen>().collect {
                 navigator.navigate(PasswordResetScreenDestination)
             }
         }
@@ -86,8 +86,8 @@ fun AccountSettingsScreen(
 
 @Composable
 private fun AccountSettingsScreenUi(
-    state: AccountSettingsScreenState,
-    proceedIntent: (IAccountSettingsScreenIntent) -> Unit
+    state: UserAppAccountSettingsScreenState,
+    proceedIntent: (IUserAppAccountSettingsScreenIntent) -> Unit
 ) {
 
     Column(
@@ -103,7 +103,7 @@ private fun AccountSettingsScreenUi(
                 .padding(TopBarPadding),
             leftBtnPainter = painterResource(R.drawable.back_icon),
             onLeftBtnClicked = {
-                proceedIntent(IAccountSettingsScreenIntent.NavigateBack)
+                proceedIntent(IUserAppAccountSettingsScreenIntent.NavigateBack)
             },
             headerTextString = stringResource(R.string.accounts_settings_header_text)
         )
@@ -177,7 +177,7 @@ private fun AccountSettingsScreenUi(
                         .fillMaxWidth(),
                     text = stringResource(R.string.password_reset_text),
                     onClick = {
-                        proceedIntent(IAccountSettingsScreenIntent.OpenPasswordResetScreen)
+                        proceedIntent(IUserAppAccountSettingsScreenIntent.OpenPasswordResetScreen)
                     }
                 )
             }
@@ -198,7 +198,7 @@ private fun LightTheme() {
 //            )
 
             AccountSettingsScreenUi(
-                state = AccountSettingsScreenState(
+                state = UserAppAccountSettingsScreenState(
                     user = UserModelDomain(
                         id = "111",
                         password = "111",
@@ -234,7 +234,7 @@ private fun DarkTheme() {
 //            )
 
             AccountSettingsScreenUi(
-                state = AccountSettingsScreenState(
+                state = UserAppAccountSettingsScreenState(
                     user = UserModelDomain(
                         id = "111",
                         password = "111",

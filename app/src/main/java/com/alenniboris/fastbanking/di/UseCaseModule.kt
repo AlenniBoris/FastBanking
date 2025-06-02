@@ -30,6 +30,7 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBa
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankRecommendedNewsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetAllUserCardsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetCardByIdUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetFullModelsForAllSimpleCardsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.credits.GetAllUserCreditsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.credits.GetCreditByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllCurrenciesInfoUseCaseImpl
@@ -38,6 +39,7 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetCur
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.CallPhoneNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.help.OpenMessengerUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.map.GetBankLocationsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllTransactionsForAccountByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllTransactionsForCreditByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsByCardUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsUseCaseImpl
@@ -65,6 +67,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUs
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankRecommendedNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetFullModelsForAllSimpleCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetAllUserCreditsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
@@ -73,6 +76,7 @@ import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetCurrenciesE
 import com.alenniboris.fastbanking.domain.usecase.logic.help.ICallPhoneNumberUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.help.IOpenMessengerUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTransactionsForAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTransactionsForCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
@@ -331,6 +335,20 @@ val UseCaseModule = module {
     factory<IGetAllTransactionsForCreditByIdUseCase> {
         GetAllTransactionsForCreditByIdUseCaseImpl(
             bankProductsRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetAllTransactionsForAccountByIdUseCase> {
+        GetAllTransactionsForAccountByIdUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IGetFullModelsForAllSimpleCardsUseCase> {
+        GetFullModelsForAllSimpleCardsUseCaseImpl(
+            getCardByIdUseCase = get<IGetCardByIdUseCase>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

@@ -11,5 +11,6 @@ data class AccountModelDomain(
     val reserveCurrency: String,
     val attachedCards: Map<String, SimpleCardModelDomain>,
     val owner: OwnerModelDomain,
-    val name: String
+    val name: String,
+    val erip: String
 )

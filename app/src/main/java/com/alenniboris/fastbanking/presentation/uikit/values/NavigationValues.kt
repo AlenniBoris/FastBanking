@@ -18,7 +18,7 @@ const val PersonalScreenRoute = "Personal screen"
 const val PersonalDetailsScreenRoute = "Personal details screen"
 const val ThemeSettingsScreenRoute = "Theme settings screen"
 const val LanguageSettingsScreenRoute = "Language settings screen"
-const val AccountSettingsScreenRoute = "account settings screen"
+const val UserAppAccountSettingsScreenRoute = "account settings screen"
 const val UserAppliancesScreenRoute = "user appliances screen"
 const val ProductApplianceChoosingScreenRoute = "product appliance choosing screen"
 const val CardApplianceFormScreenRoute = "card appliance form screen"
@@ -30,6 +30,7 @@ const val ProductHistoryScreenRoute = "product history screen"
 const val CardDetailsScreenRoute = "card details screen"
 const val ProductInformationScreenRoute = "product information screen"
 const val CreditDetailsScreenRoute = "credit details screen"
+const val AccountDetailsScreenRoute = "account details screen"
 
 val RoutesWithoutBottomBar = listOf(
     RegistrationOptionsScreenRoute,
@@ -41,7 +42,7 @@ val RoutesWithoutBottomBar = listOf(
     PersonalDetailsScreenRoute,
     ThemeSettingsScreenRoute,
     LanguageSettingsScreenRoute,
-    AccountSettingsScreenRoute,
+    UserAppAccountSettingsScreenRoute,
     ProductApplianceChoosingScreenRoute,
     CardApplianceFormScreenRoute,
     CreditApplianceFormScreenRoute,
@@ -50,5 +51,6 @@ val RoutesWithoutBottomBar = listOf(
     ProductHistoryScreenRoute,
     CardDetailsScreenRoute,
     ProductInformationScreenRoute,
-    CreditDetailsScreenRoute
+    CreditDetailsScreenRoute,
+    AccountDetailsScreenRoute
 )

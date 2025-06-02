@@ -5,9 +5,9 @@ import com.alenniboris.fastbanking.domain.model.card.CardSystem
 import com.alenniboris.fastbanking.domain.model.card.SimpleCardModelDomain
 
 data class SimpleCardModelData(
-    val id: String?,
-    val number: String?,
-    val system: String?
+    val id: String? = null,
+    val number: String? = null,
+    val system: String? = null
 )
 
 fun SimpleCardModelData.toModelDomain(): SimpleCardModelDomain? =

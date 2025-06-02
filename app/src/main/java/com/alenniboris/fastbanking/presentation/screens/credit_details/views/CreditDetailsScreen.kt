@@ -44,15 +44,15 @@ import com.alenniboris.fastbanking.presentation.screens.credit_details.toUiPictu
 import com.alenniboris.fastbanking.presentation.screens.credit_details.toUiString
 import com.alenniboris.fastbanking.presentation.screens.destinations.ProductHistoryScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.ProductInformationScreenDestination
-import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsScreenActionButtonSize
-import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsScreenActionButtonTextPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsScreenActionButtonTextSize
-import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsScreenButtonsVerticalSpacing
-import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsScreenNumberOfColumns
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsPlaceholderContainerInnerPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsPlaceholderShape
-import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenCardPlaceholderPadding
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenActionButtonSize
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenActionButtonTextPadding
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenActionButtonTextSize
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenButtonsVerticalSpacing
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenCreditPlaceholderPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenContentPadding
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenNumberOfColumns
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
@@ -184,7 +184,7 @@ private fun CreditDetailsScreenUi(
 
                     CreditDetailsPlaceholder(
                         modifier = Modifier
-                            .padding(CreditDetailsScreenCardPlaceholderPadding)
+                            .padding(CreditDetailsScreenCreditPlaceholderPadding)
                             .clip(CreditDetailsPlaceholderShape)
                             .fillMaxWidth()
                             .background(mainScreenItemColor)
@@ -193,10 +193,10 @@ private fun CreditDetailsScreenUi(
                     )
 
                     LazyVerticalGrid(
-                        columns = GridCells.Fixed(CardDetailsScreenNumberOfColumns),
+                        columns = GridCells.Fixed(CreditDetailsScreenNumberOfColumns),
                         horizontalArrangement = Arrangement.Center,
                         verticalArrangement = Arrangement.spacedBy(
-                            CardDetailsScreenButtonsVerticalSpacing
+                            CreditDetailsScreenButtonsVerticalSpacing
                         )
                     ) {
                         items(state.allActions) { action ->
@@ -230,7 +230,7 @@ private fun CreditActionButton(
 
         AppIconButton(
             modifier = Modifier
-                .size(CardDetailsScreenActionButtonSize)
+                .size(CreditDetailsScreenActionButtonSize)
                 .background(
                     color = mainScreenItemColor,
                     shape = CircleShape
@@ -242,12 +242,12 @@ private fun CreditActionButton(
 
         Text(
             modifier = Modifier
-                .padding(CardDetailsScreenActionButtonTextPadding)
+                .padding(CreditDetailsScreenActionButtonTextPadding)
                 .width(IntrinsicSize.Min),
             text = stringResource(action.toUiString()),
             style = bodyStyle.copy(
                 color = appTopBarElementsColor,
-                fontSize = CardDetailsScreenActionButtonTextSize,
+                fontSize = CreditDetailsScreenActionButtonTextSize,
                 textAlign = TextAlign.Center
             )
         )
