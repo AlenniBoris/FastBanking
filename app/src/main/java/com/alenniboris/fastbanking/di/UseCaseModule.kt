@@ -43,6 +43,9 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.Ge
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllTransactionsForCreditByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsByCardUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.GetAllUserTransactionsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.MakeTransactionByCardNumberUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.MakeTransactionByEripNumberUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.MakeTransactionForCreditByContractNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
@@ -80,6 +83,9 @@ import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTran
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTransactionsForCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByCardNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByEripNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionForCreditByContractNumberUseCase
 import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import org.koin.dsl.module
 
@@ -349,6 +355,27 @@ val UseCaseModule = module {
     factory<IGetFullModelsForAllSimpleCardsUseCase> {
         GetFullModelsForAllSimpleCardsUseCaseImpl(
             getCardByIdUseCase = get<IGetCardByIdUseCase>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IMakeTransactionByCardNumberUseCase> {
+        MakeTransactionByCardNumberUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IMakeTransactionByEripNumberUseCase> {
+        MakeTransactionByEripNumberUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IMakeTransactionForCreditByContractNumberUseCase> {
+        MakeTransactionForCreditByContractNumberUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

@@ -433,4 +433,28 @@ class BankProductsRepositoryImpl(
                 }
             )
         }
+
+    override suspend fun makeTransactionByCardNumber(
+        usedCard: CardModelDomain,
+        cardNumber: String,
+        amount: Double
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun makeTransactionByEripNumber(
+        eripNumber: String,
+        usedCard: CardModelDomain,
+        amount: Double
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun makeTransactionForCreditByContractNumber(
+        usedCard: CardModelDomain,
+        contractNumber: String,
+        amount: Double
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> {
+        TODO("Not yet implemented")
+    }
 }
