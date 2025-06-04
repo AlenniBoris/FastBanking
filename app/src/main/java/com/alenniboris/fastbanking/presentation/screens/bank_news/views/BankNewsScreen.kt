@@ -263,7 +263,7 @@ private fun BankNewsScreenUiPreview() {
                         image = "2322121",
                         mainText = "328928328923",
                         reference = Uri.parse("amdoimasdoiasoid"),
-                        synopsys = ".;;;;;;;;;;;wdwdwd",
+                        synopsys = "wdwdwd",
                         title = "3",
                         isRecommended = true
                     )

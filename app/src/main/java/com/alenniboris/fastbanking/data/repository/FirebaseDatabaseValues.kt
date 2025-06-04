@@ -25,4 +25,12 @@ object FirebaseDatabaseValues {
     const val TABLE_APPLIANCES_CREDITS = "appliances_credits"
 
     const val TABLE_APPLIANCES_DEPOSITS = "appliances_deposits"
+
+    const val SEARCHING_FIELD_CARD_NUMBER = "number"
+
+    const val SEARCHING_FIELD_CREDIT_CONTRACT_NUMBER = "contractNumber"
+
+    const val SEARCHING_FIELD_ERIP_NUMBER = "erip"
+
+    const val SEARCHING_FIELD_ID = "id"
 }

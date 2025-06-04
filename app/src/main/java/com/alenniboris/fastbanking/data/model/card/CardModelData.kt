@@ -2,6 +2,7 @@ package com.alenniboris.fastbanking.data.model.card
 
 import android.util.Log
 import com.alenniboris.fastbanking.data.model.OwnerModelData
+import com.alenniboris.fastbanking.data.model.toModelData
 import com.alenniboris.fastbanking.data.model.toModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardSystem
@@ -21,8 +22,8 @@ data class CardModelData(
     val reserveCurrency: String? = null,
     val amountInReserveCurrency: String? = null,
     val name: String? = null,
-    val ERIP: String? = null,
-    val IBAN: String? = null,
+    val erip: String? = null,
+    val iban: String? = null,
     val bankIdCode: String? = null,
 )
 
@@ -49,11 +50,30 @@ fun CardModelData.toModelDomain(): CardModelDomain? = runCatching {
             else -> CardSystem.Undefined
         },
         name = this.name!!,
-        erip = this.ERIP!!,
-        iban = this.IBAN!!,
+        erip = this.erip!!,
+        iban = this.iban!!,
         bankIdCode = this.bankIdCode!!
     )
 }.getOrElse { exception ->
     Log.e("!!!", "CardModelData.toModelDomain ${exception.stackTraceToString()}")
     null
 }
+
+fun CardModelDomain.toModelData(): CardModelData =
+    CardModelData(
+        id = this.id,
+        amountInReserveCurrency = this.amountInReserveCurrency.toString(),
+        currency = this.currencyCode,
+        reserveCurrency = this.reserveCurrencyCode,
+        amount = this.amount.toString(),
+        owner = this.owner.toModelData(),
+        expireDate = this.expireDate.time.toString(),
+        number = this.number,
+        cvv = this.cvv,
+        type = this.type.toString(),
+        system = this.system.toString(),
+        name = this.name,
+        erip = this.erip,
+        iban = this.iban,
+        bankIdCode = this.bankIdCode
+    )

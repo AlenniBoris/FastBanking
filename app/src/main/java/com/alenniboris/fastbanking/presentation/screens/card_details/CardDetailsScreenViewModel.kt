@@ -1,6 +1,5 @@
 package com.alenniboris.fastbanking.presentation.screens.card_details
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain

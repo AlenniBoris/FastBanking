@@ -37,9 +37,8 @@ data class CardApplianceFormScreenState(
 
     val dateOfAppliance: Date = Calendar.getInstance().time
     val applianceStatus: ApplianceStatus = ApplianceStatus.Waiting
-    val isVirtualCard: Boolean = applianceType?.let {
-        it == CardDetailedApplianceType.REISSUE_VIRTUAL_CARD || it == CardDetailedApplianceType.ISSUE_VIRTUAL_CARD
-    } ?: false
+    val isVirtualCard: Boolean =
+        applianceType == CardDetailedApplianceType.REISSUE_VIRTUAL_CARD || applianceType == CardDetailedApplianceType.ISSUE_VIRTUAL_CARD
     val currentCardIssueType: CardIssuingType =
         if (isNewAccountNeeded) CardIssuingType.WITH_NEW_ACCOUNT else CardIssuingType.TO_EXISTING_ACCOUNT
 }

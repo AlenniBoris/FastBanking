@@ -31,3 +31,10 @@ fun SimpleCardModelData.toModelDomain(): SimpleCardModelDomain? =
         )
         null
     }
+
+fun SimpleCardModelDomain.toModelData(): SimpleCardModelData =
+    SimpleCardModelData(
+        id = this.id,
+        number = this.number,
+        system = this.system.toString()
+    )

@@ -42,26 +42,26 @@ object DatabaseFunctions {
         }
     }
 
-    suspend inline fun <reified DataModel, DomainModel, ExceptionModel> requestElementById(
-        id: String,
+    suspend inline fun <reified DataModel, DomainModel, ExceptionModel> requestElementByField(
+        field: String,
+        fieldValue: String,
         dispatcher: CoroutineDispatcher,
         database: FirebaseDatabase,
         table: String,
         crossinline resultMapping: (DataModel?) -> DomainModel?,
-        crossinline resultCheck: (DataModel?) -> Unit,
         crossinline exceptionMapping: (Throwable) -> ExceptionModel
     ): CustomResultModelDomain<DomainModel?, ExceptionModel> = withContext(dispatcher) {
         runCatching {
 
-            val snapshot = database.reference
+            val tableSnapshot = database.reference
                 .child(table)
-                .child(id)
                 .get()
                 .await()
 
-            val result = snapshot.getValue(DataModel::class.java)
+            val elementSnapshot = tableSnapshot.children.toList()
+                .firstOrNull { it.child(field).value == fieldValue }
 
-            resultCheck(result)
+            val result = elementSnapshot?.getValue(DataModel::class.java)
 
             return@withContext CustomResultModelDomain.Success(
                 resultMapping(result)
@@ -74,13 +74,13 @@ object DatabaseFunctions {
         }
     }
 
-    suspend inline fun <reified SavingModel, ExceptionModel> sendApplianceForProduct(
+    suspend inline fun <reified SavingModel, ExceptionModel> addRecordToTheTable(
         dispatcher: CoroutineDispatcher,
         database: FirebaseDatabase,
         table: String,
         crossinline exceptionMapping: (Throwable) -> ExceptionModel,
         crossinline onGeneratingError: () -> ExceptionModel,
-        crossinline editingAppliance: (newId: String) -> SavingModel,
+        crossinline editingRecord: (newId: String) -> SavingModel,
     ): CustomResultModelDomain<Unit, ExceptionModel> = withContext(dispatcher) {
         runCatching {
 
@@ -92,9 +92,32 @@ object DatabaseFunctions {
                     onGeneratingError()
                 )
 
-            val editedAppliance = editingAppliance(newApplianceId)
+            val editedAppliance = editingRecord(newApplianceId)
 
             newTableRef.setValue(editedAppliance)
+
+            return@withContext CustomResultModelDomain.Success(Unit)
+        }.getOrElse { exception ->
+            Log.e("!!!", exception.stackTraceToString())
+            return@withContext CustomResultModelDomain.Error(
+                exceptionMapping(exception)
+            )
+        }
+    }
+
+    suspend inline fun <DataModel, ExceptionModel> updateElementValue(
+        dispatcher: CoroutineDispatcher,
+        database: FirebaseDatabase,
+        table: String,
+        modelId: String,
+        model: DataModel,
+        crossinline exceptionMapping: (Throwable) -> ExceptionModel
+    ): CustomResultModelDomain<Unit, ExceptionModel> = withContext(dispatcher) {
+        runCatching {
+
+            val elementRef = database.getReference(table + "/${modelId}")
+            Log.e("!!!!", elementRef.key.toString())
+            elementRef.setValue(model)
 
             return@withContext CustomResultModelDomain.Success(Unit)
         }.getOrElse { exception ->

@@ -61,7 +61,7 @@ class BankInfoRepositoryImpl(
                 table = FirebaseDatabaseValues.TABLE_BANK_NEWS,
                 jsonMapping = { json -> json.fromJson<BankNewsModelData>() },
                 modelsMapping = { dataModel -> dataModel.toModelDomain() },
-                filterPredicate = { domainModel -> true },
+                filterPredicate = { _ -> true },
                 exceptionMapping = { exception ->
                     exception.toCommonInfoException()
                 }
@@ -88,17 +88,13 @@ class BankInfoRepositoryImpl(
         id: String
     ): CustomResultModelDomain<BankNewsModelDomain?, CommonInfoExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestElementById<BankNewsModelData, BankNewsModelDomain, CommonInfoExceptionModelDomain>(
-                id = id,
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ID,
+                fieldValue = id,
                 dispatcher = dispatchers.IO,
                 database = database,
                 table = FirebaseDatabaseValues.TABLE_BANK_NEWS,
-                resultCheck = { dataModel ->
-                    if (dataModel == null) {
-                        throw CommonInfoExceptionModelDomain.ErrorGettingData
-                    }
-                },
-                resultMapping = { dataModel ->
+                resultMapping = { dataModel: BankNewsModelData? ->
                     dataModel?.toModelDomain()
                 },
                 exceptionMapping = { exception ->

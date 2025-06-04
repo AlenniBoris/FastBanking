@@ -362,6 +362,7 @@ val UseCaseModule = module {
     factory<IMakeTransactionByCardNumberUseCase> {
         MakeTransactionByCardNumberUseCaseImpl(
             bankProductsRepository = get<IBankProductsRepository>(),
+            currencyRepository = get<ICurrencyRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
@@ -369,6 +370,7 @@ val UseCaseModule = module {
     factory<IMakeTransactionByEripNumberUseCase> {
         MakeTransactionByEripNumberUseCaseImpl(
             bankProductsRepository = get<IBankProductsRepository>(),
+            currencyRepository = get<ICurrencyRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }
@@ -376,6 +378,7 @@ val UseCaseModule = module {
     factory<IMakeTransactionForCreditByContractNumberUseCase> {
         MakeTransactionForCreditByContractNumberUseCaseImpl(
             bankProductsRepository = get<IBankProductsRepository>(),
+            currencyRepository = get<ICurrencyRepository>(),
             dispatchers = get<IAppDispatchers>()
         )
     }

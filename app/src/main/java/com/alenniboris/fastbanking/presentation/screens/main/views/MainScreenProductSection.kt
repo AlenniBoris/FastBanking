@@ -419,7 +419,6 @@ private fun LightThemePreview() {
                             goalDescription = "wwdwd",
                             ownerId = "111",
                             name = "odsklmclksd",
-                            erip = "kjjsdnkjcsndk",
                             contractNumber = "kjdnak2313",
                             bankIdCode = "sdilakjlkasnx"
                         )
@@ -586,7 +585,6 @@ private fun DarkThemePreview() {
                             goalDescription = "wwdwd",
                             ownerId = "111",
                             name = "odsklmclksd",
-                            erip = "kjjsdnkjcsndk",
                             contractNumber = "kjdnak2313",
                             bankIdCode = "sdilakjlkasnx"
                         )

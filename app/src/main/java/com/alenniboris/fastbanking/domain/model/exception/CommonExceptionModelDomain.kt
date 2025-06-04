@@ -8,5 +8,9 @@ sealed class CommonExceptionModelDomain : Throwable() {
 
     data object ErrorGettingData : CommonExceptionModelDomain()
 
+    data object NoEnoughMoneyAmount : CommonExceptionModelDomain()
+
+    data object NotOurBankCredit : CommonExceptionModelDomain()
+
     data object Other : CommonExceptionModelDomain()
 }

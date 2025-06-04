@@ -246,5 +246,7 @@
     <string name="amount_in_main_currency_text">Amount in main currency</string>
     <string name="amount_in_reserve_currency_text">Amount in reserve currency</string>
     <string name="credit_percentage_text">Procent</string>
+    <string name="exception_no_enough_money">No enough money for operation</string>
+    <string name="exception_not_our_bank_credit">This is a contract number for a credit of not our bank</string>
 
 </resources>

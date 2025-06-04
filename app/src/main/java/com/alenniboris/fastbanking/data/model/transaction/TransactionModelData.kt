@@ -39,3 +39,15 @@ fun TransactionModelData.toModelDomain(): TransactionModelDomain? = runCatching 
     Log.e("!!!", "TransactionModelData.toModelDomain ${exception.stackTraceToString()}")
     null
 }
+
+fun TransactionModelDomain.toModelData(): TransactionModelData =
+    TransactionModelData(
+        currency = this.currency.code,
+        date = this.date.time.toString(),
+        details = this.details,
+        id = this.id,
+        priceAmount = this.priceAmount.toString(),
+        senderId = this.senderId,
+        receiverId = this.receiverId,
+        type = this.type.toString()
+    )

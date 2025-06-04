@@ -23,6 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
+import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByCardNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByEripNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionForCreditByContractNumberUseCase
 import com.alenniboris.fastbanking.presentation.screens.NavGraphs
 import com.alenniboris.fastbanking.presentation.screens.destinations.AdditionsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
@@ -51,13 +57,13 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.rememberNavHostEngine
 import com.ramcosta.composedestinations.utils.destination
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 
 class MainActivity : ComponentActivity() {
-
-    private val viewModel by inject<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +73,6 @@ class MainActivity : ComponentActivity() {
                 FastBankingUi()
             }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.signOut()
     }
 }
 
@@ -91,6 +92,39 @@ fun FastBankingUi() {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination()?.baseRoute ?: ""
+
+    val getCardByIdrUseCase = koinInject<IGetCardByIdUseCase>()
+    val creditTrans = koinInject<IMakeTransactionForCreditByContractNumberUseCase>()
+    LaunchedEffect(Unit) {
+        launch {
+            when(
+                val cardRes = getCardByIdrUseCase.invoke("1111222233334444")
+            ){
+                is CustomResultModelDomain.Success -> {
+                    val card = cardRes.result
+                    card?.let { card ->
+                        when(
+                            val transactionRes = creditTrans.invoke(
+                                usedCard = card,
+                                contractNumber = "NDUW82727BUHI",
+                                amount = 100.0
+                            )
+                        ){
+                            is CustomResultModelDomain.Success -> {
+                                Log.e("!!!!", "Success")
+                            }
+                            is CustomResultModelDomain.Error -> {
+                                Log.e("!!!!", transactionRes.exception.stackTraceToString())
+                            }
+                        }
+                    }
+                }
+                is CustomResultModelDomain.Error -> {
+                    Log.e("!!!!", cardRes.exception.stackTraceToString())
+                }
+            }
+        }
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),

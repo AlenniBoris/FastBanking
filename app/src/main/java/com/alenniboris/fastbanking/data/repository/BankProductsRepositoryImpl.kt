@@ -1,8 +1,8 @@
 package com.alenniboris.fastbanking.data.repository
 
-import android.util.Log
 import com.alenniboris.fastbanking.data.mappers.toCommonException
 import com.alenniboris.fastbanking.data.model.account.AccountModelData
+import com.alenniboris.fastbanking.data.model.account.toModelData
 import com.alenniboris.fastbanking.data.model.account.toModelDomain
 import com.alenniboris.fastbanking.data.model.appliances.CardApplianceModelData
 import com.alenniboris.fastbanking.data.model.appliances.CreditApplianceModelData
@@ -10,10 +10,13 @@ import com.alenniboris.fastbanking.data.model.appliances.DepositApplianceModelDa
 import com.alenniboris.fastbanking.data.model.appliances.toModelDomain
 import com.alenniboris.fastbanking.data.model.appliances.toSavingModel
 import com.alenniboris.fastbanking.data.model.card.CardModelData
+import com.alenniboris.fastbanking.data.model.card.toModelData
 import com.alenniboris.fastbanking.data.model.card.toModelDomain
 import com.alenniboris.fastbanking.data.model.credit.CreditModelData
+import com.alenniboris.fastbanking.data.model.credit.toModelData
 import com.alenniboris.fastbanking.data.model.credit.toModelDomain
 import com.alenniboris.fastbanking.data.model.transaction.TransactionModelData
+import com.alenniboris.fastbanking.data.model.transaction.toModelData
 import com.alenniboris.fastbanking.data.model.transaction.toModelDomain
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
@@ -37,6 +40,165 @@ class BankProductsRepositoryImpl(
     private val database: FirebaseDatabase,
     private val dispatchers: IAppDispatchers
 ) : IBankProductsRepository {
+
+    override suspend fun sendTransactionToDatabase(
+        transaction: TransactionModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> = withContext(dispatchers.IO) {
+        return@withContext DatabaseFunctions.addRecordToTheTable(
+            dispatcher = dispatchers.IO,
+            database = database,
+            table = FirebaseDatabaseValues.TABLE_TRANSACTION,
+            exceptionMapping = { exception ->
+                exception.toCommonException()
+            },
+            onGeneratingError = {
+                CommonExceptionModelDomain.Other
+            },
+            editingRecord = { id ->
+                transaction.copy(id = id).toModelData()
+            }
+        )
+    }
+
+    override suspend fun updateAccountValue(
+        account: AccountModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> = withContext(dispatchers.IO) {
+        return@withContext DatabaseFunctions.updateElementValue(
+            dispatcher = dispatchers.IO,
+            database = database,
+            table = FirebaseDatabaseValues.TABLE_ACCOUNTS,
+            modelId = account.id,
+            model = account.toModelData(),
+            exceptionMapping = { exception ->
+                exception.toCommonException()
+            }
+        )
+    }
+
+    override suspend fun updateCardValue(
+        card: CardModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> = withContext(dispatchers.IO) {
+        return@withContext DatabaseFunctions.updateElementValue(
+            dispatcher = dispatchers.IO,
+            database = database,
+            table = FirebaseDatabaseValues.TABLE_CARDS,
+            modelId = card.id,
+            model = card.toModelData(),
+            exceptionMapping = { exception ->
+                exception.toCommonException()
+            }
+        )
+    }
+
+    override suspend fun updateCreditValue(
+        credit: CreditModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> = withContext(dispatchers.IO) {
+        return@withContext DatabaseFunctions.updateElementValue(
+            dispatcher = dispatchers.IO,
+            database = database,
+            table = FirebaseDatabaseValues.TABLE_CREDITS,
+            modelId = credit.id,
+            model = credit.toModelData(),
+            exceptionMapping = { exception ->
+                exception.toCommonException()
+            }
+        )
+    }
+
+    override suspend fun getCardByEripNumber(
+        eripNumber: String
+    ): CustomResultModelDomain<CardModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ERIP_NUMBER,
+                fieldValue = eripNumber,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_CARDS,
+                resultMapping = { dataModel: CardModelData? ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getCreditByEripNumber(
+        eripNumber: String
+    ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ERIP_NUMBER,
+                fieldValue = eripNumber,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_CREDITS,
+                resultMapping = { dataModel: CreditModelData? ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getAccountByEripNumber(
+        eripNumber: String
+    ): CustomResultModelDomain<AccountModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ERIP_NUMBER,
+                fieldValue = eripNumber,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_ACCOUNTS,
+                resultMapping = { dataModel: AccountModelData? ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getCardByNumber(
+        cardNumber: String
+    ): CustomResultModelDomain<CardModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_CARD_NUMBER,
+                fieldValue = cardNumber,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_CARDS,
+                resultMapping = { dataModel: CardModelData? ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
+
+    override suspend fun getCreditByContractNumber(
+        contractNumber: String
+    ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_CREDIT_CONTRACT_NUMBER,
+                fieldValue = contractNumber,
+                dispatcher = dispatchers.IO,
+                database = database,
+                table = FirebaseDatabaseValues.TABLE_CREDITS,
+                resultMapping = { dataModel: CreditModelData? ->
+                    dataModel?.toModelDomain()
+                },
+                exceptionMapping = { exception ->
+                    exception.toCommonException()
+                }
+            )
+        }
 
     override suspend fun getAllUserCards(
         user: UserModelDomain
@@ -113,17 +275,13 @@ class BankProductsRepositoryImpl(
         id: String
     ): CustomResultModelDomain<CardModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestElementById<CardModelData, CardModelDomain, CommonExceptionModelDomain>(
-                id = id,
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ID,
+                fieldValue = id,
                 dispatcher = dispatchers.IO,
                 database = database,
                 table = FirebaseDatabaseValues.TABLE_CARDS,
-                resultCheck = { dataModel ->
-                    if (dataModel == null) {
-                        throw CommonExceptionModelDomain.ErrorGettingData
-                    }
-                },
-                resultMapping = { dataModel ->
+                resultMapping = { dataModel: CardModelData? ->
                     dataModel?.toModelDomain()
                 },
                 exceptionMapping = { exception ->
@@ -136,17 +294,13 @@ class BankProductsRepositoryImpl(
         id: String
     ): CustomResultModelDomain<AccountModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestElementById<AccountModelData, AccountModelDomain, CommonExceptionModelDomain>(
-                id = id,
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ID,
+                fieldValue = id,
                 dispatcher = dispatchers.IO,
                 database = database,
                 table = FirebaseDatabaseValues.TABLE_ACCOUNTS,
-                resultCheck = { dataModel ->
-                    if (dataModel == null) {
-                        throw CommonExceptionModelDomain.ErrorGettingData
-                    }
-                },
-                resultMapping = { dataModel ->
+                resultMapping = { dataModel: AccountModelData? ->
                     dataModel?.toModelDomain()
                 },
                 exceptionMapping = { exception ->
@@ -160,17 +314,13 @@ class BankProductsRepositoryImpl(
         id: String
     ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestElementById<CreditModelData, CreditModelDomain, CommonExceptionModelDomain>(
-                id = id,
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ID,
+                fieldValue = id,
                 dispatcher = dispatchers.IO,
                 database = database,
                 table = FirebaseDatabaseValues.TABLE_CREDITS,
-                resultCheck = { dataModel ->
-                    if (dataModel == null) {
-                        throw CommonExceptionModelDomain.ErrorGettingData
-                    }
-                },
-                resultMapping = { dataModel ->
+                resultMapping = { dataModel: CreditModelData? ->
                     dataModel?.toModelDomain()
                 },
                 exceptionMapping = { exception ->
@@ -234,17 +384,13 @@ class BankProductsRepositoryImpl(
         id: String
     ): CustomResultModelDomain<CardApplianceModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestElementById<CardApplianceModelData, CardApplianceModelDomain, CommonExceptionModelDomain>(
-                id = id,
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ID,
+                fieldValue = id,
                 dispatcher = dispatchers.IO,
                 database = database,
                 table = FirebaseDatabaseValues.TABLE_APPLIANCES_CARDS,
-                resultCheck = { dataModel ->
-                    if (dataModel == null) {
-                        throw CommonExceptionModelDomain.ErrorGettingData
-                    }
-                },
-                resultMapping = { dataModel ->
+                resultMapping = { dataModel: CardApplianceModelData? ->
                     dataModel?.toModelDomain()
                 },
                 exceptionMapping = { exception ->
@@ -257,17 +403,13 @@ class BankProductsRepositoryImpl(
         id: String
     ): CustomResultModelDomain<CreditApplianceModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestElementById<CreditApplianceModelData, CreditApplianceModelDomain, CommonExceptionModelDomain>(
-                id = id,
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ID,
+                fieldValue = id,
                 dispatcher = dispatchers.IO,
                 database = database,
                 table = FirebaseDatabaseValues.TABLE_APPLIANCES_CREDITS,
-                resultCheck = { dataModel ->
-                    if (dataModel == null) {
-                        throw CommonExceptionModelDomain.ErrorGettingData
-                    }
-                },
-                resultMapping = { dataModel ->
+                resultMapping = { dataModel: CreditApplianceModelData? ->
                     dataModel?.toModelDomain()
                 },
                 exceptionMapping = { exception ->
@@ -280,17 +422,13 @@ class BankProductsRepositoryImpl(
         id: String
     ): CustomResultModelDomain<DepositApplianceModelDomain?, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
-            return@withContext DatabaseFunctions.requestElementById<DepositApplianceModelData, DepositApplianceModelDomain, CommonExceptionModelDomain>(
-                id = id,
+            return@withContext DatabaseFunctions.requestElementByField(
+                field = FirebaseDatabaseValues.SEARCHING_FIELD_ID,
+                fieldValue = id,
                 dispatcher = dispatchers.IO,
                 database = database,
                 table = FirebaseDatabaseValues.TABLE_APPLIANCES_DEPOSITS,
-                resultCheck = { dataModel ->
-                    if (dataModel == null) {
-                        throw CommonExceptionModelDomain.ErrorGettingData
-                    }
-                },
-                resultMapping = { dataModel ->
+                resultMapping = { dataModel: DepositApplianceModelData? ->
                     dataModel?.toModelDomain()
                 },
                 exceptionMapping = { exception ->
@@ -302,7 +440,7 @@ class BankProductsRepositoryImpl(
     override suspend fun sendApplianceForCard(
         appliance: CardApplianceModelDomain
     ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> = withContext(dispatchers.IO) {
-        return@withContext DatabaseFunctions.sendApplianceForProduct(
+        return@withContext DatabaseFunctions.addRecordToTheTable(
             dispatcher = dispatchers.IO,
             database = database,
             table = FirebaseDatabaseValues.TABLE_APPLIANCES_CARDS,
@@ -312,7 +450,7 @@ class BankProductsRepositoryImpl(
             onGeneratingError = {
                 CommonExceptionModelDomain.ErrorGettingData
             },
-            editingAppliance = { newId ->
+            editingRecord = { newId ->
                 appliance.copy(id = newId).toSavingModel()
             }
         )
@@ -321,7 +459,7 @@ class BankProductsRepositoryImpl(
     override suspend fun sendApplianceForCredit(
         appliance: CreditApplianceModelDomain
     ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> = withContext(dispatchers.IO) {
-        return@withContext DatabaseFunctions.sendApplianceForProduct(
+        return@withContext DatabaseFunctions.addRecordToTheTable(
             dispatcher = dispatchers.IO,
             database = database,
             table = FirebaseDatabaseValues.TABLE_APPLIANCES_CREDITS,
@@ -331,7 +469,7 @@ class BankProductsRepositoryImpl(
             onGeneratingError = {
                 CommonExceptionModelDomain.ErrorGettingData
             },
-            editingAppliance = { newId ->
+            editingRecord = { newId ->
                 appliance.copy(id = newId).toSavingModel()
             }
         )
@@ -340,7 +478,7 @@ class BankProductsRepositoryImpl(
     override suspend fun sendApplianceForDeposit(
         appliance: DepositApplianceModelDomain
     ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> = withContext(dispatchers.IO) {
-        return@withContext DatabaseFunctions.sendApplianceForProduct(
+        return@withContext DatabaseFunctions.addRecordToTheTable(
             dispatcher = dispatchers.IO,
             database = database,
             table = FirebaseDatabaseValues.TABLE_APPLIANCES_DEPOSITS,
@@ -350,7 +488,7 @@ class BankProductsRepositoryImpl(
             onGeneratingError = {
                 CommonExceptionModelDomain.ErrorGettingData
             },
-            editingAppliance = { newId ->
+            editingRecord = { newId ->
                 appliance.copy(id = newId).toSavingModel()
             }
         )
@@ -375,13 +513,10 @@ class BankProductsRepositoryImpl(
                     .awaitAll()
                     .map { transRes ->
                         if (transRes is CustomResultModelDomain.Success) {
-                            Log.e("!!!", transRes.result.toString())
                             transRes.result
-                        } else {
-                            return@withContext CustomResultModelDomain.Error(
-                                transRes.exception!!
-                            )
-                        }
+                        } else return@withContext CustomResultModelDomain.Error(
+                            transRes.exception!!
+                        )
                     }
                 val res: MutableMap<String, TransactionModelDomain> = mutableMapOf()
                 list.forEach { listOfTransactions ->
@@ -433,28 +568,4 @@ class BankProductsRepositoryImpl(
                 }
             )
         }
-
-    override suspend fun makeTransactionByCardNumber(
-        usedCard: CardModelDomain,
-        cardNumber: String,
-        amount: Double
-    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun makeTransactionByEripNumber(
-        eripNumber: String,
-        usedCard: CardModelDomain,
-        amount: Double
-    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun makeTransactionForCreditByContractNumber(
-        usedCard: CardModelDomain,
-        contractNumber: String,
-        amount: Double
-    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> {
-        TODO("Not yet implemented")
-    }
 }

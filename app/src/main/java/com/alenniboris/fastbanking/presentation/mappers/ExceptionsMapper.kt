@@ -58,4 +58,6 @@ fun CommonExceptionModelDomain.toUiMessageString(): Int = when (this) {
     CommonExceptionModelDomain.Other -> R.string.exception_unknown
     CommonExceptionModelDomain.ServerError -> R.string.exception_getting_data
     CommonExceptionModelDomain.WebException -> R.string.exception_internet_error
+    CommonExceptionModelDomain.NoEnoughMoneyAmount -> R.string.exception_no_enough_money
+    CommonExceptionModelDomain.NotOurBankCredit -> R.string.exception_not_our_bank_credit
 }

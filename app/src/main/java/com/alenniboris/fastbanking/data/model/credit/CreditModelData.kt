@@ -16,7 +16,6 @@ data class CreditModelData(
     val ownerId: String? = null,
     val amountInReserveCurrency: String? = null,
     val name: String? = null,
-    val ERIP: String? = null,
     val bankIdCode: String? = null,
     val contractNumber: String? = null
 )
@@ -35,7 +34,6 @@ fun CreditModelData.toModelDomain(): CreditModelDomain? = runCatching {
         goalDescription = this.goalDescription!!,
         ownerId = this.ownerId!!,
         name = this.name!!,
-        erip = this.ERIP!!,
         bankIdCode = this.bankIdCode!!,
         contractNumber = this.contractNumber!!
     )
@@ -43,3 +41,19 @@ fun CreditModelData.toModelDomain(): CreditModelDomain? = runCatching {
     Log.e("!!!", "CreditModelData.toModelDomain, ${exception.stackTraceToString()}")
     null
 }
+
+fun CreditModelDomain.toModelData(): CreditModelData = CreditModelData(
+    id = this.id,
+    amountInReserveCurrency = this.amountInReserveCurrency.toString(),
+    initialAmount = this.initialAmount.toString(),
+    currency = this.currency,
+    reserveCurrency = this.reserveCurrency,
+    percentage = this.percentage.toString(),
+    lastPayment = this.lastPayment.time.toString(),
+    startDate = this.startDate.time.toString(),
+    goalDescription = this.goalDescription,
+    ownerId = this.ownerId,
+    name = this.name,
+    bankIdCode = this.bankIdCode,
+    contractNumber = this.contractNumber
+)

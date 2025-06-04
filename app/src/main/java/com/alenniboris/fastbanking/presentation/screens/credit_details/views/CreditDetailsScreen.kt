@@ -288,7 +288,6 @@ private fun LightTheme() {
                             goalDescription = "wwdwd",
                             ownerId = "111",
                             name = "odsklmclksd",
-                            erip = "kjjsdnkjcsndk",
                             contractNumber = "kjdnak2313",
                             bankIdCode = "sdilakjlkasnx"
                         )
@@ -334,7 +333,6 @@ private fun DarkTheme() {
                             goalDescription = "wwdwd",
                             ownerId = "111",
                             name = "odsklmclksd",
-                            erip = "kjjsdnkjcsndk",
                             contractNumber = "kjdnak2313",
                             bankIdCode = "sdilakjlkasnx"
                         )

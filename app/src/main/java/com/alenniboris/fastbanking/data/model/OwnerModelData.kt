@@ -25,3 +25,10 @@ fun OwnerModelData.toModelDomain(): OwnerModelDomain? =
         )
         null
     }
+
+fun OwnerModelDomain.toModelData(): OwnerModelData =
+    OwnerModelData(
+        id = this.id,
+        name = this.name,
+        surname = this.surname
+    )

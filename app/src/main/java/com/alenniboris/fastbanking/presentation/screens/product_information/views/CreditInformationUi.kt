@@ -65,21 +65,6 @@ fun CreditInformationUi(
             modifier = Modifier
                 .padding(ProductInformationScreenSectionPadding)
                 .fillMaxWidth(),
-            header = stringResource(R.string.erip_number_text),
-            text = credit.domainModel.erip,
-            onClick = {
-                proceedIntent(
-                    IProductInformationScreenIntent.CopyTextToClipboard(
-                        credit.domainModel.erip
-                    )
-                )
-            }
-        )
-
-        ProductInformationCopySection(
-            modifier = Modifier
-                .padding(ProductInformationScreenSectionPadding)
-                .fillMaxWidth(),
             header = stringResource(R.string.bank_id_code_text),
             text = credit.domainModel.bankIdCode,
             onClick = {
@@ -118,7 +103,6 @@ private fun LightTheme() {
                         goalDescription = "wwdwd",
                         ownerId = "111",
                         name = "odsklmclksd",
-                        erip = "kjjsdnkjcsndk",
                         contractNumber = "kjdnak2313",
                         bankIdCode = "sdilakjlkasnx"
                     )

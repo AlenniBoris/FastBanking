@@ -1,6 +1,5 @@
 package com.alenniboris.fastbanking.domain.usecase.implementation.cards
 
-import android.util.Log
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardModelDomain
 import com.alenniboris.fastbanking.domain.model.card.SimpleCardModelDomain
@@ -31,7 +30,7 @@ class GetFullModelsForAllSimpleCardsUseCaseImpl(
                     }
                     .awaitAll()
                     .mapNotNull { result ->
-                        if (result is CustomResultModelDomain.Success){
+                        if (result is CustomResultModelDomain.Success) {
                             result.result
                         } else {
                             return@withContext CustomResultModelDomain.Error(result.exception!!)

@@ -3,13 +3,15 @@ package com.alenniboris.fastbanking.data.model.account
 import android.util.Log
 import com.alenniboris.fastbanking.data.model.OwnerModelData
 import com.alenniboris.fastbanking.data.model.card.SimpleCardModelData
+import com.alenniboris.fastbanking.data.model.card.toModelData
 import com.alenniboris.fastbanking.data.model.card.toModelDomain
+import com.alenniboris.fastbanking.data.model.toModelData
 import com.alenniboris.fastbanking.data.model.toModelDomain
 import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.card.SimpleCardModelDomain
 
 data class AccountModelData(
-    val ERIP: String? = null,
+    val erip: String? = null,
     val amount: String? = null,
     val attachedCards: Map<String?, SimpleCardModelData?>? = null,
     val id: String? = null,
@@ -37,9 +39,26 @@ fun AccountModelData.toModelDomain(): AccountModelDomain? = runCatching {
         currency = this.currency!!,
         reserveCurrency = this.reserveCurrency!!,
         name = this.name!!,
-        erip = this.ERIP!!
+        erip = this.erip!!
     )
 }.getOrElse { exception ->
     Log.e("!!!", "AccountModelData.toModelDomain, ${exception.stackTraceToString()}")
     null
 }
+
+fun AccountModelDomain.toModelData(): AccountModelData =
+    AccountModelData(
+        amount = this.amount.toString(),
+        amountInReserveCurrency = this.amountInReserveCurrency.toString(),
+        attachedCards = this.attachedCards
+            .map { (modelId, model) ->
+                modelId to model.toModelData()
+            }
+            .toMap(),
+        id = this.id,
+        owner = this.owner.toModelData(),
+        currency = this.currency,
+        reserveCurrency = this.reserveCurrency,
+        name = this.name,
+        erip = this.erip
+    )

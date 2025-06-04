@@ -13,6 +13,30 @@ import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 
 interface IBankProductsRepository {
 
+    suspend fun sendTransactionToDatabase(
+        transaction: TransactionModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+
+    suspend fun updateCardValue(
+        card: CardModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+
+    suspend fun updateCreditValue(
+        credit: CreditModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+
+    suspend fun updateAccountValue(
+        account: AccountModelDomain
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+
+    suspend fun getCardByNumber(
+        cardNumber: String
+    ): CustomResultModelDomain<CardModelDomain?, CommonExceptionModelDomain>
+
+    suspend fun getCreditByContractNumber(
+        contractNumber: String
+    ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain>
+
     suspend fun getAllUserCards(
         user: UserModelDomain
     ): CustomResultModelDomain<List<CardModelDomain>, CommonExceptionModelDomain>
@@ -90,21 +114,16 @@ interface IBankProductsRepository {
         accountId: String
     ): CustomResultModelDomain<List<TransactionModelDomain>, CommonExceptionModelDomain>
 
-    suspend fun makeTransactionByCardNumber(
-        usedCard: CardModelDomain,
-        cardNumber: String,
-        amount: Double
-    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+    suspend fun getCardByEripNumber(
+        eripNumber: String
+    ): CustomResultModelDomain<CardModelDomain?, CommonExceptionModelDomain>
 
-    suspend fun makeTransactionByEripNumber(
-        eripNumber: String,
-        usedCard: CardModelDomain,
-        amount: Double
-    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+    suspend fun getCreditByEripNumber(
+        eripNumber: String
+    ): CustomResultModelDomain<CreditModelDomain?, CommonExceptionModelDomain>
 
-    suspend fun makeTransactionForCreditByContractNumber(
-        usedCard: CardModelDomain,
-        contractNumber: String,
-        amount: Double
-    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+    suspend fun getAccountByEripNumber(
+        eripNumber: String
+    ): CustomResultModelDomain<AccountModelDomain?, CommonExceptionModelDomain>
+
 }
