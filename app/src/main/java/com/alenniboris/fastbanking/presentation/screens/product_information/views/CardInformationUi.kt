@@ -38,7 +38,7 @@ fun CardInformationUi(
             modifier = Modifier
                 .padding(ProductInformationScreenSectionPadding)
                 .fillMaxWidth(),
-            header = stringResource(R.string.erip_number_text),
+            header = stringResource(R.string.erip_number_description_text),
             text = card.domainModel.erip,
             onClick = {
                 proceedIntent(

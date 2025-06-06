@@ -19,6 +19,7 @@ import com.alenniboris.fastbanking.domain.model.map.MapsElementModelDomain
 import com.alenniboris.fastbanking.presentation.model.bank_info.MapsElementModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_info.toTypeIcon
 import com.alenniboris.fastbanking.presentation.model.bank_info.toTypeTitle
+import com.alenniboris.fastbanking.presentation.uikit.theme.AtmMapScreenInfoCardShape
 import com.alenniboris.fastbanking.presentation.uikit.theme.MapLocationItemContentTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.MapLocationItemTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.MapLocationItemTitleTextSize
@@ -38,7 +39,10 @@ fun MapElementInfoCard(
         onDismissRequest = { onDismiss() },
         content = {
             Column(
-                modifier = modifier.background(appColor),
+                modifier = modifier.background(
+                    color = appColor,
+                    shape = AtmMapScreenInfoCardShape
+                ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Icon(

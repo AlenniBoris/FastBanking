@@ -52,7 +52,7 @@ fun AccountInformationUi(
             modifier = Modifier
                 .padding(ProductInformationScreenSectionPadding)
                 .fillMaxWidth(),
-            header = stringResource(R.string.erip_number_text),
+            header = stringResource(R.string.erip_number_description_text),
             text = account.domainModel.erip,
             onClick = {
                 proceedIntent(

@@ -33,6 +33,9 @@ object CommonFunctions {
         amount
     )
 
+    fun formatDateToMonthYearText(date: Date): String =
+        SimpleDateFormat("MM/yyyy", Locale.getDefault()).format(date)
+
     fun formatDateToDateText(date: Date): String =
         SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date)
 

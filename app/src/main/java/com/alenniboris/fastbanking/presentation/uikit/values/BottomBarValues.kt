@@ -96,7 +96,7 @@ fun AuthorizedActions.toBottomBarModel(onClick: () -> Unit) = when (this) {
             onClick = onClick,
             iconId = PaymentPicture,
             textId = R.string.payment_icon_text,
-            route = PaymentScreenRoute
+            route = PaymentTypeSelectionScreenRoute
         )
 
     AuthorizedActions.Additions ->

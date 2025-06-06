@@ -1,7 +1,6 @@
 package com.alenniboris.fastbanking.presentation.screens.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,19 +15,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
-import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
-import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByCardNumberUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByEripNumberUseCase
-import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionForCreditByContractNumberUseCase
 import com.alenniboris.fastbanking.presentation.screens.NavGraphs
 import com.alenniboris.fastbanking.presentation.screens.destinations.AdditionsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.AtmMapScreenDestination
@@ -36,6 +28,7 @@ import com.alenniboris.fastbanking.presentation.screens.destinations.CurrencyScr
 import com.alenniboris.fastbanking.presentation.screens.destinations.HelpScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.LoginScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.MainScreenDestination
+import com.alenniboris.fastbanking.presentation.screens.destinations.PaymentTypeSelectionScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.TransactionsHistoryScreenDestination
 import com.alenniboris.fastbanking.presentation.uikit.theme.BottomBarHeight
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
@@ -48,6 +41,7 @@ import com.alenniboris.fastbanking.presentation.uikit.values.HelpScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.LoginScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.MainScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.NotAuthorizedActions
+import com.alenniboris.fastbanking.presentation.uikit.values.PaymentTypeSelectionScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.RoutesWithoutBottomBar
 import com.alenniboris.fastbanking.presentation.uikit.values.TransactionsHistoryScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.toBottomBarModel
@@ -57,10 +51,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.rememberNavHostEngine
 import com.ramcosta.composedestinations.utils.destination
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 
 
 class MainActivity : ComponentActivity() {
@@ -77,7 +68,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun FastBankingUi() {
+private fun FastBankingUi() {
+
     val viewModel = koinViewModel<MainActivityViewModel>()
     val isUserAuthenticated by viewModel.isUserAuthenticatedFlow.collectAsStateWithLifecycle()
 
@@ -92,39 +84,6 @@ fun FastBankingUi() {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination()?.baseRoute ?: ""
-
-    val getCardByIdrUseCase = koinInject<IGetCardByIdUseCase>()
-    val creditTrans = koinInject<IMakeTransactionForCreditByContractNumberUseCase>()
-    LaunchedEffect(Unit) {
-        launch {
-            when(
-                val cardRes = getCardByIdrUseCase.invoke("1111222233334444")
-            ){
-                is CustomResultModelDomain.Success -> {
-                    val card = cardRes.result
-                    card?.let { card ->
-                        when(
-                            val transactionRes = creditTrans.invoke(
-                                usedCard = card,
-                                contractNumber = "NDUW82727BUHI",
-                                amount = 100.0
-                            )
-                        ){
-                            is CustomResultModelDomain.Success -> {
-                                Log.e("!!!!", "Success")
-                            }
-                            is CustomResultModelDomain.Error -> {
-                                Log.e("!!!!", transactionRes.exception.stackTraceToString())
-                            }
-                        }
-                    }
-                }
-                is CustomResultModelDomain.Error -> {
-                    Log.e("!!!!", cardRes.exception.stackTraceToString())
-                }
-            }
-        }
-    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -158,7 +117,11 @@ fun FastBankingUi() {
                                         }
 
                                         AuthorizedActions.Payment -> {
-                                            Log.e("!!!", "Payment")
+                                            if (currentRoute != PaymentTypeSelectionScreenRoute) {
+                                                navController.navigate(
+                                                    PaymentTypeSelectionScreenDestination
+                                                )
+                                            }
                                         }
 
                                         AuthorizedActions.Additions -> {

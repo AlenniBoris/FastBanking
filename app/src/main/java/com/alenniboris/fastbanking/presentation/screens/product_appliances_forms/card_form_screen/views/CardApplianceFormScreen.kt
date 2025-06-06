@@ -38,7 +38,7 @@ import com.alenniboris.fastbanking.presentation.mappers.toUiString
 import com.alenniboris.fastbanking.presentation.model.bank_product.toUiPicture
 import com.alenniboris.fastbanking.presentation.model.bank_product.toUiString
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormOfficeSelectionScreen
-import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormProceedButton
+import com.alenniboris.fastbanking.presentation.uikit.views.AppProcessProceedButton
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormProcessFinalScreen
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ProductApplianceFormScreenProcess
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.card_form_screen.CardApplianceFormScreenState
@@ -281,7 +281,7 @@ private fun CardApplianceFormScreenUi(
             }
         }
 
-        ApplianceFormProceedButton(
+        AppProcessProceedButton(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()

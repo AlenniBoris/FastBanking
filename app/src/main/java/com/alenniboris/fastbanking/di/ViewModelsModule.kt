@@ -39,6 +39,9 @@ import com.alenniboris.fastbanking.domain.usecase.logic.map.IGetBankLocationsUse
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllTransactionsForCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsByCardUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IGetAllUserTransactionsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByCardNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionByEripNumberUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.transactions.IMakeTransactionForCreditByContractNumberUseCase
 import com.alenniboris.fastbanking.presentation.model.appliance.ProductApplianceType
 import com.alenniboris.fastbanking.presentation.screens.account_details.AccountDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityViewModel
@@ -55,6 +58,9 @@ import com.alenniboris.fastbanking.presentation.screens.main.MainScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.map.AtmMapScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.news_details.NewsDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.password_reset.PasswordResetScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.payment_process.PaymentProcessScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.payment_type_selection.PaymentType
+import com.alenniboris.fastbanking.presentation.screens.payment_type_selection.PaymentTypeSelectionScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.personal.PersonalScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.personal_details.PersonalDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.product_appliance_choosing.ProductApplianceChoosingScreenViewModel
@@ -286,6 +292,20 @@ val ViewModelsModule = module {
             accountId = accountId,
             getAccountByIdUseCase = get<IGetAccountByIdUseCase>(),
             getFullModelsForAllSimpleCardsUseCase = get<IGetFullModelsForAllSimpleCardsUseCase>()
+        )
+    }
+
+    viewModel<PaymentTypeSelectionScreenViewModel> {
+        PaymentTypeSelectionScreenViewModel()
+    }
+
+    viewModel<PaymentProcessScreenViewModel> { (paymentType: PaymentType) ->
+        PaymentProcessScreenViewModel(
+            paymentType = paymentType,
+            getAllUserCardsUseCase = get<IGetAllUserCardsUseCase>(),
+            makeTransactionByCardNumberUseCase = get<IMakeTransactionByCardNumberUseCase>(),
+            makeTransactionByEripNumberUseCase = get<IMakeTransactionByEripNumberUseCase>(),
+            makeTransactionForCreditByContractNumberUseCase = get<IMakeTransactionForCreditByContractNumberUseCase>()
         )
     }
 }

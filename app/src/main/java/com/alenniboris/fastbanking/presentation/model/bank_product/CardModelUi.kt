@@ -25,6 +25,9 @@ data class CardModelUi(
 
     val dateOfExpireText: String =
         CommonFunctions.formatDateToDateText(domainModel.expireDate)
+
+    val smallDateOfExpireText: String =
+        CommonFunctions.formatDateToMonthYearText(domainModel.expireDate)
 }
 
 fun CardModelDomain.toModelUi(): CardModelUi = CardModelUi(

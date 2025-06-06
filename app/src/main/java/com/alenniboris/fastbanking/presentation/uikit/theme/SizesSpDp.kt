@@ -15,7 +15,7 @@ val EnterValueTextFieldTextPadding = PaddingValues(horizontal = 10.dp)
 
 // TopBar (Login)
 val TopBarPadding = PaddingValues(horizontal = 15.dp, vertical = 15.dp)
-val TopBarHeaderTextSize = 30.sp
+val TopBarHeaderTextSize = 25.sp
 
 // Login screen
 val LoginScreenHeaderPadding = PaddingValues(start = 15.dp)
@@ -93,13 +93,13 @@ val appButtonRowButtonInnerPadding = PaddingValues(vertical = 5.dp)
 val appButtonRowButtonOuterPadding = PaddingValues(horizontal = 5.dp)
 val appButtonRowButtonShape = RoundedCornerShape(20)
 val AtmMapNotRegisteredUserScreenContentPadding = PaddingValues(horizontal = 20.dp)
-
-// Map screen
 val AtmMapListScreenItemPadding = PaddingValues(vertical = 5.dp)
 val AtmMapListScreenItemInnerPadding = PaddingValues(vertical = 5.dp)
 val AtmMapListScreenItemIconPadding = PaddingValues(horizontal = 15.dp)
 val AtmMapListScreenItemBorderSize = 1.dp
 val AtmMapListScreenItemBorderShape = RoundedCornerShape(20)
+val AtmMapScreenInfoCardShape = RoundedCornerShape(60f)
+
 
 // Currency screen
 val CurrencyScreenEnterFieldPadding = PaddingValues(end = 10.dp)
@@ -407,3 +407,29 @@ val AccountDetailsScreenActionButtonTextPadding = PaddingValues(top = 10.dp)
 val AccountDetailsScreenButtonsVerticalSpacing = 15.dp
 val AccountDetailsScreenSpacerHeight = 1.dp
 
+// Payment Type Selection screen
+val PaymentTypeSelectionScreenNumberOfColumns = 2
+val PaymentTypeSelectionScreenContentPadding = PaddingValues(horizontal = 10.dp)
+val PaymentTypeSelectionScreenButtonOuterPadding =
+    PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp)
+val PaymentTypeSelectionScreenButtonInnerPadding =
+    PaddingValues(horizontal = 15.dp, vertical = 15.dp)
+val PaymentTypeSelectionScreenButtonSize = 50.dp
+val PaymentTypeSelectionScreenButtonTextPadding = PaddingValues(top = 10.dp)
+val PaymentTypeSelectionScreenButtonTextSize = 20.sp
+val PaymentTypeSelectionScreenButtonShape = RoundedCornerShape(60f)
+
+// Payment process screen
+val PaymentProcessScreenContentPadding = PaddingValues(horizontal = 20.dp)
+val PaymentProcessScreenTextRowPadding = PaddingValues(vertical = 20.dp)
+val PaymentProcessScreenTextRowFontSize = 20.sp
+val PaymentProcessScreenTextRowTextPadding = PaddingValues(start = 10.dp)
+val PaymentProcessScreenTextFieldInnerPadding = PaddingValues(vertical = 10.dp, horizontal = 10.dp)
+val PaymentProcessScreenTextFieldShape = RoundedCornerShape(60f)
+val PaymentProcessScreenCardPlaceholderShape = RoundedCornerShape(60f)
+val PaymentProcessScreenCardPlaceholderInnerPadding =
+    PaddingValues(horizontal = 20.dp, vertical = 15.dp)
+val PaymentProcessScreenCardPlaceholderColumnPadding = PaddingValues(start = 20.dp)
+val PaymentProcessScreenCardPlaceholderColumnTextPadding = PaddingValues(top = 5.dp)
+val PaymentProcessScreenCardPlaceholderColumnTextSize = 20.sp
+val PaymentProcessScreenCardPlaceholderImageTextPadding = PaddingValues(start = 10.dp)

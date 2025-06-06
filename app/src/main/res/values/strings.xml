@@ -234,7 +234,7 @@
     <string name="transaction_details_name_section_text">Transaction name</string>
     <string name="transaction_details_sum_section_text">Transaction sum text</string>
     <string name="card_date_of_expire_text">Date of expire</string>
-    <string name="erip_number_text">The number of the agreement for card replenishment and refund of ERIP payments</string>
+    <string name="erip_number_description_text">The number of the agreement for card replenishment and refund of ERIP payments</string>
     <string name="iban_number_text">International bank account number(IBAN)</string>
     <string name="bank_id_code_text">Bank identification code</string>
     <string name="contract_number_text">Number of contract used to transfer money</string>
@@ -248,5 +248,17 @@
     <string name="credit_percentage_text">Procent</string>
     <string name="exception_no_enough_money">No enough money for operation</string>
     <string name="exception_not_our_bank_credit">This is a contract number for a credit of not our bank</string>
+    <string name="payment_on_my_card_text">To my card</string>
+    <string name="payment_by_card_number_text">By card number</string>
+    <string name="payment_by_erip_number_text">By ERIP number</string>
+    <string name="payment_for_credit_by_contract_number_text">For credit</string>
+    <string name="payment_screen_header_text">Payments and transactions</string>
+    <string name="transaction_data_error">Check that you filled data. And amount is more than 0</string>
+    <string name="user_has_no_cards">You have no cards to make transaction</string>
+    <string name="enter_card_number_text">Enter card number</string>
+    <string name="enter_erip_number_text">Enter erip number</string>
+    <string name="enter_contract_number_text">Enter contracct number</string>
+    <string name="transaction_approved_text">Transaction was successful</string>
+    <string name="enter_amount_text">Enter amount</string>
 
 </resources>

@@ -23,7 +23,8 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 
 @Composable
 fun AppEmptyScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    textId: Int = R.string.nothing_found
 ) {
     Box(
         modifier = modifier,
@@ -41,7 +42,7 @@ fun AppEmptyScreen(
             )
             Text(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                text = stringResource(R.string.nothing_found),
+                text = stringResource(textId),
                 color = appTopBarElementsColor,
                 style = bodyStyle.copy(
                     fontSize = EmptyScreenFontSize

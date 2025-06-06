@@ -36,7 +36,7 @@ import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.presentation.mappers.toUiString
 import com.alenniboris.fastbanking.presentation.model.user.toModelUi
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormOfficeSelectionScreen
-import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormProceedButton
+import com.alenniboris.fastbanking.presentation.uikit.views.AppProcessProceedButton
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ApplianceFormProcessFinalScreen
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ProductApplianceFormScreenProcess
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.credit_form_screen.CreditApplianceFormScreenState
@@ -231,7 +231,7 @@ private fun CreditApplianceFormScreenUi(
 
             if (currentUser.isCreditsAllowed) {
 
-                ApplianceFormProceedButton(
+                AppProcessProceedButton(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()

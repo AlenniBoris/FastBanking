@@ -1,4 +1,4 @@
-package com.alenniboris.fastbanking.presentation.screens.product_appliances_forms
+package com.alenniboris.fastbanking.presentation.uikit.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +27,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.productApplianceForm
 import com.alenniboris.fastbanking.presentation.uikit.theme.productApplianceFormBottomButtonTextColor
 
 @Composable
-fun ApplianceFormProceedButton(
+fun AppProcessProceedButton(
     modifier: Modifier,
     onClick: () -> Unit
 ) {
@@ -73,7 +73,7 @@ private fun LightTheme() {
                 modifier = Modifier.fillMaxSize()
             ) {
 
-                ApplianceFormProceedButton(
+                AppProcessProceedButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(mainScreenItemColor)
@@ -96,7 +96,7 @@ private fun DarkTheme() {
                 modifier = Modifier.fillMaxSize()
             ) {
 
-                ApplianceFormProceedButton(
+                AppProcessProceedButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(mainScreenItemColor)

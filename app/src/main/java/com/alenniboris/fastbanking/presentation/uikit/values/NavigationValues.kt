@@ -9,7 +9,7 @@ const val AtmMapScreenRoute = "Atm map screen"
 const val CurrencyScreenRoute = "Currency screen"
 const val HelpScreenRoute = "Help screen"
 const val AdditionsScreenRoute = "Additions screen"
-const val PaymentScreenRoute = "Payment screen"
+const val PaymentTypeSelectionScreenRoute = "Payment type selection screen"
 const val ApplicationInformationScreenRoute = "Application information screen"
 const val BankNewsScreenRoute = "Bank news screen"
 const val NewsDetailsScreenRoute = "News details screen"
@@ -31,6 +31,7 @@ const val CardDetailsScreenRoute = "card details screen"
 const val ProductInformationScreenRoute = "product information screen"
 const val CreditDetailsScreenRoute = "credit details screen"
 const val AccountDetailsScreenRoute = "account details screen"
+const val PaymentProcessScreenRoute = "payment process screen"
 
 val RoutesWithoutBottomBar = listOf(
     RegistrationOptionsScreenRoute,
@@ -52,5 +53,6 @@ val RoutesWithoutBottomBar = listOf(
     CardDetailsScreenRoute,
     ProductInformationScreenRoute,
     CreditDetailsScreenRoute,
-    AccountDetailsScreenRoute
+    AccountDetailsScreenRoute,
+    PaymentProcessScreenRoute
 )
