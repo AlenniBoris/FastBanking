@@ -19,7 +19,7 @@ import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
 import com.alenniboris.fastbanking.presentation.model.user.toModelUi
 import com.alenniboris.fastbanking.presentation.screens.product_appliances_forms.ProductApplianceFormScreenProcess
-import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyFlow
+import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyMode
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -319,7 +319,7 @@ class CardApplianceFormScreenViewModel(
             val appliance = CardApplianceModelDomain(
                 id = "",
                 currencyCode = currentState.selectedCurrency?.code
-                    ?: baseCurrencyFlow.value.currencyCode,
+                    ?: baseCurrencyMode.value.currencyCode,
                 dateOfAppliance = currentState.dateOfAppliance,
                 status = currentState.applianceStatus,
                 selectedOffice = currentState.selectedBankOffice ?: OfficeModelDomain(

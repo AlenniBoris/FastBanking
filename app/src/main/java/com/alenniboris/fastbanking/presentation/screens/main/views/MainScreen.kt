@@ -77,7 +77,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenProductsBu
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenProductsButtonIconTintColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.productApplianceFormCheckboxCheckedTrackColor
-import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyFlow
+import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyMode
 import com.alenniboris.fastbanking.presentation.uikit.values.ClickableElement
 import com.alenniboris.fastbanking.presentation.uikit.values.MainScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.toUiText
@@ -213,7 +213,7 @@ private fun MainScreenUi(
     proceedIntent: (IMainScreenIntent) -> Unit
 ) {
 
-    val baseCurrency by baseCurrencyFlow.collectAsStateWithLifecycle()
+    val baseCurrency by baseCurrencyMode.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -340,7 +340,8 @@ private fun MainScreenUi(
                 isCurrencyDataLoading = state.isBaseCurrencyExchangeLoading,
                 baseCurrencyCode = baseCurrency.currencyCode,
                 baseCurrencyAmount = state.baseCurrencyAmount,
-                exchangeCurrencyAmount = state.exchangedCurrencyAmount,
+                exchangeCurrencyCode = state.exchangeCurrencyCode,
+                exchangeCurrencyAmount = state.exchangeCurrencyAmount,
                 isAccountsDataLoading = state.isUserAccountsSumLoading,
                 allAccountsAmount = state.userAccountsSum
             )

@@ -17,8 +17,10 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alenniboris.fastbanking.presentation.uikit.utils.ThemeMode
+import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyMode
 import com.alenniboris.fastbanking.presentation.uikit.utils.currentLanguageMode
 import com.alenniboris.fastbanking.presentation.uikit.utils.currentThemeMode
+import com.alenniboris.fastbanking.presentation.uikit.utils.getLastBaseCurrencyAndApply
 import com.alenniboris.fastbanking.presentation.uikit.utils.getLastLanguageAndApply
 import com.alenniboris.fastbanking.presentation.uikit.utils.getLastThemeAndApply
 
@@ -45,10 +47,12 @@ fun FastBankingTheme(
     val context = LocalContext.current
     val themeModeInit = remember { context.getLastThemeAndApply(isSystemDarkMode = darkTheme) }
     val langModeInit = remember { context.getLastLanguageAndApply() }
+    val baseCurrencyInit = remember { context.getLastBaseCurrencyAndApply() }
 
     val colorScheme by remember(
         key1 = currentThemeMode.collectAsStateWithLifecycle().value.isThemeDark,
-        key2 = currentLanguageMode.collectAsStateWithLifecycle().value
+        key2 = currentLanguageMode.collectAsStateWithLifecycle().value,
+        key3 = baseCurrencyMode.collectAsStateWithLifecycle().value
     ) {
         mutableStateOf(LightColorScheme.copy())
     }

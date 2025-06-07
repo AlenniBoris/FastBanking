@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +38,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
+import com.alenniboris.fastbanking.presentation.uikit.utils.AppLanguage
 import com.alenniboris.fastbanking.presentation.uikit.utils.setLanguage
 import com.alenniboris.fastbanking.presentation.uikit.utils.toUiString
 import com.alenniboris.fastbanking.presentation.uikit.values.LanguageSettingsScreenRoute
@@ -105,45 +108,58 @@ private fun LanguageSettingsScreenUi(
             headerTextString = stringResource(R.string.application_Language_text)
         )
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(SettingsScreenContentPadding)
+        LazyColumn(
+            modifier = Modifier.padding(SettingsScreenContentPadding)
         ) {
+            itemsIndexed(state.allLanguages) { index, language ->
 
-            state.allLanguages.forEachIndexed { index, language ->
-
-                Row(
+                AppLanguageItem(
                     modifier = Modifier
                         .padding(
                             if (index == 0) SettingsScreenFirstItemPadding
                             else SettingsScreenItemPadding
                         )
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    Text(
-                        text = stringResource(language.toUiString()),
-                        style = bodyStyle.copy(
-                            color = appTopBarElementsColor,
-                            fontWeight = FontWeight.Normal,
-                            fontSize = SettingsScreenItemFontSize
-                        )
-                    )
-
-                    AppCheckButton(
-                        isChecked = state.currentLanguage == language,
-                        onClick = {
-                            proceedIntent(
-                                ILanguageSettingsScreenIntent.UpdateAppLanguage(language)
-                            )
-                        }
-                    )
-                }
+                    language = language,
+                    currentLanguage = state.currentLanguage,
+                    proceedIntent = proceedIntent
+                )
             }
         }
+    }
+}
+
+@Composable
+private fun AppLanguageItem(
+    modifier: Modifier = Modifier,
+    language: AppLanguage,
+    currentLanguage: AppLanguage,
+    proceedIntent: (ILanguageSettingsScreenIntent) -> Unit
+) {
+
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Text(
+            text = stringResource(language.toUiString()),
+            style = bodyStyle.copy(
+                color = appTopBarElementsColor,
+                fontWeight = FontWeight.Normal,
+                fontSize = SettingsScreenItemFontSize
+            )
+        )
+
+        AppCheckButton(
+            isChecked = currentLanguage == language,
+            onClick = {
+                proceedIntent(
+                    ILanguageSettingsScreenIntent.UpdateAppLanguage(language)
+                )
+            }
+        )
     }
 }
 

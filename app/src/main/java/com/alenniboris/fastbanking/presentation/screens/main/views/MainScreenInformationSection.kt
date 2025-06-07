@@ -22,7 +22,6 @@ import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.presentation.uikit.functions.CommonFunctions
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenInformationSectionContainerPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenInformationSectionContentBigTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenInformationSectionContentInnerPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenInformationSectionContentMainTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.MainScreenInformationSectionContentPadding
@@ -41,6 +40,7 @@ fun MainScreenInformationSection(
     modifier: Modifier = Modifier,
     isCurrencyDataLoading: Boolean,
     baseCurrencyCode: String,
+    exchangeCurrencyCode: String,
     baseCurrencyAmount: Double?,
     exchangeCurrencyAmount: Double?,
     isAccountsDataLoading: Boolean,
@@ -90,7 +90,7 @@ fun MainScreenInformationSection(
                 Text(
                     modifier = Modifier.padding(MainScreenInformationSectionContentTextPadding),
                     text = exchangeCurrencyAmount?.let {
-                        CommonFunctions.formatAmount(exchangeCurrencyAmount) + " " + baseCurrencyCode
+                        CommonFunctions.formatAmount(exchangeCurrencyAmount) + " " + exchangeCurrencyCode
                     } ?: (stringResource(R.string.no_value_text) + " " + baseCurrencyCode),
                     style = bodyStyle.copy(
                         color = mainScreenTextColor,
@@ -183,10 +183,11 @@ private fun LightTheme() {
                         .height(MainScreenProductSectionHeight),
                     isCurrencyDataLoading = false,
                     baseCurrencyCode = "usd",
-                    baseCurrencyAmount = 1.0,
+                    baseCurrencyAmount = 100.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = false,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -199,7 +200,8 @@ private fun LightTheme() {
                     baseCurrencyAmount = 1.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = false,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -212,7 +214,8 @@ private fun LightTheme() {
                     baseCurrencyAmount = 1.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = true,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -225,7 +228,8 @@ private fun LightTheme() {
                     baseCurrencyAmount = 1.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = true,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -238,7 +242,8 @@ private fun LightTheme() {
                     baseCurrencyAmount = null,
                     exchangeCurrencyAmount = null,
                     isAccountsDataLoading = false,
-                    allAccountsAmount = null
+                    allAccountsAmount = null,
+                    exchangeCurrencyCode = "byn"
                 )
             }
         }
@@ -268,7 +273,8 @@ private fun DarkTheme() {
                     baseCurrencyAmount = 1.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = false,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -281,7 +287,8 @@ private fun DarkTheme() {
                     baseCurrencyAmount = 1.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = false,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -294,7 +301,8 @@ private fun DarkTheme() {
                     baseCurrencyAmount = 1.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = true,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -307,7 +315,8 @@ private fun DarkTheme() {
                     baseCurrencyAmount = 1.0,
                     exchangeCurrencyAmount = 2.0,
                     isAccountsDataLoading = true,
-                    allAccountsAmount = 120.0
+                    allAccountsAmount = 120.0,
+                    exchangeCurrencyCode = "byn"
                 )
 
                 MainScreenInformationSection(
@@ -320,7 +329,8 @@ private fun DarkTheme() {
                     baseCurrencyAmount = null,
                     exchangeCurrencyAmount = null,
                     isAccountsDataLoading = false,
-                    allAccountsAmount = null
+                    allAccountsAmount = null,
+                    exchangeCurrencyCode = "byn"
                 )
             }
         }

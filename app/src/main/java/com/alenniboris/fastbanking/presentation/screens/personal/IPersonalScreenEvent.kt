@@ -10,6 +10,8 @@ sealed interface IPersonalScreenEvent {
 
     data object OpenLanguageSettingsScreen : IPersonalScreenEvent
 
+    data object OpenBaseCurrencySettingsScreen : IPersonalScreenEvent
+
     data object OpenAccountDataScreen : IPersonalScreenEvent
 
     data object OpenPersonalDetailsScreen : IPersonalScreenEvent

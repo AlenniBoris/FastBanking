@@ -41,6 +41,7 @@ enum class SettingsActionsCategory {
 enum class SettingsActions {
     APPLICATION_THEME,
     APPLICATION_LANGUAGE,
+    APPLICATION_BASE_CURRENCY,
     ACCOUNT_DATA
 }
 
@@ -52,7 +53,8 @@ fun SettingsActionsCategory.toUiString(): Int = when (this) {
 fun SettingsActionsCategory.toListOfActions(): List<SettingsActions> = when (this) {
     SettingsActionsCategory.GENERAL -> listOf(
         SettingsActions.APPLICATION_THEME,
-        SettingsActions.APPLICATION_LANGUAGE
+        SettingsActions.APPLICATION_LANGUAGE,
+        SettingsActions.APPLICATION_BASE_CURRENCY
     )
 
     SettingsActionsCategory.SAFETY -> listOf(
@@ -63,17 +65,20 @@ fun SettingsActionsCategory.toListOfActions(): List<SettingsActions> = when (thi
 fun SettingsActions.toUiString(): Int = when (this) {
     SettingsActions.APPLICATION_THEME -> R.string.application_theme_text
     SettingsActions.APPLICATION_LANGUAGE -> R.string.application_language_text
+    SettingsActions.APPLICATION_BASE_CURRENCY -> R.string.application_base_currency_text
     SettingsActions.ACCOUNT_DATA -> R.string.my_account_text
 }
 
 fun SettingsActions.toUiPicture(): Int = when (this) {
     SettingsActions.APPLICATION_THEME -> R.drawable.application_theme_icon
     SettingsActions.APPLICATION_LANGUAGE -> R.drawable.application_language_icon
+    SettingsActions.APPLICATION_BASE_CURRENCY -> R.drawable.application_base_currency_icon
     SettingsActions.ACCOUNT_DATA -> R.drawable.personal_icon
 }
 
 fun SettingsActions.toUiDescriptionString(): Int = when (this) {
     SettingsActions.APPLICATION_THEME -> R.string.application_theme_description_text
     SettingsActions.APPLICATION_LANGUAGE -> R.string.application_language_description_text
+    SettingsActions.APPLICATION_BASE_CURRENCY -> R.string.application_base_currency_description_text
     SettingsActions.ACCOUNT_DATA -> R.string.my_account_description_text
 }

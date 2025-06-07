@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +30,7 @@ import com.alenniboris.fastbanking.R
 import com.alenniboris.fastbanking.domain.model.user.UserGender
 import com.alenniboris.fastbanking.domain.model.user.UserModelDomain
 import com.alenniboris.fastbanking.presentation.model.user.toModelUi
+import com.alenniboris.fastbanking.presentation.screens.destinations.BaseCurrencySettingsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.LanguageSettingsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.PersonalDetailsScreenDestination
 import com.alenniboris.fastbanking.presentation.screens.destinations.ThemeSettingsScreenDestination
@@ -109,6 +108,12 @@ fun PersonalScreen(
         launch {
             event.filterIsInstance<IPersonalScreenEvent.OpenLanguageSettingsScreen>().collect {
                 navigator.navigate(LanguageSettingsScreenDestination)
+            }
+        }
+
+        launch {
+            event.filterIsInstance<IPersonalScreenEvent.OpenBaseCurrencySettingsScreen>().collect {
+                navigator.navigate(BaseCurrencySettingsScreenDestination)
             }
         }
 
@@ -251,18 +256,12 @@ private fun PersonalScreenUi(
                 when (state.currentViewedCategory) {
                     PersonalScreenCategories.PROFILE -> {
                         ProfileCategoryActions(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .verticalScroll(rememberScrollState()),
                             proceedIntent = proceedIntent
                         )
                     }
 
                     PersonalScreenCategories.SETTING -> {
                         SettingsCategoryActions(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .verticalScroll(rememberScrollState()),
                             proceedIntent = proceedIntent
                         )
                     }

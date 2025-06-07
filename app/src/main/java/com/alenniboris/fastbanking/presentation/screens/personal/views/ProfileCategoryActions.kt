@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,17 +39,13 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 
 @Composable
 fun ProfileCategoryActions(
-    modifier: Modifier = Modifier,
     proceedIntent: (IPersonalScreenIntent) -> Unit
 ) {
 
     val profileActions by remember { mutableStateOf(ProfileActions.entries.toList()) }
 
-    Column(
-        modifier = modifier
-    ) {
-
-        profileActions.forEach { action ->
+    LazyColumn {
+        items(profileActions) { action ->
             ProfileActionUi(
                 modifier = Modifier
                     .padding(AdditionsScreenActionPadding)
@@ -119,12 +117,15 @@ private fun LightTheme() {
         darkTheme = false
     ) {
         Surface {
-            ProfileCategoryActions(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(appColor),
-                proceedIntent = {}
-            )
+                    .background(appColor)
+            ) {
+                ProfileCategoryActions(
+                    proceedIntent = {}
+                )
+            }
         }
     }
 }
@@ -136,12 +137,15 @@ private fun DarkTheme() {
         darkTheme = true
     ) {
         Surface {
-            ProfileCategoryActions(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(appColor),
-                proceedIntent = {}
-            )
+                    .background(appColor)
+            ) {
+                ProfileCategoryActions(
+                    proceedIntent = {}
+                )
+            }
         }
     }
 }

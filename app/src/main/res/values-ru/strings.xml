@@ -262,5 +262,11 @@
     <string name="enter_contract_number_text">Enter contracct number</string>
     <string name="transaction_approved_text">Transaction was successful</string>
     <string name="enter_amount_text">Enter amount</string>
+    <string name="dollar_currency_text">Dollar</string>
+    <string name="euro_currency_text">Euro</string>
+    <string name="ruble_currency_text">Ruble</string>
+    <string name="yane_currency_text">Yane</string>
+    <string name="application_base_currency_text">App base currency</string>
+    <string name="application_base_currency_description_text">Change app base currency</string>
 
 </resources>

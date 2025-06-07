@@ -48,6 +48,7 @@ import com.alenniboris.fastbanking.presentation.screens.activity.MainActivityVie
 import com.alenniboris.fastbanking.presentation.screens.additions.AdditionsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.application_information.ApplicationInformationScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.bank_news.BankNewsScreenViewModel
+import com.alenniboris.fastbanking.presentation.screens.base_currency_settings.BaseCurrencySettingsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.card_details.CardDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.credit_details.CreditDetailsScreenViewModel
 import com.alenniboris.fastbanking.presentation.screens.currency.CurrencyScreenViewModel
@@ -307,5 +308,9 @@ val ViewModelsModule = module {
             makeTransactionByEripNumberUseCase = get<IMakeTransactionByEripNumberUseCase>(),
             makeTransactionForCreditByContractNumberUseCase = get<IMakeTransactionForCreditByContractNumberUseCase>()
         )
+    }
+
+    viewModel<BaseCurrencySettingsScreenViewModel>() {
+        BaseCurrencySettingsScreenViewModel()
     }
 }

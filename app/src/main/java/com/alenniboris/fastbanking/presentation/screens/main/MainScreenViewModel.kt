@@ -20,7 +20,8 @@ import com.alenniboris.fastbanking.presentation.model.bank_product.IBankProductM
 import com.alenniboris.fastbanking.presentation.model.bank_product.TransactionModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.toModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.toUiModel
-import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyFlow
+import com.alenniboris.fastbanking.presentation.uikit.utils.BaseCurrencyMode
+import com.alenniboris.fastbanking.presentation.uikit.utils.baseCurrencyMode
 import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
@@ -90,20 +91,26 @@ class MainScreenViewModel(
     }
 
     init {
-        loadBaseExchangeRate()
-        loadAllAccountsSummaryValue()
+        viewModelScope.launch {
+            baseCurrencyMode
+                .buffer(onBufferOverflow = BufferOverflow.DROP_OLDEST)
+                .distinctUntilChanged()
+                .collect { baseCurrency ->
+                    loadBaseExchangeRate(baseCurrency = baseCurrency)
+                    loadAllAccountsSummaryValue(baseCurrency = baseCurrency)
+                }
+        }
     }
 
-    private fun loadBaseExchangeRate() {
+    private fun loadBaseExchangeRate(baseCurrency: BaseCurrencyMode) {
         viewModelScope.launch {
             _screenState.update { it.copy(isBaseCurrencyExchangeLoading = true) }
 
-            val currentBaseCurrency = baseCurrencyFlow.value
             when (
                 val res = getCurrenciesExchangeRateUseCase.invoke(
                     fromCurrency = CurrencyModelDomain(
-                        code = currentBaseCurrency.currencyCode,
-                        fullName = currentBaseCurrency.currencyFullName
+                        code = baseCurrency.currencyCode,
+                        fullName = baseCurrency.currencyFullName
                     ),
                     toCurrency = MainScreenValues.BaseExchangeCurrency
                 )
@@ -113,8 +120,9 @@ class MainScreenViewModel(
 
                     _screenState.update {
                         it.copy(
-                            baseCurrencyAmount = currentBaseCurrency.baseAmount,
-                            exchangedCurrencyAmount = currentBaseCurrency.baseAmount * rate
+                            baseCurrencyAmount = baseCurrency.baseAmount,
+                            exchangeCurrencyAmount = baseCurrency.baseAmount * rate,
+                            exchangeCurrencyCode = MainScreenValues.BaseExchangeCurrency.code
                         )
                     }
                 }
@@ -132,16 +140,15 @@ class MainScreenViewModel(
         }
     }
 
-    private fun loadAllAccountsSummaryValue() {
+    private fun loadAllAccountsSummaryValue(baseCurrency: BaseCurrencyMode) {
         viewModelScope.launch {
             _screenState.update { it.copy(isUserAccountsSumLoading = true) }
 
-            val currentBaseCurrency = baseCurrencyFlow.value
             when (
                 val res = getAllUserAccountsCurrencyAmountUseCase.invoke(
                     baseCurrency = CurrencyModelDomain(
-                        code = currentBaseCurrency.currencyCode,
-                        fullName = currentBaseCurrency.currencyFullName
+                        code = baseCurrency.currencyCode,
+                        fullName = baseCurrency.currencyFullName
                     )
                 )
             ) {
@@ -179,7 +186,7 @@ class MainScreenViewModel(
                     val list = if (result.result.size < 3) {
                         result.result
                     } else
-                        result.result.subList(0, 2)
+                        result.result.subList(0, MainScreenValues.NumberOfVisibleTransactions)
 
                     val res = list.map { it.toUiModel(usedCard = card.domainModel) }
 

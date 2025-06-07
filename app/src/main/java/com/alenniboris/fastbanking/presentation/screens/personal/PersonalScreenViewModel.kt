@@ -56,7 +56,14 @@ class PersonalScreenViewModel(
             SettingsActions.APPLICATION_THEME -> openThemeSettingsScreen()
             SettingsActions.APPLICATION_LANGUAGE -> openLanguageSettingsScreen()
             SettingsActions.ACCOUNT_DATA -> openAccountDataScreen()
+            SettingsActions.APPLICATION_BASE_CURRENCY -> openBaseCurrencySettingsScreen()
         }
+    }
+
+    private fun openBaseCurrencySettingsScreen() {
+        _event.emit(
+            IPersonalScreenEvent.OpenBaseCurrencySettingsScreen
+        )
     }
 
     private fun openAccountDataScreen() {

@@ -1,12 +1,12 @@
 package com.alenniboris.fastbanking.presentation.screens.personal.views
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -36,56 +36,66 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.PersonalScreenProfil
 import com.alenniboris.fastbanking.presentation.uikit.theme.PersonalScreenProfileActionDescriptionTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.PersonalScreenProfileActionFontSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.PersonalScreenProfileActionTextPadding
-import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 
 @Composable
 fun SettingsCategoryActions(
-    modifier: Modifier = Modifier,
     proceedIntent: (IPersonalScreenIntent) -> Unit
 ) {
 
     val settingsCategory by remember { mutableStateOf(SettingsActionsCategory.entries.toList()) }
 
+    LazyColumn {
+        itemsIndexed(settingsCategory) { index, category ->
+            CategoryUi(
+                modifier = Modifier.padding(
+                    if (index == 0) PersonalScreenProfileActionColumnFirstPadding
+                    else PersonalScreenProfileActionColumnPadding
+                ),
+                category = category,
+                proceedIntent = proceedIntent
+            )
+        }
+    }
+}
+
+@Composable
+private fun CategoryUi(
+    modifier: Modifier = Modifier,
+    category: SettingsActionsCategory,
+    proceedIntent: (IPersonalScreenIntent) -> Unit
+) {
+
     Column(
         modifier = modifier
     ) {
 
-        settingsCategory.forEachIndexed { index, category ->
+        Text(
+            modifier = modifier,
+            text = stringResource(category.toUiString()),
+            style = bodyStyle.copy(
+                fontWeight = FontWeight.Bold,
+                fontSize = PersonalScreenProfileActionBigFontSize,
+                color = appTopBarElementsColor
+            )
+        )
 
-            Column(
-                modifier = Modifier.padding(
-                    if (index == 0) PersonalScreenProfileActionColumnFirstPadding
-                    else PersonalScreenProfileActionColumnPadding
-                )
-            ) {
+        val settingsActions by remember { mutableStateOf(category.toListOfActions()) }
 
-                Text(
-                    text = stringResource(category.toUiString()),
-                    style = bodyStyle.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = PersonalScreenProfileActionBigFontSize,
-                        color = appTopBarElementsColor
-                    )
-                )
+        settingsActions.forEach { action ->
 
-                val settingsActions by remember { mutableStateOf(category.toListOfActions()) }
-
-                settingsActions.forEach { action ->
-                    SettingsActionUi(
-                        modifier = Modifier
-                            .padding(AdditionsScreenActionPadding)
-                            .fillMaxWidth()
-                            .clickable {
-                                proceedIntent(
-                                    IPersonalScreenIntent.ProceedAccordingToSettingsAction(action)
-                                )
-                            },
-                        action = action
-                    )
-                }
-            }
+            SettingsActionUi(
+                modifier = Modifier
+                    .padding(AdditionsScreenActionPadding)
+                    .fillMaxWidth()
+                    .clickable {
+                        proceedIntent(
+                            IPersonalScreenIntent.ProceedAccordingToSettingsAction(action)
+                        )
+                    },
+                action = action
+            )
         }
     }
 }
@@ -147,9 +157,6 @@ private fun DarkTheme() {
     ) {
         Surface {
             SettingsCategoryActions(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(appColor),
                 proceedIntent = {}
             )
         }
@@ -164,9 +171,6 @@ private fun LightTheme() {
     ) {
         Surface {
             SettingsCategoryActions(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(appColor),
                 proceedIntent = {}
             )
         }

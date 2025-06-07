@@ -18,6 +18,7 @@ const val PersonalScreenRoute = "Personal screen"
 const val PersonalDetailsScreenRoute = "Personal details screen"
 const val ThemeSettingsScreenRoute = "Theme settings screen"
 const val LanguageSettingsScreenRoute = "Language settings screen"
+const val BaseCurrencySettingsScreenRoute = "Base currency settings screen"
 const val UserAppAccountSettingsScreenRoute = "account settings screen"
 const val UserAppliancesScreenRoute = "user appliances screen"
 const val ProductApplianceChoosingScreenRoute = "product appliance choosing screen"
@@ -54,5 +55,6 @@ val RoutesWithoutBottomBar = listOf(
     ProductInformationScreenRoute,
     CreditDetailsScreenRoute,
     AccountDetailsScreenRoute,
-    PaymentProcessScreenRoute
+    PaymentProcessScreenRoute,
+    BaseCurrencySettingsScreenRoute
 )
