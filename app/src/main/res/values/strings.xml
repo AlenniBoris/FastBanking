@@ -42,7 +42,7 @@
     <string name="user_data_text">User data</string>
     <string name="document_type_text">Document type</string>
     <string name="document_type_password_text">Passport of RB sitizen</string>
-    <string name="document_options_description">doccument options icon</string>
+    <string name="document_options_description">document options icon</string>
     <string name="document_type_password_hint">Identification number</string>
     <string name="document_type_password_hint_description">Id number is located on the last page of your passport. It is a long number of 14 latin characters with nubers. It will be your login after registration</string>
     <string name="phone_number_text">Phone number</string>
@@ -177,7 +177,7 @@
     <string name="category_login_text">Login</string>
     <string name="category_password_text">Password</string>
     <string name="new_product_text">New product</string>
-    <string name="forward_icon_description">Forwsrd icon</string>
+    <string name="forward_icon_description">Forward icon</string>
     <string name="appliances_text">Appliances</string>
     <string name="approved_status_text">Approved</string>
     <string name="waiting_status_text">Waiting</string>
@@ -206,7 +206,7 @@
     <string name="card_policy_text">I am informed that the illegal distribution\nof Card details or authentication\ndata for account access, committed\nfor selfish reasons, is prohibited and subject\nto criminal prosecution (Article *** of the Criminal Code of the Republic of Belarus)*</string>
     <string name="appliance_final_okay_text">Appliance was send. Tap button below to finish</string>
     <string name="credit_appliance_form_text">Choose credit that suits you more</string>
-    <string name="credit_policy_text">I am informed that the illegal distribution\\nof credit details or authentication\\ndata for account access, committed\\nfor selfish reasons, is prohibited and subject\\nto criminal prosecution (Article *** of the Criminal Code of the Republic of Belarus)*</string>
+    <string name="credit_policy_text">I am informed that the illegal distribution\\nof credit details or authentication\\ndata for account access, committed\\nfor selfish reasons, is prohibited and subject\\not criminal prosecution (Article *** of the Criminal Code of the Republic of Belarus)*</string>
     <string name="credit_goal_placeholder_text">Enter your credit goal</string>
     <string name="credit_not_allowed_text">Your age is lower than 22, so you won\'t be able to make appliance for credit</string>
     <string name="minimal_contribution_placeholder_text">Minimal contribution</string>
@@ -256,8 +256,8 @@
     <string name="transaction_data_error">Check that you filled data. And amount is more than 0</string>
     <string name="user_has_no_cards">You have no cards to make transaction</string>
     <string name="enter_card_number_text">Enter card number</string>
-    <string name="enter_erip_number_text">Enter erip number</string>
-    <string name="enter_contract_number_text">Enter contracct number</string>
+    <string name="enter_erip_number_text">Enter ERIP number</string>
+    <string name="enter_contract_number_text">Enter contract number</string>
     <string name="transaction_approved_text">Transaction was successful</string>
     <string name="enter_amount_text">Enter amount</string>
     <string name="dollar_currency_text">Dollar</string>
