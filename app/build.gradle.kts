@@ -78,6 +78,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose.android)
     implementation(libs.play.services.location)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -121,6 +122,15 @@ dependencies {
     //Coil
     implementation("io.coil-kt.coil3:coil-compose:3.0.4")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
+
+    // junit + mockito
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.15.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+    // koin test
+    testImplementation("io.insert-koin:koin-test:4.0.2")
+    testImplementation("io.insert-koin:koin-test-junit4:4.0.2")
 }
 
 secrets {
