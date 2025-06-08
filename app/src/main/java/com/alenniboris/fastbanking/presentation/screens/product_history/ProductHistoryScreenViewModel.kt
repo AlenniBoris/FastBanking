@@ -43,7 +43,7 @@ class ProductHistoryScreenViewModel(
                 loadCreditHistory(credit = product.fromJson<CreditModelUi>())
             }
 
-            BankProduct.DEPOSITS_AND_ACCOUNTS -> {
+            BankProduct.ACCOUNTS_AND_DEPOSITS -> {
                 loadAccountHistory(account = product.fromJson<AccountModelUi>())
             }
         }

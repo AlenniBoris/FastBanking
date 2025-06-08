@@ -6,6 +6,8 @@ import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 
 sealed interface IMainScreenIntent {
 
+    data object LoadUserProducts : IMainScreenIntent
+
     data object UpdateRecommendedNewsVisibility : IMainScreenIntent
 
     data object OpenHelpScreen : IMainScreenIntent

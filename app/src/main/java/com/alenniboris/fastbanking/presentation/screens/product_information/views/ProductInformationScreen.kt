@@ -63,7 +63,7 @@ fun ProductInformationScreen(
             when (productType) {
                 BankProduct.CARD -> product.fromJson<CardModelUi>()
                 BankProduct.CREDIT -> product.fromJson<CreditModelUi>()
-                BankProduct.DEPOSITS_AND_ACCOUNTS -> product.fromJson<AccountModelUi>()
+                BankProduct.ACCOUNTS_AND_DEPOSITS -> product.fromJson<AccountModelUi>()
             }
         )
     }

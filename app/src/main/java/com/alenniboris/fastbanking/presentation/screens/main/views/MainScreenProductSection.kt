@@ -169,7 +169,7 @@ fun MainScreenProductSection(
                         }
 
 
-                    BankProduct.DEPOSITS_AND_ACCOUNTS ->
+                    BankProduct.ACCOUNTS_AND_DEPOSITS ->
                         (currentUserProduct as? AccountModelUi)?.let { account ->
                             DepositsAndAccountsProductUi(
                                 modifier = Modifier
@@ -226,18 +226,31 @@ private fun CardProductUi(
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
 
-        Row {
-            Image(
-                painter = painterResource(card.picture),
-                contentDescription = stringResource(R.string.payment_icon_text)
-            )
+        Column {
+
+            Row {
+                Image(
+                    painter = painterResource(card.picture),
+                    contentDescription = stringResource(R.string.payment_icon_text)
+                )
+
+                Text(
+                    modifier = Modifier.padding(CardProductUiNumberTextPadding),
+                    text = card.numberText,
+                    style = bodyStyle.copy(
+                        color = mainScreenTextColor,
+                        fontSize = CardProductUiTextSize
+                    )
+                )
+            }
 
             Text(
-                modifier = Modifier.padding(CardProductUiNumberTextPadding),
-                text = card.numberText,
+                modifier = Modifier.padding(CardProductUiReserveCurrencyPadding),
+                text = card.name,
                 style = bodyStyle.copy(
                     color = mainScreenTextColor,
-                    fontSize = CardProductUiTextSize
+                    fontSize = CardProductUiTextSize,
+                    fontWeight = FontWeight.Bold
                 )
             )
         }
@@ -276,7 +289,7 @@ private fun CreditProductUi(
 
         Text(
             modifier = Modifier.weight(1f),
-            text = credit.domainModel.id,
+            text = credit.name,
             style = bodyStyle.copy(
                 color = mainScreenTextColor,
                 fontSize = CreditProductUiTextSize,
@@ -317,7 +330,7 @@ private fun DepositsAndAccountsProductUi(
 
         Text(
             modifier = Modifier.weight(1f),
-            text = account.accountIdText,
+            text = account.name,
             style = bodyStyle.copy(
                 color = mainScreenTextColor,
                 fontSize = CreditProductUiTextSize,
@@ -437,7 +450,7 @@ private fun LightThemePreview() {
                         .heightIn(min = MainScreenProductSectionHeight)
                         .background(mainScreenOnItemColor)
                         .padding(MainScreenProductSectionInnerPadding),
-                    currentProduct = BankProduct.DEPOSITS_AND_ACCOUNTS,
+                    currentProduct = BankProduct.ACCOUNTS_AND_DEPOSITS,
                     currentUserProduct = AccountModelUi(
                         domainModel = AccountModelDomain(
                             id = "21213",
@@ -603,7 +616,7 @@ private fun DarkThemePreview() {
                         .heightIn(min = MainScreenProductSectionHeight)
                         .background(mainScreenOnItemColor)
                         .padding(MainScreenProductSectionInnerPadding),
-                    currentProduct = BankProduct.DEPOSITS_AND_ACCOUNTS,
+                    currentProduct = BankProduct.ACCOUNTS_AND_DEPOSITS,
                     currentUserProduct = AccountModelUi(
                         domainModel = AccountModelDomain(
                             id = "21213",

@@ -3,6 +3,7 @@ package com.alenniboris.fastbanking.presentation.screens.credit_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
+import com.alenniboris.fastbanking.domain.usecase.logic.credits.IChangeCreditNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class CreditDetailsScreenViewModel(
     private val creditId: String,
-    private val getCreditByIdUseCase: IGetCreditByIdUseCase
+    private val getCreditByIdUseCase: IGetCreditByIdUseCase,
+    private val changeCreditNameUseCase: IChangeCreditNameUseCase
 ) : ViewModel() {
 
     private val _screenState = MutableStateFlow(CreditDetailsScreenState())
@@ -53,6 +55,52 @@ class CreditDetailsScreenViewModel(
         when (intent) {
             is ICreditDetailsScreenIntent.NavigateBack -> navigateBack()
             is ICreditDetailsScreenIntent.ProceedDetailsAction -> proceedDetailsAction(intent.action)
+            ICreditDetailsScreenIntent.ChangeCreditNameSettingsVisibility -> changeCreditNameSettingsVisibility()
+            ICreditDetailsScreenIntent.UpdateCreditName -> updateCreditName()
+            is ICreditDetailsScreenIntent.UpdateCreditNewName -> updateCreditNewName(intent.newName)
+        }
+    }
+
+    private fun updateCreditNewName(newName: String) {
+        _screenState.update {
+            it.copy(
+                creditNewName = newName
+            )
+        }
+    }
+
+    private fun updateCreditName() {
+        _screenState.value.credit?.let { credit ->
+            viewModelScope.launch {
+                when (
+                    val res = changeCreditNameUseCase.invoke(
+                        credit = credit.domainModel,
+                        newName = _screenState.value.creditNewName
+                    )
+                ) {
+                    is CustomResultModelDomain.Success -> {
+                        changeCreditNameSettingsVisibility()
+                        loadCredit()
+                    }
+
+                    is CustomResultModelDomain.Error -> {
+                        _event.emit(
+                            ICreditDetailsScreenEvent.ShowToastMessage(
+                                res.exception.toUiMessageString()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun changeCreditNameSettingsVisibility() {
+        _screenState.update {
+            it.copy(
+                isCreditNameSettingsVisible = !it.isCreditNameSettingsVisible,
+                creditNewName = ""
+            )
         }
     }
 

@@ -183,7 +183,7 @@ private fun ProductApplianceChoosingScreenUi(
                         when (state.currentProduct) {
                             BankProduct.CARD -> state.cardOptions
                             BankProduct.CREDIT -> state.creditOptions
-                            BankProduct.DEPOSITS_AND_ACCOUNTS -> state.depositOptions
+                            BankProduct.ACCOUNTS_AND_DEPOSITS -> state.depositOptions
                         }
                     ) { item ->
 
@@ -206,7 +206,7 @@ private fun ProductApplianceChoosingScreenUi(
                                                 )
                                             }
 
-                                            BankProduct.DEPOSITS_AND_ACCOUNTS -> {
+                                            BankProduct.ACCOUNTS_AND_DEPOSITS -> {
                                                 IProductApplianceChoosingScreenIntent.ProceedDepositOption(
                                                     item as DepositDetailedApplianceType
                                                 )
@@ -236,7 +236,7 @@ private fun ProductApplianceChoosingScreenUi(
                                                     ?: R.string.undefined_text
                                             )
 
-                                        BankProduct.DEPOSITS_AND_ACCOUNTS ->
+                                        BankProduct.ACCOUNTS_AND_DEPOSITS ->
                                             stringResource(
                                                 (item as? DepositDetailedApplianceType)?.toUiString()
                                                     ?: R.string.undefined_text

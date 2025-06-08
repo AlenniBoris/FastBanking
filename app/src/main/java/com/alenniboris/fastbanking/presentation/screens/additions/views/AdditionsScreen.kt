@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,6 +55,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.appTopBarElementsColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 import com.alenniboris.fastbanking.presentation.uikit.values.AdditionsScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.views.AppDialogWithTextField
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -96,19 +97,6 @@ fun AdditionsScreen(
                 navigator.navigate(
                     AtmMapScreenDestination(isBackButtonNeeded = true)
                 )
-            }
-        }
-
-        launch {
-            event.filterIsInstance<IAdditionsScreenEvent.OpenPraisePage>().collect {
-                toastMessage?.cancel()
-                toastMessage =
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.in_development_text),
-                        Toast.LENGTH_SHORT
-                    )
-                toastMessage?.show()
             }
         }
 
@@ -163,6 +151,28 @@ private fun AdditionsScreenUi(
     proceedIntent: (IAdditionsScreenIntent) -> Unit
 ) {
 
+    if (state.isPraiseDialogVisible) {
+        AppDialogWithTextField(
+            header = stringResource(R.string.praise_description_text),
+            value = state.praiseText,
+            onValueChanged = { text ->
+                proceedIntent(
+                    IAdditionsScreenIntent.ChangePraiseText(text)
+                )
+            },
+            onDismiss = {
+                proceedIntent(
+                    IAdditionsScreenIntent.UpdatePraiseDialogVisibility
+                )
+            },
+            onApprove = {
+                proceedIntent(
+                    IAdditionsScreenIntent.SendUserPraise
+                )
+            }
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -193,13 +203,8 @@ private fun AdditionsScreenContent(
     proceedIntent: (IAdditionsScreenIntent) -> Unit
 ) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-
-        categories.forEachIndexed { index, category ->
+    LazyColumn {
+        itemsIndexed(categories) { index, category ->
 
             Column(
                 modifier = Modifier.padding(

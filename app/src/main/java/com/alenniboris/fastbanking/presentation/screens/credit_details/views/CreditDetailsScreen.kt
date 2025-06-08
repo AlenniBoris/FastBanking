@@ -50,8 +50,8 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenA
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenActionButtonTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenActionButtonTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenButtonsVerticalSpacing
-import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenCreditPlaceholderPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenContentPadding
+import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenCreditPlaceholderPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CreditDetailsScreenNumberOfColumns
 import com.alenniboris.fastbanking.presentation.uikit.theme.FastBankingTheme
 import com.alenniboris.fastbanking.presentation.uikit.theme.TopBarPadding
@@ -62,6 +62,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
 import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import com.alenniboris.fastbanking.presentation.uikit.values.CreditDetailsScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.views.AppDialogWithTextField
 import com.alenniboris.fastbanking.presentation.uikit.views.AppEmptyScreen
 import com.alenniboris.fastbanking.presentation.uikit.views.AppIconButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppProgressBar
@@ -176,6 +177,28 @@ private fun CreditDetailsScreenUi(
 
             state.credit != null -> {
 
+                if (state.isCreditNameSettingsVisible) {
+                    AppDialogWithTextField(
+                        header = stringResource(R.string.change_product_name),
+                        value = state.creditNewName,
+                        onValueChanged = { newName ->
+                            proceedIntent(
+                                ICreditDetailsScreenIntent.UpdateCreditNewName(newName)
+                            )
+                        },
+                        onDismiss = {
+                            proceedIntent(
+                                ICreditDetailsScreenIntent.ChangeCreditNameSettingsVisibility
+                            )
+                        },
+                        onApprove = {
+                            proceedIntent(
+                                ICreditDetailsScreenIntent.UpdateCreditName
+                            )
+                        }
+                    )
+                }
+
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -189,7 +212,8 @@ private fun CreditDetailsScreenUi(
                             .fillMaxWidth()
                             .background(mainScreenItemColor)
                             .padding(CreditDetailsPlaceholderContainerInnerPadding),
-                        credit = state.credit
+                        credit = state.credit,
+                        proceedIntent = proceedIntent
                     )
 
                     LazyVerticalGrid(

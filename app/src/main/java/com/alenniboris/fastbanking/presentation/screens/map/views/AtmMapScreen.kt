@@ -42,7 +42,7 @@ import com.alenniboris.fastbanking.presentation.uikit.utils.toPermission
 import com.alenniboris.fastbanking.presentation.uikit.values.AtmMapScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.ClickableElement
 import com.alenniboris.fastbanking.presentation.uikit.views.AppButtonRow
-import com.alenniboris.fastbanking.presentation.uikit.views.AppRationaleDialog
+import com.alenniboris.fastbanking.presentation.uikit.views.AppPermissionRationaleDialog
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -190,7 +190,7 @@ private fun AtmMapNotRegisteredUserScreenUi(
         }
         if (state.isPermissionDialogVisible) {
             state.requestedPermission?.let {
-                AppRationaleDialog(
+                AppPermissionRationaleDialog(
                     permissionType = it,
                     onDismiss = {
                         proceedIntent(

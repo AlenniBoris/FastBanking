@@ -62,6 +62,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
 import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
 import com.alenniboris.fastbanking.presentation.uikit.values.CardDetailsScreenRoute
+import com.alenniboris.fastbanking.presentation.uikit.views.AppDialogWithTextField
 import com.alenniboris.fastbanking.presentation.uikit.views.AppEmptyScreen
 import com.alenniboris.fastbanking.presentation.uikit.views.AppIconButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppProgressBar
@@ -176,6 +177,28 @@ private fun CardDetailsScreenUi(
 
             state.card != null -> {
 
+                if (state.isCardNameSettingsVisible) {
+                    AppDialogWithTextField(
+                        header = stringResource(R.string.change_product_name),
+                        value = state.cardNewName,
+                        onValueChanged = { newName ->
+                            proceedIntent(
+                                ICardDetailsScreenIntent.UpdateCardNewName(newName)
+                            )
+                        },
+                        onDismiss = {
+                            proceedIntent(
+                                ICardDetailsScreenIntent.ChangeCardNameSettingsVisibility
+                            )
+                        },
+                        onApprove = {
+                            proceedIntent(
+                                ICardDetailsScreenIntent.UpdateCardName
+                            )
+                        }
+                    )
+                }
+
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -186,7 +209,8 @@ private fun CardDetailsScreenUi(
                         modifier = Modifier
                             .padding(CardDetailsScreenCardPlaceholderPadding)
                             .fillMaxWidth(),
-                        card = state.card
+                        card = state.card,
+                        proceedIntent = proceedIntent
                     )
 
                     LazyVerticalGrid(

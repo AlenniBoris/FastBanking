@@ -9,5 +9,7 @@ data class AccountDetailsScreenState(
     val attachedCards: List<CardModelUi> = emptyList(),
     val isAttachedCardsLoading: Boolean = false,
     val isAttachedCardsSheetVisible: Boolean = false,
-    val allActions: List<AccountDetailsScreenActions> = AccountDetailsScreenActions.entries.toList()
+    val allActions: List<AccountDetailsScreenActions> = AccountDetailsScreenActions.entries.toList(),
+    val isAccountNameSettingsVisible: Boolean = false,
+    val accountNewName: String = ""
 )

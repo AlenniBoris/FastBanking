@@ -19,7 +19,7 @@ import com.alenniboris.fastbanking.presentation.uikit.utils.toPermissionName
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
-fun AppRationaleDialog(
+fun AppPermissionRationaleDialog(
     permissionType: PermissionType,
     onDismiss: () -> Unit,
     onOpenSettings: () -> Unit
@@ -60,7 +60,7 @@ private fun AppRationaleDialogPreview() {
             .fillMaxSize()
             .background(appColor)
     ) {
-        AppRationaleDialog(
+        AppPermissionRationaleDialog(
             permissionType = PermissionType.PERMISSION_COARSE_LOCATION,
             onDismiss = {},
             onOpenSettings = {}

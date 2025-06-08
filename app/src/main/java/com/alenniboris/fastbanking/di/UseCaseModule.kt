@@ -6,6 +6,7 @@ import com.alenniboris.fastbanking.domain.repository.IBankProductsRepository
 import com.alenniboris.fastbanking.domain.repository.ICurrencyRepository
 import com.alenniboris.fastbanking.domain.repository.IHelpRepository
 import com.alenniboris.fastbanking.domain.repository.IMapsRepository
+import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.ChangeAccountNameUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAccountByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsCurrencyAmountUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.accounts.GetAllUserAccountsUseCaseImpl
@@ -28,9 +29,12 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetAp
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankNewsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.GetBankRecommendedNewsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.bank_info.SendUserPraiseUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.cards.ChangeCardNameUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetAllUserCardsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetCardByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.cards.GetFullModelsForAllSimpleCardsUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.implementation.credits.ChangeCreditNameUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.credits.GetAllUserCreditsUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.credits.GetCreditByIdUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.currency.GetAllCurrenciesInfoUseCaseImpl
@@ -46,6 +50,7 @@ import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.Ge
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.MakeTransactionByCardNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.MakeTransactionByEripNumberUseCaseImpl
 import com.alenniboris.fastbanking.domain.usecase.implementation.transactions.MakeTransactionForCreditByContractNumberUseCaseImpl
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IChangeAccountNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
@@ -68,9 +73,12 @@ import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicatio
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankRecommendedNewsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.ISendUserPraiseUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IChangeCardNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetFullModelsForAllSimpleCardsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.credits.IChangeCreditNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetAllUserCreditsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
@@ -90,6 +98,33 @@ import com.alenniboris.fastbanking.domain.utils.IAppDispatchers
 import org.koin.dsl.module
 
 val UseCaseModule = module {
+
+    factory<ISendUserPraiseUseCase> {
+        SendUserPraiseUseCaseImpl(
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IChangeCreditNameUseCase> {
+        ChangeCreditNameUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IChangeAccountNameUseCase> {
+        ChangeAccountNameUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
+
+    factory<IChangeCardNameUseCase> {
+        ChangeCardNameUseCaseImpl(
+            bankProductsRepository = get<IBankProductsRepository>(),
+            dispatchers = get<IAppDispatchers>()
+        )
+    }
 
     single<IGetCurrentUserUseCase> {
         GetCurrentUserUseCaseImpl(

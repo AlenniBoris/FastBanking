@@ -3,6 +3,7 @@ package com.alenniboris.fastbanking.presentation.screens.account_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IChangeAccountNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetFullModelsForAllSimpleCardsUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 class AccountDetailsScreenViewModel(
     private val accountId: String,
     private val getAccountByIdUseCase: IGetAccountByIdUseCase,
+    private val changeAccountNameUseCase: IChangeAccountNameUseCase,
     private val getFullModelsForAllSimpleCardsUseCase: IGetFullModelsForAllSimpleCardsUseCase
 ) : ViewModel() {
 
@@ -86,6 +88,50 @@ class AccountDetailsScreenViewModel(
             is IAccountDetailsScreenIntent.ProceedDetailsAction -> proceedDetailsAction(intent.action)
             is IAccountDetailsScreenIntent.UpdateAttachedCardsSheetVisibility -> updateAccountAttachedCardsSheetVisibility()
             is IAccountDetailsScreenIntent.OpenCardDetailsScreen -> openCardDetailsScreen(intent.cardId)
+            is IAccountDetailsScreenIntent.ChangeAccountNameSettingsVisibility -> changeAccountNameSettingsVisibility()
+            is IAccountDetailsScreenIntent.UpdateAccountName -> updateAccountName()
+            is IAccountDetailsScreenIntent.UpdateAccountNewName -> updateAccountNewName(intent.newName)
+        }
+    }
+
+    private fun updateAccountName() {
+        _screenState.value.account?.let { account ->
+            viewModelScope.launch {
+                when (
+                    val res = changeAccountNameUseCase.invoke(
+                        account = account.domainModel,
+                        newName = _screenState.value.accountNewName
+                    )
+                ) {
+                    is CustomResultModelDomain.Success -> {
+                        changeAccountNameSettingsVisibility()
+                        loadAccountById()
+                    }
+
+                    is CustomResultModelDomain.Error -> {
+                        _event.emit(
+                            IAccountDetailsScreenEvent.ShowToastMessage(
+                                res.exception.toUiMessageString()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateAccountNewName(newName: String) {
+        _screenState.update {
+            it.copy(accountNewName = newName)
+        }
+    }
+
+    private fun changeAccountNameSettingsVisibility() {
+        _screenState.update {
+            it.copy(
+                isAccountNameSettingsVisible = !it.isAccountNameSettingsVisible,
+                accountNewName = ""
+            )
         }
     }
 

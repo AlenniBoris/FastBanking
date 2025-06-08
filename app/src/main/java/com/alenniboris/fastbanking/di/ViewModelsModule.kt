@@ -3,6 +3,7 @@ package com.alenniboris.fastbanking.di
 import com.alenniboris.fastbanking.domain.model.appliances.CardDetailedApplianceType
 import com.alenniboris.fastbanking.domain.model.appliances.CreditDetailedApplianceType
 import com.alenniboris.fastbanking.domain.model.appliances.DepositDetailedApplianceType
+import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IChangeAccountNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAccountByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsCurrencyAmountUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.accounts.IGetAllUserAccountsUseCase
@@ -25,9 +26,12 @@ import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetApplicatio
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankNewsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.IGetBankRecommendedNewsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.bank_info.ISendUserPraiseUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IChangeCardNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetAllUserCardsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetFullModelsForAllSimpleCardsUseCase
+import com.alenniboris.fastbanking.domain.usecase.logic.credits.IChangeCreditNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetAllUserCreditsUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.credits.IGetCreditByIdUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.currency.IGetAllCurrenciesInfoUseCase
@@ -133,7 +137,9 @@ val ViewModelsModule = module {
     }
 
     viewModel<AdditionsScreenViewModel> {
-        AdditionsScreenViewModel()
+        AdditionsScreenViewModel(
+            sendUserPraiseUseCase = get<ISendUserPraiseUseCase>()
+        )
     }
 
     viewModel<ApplicationInformationScreenViewModel> {
@@ -277,6 +283,7 @@ val ViewModelsModule = module {
     viewModel<CardDetailsScreenViewModel>() { (cardId: String) ->
         CardDetailsScreenViewModel(
             cardId = cardId,
+            changeCardNameUseCase = get<IChangeCardNameUseCase>(),
             getCardByIdUseCase = get<IGetCardByIdUseCase>()
         )
     }
@@ -284,7 +291,8 @@ val ViewModelsModule = module {
     viewModel<CreditDetailsScreenViewModel>() { (creditId: String) ->
         CreditDetailsScreenViewModel(
             creditId = creditId,
-            getCreditByIdUseCase = get<IGetCreditByIdUseCase>()
+            getCreditByIdUseCase = get<IGetCreditByIdUseCase>(),
+            changeCreditNameUseCase = get<IChangeCreditNameUseCase>()
         )
     }
 
@@ -292,7 +300,8 @@ val ViewModelsModule = module {
         AccountDetailsScreenViewModel(
             accountId = accountId,
             getAccountByIdUseCase = get<IGetAccountByIdUseCase>(),
-            getFullModelsForAllSimpleCardsUseCase = get<IGetFullModelsForAllSimpleCardsUseCase>()
+            getFullModelsForAllSimpleCardsUseCase = get<IGetFullModelsForAllSimpleCardsUseCase>(),
+            changeAccountNameUseCase = get<IChangeAccountNameUseCase>()
         )
     }
 

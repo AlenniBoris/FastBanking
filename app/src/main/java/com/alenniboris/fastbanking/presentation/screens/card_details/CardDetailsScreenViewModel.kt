@@ -3,6 +3,7 @@ package com.alenniboris.fastbanking.presentation.screens.card_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alenniboris.fastbanking.domain.model.CustomResultModelDomain
+import com.alenniboris.fastbanking.domain.usecase.logic.cards.IChangeCardNameUseCase
 import com.alenniboris.fastbanking.domain.usecase.logic.cards.IGetCardByIdUseCase
 import com.alenniboris.fastbanking.domain.utils.SingleFlowEvent
 import com.alenniboris.fastbanking.presentation.mappers.toUiMessageString
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class CardDetailsScreenViewModel(
     private val cardId: String,
-    private val getCardByIdUseCase: IGetCardByIdUseCase
+    private val getCardByIdUseCase: IGetCardByIdUseCase,
+    private val changeCardNameUseCase: IChangeCardNameUseCase
 ) : ViewModel() {
 
     private val _screenState = MutableStateFlow(CardDetailsScreenState())
@@ -53,6 +55,52 @@ class CardDetailsScreenViewModel(
         when (intent) {
             is ICardDetailsScreenIntent.NavigateBack -> navigateBack()
             is ICardDetailsScreenIntent.ProceedDetailsAction -> proceedDetailsAction(intent.action)
+            is ICardDetailsScreenIntent.ChangeCardNameSettingsVisibility -> changeCardNameSettingsVisibility()
+            is ICardDetailsScreenIntent.UpdateCardName -> updateCardName()
+            is ICardDetailsScreenIntent.UpdateCardNewName -> updateCardNewName(intent.newName)
+        }
+    }
+
+    private fun updateCardNewName(newName: String) {
+        _screenState.update {
+            it.copy(
+                cardNewName = newName
+            )
+        }
+    }
+
+    private fun updateCardName() {
+        _screenState.value.card?.let { card ->
+            viewModelScope.launch {
+                when (
+                    val res = changeCardNameUseCase.invoke(
+                        card = card.domainModel,
+                        newName = _screenState.value.cardNewName
+                    )
+                ) {
+                    is CustomResultModelDomain.Success -> {
+                        changeCardNameSettingsVisibility()
+                        loadCard()
+                    }
+
+                    is CustomResultModelDomain.Error -> {
+                        _event.emit(
+                            ICardDetailsScreenEvent.ShowToastMessage(
+                                res.exception.toUiMessageString()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun changeCardNameSettingsVisibility() {
+        _screenState.update {
+            it.copy(
+                isCardNameSettingsVisible = !it.isCardNameSettingsVisible,
+                cardNewName = ""
+            )
         }
     }
 

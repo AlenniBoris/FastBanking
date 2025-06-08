@@ -53,7 +53,7 @@ import com.alenniboris.fastbanking.presentation.uikit.utils.toPermission
 import com.alenniboris.fastbanking.presentation.uikit.values.HelpScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.views.AppCustomButton
 import com.alenniboris.fastbanking.presentation.uikit.views.AppFilter
-import com.alenniboris.fastbanking.presentation.uikit.views.AppRationaleDialog
+import com.alenniboris.fastbanking.presentation.uikit.views.AppPermissionRationaleDialog
 import com.alenniboris.fastbanking.presentation.uikit.views.AppTopBar
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -144,7 +144,7 @@ private fun HelpScreenUi(
 
     if (state.isPermissionDialogVisible) {
         state.requestedPermission?.let {
-            AppRationaleDialog(
+            AppPermissionRationaleDialog(
                 permissionType = it,
                 onDismiss = {
                     proceedIntent(

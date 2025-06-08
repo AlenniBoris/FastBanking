@@ -8,13 +8,13 @@ import com.alenniboris.fastbanking.domain.model.appliances.DepositDetailedApplia
 enum class BankProduct {
     CARD,
     CREDIT,
-    DEPOSITS_AND_ACCOUNTS
+    ACCOUNTS_AND_DEPOSITS
 }
 
 fun BankProduct.toUiText(): Int = when (this) {
     BankProduct.CARD -> R.string.cards_products_text
     BankProduct.CREDIT -> R.string.credits_products_text
-    BankProduct.DEPOSITS_AND_ACCOUNTS -> R.string.deposits_and_accounts_products_text
+    BankProduct.ACCOUNTS_AND_DEPOSITS -> R.string.accounts_and_deposits_products_text
 }
 
 

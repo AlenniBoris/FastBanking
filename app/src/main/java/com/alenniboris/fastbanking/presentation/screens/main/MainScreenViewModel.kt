@@ -68,7 +68,7 @@ class MainScreenViewModel(
                     when (product) {
                         BankProduct.CARD -> loadUserCards()
                         BankProduct.CREDIT -> loadUserCredits()
-                        BankProduct.DEPOSITS_AND_ACCOUNTS -> loadUserAccounts()
+                        BankProduct.ACCOUNTS_AND_DEPOSITS -> loadUserAccounts()
                     }
                 }
         }
@@ -326,6 +326,7 @@ class MainScreenViewModel(
 
     fun proceedIntent(intent: IMainScreenIntent) {
         when (intent) {
+            is IMainScreenIntent.LoadUserProducts -> loadUserProducts()
             is IMainScreenIntent.UpdateRecommendedNewsVisibility -> updateRecommendedNewsVisibility()
             is IMainScreenIntent.OpenHelpScreen -> openHelpScreen()
             is IMainScreenIntent.OpenPersonalDetailsScreen -> openPersonalDetailsScreen()
@@ -345,6 +346,14 @@ class MainScreenViewModel(
                 updateSelectedTransaction(intent.transaction)
 
             is IMainScreenIntent.OpenProductDetailsScreen -> openProductDetailsScreen(intent.product)
+        }
+    }
+
+    private fun loadUserProducts() {
+        when (_screenState.value.currentBankProduct) {
+            BankProduct.CARD -> loadUserCards()
+            BankProduct.CREDIT -> loadUserCredits()
+            BankProduct.ACCOUNTS_AND_DEPOSITS -> loadUserAccounts()
         }
     }
 
@@ -392,7 +401,7 @@ class MainScreenViewModel(
             ActionsWithProducts.OPEN_ONLINE_DEPOSIT -> {
                 _event.emit(
                     IMainScreenEvent.OpenProductApplianceChoosingScreen(
-                        BankProduct.DEPOSITS_AND_ACCOUNTS
+                        BankProduct.ACCOUNTS_AND_DEPOSITS
                     )
                 )
             }

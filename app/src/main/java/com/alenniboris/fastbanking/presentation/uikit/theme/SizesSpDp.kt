@@ -433,3 +433,10 @@ val PaymentProcessScreenCardPlaceholderColumnPadding = PaddingValues(start = 20.
 val PaymentProcessScreenCardPlaceholderColumnTextPadding = PaddingValues(top = 5.dp)
 val PaymentProcessScreenCardPlaceholderColumnTextSize = 20.sp
 val PaymentProcessScreenCardPlaceholderImageTextPadding = PaddingValues(start = 10.dp)
+
+// App changing product name dialog
+val AppChangingProductNameDialogContainerPadding = PaddingValues(all = 20.dp)
+val AppChangingProductNameDialogContainerShape = RoundedCornerShape(60f)
+val AppChangingProductNameDialogTextSize = 20.sp
+val AppChangingProductNameDialogTextFieldOuterPadding = PaddingValues(vertical = 15.dp)
+val AppChangingProductNameDialogTextFieldInnerPadding = PaddingValues(vertical = 15.dp, horizontal = 10.dp)

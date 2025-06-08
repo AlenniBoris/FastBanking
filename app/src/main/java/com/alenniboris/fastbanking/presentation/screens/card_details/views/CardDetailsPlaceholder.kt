@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import com.alenniboris.fastbanking.domain.model.card.CardSystem
 import com.alenniboris.fastbanking.domain.model.card.CardType
 import com.alenniboris.fastbanking.presentation.model.bank_product.CardModelUi
 import com.alenniboris.fastbanking.presentation.model.bank_product.toUiString
+import com.alenniboris.fastbanking.presentation.screens.card_details.ICardDetailsScreenIntent
 import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsPlaceholderContainerInnerPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsPlaceholderElementDoublePadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.CardDetailsPlaceholderElementPadding
@@ -38,12 +40,14 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.cardSystemMastercard
 import com.alenniboris.fastbanking.presentation.uikit.theme.cardSystemMirColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.cardSystemUndefinedColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.cardSystemVisaColor
+import com.alenniboris.fastbanking.presentation.uikit.views.AppIconButton
 import java.util.Calendar
 
 @Composable
 fun CardDetailsPlaceholder(
     modifier: Modifier = Modifier,
-    card: CardModelUi
+    card: CardModelUi,
+    proceedIntent: (ICardDetailsScreenIntent) -> Unit
 ) {
 
     Column(
@@ -60,14 +64,31 @@ fun CardDetailsPlaceholder(
             .padding(CardDetailsPlaceholderContainerInnerPadding)
     ) {
 
-        Text(
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            text = card.name,
-            style = bodyStyle.copy(
-                fontSize = CardDetailsPlaceholderMainTextSize,
-                color = cardDetailsPlaceholderTextColor
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Text(
+                modifier = Modifier.weight(1f),
+                text = card.name,
+                style = bodyStyle.copy(
+                    fontSize = CardDetailsPlaceholderMainTextSize,
+                    color = cardDetailsPlaceholderTextColor
+                )
             )
-        )
+
+            AppIconButton(
+                iconPainter = painterResource(R.drawable.settings_icon),
+                tint = cardDetailsPlaceholderTextColor,
+                isAnimated = true,
+                onClick = {
+                    proceedIntent(
+                        ICardDetailsScreenIntent.ChangeCardNameSettingsVisibility
+                    )
+                }
+            )
+        }
 
         Row(
             modifier = Modifier
@@ -180,7 +201,8 @@ private fun LightTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
 
                 CardDetailsPlaceholder(
@@ -209,7 +231,8 @@ private fun LightTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
 
                 CardDetailsPlaceholder(
@@ -238,7 +261,8 @@ private fun LightTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
 
                 CardDetailsPlaceholder(
@@ -267,7 +291,8 @@ private fun LightTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
             }
         }
@@ -311,7 +336,8 @@ private fun DarkTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
 
                 CardDetailsPlaceholder(
@@ -340,7 +366,8 @@ private fun DarkTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
 
                 CardDetailsPlaceholder(
@@ -369,7 +396,8 @@ private fun DarkTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
 
                 CardDetailsPlaceholder(
@@ -398,7 +426,8 @@ private fun DarkTheme() {
                             iban = "21912029nsknac",
                             bankIdCode = "dsjkcnkjsndc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
             }
         }

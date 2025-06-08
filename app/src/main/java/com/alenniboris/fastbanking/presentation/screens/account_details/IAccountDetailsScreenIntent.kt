@@ -10,4 +10,10 @@ sealed interface IAccountDetailsScreenIntent {
     data object UpdateAttachedCardsSheetVisibility : IAccountDetailsScreenIntent
 
     data class OpenCardDetailsScreen(val cardId: String) : IAccountDetailsScreenIntent
+
+    data object ChangeAccountNameSettingsVisibility : IAccountDetailsScreenIntent
+
+    data object UpdateAccountName : IAccountDetailsScreenIntent
+
+    data class UpdateAccountNewName(val newName: String) : IAccountDetailsScreenIntent
 }

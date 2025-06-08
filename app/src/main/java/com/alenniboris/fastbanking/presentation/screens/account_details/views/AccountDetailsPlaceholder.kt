@@ -2,14 +2,17 @@ package com.alenniboris.fastbanking.presentation.screens.account_details.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +22,7 @@ import com.alenniboris.fastbanking.domain.model.account.AccountModelDomain
 import com.alenniboris.fastbanking.domain.model.card.CardSystem
 import com.alenniboris.fastbanking.domain.model.card.SimpleCardModelDomain
 import com.alenniboris.fastbanking.presentation.model.bank_product.AccountModelUi
+import com.alenniboris.fastbanking.presentation.screens.account_details.IAccountDetailsScreenIntent
 import com.alenniboris.fastbanking.presentation.uikit.theme.AccountDetailsPlaceholderElementTextPadding
 import com.alenniboris.fastbanking.presentation.uikit.theme.AccountDetailsPlaceholderMainTextSize
 import com.alenniboris.fastbanking.presentation.uikit.theme.AccountDetailsPlaceholderSubtleTextSize
@@ -32,19 +36,49 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.appColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.bodyStyle
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
+import com.alenniboris.fastbanking.presentation.uikit.views.AppIconButton
 
 @Composable
 fun AccountDetailsPlaceholder(
     modifier: Modifier = Modifier,
-    account: AccountModelUi
+    account: AccountModelUi,
+    proceedIntent: (IAccountDetailsScreenIntent) -> Unit
 ) {
 
     Column(
         modifier = modifier
     ) {
 
-        PlaceholderTextSection(
+        Row(
             modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Text(
+                modifier = Modifier.weight(1f),
+                text = account.name,
+                style = bodyStyle.copy(
+                    fontSize = AccountDetailsPlaceholderMainTextSize,
+                    color = mainScreenTextColor
+                )
+            )
+
+            AppIconButton(
+                iconPainter = painterResource(R.drawable.settings_icon),
+                tint = mainScreenTextColor,
+                isAnimated = true,
+                onClick = {
+                    proceedIntent(
+                        IAccountDetailsScreenIntent.ChangeAccountNameSettingsVisibility
+                    )
+                }
+            )
+        }
+
+        PlaceholderTextSection(
+            modifier = Modifier
+                .padding(CreditDetailsPlaceholderElementPadding)
+                .fillMaxWidth(),
             header = stringResource(R.string.amount_in_main_currency_text),
             text = account.mainCurrencyText
         )
@@ -159,12 +193,14 @@ private fun LightTheme() {
                             name = "odsklmclksd",
                             erip = "dshc bsdhcbsdc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
             }
         }
     }
 }
+
 @Composable
 @Preview
 private fun DarkTheme() {
@@ -234,7 +270,8 @@ private fun DarkTheme() {
                             name = "odsklmclksd",
                             erip = "dshc bsdhcbsdc"
                         )
-                    )
+                    ),
+                    proceedIntent = {}
                 )
             }
         }

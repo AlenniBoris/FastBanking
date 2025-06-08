@@ -76,6 +76,7 @@ import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenItemColor
 import com.alenniboris.fastbanking.presentation.uikit.theme.mainScreenTextColor
 import com.alenniboris.fastbanking.presentation.uikit.values.AccountDetailsScreenRoute
 import com.alenniboris.fastbanking.presentation.uikit.values.BankProduct
+import com.alenniboris.fastbanking.presentation.uikit.views.AppDialogWithTextField
 import com.alenniboris.fastbanking.presentation.uikit.views.AppEmptyScreen
 import com.alenniboris.fastbanking.presentation.uikit.views.AppFilter
 import com.alenniboris.fastbanking.presentation.uikit.views.AppIconButton
@@ -115,7 +116,7 @@ fun AccountDetailsScreen(
                 .collect { coming ->
                     navigator.navigate(
                         ProductInformationScreenDestination(
-                            productType = BankProduct.DEPOSITS_AND_ACCOUNTS,
+                            productType = BankProduct.ACCOUNTS_AND_DEPOSITS,
                             product = coming.account.toJson()
                         )
                     )
@@ -127,7 +128,7 @@ fun AccountDetailsScreen(
                 .collect { coming ->
                     navigator.navigate(
                         ProductHistoryScreenDestination(
-                            productType = BankProduct.DEPOSITS_AND_ACCOUNTS,
+                            productType = BankProduct.ACCOUNTS_AND_DEPOSITS,
                             product = coming.account.toJson()
                         )
                     )
@@ -207,6 +208,28 @@ private fun AccountDetailsScreenUi(
 
             state.account != null -> {
 
+                if (state.isAccountNameSettingsVisible) {
+                    AppDialogWithTextField(
+                        header = stringResource(R.string.change_product_name),
+                        value = state.accountNewName,
+                        onValueChanged = { newName ->
+                            proceedIntent(
+                                IAccountDetailsScreenIntent.UpdateAccountNewName(newName)
+                            )
+                        },
+                        onDismiss = {
+                            proceedIntent(
+                                IAccountDetailsScreenIntent.ChangeAccountNameSettingsVisibility
+                            )
+                        },
+                        onApprove = {
+                            proceedIntent(
+                                IAccountDetailsScreenIntent.UpdateAccountName
+                            )
+                        }
+                    )
+                }
+
                 AccountDetailsPlaceholder(
                     modifier = Modifier
                         .padding(CreditDetailsScreenCreditPlaceholderPadding)
@@ -214,7 +237,8 @@ private fun AccountDetailsScreenUi(
                         .fillMaxWidth()
                         .background(mainScreenItemColor)
                         .padding(CreditDetailsPlaceholderContainerInnerPadding),
-                    account = state.account
+                    account = state.account,
+                    proceedIntent = proceedIntent
                 )
 
                 LazyVerticalGrid(

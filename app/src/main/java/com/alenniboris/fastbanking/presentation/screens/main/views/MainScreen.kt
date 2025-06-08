@@ -113,6 +113,12 @@ fun MainScreen(
         )
     }
 
+    LaunchedEffect(Unit) {
+        proceedIntent(
+            IMainScreenIntent.LoadUserProducts
+        )
+    }
+
     LaunchedEffect(event) {
 
         launch {
