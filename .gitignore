@@ -21,3 +21,4 @@ secret.apikey.default.properties
 /secret.apikey.default.properties
 apikeys.properties
 /apikeys.properties
+/app/google-services.json
