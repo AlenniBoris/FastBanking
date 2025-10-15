@@ -43,11 +43,11 @@ It is important to understand that it is a fully mobile app pet-project. So its 
 
 - Also you need to get your own key for google services. It is needed for google maps. Follow [official guide](https://developers.google.com/maps/get-started) to get it. Create secret.apikey.properties and secret.apikey.default.properties files and set api key as GOOGLE_MAPS_API_KEY value
 
-- Also you have to create your own firebase project with a structure from documents [] and connect it with project
+- Also you have to create your own firebase project with a structure from [documents](https://github.com/AlenniBoris/FastBanking/blob/main/Docs%20BBank.pdf) and connect it with project
 
 ## Documentation
 
-[Fastbanking documentation](https://github.com/AlenniBoris/FastBanking/blob/main/Docs%20BBan)
+[Documentation](https://github.com/AlenniBoris/FastBanking/blob/main/Docs%20BBank.pdf)
 
 
 ## Authors
